@@ -1,13 +1,15 @@
 
 
 
-nav.section
-    div.primary-nav
+nav
+    div.primary-nav.section
         div
-            img(src="", alt="logo")
+            a(href="/").nav-logo
+                img(src="", alt="logo")
         div
             a(href="signup").nav-item Sign Up
             a(href="login").nav-item Log In
-    div.secondary-nav
+    hr
+    div.secondary-nav.section
         each val in ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"]
             a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
