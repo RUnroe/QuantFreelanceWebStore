@@ -1,0 +1,19 @@
+.primary-nav {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.secondary-nav {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+.secondary-nav a {
+    text-decoration:none;
+    color: var(--color-dark-1);
+}

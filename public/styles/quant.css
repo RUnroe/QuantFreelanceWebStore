@@ -1,0 +1,105 @@
+/*====================
+      Variables
+======================*/
+:root {
+    --color-dark-1: #403D52;
+    --color-dark-2: #656276;
+    --color-dark-3: #57536C;
+    --color-primary: #648DE5;
+    --color-secondary: #45B69C;
+    --color-danger: #F26666;
+    --color-light-1: #fff;
+    --color-light-2: #F7F7F7;
+    --color-light-3: #EFEFF0;
+}
+
+/*====================
+        Main
+======================*/
+body {
+    font-family: "Roboto";
+    color: var(--color-dark-1);
+    margin: 0;
+    padding:0;
+}
+.section {
+    max-width: 1300px;
+    margin: 0 auto;
+    display:block;
+    box-sizing: border-box;
+}
+.container {
+    padding: 1rem 2rem;
+}
+.container.dark {
+    background-color: var(--color-dark-1);
+}
+.container.gradient {
+    background: linear-gradient(to bottom right, var(--color-dark-1), var(--color-dark-3));
+}
+
+
+/*====================
+        Text
+======================*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat";
+}
+.text-center {
+    text-align: center;
+}
+.text-white {
+    color:var(--color-light-1);
+}
+
+
+/*====================
+        Button
+======================*/
+.btn {
+    font-family: "Roboto";
+    font-style: normal;
+    color: var(--color-dark-1);
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    margin: 0.5rem 0;
+    width:fit-content;
+    display:block;
+}
+.btn:hover {
+    cursor:pointer;
+}
+.btn.center {
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.btn.blue {
+    color: var(--color-light-1);
+    background-color:var(--color-primary);
+}
+
+
+/*====================
+        Input
+======================*/
+.input {
+    font-family: "Roboto";
+    padding:0.5rem 0.6rem;
+    width: 100%;
+    outline:none;
+    border-radius: 4px;
+    border: 2px solid var(--color-light-3);
+    background-color: var(--color-light-3);
+    color: var(--color-dark-1);
+}
+.input.search {
+    background-color: var(--color-light-1);
+}
+.input:focus {
+    border:2px solid var(--color-primary);
+}
