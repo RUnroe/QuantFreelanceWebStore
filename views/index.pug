@@ -1,0 +1,17 @@
+extends layout
+append scripts
+    +js("index")
+
+append links
+    +css("index")
+
+block content
+    div.section.gradient
+        div
+            h1.text-white Find the freelance services that you need
+            div 
+                input(type="text" placeholder="What service are you looking for?").input#searchField
+                p.text-center or
+                a(href="signup").btn.blue Become a Seller
+        div
+            img(src="", alt="people")
