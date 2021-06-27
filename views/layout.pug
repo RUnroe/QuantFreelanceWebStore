@@ -1,0 +1,29 @@
+mixin css(name)
+	link(href="/styles/"+name+".css", rel="stylesheet", type="text/css")
+
+mixin js(name)
+	script(src="/scripts/"+name+".js" defer)
+
+doctype html
+html(lang="en")
+	head
+		title Data Express
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+       link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet")
+		block links
+			+css("quant")
+		block scripts
+			+js("navbar")
+
+body
+    if accessType == "buyer"
+        include signedInBuyerNav
+    else if accessType == "seller"
+        include signedInSellerNav
+    else
+        include signedOutNav
+    section#main
+			block content
+    include footer
