@@ -23,3 +23,18 @@ block content
                     img(src="https://via.placeholder.com/100")
                     hr
                     p= val
+    div.container.light-grey.learn-section
+        h2 Using Quant is easy
+        div.info-container
+            each data in [{title: "Find what you need", src:"https://via.placeholder.com/100", desc: "Find services by searching or exploring the nine different categories."}, {title: "Hire freelancers", src:"https://via.placeholder.com/100", desc: "Once you have found a service, hire the freelancer and send them a custom message."}, {title: "Sell services", src:"https://via.placeholder.com/100", desc: "Become a seller by upgrading your account for free. Then start listing any services you wish to sell."}]
+                div.info-box
+                    img(src=data.src).round
+                    h4= data.title
+                    hr
+                    p= data.desc
+
+    div.container.dark.cta-section
+        h1.text-white Want to join the fun?
+        p.text-white Sign up now to purchase or sell services.
+        a(href="signup").btn.blue Sign Up
+
