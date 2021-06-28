@@ -10,7 +10,8 @@ nav hr {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 16px;
+    /* padding: 16px; */
+    padding:0.25rem 1rem 1px;
     align-items: center;
     box-sizing: border-box;
 }
