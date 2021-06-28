@@ -1,0 +1,10 @@
+.search-section {
+    padding: 4rem 2rem;
+    display:flex;
+}
+.search-section > div {
+    flex: 1;
+}
+.search-container {
+    width:80%;
+}
