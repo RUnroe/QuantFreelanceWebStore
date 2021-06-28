@@ -15,3 +15,11 @@ block content
                 a(href="signup").btn.blue.center Become a Seller
         div
             img(src="", alt="people")
+    div.container.explore-section
+        h2 Explore the marketplace
+        div.category-box-container
+            each val in ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"]
+                a(href=val.replace(" & ", "-").toLowerCase()).category-box
+                    img(src="https://via.placeholder.com/100")
+                    hr
+                    p= val
