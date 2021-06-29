@@ -1,13 +1,9 @@
 const express = require('express');
 const path = require('path');
 const session = require("express-session");
-const { MongoClient } = require("mongodb");
 
 
-const client = new MongoClient(require('./secrets').mongo.connectionString, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-});
+
 
 const app = express();
 const snowmachine = new (require('snowflake-generator'))(1420070400000);
@@ -16,7 +12,7 @@ app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname + "/public")));
 
-let routeFiles = ['frontend'];
+let routeFiles = ['frontend', 'api/orders', 'api/users', 'api/products'];
 const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
