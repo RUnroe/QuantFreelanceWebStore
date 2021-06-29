@@ -1,6 +1,13 @@
 const express = require('express');
 const path = require('path');
 const session = require("express-session");
+const { MongoClient } = require("mongodb");
+
+
+const client = new MongoClient(require('./secrets').mongo.connectionString, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+});
 
 const app = express();
 const snowmachine = new (require('snowflake-generator'))(1420070400000);
