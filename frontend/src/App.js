@@ -69,6 +69,9 @@ function App() {
         <Route path="/store/:product_id">
           <ProductPage />
         </Route>
+        <Route path="/purchase/:product_id">
+          <PurchasePage />
+        </Route>
         <Route path="/account/settings">
           <AccountSettingsPage />
         </Route>
