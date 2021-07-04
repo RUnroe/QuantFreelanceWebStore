@@ -21,25 +21,35 @@ import OrdersPage from './OrdersPage';
 
 
 import './App.css';
-
+// nav
+//   div.primary-nav.section
+//       div
+//           a(href="/").nav-logo
+//               img(src="https://via.placeholder.com/135x45", alt="logo")
+//       div
+//           a(href="signup").nav-item Sign Up
+//           a(href="login").nav-item Log In
+//   hr
+//   div.secondary-nav.section
+//       each val in ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"]
+//           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
 function App() {
   return (
     <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/signup">Sign Up</Link>
-        </li>
-        <li>
-          <Link to="/login">Log In</Link>
-        </li>
-      </ul>
-
+    <nav>
+      <div className="primary-nav section">
+        <div>
+          <Link className="nav-logo" to="/"><img src="https://via.placeholder.com/135x45" alt="logo" /></Link>
+        </div>
+        <div>
+          <Link className="nav-item" to="/signup">Sign Up</Link>
+          <Link className="nav-item" to="/login">Log In</Link>
+        </div>
+      </div>
       <hr />
+      <div className="secondary-nav section">
 
+      </div>
       {/*
         A <Switch> looks through all its children <Route>
         elements and renders the first one whose path
@@ -91,7 +101,7 @@ function App() {
           <OrdersPage />
         </Route>
       </Switch>
-    </div>
+    </nav>
   </Router>
   );
 }
