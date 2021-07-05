@@ -1,9 +1,12 @@
-const { client, users, products, orders} = require('./db-connect');
+const {MongoClient} = require('mongodb');
+const snowmachine = new (require('snowflake-generator'))(1420070400000);
 
+const dbclient = new MongoClient(require('../secrets.json').mongo.connectionString, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+dbclient.connect().then(() => console.log("connected"));
 
-
-
-//const snowmachine = new (require('snowflake-generator'));
 
 const hasher = require('argon2');
 const hash_options = {
@@ -13,7 +16,6 @@ const hash = async (pw) => {
 	return hasher.hash(pw, hash_options)
 		.catch(err => {
 			const error_id = gen_id();
-			logger.error(JSON.stringify([error_id.toString(), err]));
 			throw ['An error occurred while hashing the supplied password'];
 		});
 };
@@ -37,23 +39,25 @@ const findErrors = fields => {
 //            Users
 // ==============================
 
-const createUser = async (username, email, first_name, last_name, password, icon_id, is_seller) => {
+const createUser = async (_user) => {
+	console.log("req.body", _user);
 	const errors = findErrors([
-		{name: "username", value: username}, 
-		{name: "email", value: email}, 
-		{name: "first name", value: first_name}, 
-		{name: "last name", value: last_name}, 
-		{name: "password", value: password}, 
-		{name: "icon id", value: icon_id}	
+		{name: "username", value: _user.username}, 
+		{name: "email", value: _user.email}, 
+		{name: "first name", value: _user.first_name}, 
+		{name: "last name", value: _user.last_name}, 
+		{name: "password", value: _user.password}, 
+		{name: "icon id", value: _user.icon_id}	
 	]);
 	if (errors.length) {
 		throw errors;
 	}
-	if(typeof is_seller != "boolean") is_seller = false;
 
     const user_id = gen_id();
-	const record = Object.assign({}, user, {user_id});
+	const record = Object.assign({}, _user, {user_id});
+	if(typeof is_seller != "boolean") record.is_seller = false;
 	return getUserByEmail({email: record.email}).then(user => {
+		console.log("gfgf");
 		if(user) throw [`A user already exists with the email address ${record.email}`];
 	}).then(getUserByUsername({username: record.username})).then(user => {
 		if(user) throw [`A user already exists with the username ${record.username}`];
@@ -61,30 +65,22 @@ const createUser = async (username, email, first_name, last_name, password, icon
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
-			return users.insertOne(record).then(_ => user_id);
+			console.log("insert");
+			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(_ => user_id);
 		})
 	);
 }
 
 
 const getUserByEmail = async ({_email}) => {
-	users.find({"email": _email}).then(result => {
-		console.log(result);
-	});
+	return await dbclient.db('QuantFreelance').collection('User').findOne({"email": _email});
+}
+const getUserByUsername = async ({_username}) => {
+	return await dbclient.db('QuantFreelance').collection('User').findOne({"username": _username});
 }
 
 
 
-module.exports = ({db, snowmachine}) => {
-	//configure({db, snowmachine});
-	return {
-		db
-		, createUser, getUserByEmail
+module.exports =  {
+		createUser, getUserByEmail
 	};
-	// return {
-	// 	db
-	// 	, createUser, getUserById, getUserByEmail, updateUser, authenticate
-	// 	, updateCalendars, getCalendarDetails, getCalendarEventsByUserIds
-	// 	, searchFriends, createFriendship, getFriendships, getPendingFriendships, acceptFriendship, declineFriendship, endFriendship
-	// };
-};

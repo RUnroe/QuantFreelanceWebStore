@@ -1,8 +1,6 @@
 const dal = {};
 const configure = (obj) => {
-	console.log(dal, obj);
 	Object.assign(dal, obj.dal);
-	console.log(dal, obj);
 
 };
 

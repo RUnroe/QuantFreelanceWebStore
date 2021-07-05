@@ -1,25 +1,27 @@
 const express = require('express');
 const path = require('path');
 const session = require("express-session");
+const bodyParser = require('body-parser');
 
 
 
 
 const app = express();
-const { db } = require('./db/db-connect');
-const snowmachine = new (require('snowflake-generator'))(1420070400000);
-const dal = require('./db/dal')({db, snowmachine});
+const dal = require('./db/dal');
 
 
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname + "/public")));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 let routeFiles = ['frontend', 'api/orders', 'api/users', 'api/products'];
 const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
-        if(component.configure) component.configure({ dal, snowmachine});
+        if(component.configure) component.configure({ dal});
         routeManager.apply(app, component);
 });
 
