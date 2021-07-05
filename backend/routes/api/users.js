@@ -1,39 +1,42 @@
-let db, snowmachine;
+const dal = {};
 const configure = (obj) => {
-	db = obj['db'];
-	snowmachine = obj['snowmachine'];
+	console.log(dal, obj);
+	Object.assign(dal, obj.dal);
+	console.log(dal, obj);
+
 };
 
-const handle = (statusCode, req, res) => {
-	return errors => {
-		res.status(statusCode).json(errors)
-	};
-};
-
-const expect = (obj, names, errors) => {
-	if (names.constructor.name !== 'Array')
-		names = [names];
-	for (let name of names)
-		if (!obj.hasOwnProperty(name))
-			errors.push(`${name} was expected, but was not provided`);
-};
+const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
 
 const createUser = (req, res) => {
-    const errors = [];
-	expect(req.body, ['username', 'email', 'first_name', 'last_name', 'password', 'icon_id'], errors);
-	if (errors.length) res.status(400).json(errors);
-	else {
-		db.createUser(req.body.username, req.body.email, req.body.first_name, req.body.last_name, req.body.password, req.body.icon_id, (req.body.is_seller == true))
-			.then(user => {
-				res.status(201).location(`/api/user/${user.user_id}`).json(user);
-				return user;
-			})
-		    .catch(handle(500, req, res));
-	}
+	dal.createUser(req.body)
+		.then(user_id => {
+			req.session.user_id = user_id.toString(); // log them in
+			res.header('Location', '/api/auth');
+			res.sendStatus(201);
+		})
+		.catch(handle(req, res));
 }
 
+// Authenticate the user by assigning them a session/cookie
+const authenticate = (req, res, next) => {
+	dal.authenticate({email: req.body.email, password: req.body.password})
+		.then(user_id => {
+			if (user_id) {
+				req.session.user_id = user_id.toString();
+				res.statusMessage = 'Authenticated';
+				res.status(204).end();
+				return;
+			}
+			res.sendStatus(401);
+			return;
+		})
+		.catch(handle(req, res));
+};
+
+
 const getUser = (req, res) => {
-    handle(500, req, res);
+    
 }
 
 const updateUser = (req, res) => {
@@ -69,4 +72,4 @@ const routes = [
 ];
 
 
-module.exports = { routes };
+module.exports = { routes, configure };
