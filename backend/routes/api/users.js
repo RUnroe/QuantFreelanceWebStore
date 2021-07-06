@@ -9,8 +9,8 @@ const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/ro
 const createUser = (req, res) => {
 	dal.createUser(req.body)
 		.then(user_id => {
-			req.session.user_id = user_id.toString(); // log them in
-			res.header('Location', '/api/auth');
+			// req.session.user_id = user_id.toString(); // log them in
+			// res.header('Location', '/api/auth');
 			res.sendStatus(201);
 		})
 		.catch(handle(req, res));

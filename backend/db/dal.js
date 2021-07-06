@@ -40,7 +40,7 @@ const findErrors = fields => {
 // ==============================
 
 const createUser = async (_user) => {
-	console.log("req.body", _user);
+	// console.log("req.body", _user);
 	const errors = findErrors([
 		{name: "username", value: _user.username}, 
 		{name: "email", value: _user.email}, 
@@ -55,32 +55,38 @@ const createUser = async (_user) => {
 
     const user_id = gen_id();
 	const record = Object.assign({}, _user, {user_id});
-	if(typeof is_seller != "boolean") record.is_seller = false;
+	if(typeof _user.is_seller != "boolean") record.is_seller = false;
+	console.log(record);
 	return getUserByEmail({email: record.email}).then(user => {
-		console.log("gfgf");
+		// console.log(user.email, "email exists");
 		if(user) throw [`A user already exists with the email address ${record.email}`];
-	}).then(getUserByUsername({username: record.username})).then(user => {
+	}).then(() => getUserByUsername({username: record.username})).then(user => {
+		console.log(user, "username exists");
 		if(user) throw [`A user already exists with the username ${record.username}`];
 	})
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
 			console.log("insert");
-			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(_ => user_id);
+			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(() => user_id);
 		})
 	);
 }
 
 
-const getUserByEmail = async ({_email}) => {
-	return await dbclient.db('QuantFreelance').collection('User').findOne({"email": _email});
+const getUserByEmail = async ({email}) => {
+	return await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
+	// .then(user => {console.log("user found: ", user); return user;})
+	.catch(err => { throw ['An error occurred while finding user by email'];});
 }
-const getUserByUsername = async ({_username}) => {
-	return await dbclient.db('QuantFreelance').collection('User').findOne({"username": _username});
+const getUserByUsername = async ({username}) => {
+	return await dbclient.db('QuantFreelance').collection('User').findOne({"username": username})
+	.catch(err => { throw ['An error occurred while finding user by username'];});
+
 }
 
 
 
 module.exports =  {
-		createUser, getUserByEmail
+		createUser, getUserByEmail, getUserByUsername
 	};
