@@ -70,10 +70,15 @@ const createUser = async (_user) => {
 	);
 }
 
+const getUserById = async ({user_id}) => {
+	return await dbclient.db('QuantFreelance').collection('User').findOne({"user_id": user_id}).then(result => {
+		delete result.password; return result;
+	})
+	.catch(err => { throw ['An error occurred while finding user by id'];});
+}
 
 const getUserByEmail = async ({email}) => {
 	return await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
-	// .then(user => {console.log("user found: ", user); return user;})
 	.catch(err => { throw ['An error occurred while finding user by email'];});
 }
 const getUserByUsername = async ({username}) => {
@@ -85,5 +90,5 @@ const getUserByUsername = async ({username}) => {
 
 
 module.exports =  {
-	createUser, getUserByEmail, getUserByUsername
+	createUser, getUserByEmail, getUserByUsername, getUserById
 };
