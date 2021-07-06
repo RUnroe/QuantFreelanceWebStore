@@ -29,7 +29,7 @@ const isFieldEmpty = field => {
 const findErrors = fields => {
 	const errors = [];
 	fields.forEach(field => {
-		if(isFieldEmpty(field.value)) {
+		if(isFieldEmpty(field.value) || typeof field.value != "string" ||(field.regex && !field.regex.test(field.value))) {
 			errors.push(`Expected ${field.name}, but ${field.value} was supplied`);
 		}
 	});
@@ -42,11 +42,11 @@ const findErrors = fields => {
 const createUser = async (_user) => {
 	// console.log("req.body", _user);
 	const errors = findErrors([
-		{name: "username", value: _user.username}, 
-		{name: "email", value: _user.email}, 
-		{name: "first name", value: _user.first_name}, 
-		{name: "last name", value: _user.last_name}, 
-		{name: "password", value: _user.password}, 
+		{name: "username", value: _user.username, regex: /^[a-zA-Z0-9_ ]+$/}, 
+		{name: "email", value: _user.email, regex: /\w+@\w+\.\w+/}, 
+		{name: "first name", value: _user.first_name, regex: /^[a-zA-Z- ]+$/}, 
+		{name: "last name", value: _user.last_name, regex: /^[a-zA-Z- ]+$/}, 
+		{name: "password", value: _user.password, regex: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/}, 
 		{name: "icon id", value: _user.icon_id}	
 	]);
 	if (errors.length) {
@@ -56,18 +56,15 @@ const createUser = async (_user) => {
     const user_id = gen_id();
 	const record = Object.assign({}, _user, {user_id});
 	if(typeof _user.is_seller != "boolean") record.is_seller = false;
-	console.log(record);
 	return getUserByEmail({email: record.email}).then(user => {
-		// console.log(user.email, "email exists");
 		if(user) throw [`A user already exists with the email address ${record.email}`];
 	}).then(() => getUserByUsername({username: record.username})).then(user => {
-		console.log(user, "username exists");
 		if(user) throw [`A user already exists with the username ${record.username}`];
 	})
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
-			console.log("insert");
+			console.log("Inserted User");
 			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(() => user_id);
 		})
 	);
@@ -88,5 +85,5 @@ const getUserByUsername = async ({username}) => {
 
 
 module.exports =  {
-		createUser, getUserByEmail, getUserByUsername
-	};
+	createUser, getUserByEmail, getUserByUsername
+};
