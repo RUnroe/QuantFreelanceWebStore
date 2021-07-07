@@ -9,7 +9,7 @@ const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/ro
 const createOrder = (req, res) => {
 	dal.createOrder(req.body).then(() => {
 		res.status(201);
-		res.statusMessage = 'Created User';
+		res.statusMessage = 'Created Order';
 		res.end();
 	})
 	.catch(handle(req, res));
@@ -33,7 +33,12 @@ const getOrdersBySeller = (req, res) => {
 
 //Change order status (pending, accepted, declined, completed)
 const updateOrderStatus = (req, res) => {
-
+	dal.updateOrderStatus(req.params.order_id, req.body.status).then(() => {
+		res.status(201);
+		res.statusMessage = 'Updated Order';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 

@@ -153,8 +153,18 @@ const getOrdersBySeller = async (user_id) => {
 	.catch(err => { throw ['An error occurred while finding order by seller id'];});
 }
 
+const updateOrderStatus = async (order_id, status) => {
+	console.log(order_id, status);
+	if(status == "pending" || status == "accepted" || status == "declined" || status == "completed") {
+		let newStatus = {$set: {status}};
+		console.log(newStatus);
+		return dbclient.db('QuantFreelance').collection('Order').updateOne({order_id}, newStatus)
+		.catch(err => { throw ['An error occurred while updating order status'];});
+	}
+	throw [`Expected 'pending', 'accepted', 'declined', or 'completed', but ${field.value} was supplied`];
+}
 
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
-	createOrder, getOrdersByCustomer, getOrdersBySeller
+	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus
 };
