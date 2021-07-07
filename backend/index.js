@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname + "/public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-let routeFiles = ['frontend', 'api/orders', 'api/users', 'api/products'];
+let routeFiles = ['api/orders', 'api/users', 'api/products', 'api/icons'];
 const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
