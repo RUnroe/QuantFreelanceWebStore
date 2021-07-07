@@ -73,6 +73,7 @@ const createUser = async (_user) => {
 
 const getUserById = async ({user_id}) => {
 	return await dbclient.db('QuantFreelance').collection('User').findOne({"user_id": user_id}).then(result => {
+		if(!result) return null;
 		delete result.password; return result;
 	})
 	.catch(err => { throw ['An error occurred while finding user by id'];});
@@ -107,6 +108,41 @@ const removeUser = async (user_id) => {
 	
 }
 
+
+// ==============================
+//            Orders
+// ==============================
+
+const createOrder = async (_order) => {
+	console.log(_order);
+	const errors = findErrors([
+		{name: "buyer", value: _order.buyer}, 
+		{name: "seller", value: _order.seller}, 
+	]);
+	if (errors.length) {
+		throw errors;
+	}
+	if(!_order.message) _order.message = "";
+	return getUserById({user_id: _order.buyer}).then(user => {
+		if(!user) throw [`No user exists with the id "${_order.buyer}" `];
+	}).then(() => getUserById({user_id: _order.seller})).then(user => {
+		if(!user) throw [`No user exists with the id "${_order.seller}" `];
+	}).then(() => {
+		const order_id = gen_id();
+		const record = Object.assign({}, _order, {order_id});
+		if(_order.status != "pending" || _order.status != "accepted" ||
+		_order.status != "declined" || _order.status != "completed")
+			record.status = "pending";
+
+		return dbclient.db('QuantFreelance').collection('Order').insertOne(record).then(() => order_id);
+	});
+
+}
+
+
+
+
 module.exports =  {
-	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser
+	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
+	createOrder
 };

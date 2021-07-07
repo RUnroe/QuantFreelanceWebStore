@@ -1,11 +1,18 @@
-const handle = (statusCode, req, res) => {
-	return errors => {
-		res.status(statusCode).json(errors)
-	};
+const dal = {};
+const configure = (obj) => {
+	Object.assign(dal, obj.dal);
+
 };
 
-const createOrder = (req, res) => {
+const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
 
+const createOrder = (req, res) => {
+	dal.createOrder(req.body).then(() => {
+		res.status(201);
+		res.statusMessage = 'Created User';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 //get all orders (purchased) for user by user_id
@@ -49,4 +56,4 @@ const routes = [
 ];
 
 
-module.exports = { routes };
+module.exports = { routes, configure };

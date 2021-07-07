@@ -11,7 +11,9 @@ const createUser = (req, res) => {
 		.then(user_id => {
 			// req.session.user_id = user_id.toString(); // log them in
 			// res.header('Location', '/api/auth');
-			res.sendStatus(201);
+			res.status(201);
+			res.statusMessage = 'Created User';
+			res.end();
 		})
 		.catch(handle(req, res));
 }
@@ -42,7 +44,7 @@ const getUser = (req, res) => {
 const updateUser = (req, res) => {
 	dal.updateUser(req.session.user_id, req.body).then(() => {
 		res.status(204);
-		res.statusMessage = 'Updated';
+		res.statusMessage = 'Updated User';
 		res.end();
 	})
 	.catch(handle(req, res));
@@ -52,7 +54,7 @@ const updateUser = (req, res) => {
 const removeUser = (req, res) => {
 	dal.removeUser(req.session.user_id, req.body).then(() => {
 		res.status(204);
-		res.statusMessage = 'Removed';
+		res.statusMessage = 'Removed User';
 		res.end();
 	})
 	.catch(handle(req, res));

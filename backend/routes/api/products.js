@@ -1,8 +1,10 @@
-const handle = (statusCode, req, res) => {
-	return errors => {
-		res.status(statusCode).json(errors)
-	};
+const dal = {};
+const configure = (obj) => {
+	Object.assign(dal, obj.dal);
+
 };
+
+const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
 
 const createProduct = (req, res) => {
 
@@ -66,4 +68,4 @@ const routes = [
 ];
 
 
-module.exports = { routes };
+module.exports = { routes, configure };
