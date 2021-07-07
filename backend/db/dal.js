@@ -114,7 +114,7 @@ const removeUser = async (user_id) => {
 // ==============================
 
 const createOrder = async (_order) => {
-	console.log(_order);
+	// console.log(_order);
 	const errors = findErrors([
 		{name: "buyer", value: _order.buyer}, 
 		{name: "seller", value: _order.seller}, 
@@ -139,10 +139,22 @@ const createOrder = async (_order) => {
 
 }
 
+const getOrdersByCustomer = async (user_id) => {
+	return await dbclient.db('QuantFreelance').collection('Order').findOne({"buyer": user_id}).then(result => {
+		return result;
+	})
+	.catch(err => { throw ['An error occurred while finding order by buyer id'];});
+}
 
+const getOrdersBySeller = async (user_id) => {
+	return await dbclient.db('QuantFreelance').collection('Order').findOne({"seller": user_id}).then(result => {
+		return result;
+	})
+	.catch(err => { throw ['An error occurred while finding order by seller id'];});
+}
 
 
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
-	createOrder
+	createOrder, getOrdersByCustomer, getOrdersBySeller
 };

@@ -38,7 +38,8 @@ const authenticate = (req, res, next) => {
 const getUser = (req, res) => {
     dal.getUserById({user_id: req.params.user_id}).then( user => {
 		res.json(user);
-	}).catch(handle(req, res));
+	})
+	.catch(handle(req, res));
 }
 
 const updateUser = (req, res) => {

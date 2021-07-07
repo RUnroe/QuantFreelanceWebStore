@@ -17,12 +17,18 @@ const createOrder = (req, res) => {
 
 //get all orders (purchased) for user by user_id
 const getOrdersByCustomer = (req, res) => {
-
+	dal.getOrdersByCustomer("861770015727337472").then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
 }
 
 //get all orders (sold) for user by user_id
 const getOrdersBySeller = (req, res) => {
-
+	dal.getOrdersBySeller("861776823657398272").then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
 }
 
 //Change order status (pending, accepted, declined, completed)
@@ -39,12 +45,12 @@ const routes = [
 		handler: createOrder
 	},
     {
-		uri: '/api/order/customer/:order_id',
+		uri: '/api/order/customer',
 		methods: ['get'],
 		handler: getOrdersByCustomer
 	},
     {
-		uri: '/api/order/seller/:order_id',
+		uri: '/api/order/seller',
 		methods: ['get'],
 		handler: getOrdersBySeller
 	}, 
