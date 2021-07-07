@@ -35,6 +35,8 @@ const findErrors = fields => {
 	});
 	return errors;
 }
+
+
 // ==============================
 //            Users
 // ==============================
@@ -64,7 +66,6 @@ const createUser = async (_user) => {
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
-			console.log("Inserted User");
 			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(() => user_id);
 		})
 	);
@@ -87,8 +88,25 @@ const getUserByUsername = async ({username}) => {
 
 }
 
+const updateUser = async (user_id, user) => {
+	let newValues = { $set: {}};
+	if(!isFieldEmpty(user.username) && /^[a-zA-Z0-9_ ]+$/.test(user.username)) newValues['$set'].username = user.username;
+	if(!isFieldEmpty(user.first_name) && /^[a-zA-Z- ]+$/.test(user.first_name)) newValues['$set'].first_name = user.first_name;
+	if(!isFieldEmpty(user.last_name) && /^[a-zA-Z- ]+$/.test(user.last_name)) newValues['$set'].last_name = user.last_name;
+	if(user.icon_id) newValues['$set'].icon_id = user.icon_id;
+	if(user.is_seller) newValues['$set'].is_seller = (user.is_seller == true);
+	return await dbclient.db('QuantFreelance').collection('User').updateOne({user_id}, newValues)
+	.catch(err => { throw ['An error occurred while updating user'];});
 
+}
+
+const removeUser = async (user_id) => {
+	console.log(user_id)
+	return await dbclient.db('QuantFreelance').collection('User').deleteOne({user_id})
+	.catch(err => { throw ['An error occurred while removing user'];});
+	
+}
 
 module.exports =  {
-	createUser, getUserByEmail, getUserByUsername, getUserById
+	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser
 };

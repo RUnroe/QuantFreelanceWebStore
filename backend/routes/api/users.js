@@ -40,11 +40,22 @@ const getUser = (req, res) => {
 }
 
 const updateUser = (req, res) => {
+	dal.updateUser(req.session.user_id, req.body).then(() => {
+		res.status(204);
+		res.statusMessage = 'Updated';
+		res.end();
+	})
+	.catch(handle(req, res));
 
 }
 
 const removeUser = (req, res) => {
-
+	dal.removeUser(req.session.user_id, req.body).then(() => {
+		res.status(204);
+		res.statusMessage = 'Removed';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 
@@ -60,12 +71,12 @@ const routes = [
 		handler: getUser
 	},
     {
-		uri: '/api/user/:user_id',
+		uri: '/api/user',
 		methods: ['put'],
 		handler: updateUser
 	}, 
     {
-		uri: '/api/user/:user_id',
+		uri: '/api/user',
 		methods: ['delete'],
 		handler: removeUser
 	}
