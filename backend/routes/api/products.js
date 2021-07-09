@@ -7,24 +7,43 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
 
 const createProduct = (req, res) => {
-
+	dal.createProduct(req.body).then(() => {
+		res.status(201);
+		res.statusMessage = 'Created Product';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 const getProduct = (req, res) => {
-
+	dal.getProduct(req.session.user_id).then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
 }
 
 const getProductsBySeller = (req, res) => {
-
+	dal.getProductsBySeller(req.session.user_id).then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
 }
 
 const getProductsByCategory = (req, res) => {
-
+	dal.getProductsByCategory(req.session.user_id).then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
 }
 
 //Variable data pieces: title, price, description, category, cover_image, page_structure
 const updateProduct = (req, res) => {
-
+	dal.updateOrderStatus(req.params.product_id, req.session.user_id, req.body).then(() => {
+		res.status(201);
+		res.statusMessage = 'Updated Product';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 const removeProduct = (req, res) => {

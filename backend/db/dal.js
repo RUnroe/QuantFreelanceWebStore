@@ -29,7 +29,7 @@ const isFieldEmpty = field => {
 const findErrors = fields => {
 	const errors = [];
 	fields.forEach(field => {
-		if(isFieldEmpty(field.value) || typeof field.value != "string" ||(field.regex && !field.regex.test(field.value))) {
+		if(isFieldEmpty(field.value) || typeof field.value != (field.type ? field.type : "string") ||(field.regex && !field.regex.test(field.value))) {
 			errors.push(`Expected ${field.name}, but ${field.value} was supplied`);
 		}
 	});
@@ -140,15 +140,15 @@ const createOrder = async (_order) => {
 }
 
 const getOrdersByCustomer = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').findOne({"buyer": user_id}).then(result => {
-		return result;
+	return await dbclient.db('QuantFreelance').collection('Order').find({"buyer": user_id}).then(result => {
+		return result.toArray();
 	})
 	.catch(err => { throw ['An error occurred while finding order by buyer id'];});
 }
 
 const getOrdersBySeller = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').findOne({"seller": user_id}).then(result => {
-		return result;
+	return await dbclient.db('QuantFreelance').collection('Order').find({"seller": user_id}).then(result => {
+		return result.toArray();
 	})
 	.catch(err => { throw ['An error occurred while finding order by seller id'];});
 }
@@ -164,7 +164,89 @@ const updateOrderStatus = async (order_id, status) => {
 	throw [`Expected 'pending', 'accepted', 'declined', or 'completed', but ${field.value} was supplied`];
 }
 
+// ==============================
+//            Products
+// ==============================
+
+const createProduct = async (_product) => {
+	try {
+		_product.price = parseInt(_product.price);
+	} catch (err) { throw ['An error occured while parsing price']};
+
+	const errors = findErrors([
+		{name: "seller id", value: _product.seller},
+		{name: "price", value: _product.price, type:"number"},
+		{name: "title", value: _product.title}, 
+		{name: "category", value: _product.category}, 
+		{name: "icon id", value: _product.icon_id}	
+	]);
+	if(_product.price < 0) throw ['Price cannot be negative'];
+	if(typeof _product.description != "string")  _product.description = "";
+	if (errors.length) {
+		throw errors;
+	}
+
+    const product_id = gen_id();
+	const record = Object.assign({}, _product, {product_id});
+
+	return dbclient.db('QuantFreelance').collection('Product').insertOne(record).then(() => product_id);
+	
+}
+const getProductById = async (product_id) => {
+	return await dbclient.db('QuantFreelance').collection('Product').findOne({product_id}).then(result => {
+		return result;
+	})
+	.catch(err => { throw ['An error occurred while finding product by id'];});
+}
+
+const getProductsBySeller = async (user_id) => {
+	return await dbclient.db('QuantFreelance').collection('Product').find({"seller": user_id}).then(result => {
+		return result.toArray();
+	})
+	.catch(err => { throw ['An error occurred while finding product by seller id'];});
+}
+
+const getProductsByCategory = async (category) => {
+	if(typeof category != "string") throw [`Expected a string for the category but ${category} was supplied`];
+	return await dbclient.db('QuantFreelance').collection('Product').find({category}).then(result => {
+		return result.toArray();
+	})
+	.catch(err => { throw ['An error occurred while finding product by category'];});
+}
+
+const updateProduct = async (product_id, user_id, product) => {
+	//check if current user owns product
+	//get product by id. If seller id matches user_id, then proceed
+	//else throw error
+
+
+	let newValues = { $set: {}};
+	if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
+	if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
+	if(!isFieldEmpty(product.category)) newValues['$set'].category = product.category;
+	if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
+	return await dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
+	.catch(err => { throw ['An error occurred while updating product'];});
+
+}
+
+const removeProduct = async (product_id) => {
+	return await dbclient.db('QuantFreelance').collection('Product').deleteOne({product_id})
+	.catch(err => { throw ['An error occurred while removing product'];});
+	
+}
+
+// ==============================
+//            Icons
+// ==============================
+
+
+
+
+
+
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
-	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus
+	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
+	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct
 };

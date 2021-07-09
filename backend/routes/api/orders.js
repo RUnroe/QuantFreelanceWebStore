@@ -17,7 +17,7 @@ const createOrder = (req, res) => {
 
 //get all orders (purchased) for user by user_id
 const getOrdersByCustomer = (req, res) => {
-	dal.getOrdersByCustomer("861770015727337472").then(result => {
+	dal.getOrdersByCustomer(req.session.user_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
@@ -25,7 +25,7 @@ const getOrdersByCustomer = (req, res) => {
 
 //get all orders (sold) for user by user_id
 const getOrdersBySeller = (req, res) => {
-	dal.getOrdersBySeller("861776823657398272").then(result => {
+	dal.getOrdersBySeller(req.session.user_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
