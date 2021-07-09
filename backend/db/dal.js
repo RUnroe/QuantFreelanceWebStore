@@ -240,13 +240,24 @@ const removeProduct = async (product_id) => {
 //            Icons
 // ==============================
 
+const createIcon = async (url) => {
+	if(isFieldEmpty(url)) throw [`Expected a url, but ${url} was supplied`];
+	const record = {icon_id: gen_id(), url};
+	return dbclient.db('QuantFreelance').collection('Icon').insertOne(record).then(() => url);
+}
 
-
+const getIcon = async (icon_id) => {
+	return await dbclient.db('QuantFreelance').collection('Icon').findOne({icon_id}).then(result => {
+		return result;
+	})
+	.catch(err => { throw ['An error occurred while finding product by id'];});
+}
 
 
 
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
 	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
-	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct
+	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct,
+	createIcon, getIcon
 };

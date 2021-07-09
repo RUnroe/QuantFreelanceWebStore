@@ -7,19 +7,19 @@ const requireAuth = (redirect) => (req, res, next) => {
 const requireNotAuth = (redirect) => (req, res, next) => {
 	if (req.session.user_id) {
 		if (redirect) res.redirect(redirect);
-		else res.sendStatus(403); // dunno how to say "you're supposed to be not logged in, but you're logged in", so i guess Forbidden works?
+		else res.sendStatus(403); 
 	}
 	else next();
 };
 
-// use as someAsyncThing().then(yada).catch(handle(500, req, res));
+
 const handle = (req, res, code) => {
 	switch (code) {
 		case undefined:
 		case null:
 			return (errors) => {
 				switch (errors?.constructor.name) {
-					case 'Array': // the application code will only throw arrays, by convention that i chose
+					case 'Array': // the application code will only throw arrays
 						return handle(req, res, 400)(errors); // blame the user
 					default:
 						return handle(req, res, 500)(errors); // who knows
