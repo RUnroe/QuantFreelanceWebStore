@@ -222,7 +222,7 @@ const updateProduct = async (product_id, user_id, product) => {
 		if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
 		if(!isFieldEmpty(product.category)) newValues['$set'].category = product.category;
 		if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
-		return await dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
+		return dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
 		.catch(err => { throw ['An error occurred while updating product'];});
 	});
 
