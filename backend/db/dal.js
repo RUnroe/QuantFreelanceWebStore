@@ -49,7 +49,6 @@ const createUser = async (_user) => {
 		{name: "first name", value: _user.first_name, regex: /^[a-zA-Z- ]+$/}, 
 		{name: "last name", value: _user.last_name, regex: /^[a-zA-Z- ]+$/}, 
 		{name: "password", value: _user.password, regex: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/}, 
-		{name: "icon id", value: _user.icon_id}	
 	]);
 	if (errors.length) {
 		throw errors;
@@ -168,17 +167,17 @@ const updateOrderStatus = async (order_id, status) => {
 //            Products
 // ==============================
 
-const createProduct = async (_product) => {
+const createProduct = async (user_id, _product) => {
 	try {
 		_product.price = parseInt(_product.price);
 	} catch (err) { throw ['An error occured while parsing price']};
+	_product.seller = user_id;
 
 	const errors = findErrors([
 		{name: "seller id", value: _product.seller},
 		{name: "price", value: _product.price, type:"number"},
 		{name: "title", value: _product.title}, 
 		{name: "category", value: _product.category}, 
-		{name: "icon id", value: _product.icon_id}	
 	]);
 	if(_product.price < 0) throw ['Price cannot be negative'];
 	if(typeof _product.description != "string")  _product.description = "";
@@ -216,17 +215,18 @@ const getProductsByCategory = async (category) => {
 
 const updateProduct = async (product_id, user_id, product) => {
 	//check if current user owns product
-	//get product by id. If seller id matches user_id, then proceed
-	//else throw error
+	getProductById(product_id).then(result => {
+		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
+		let newValues = { $set: {}};
+		if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
+		if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
+		if(!isFieldEmpty(product.category)) newValues['$set'].category = product.category;
+		if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
+		return await dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
+		.catch(err => { throw ['An error occurred while updating product'];});
+	});
 
-
-	let newValues = { $set: {}};
-	if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
-	if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
-	if(!isFieldEmpty(product.category)) newValues['$set'].category = product.category;
-	if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
-	return await dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
-	.catch(err => { throw ['An error occurred while updating product'];});
+	
 
 }
 
