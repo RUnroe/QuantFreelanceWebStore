@@ -26,7 +26,7 @@ app.use(session({
                 dbName: 'QuantFreelance'
         }),
         secret: require('./secrets').session.secret,
-        name: 'waffle.session',
+        name: 'quant.session',
         resave: false,
         saveUninitialized: false,
         cookie: {
