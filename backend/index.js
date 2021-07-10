@@ -30,7 +30,7 @@ app.use(session({
         resave: false,
         saveUninitialized: false,
         cookie: {
-                maxAge: 1000 * 60 * 60 * 24 * (process.env.SESSION_LIFETIME_DAYS || 90),
+                maxAge: 1000 * 60 * 60 * 24 * 30,
                 sameSite: 'none',
                 secure: true,
                 httpOnly: true
