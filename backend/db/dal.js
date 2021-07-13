@@ -5,7 +5,8 @@ const dbclient = new MongoClient(require('../secrets.json').mongo.connectionStri
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
-dbclient.connect().then(() => console.log("connected"));
+console.log("Attempting to connect to database");
+dbclient.connect().then(() => console.log("Connected")).catch(error => console.log("Could not connect", error));
 
 
 const hasher = require('argon2');
@@ -107,6 +108,18 @@ const removeUser = async (user_id) => {
 	
 }
 
+
+const authenticate = async ({identifier, password}) => {
+	return dbclient.db('QuantFreelance').collection('User').findOne({$or:[{"username":identifier},{"email":identifier}]})
+		.then(result => {
+			if (result)
+				return verify_hash(result?.password, password).then(ok => {
+					if (ok) return result.user_id;
+					else return undefined;
+				});
+			else return undefined; 
+		});
+}
 
 // ==============================
 //            Orders
@@ -257,6 +270,7 @@ const getIcon = async (icon_id) => {
 
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
+	authenticate,
 	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
 	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct,
 	createIcon, getIcon

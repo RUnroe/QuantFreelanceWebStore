@@ -20,6 +20,20 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+
+let routeFiles = ['api/orders', 'api/users', 'api/products', 'api/icons'];
+const routeManager = require('./routes/manager');
+routeFiles.forEach((file) => {
+        let component = require(`./routes/${file}`);
+        if (component.configure) component.configure({
+                dal
+        });
+        routeManager.apply(app, component);
+});
+
+
+app.use(require('cookie-parser')(require('./secrets').session.secret));
+
 app.use(session({
         store: MongoStore.create({
                 mongoUrl: require('./secrets').mongo.connectionString,
@@ -35,16 +49,6 @@ app.use(session({
                 secure: true,
                 httpOnly: true
         }
-}))
-
-let routeFiles = ['api/orders', 'api/users', 'api/products', 'api/icons'];
-const routeManager = require('./routes/manager');
-routeFiles.forEach((file) => {
-        let component = require(`./routes/${file}`);
-        if (component.configure) component.configure({
-                dal
-        });
-        routeManager.apply(app, component);
-});
+}));
 
 app.listen(3005, "localhost");

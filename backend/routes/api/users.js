@@ -20,7 +20,7 @@ const createUser = (req, res) => {
 
 // Authenticate the user by assigning them a session/cookie
 const authenticate = (req, res, next) => {
-	dal.authenticate({email: req.body.email, password: req.body.password})
+	dal.authenticate({identifier: req.body.identifier, password: req.body.password})
 		.then(user_id => {
 			if (user_id) {
 				req.session.user_id = user_id.toString();
@@ -34,6 +34,13 @@ const authenticate = (req, res, next) => {
 		.catch(handle(req, res));
 };
 
+
+const endSession = (req, res) => {
+	req.session.destroy();
+	res.status(204);
+	res.statusMessage = 'Logged out';
+	res.end();
+};
 
 const getUser = (req, res) => {
     dal.getUserById({user_id: req.params.user_id}).then( user => {
@@ -82,7 +89,19 @@ const routes = [
 		uri: '/api/user',
 		methods: ['delete'],
 		handler: removeUser
-	}
+	},
+
+	{
+		uri: '/api/auth',
+		methods: ['post'],
+		handler: authenticate
+	},
+	{
+		uri: '/api/auth',
+		methods: ['delete'],
+		handler: [requireAuth(), endSession]
+	},
+
 ];
 
 
