@@ -19,7 +19,7 @@ const handle = (req, res, code) => {
 		case undefined:
 		case null:
 			return (errors) => {
-				switch (errors?.constructor.name) {
+				switch (errors.constructor.name) {
 					case 'Array': // the application code will only throw arrays
 						return handle(req, res, 400)(errors); // blame the user
 					default:
