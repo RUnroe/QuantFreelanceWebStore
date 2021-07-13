@@ -113,7 +113,7 @@ const authenticate = async ({identifier, password}) => {
 	return dbclient.db('QuantFreelance').collection('User').findOne({$or:[{"username":identifier},{"email":identifier}]})
 		.then(result => {
 			if (result)
-				return verify_hash(result?.password, password).then(ok => {
+				return verify_hash(result.password, password).then(ok => {
 					if (ok) return result.user_id;
 					else return undefined;
 				});
