@@ -126,7 +126,6 @@ const authenticate = async ({identifier, password}) => {
 // ==============================
 
 const createOrder = async (_order) => {
-	// console.log(_order);
 	const errors = findErrors([
 		{name: "buyer", value: _order.buyer}, 
 		{name: "seller", value: _order.seller}, 

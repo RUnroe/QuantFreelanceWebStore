@@ -62,7 +62,7 @@ const routes = [
 	{
 		uri: '/api/product',
 		methods: ['post'],
-		handler: createProduct
+		handler: [requireAuth(), createProduct]
 	},
     {
 		uri: '/api/product/:product_id',
@@ -82,12 +82,12 @@ const routes = [
     {
 		uri: '/api/product',
 		methods: ['put'],
-		handler: updateProduct
+		handler: [requireAuth(), updateProduct]
 	}, 
     {
 		uri: '/api/product',
 		methods: ['delete'],
-		handler: removeProduct
+		handler: [requireAuth(), removeProduct]
 	}
 ];
 

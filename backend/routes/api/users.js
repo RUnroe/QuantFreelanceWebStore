@@ -9,8 +9,8 @@ const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/ro
 const createUser = (req, res) => {
 	dal.createUser(req.body)
 		.then(user_id => {
-			// req.session.user_id = user_id.toString(); // log them in
-			// res.header('Location', '/api/auth');
+			req.session.user_id = user_id.toString(); // log them in
+			//res.header('Location', '/api/auth');
 			res.status(201);
 			res.statusMessage = 'Created User';
 			res.end();
@@ -22,6 +22,7 @@ const createUser = (req, res) => {
 const authenticate = (req, res, next) => {
 	dal.authenticate({identifier: req.body.identifier, password: req.body.password})
 		.then(user_id => {
+			console.log(user_id, 'logged in');
 			if (user_id) {
 				req.session.user_id = user_id.toString();
 				res.statusMessage = 'Authenticated';
@@ -83,12 +84,12 @@ const routes = [
     {
 		uri: '/api/user',
 		methods: ['put'],
-		handler: updateUser
+		handler: [requireAuth(), updateUser]
 	}, 
     {
 		uri: '/api/user',
 		methods: ['delete'],
-		handler: removeUser
+		handler: [requireAuth(), removeUser]
 	},
 
 	{

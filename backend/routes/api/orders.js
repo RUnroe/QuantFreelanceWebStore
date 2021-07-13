@@ -47,7 +47,7 @@ const routes = [
 	{
 		uri: '/api/order',
 		methods: ['post'],
-		handler: createOrder
+		handler: [requireAuth(), createOrder]
 	},
     {
 		uri: '/api/order/customer',
@@ -62,7 +62,7 @@ const routes = [
     {
 		uri: '/api/order/:order_id',
 		methods: ['put'],
-		handler: updateOrderStatus
+		handler: [requireAuth(), updateOrderStatus]
 	}
 ];
 
