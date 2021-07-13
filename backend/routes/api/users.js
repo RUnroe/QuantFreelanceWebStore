@@ -24,10 +24,11 @@ const authenticate = (req, res, next) => {
 		.then(user_id => {
 			console.log(user_id, 'logged in');
 			if (user_id) {
+				console.log(user_id, "made it in if statement");
 				req.session.user_id = user_id;
 				res.statusMessage = 'Authenticated';
 				res.status(204).end();
-				console.log(res);
+				console.log("finished");
 				return;
 			}
 			res.sendStatus(401);
