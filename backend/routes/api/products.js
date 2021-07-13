@@ -4,7 +4,7 @@ const configure = (obj) => {
 
 };
 
-const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
+const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createProduct = (req, res) => {
 	dal.createProduct(req.session.user_id, req.body).then(() => {

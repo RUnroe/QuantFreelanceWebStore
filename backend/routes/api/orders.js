@@ -4,7 +4,7 @@ const configure = (obj) => {
 
 };
 
-const { requireAuth, requireNotAuth, handle } = require(require.main.path + '/routes/util');
+const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createOrder = (req, res) => {
 	dal.createOrder(req.body).then(() => {
