@@ -53,7 +53,11 @@ app.use(session({
                 mongoUrl: require('./secrets').mongo.connectionString,
                 dbName: 'QuantFreelance',
                 ttl: 14 * 24 * 60 * 60 // = 14 days. Default
-              })
+        }),
+        secret: require('./secrets').session.secret,
+        // name: 'quant.session',
+        resave: false,
+        saveUninitialized: false
 }));
 
 app.listen(3005, "localhost");
