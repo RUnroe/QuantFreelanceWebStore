@@ -47,7 +47,12 @@ const updateProduct = (req, res) => {
 }
 
 const removeProduct = (req, res) => {
-
+	dal.removeProduct(req.body.product_id).then(() => {
+		res.status(204);
+		res.statusMessage = 'Removed Product';
+		res.end();
+	})
+	.catch(handle(req, res));
 }
 
 
@@ -75,12 +80,12 @@ const routes = [
 		handler: getProductsByCategory
 	}, 
     {
-		uri: '/api/product/:order_id',
+		uri: '/api/product',
 		methods: ['put'],
 		handler: updateProduct
 	}, 
     {
-		uri: '/api/product/:order_id',
+		uri: '/api/product',
 		methods: ['delete'],
 		handler: removeProduct
 	}
