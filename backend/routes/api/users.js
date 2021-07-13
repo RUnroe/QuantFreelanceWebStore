@@ -32,7 +32,7 @@ const authenticate = (req, res, next) => {
 			res.sendStatus(401);
 			return;
 		})
-		.catch(err => {console.log(err);handle(req, res);});
+		.catch(err => {console.log(err); return handle(req, res);});
 };
 
 
