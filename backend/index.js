@@ -35,20 +35,25 @@ routeFiles.forEach((file) => {
 app.use(require('cookie-parser')(require('./secrets').session.secret));
 
 app.use(session({
+        // store: MongoStore.create({
+        //         mongoUrl: require('./secrets').mongo.connectionString,
+        //         dbName: 'QuantFreelance'
+        // }),
+        // secret: require('./secrets').session.secret,
+        // name: 'quant.session',
+        // resave: false,
+        // saveUninitialized: false,
+        // cookie: {
+        //         maxAge: 1000 * 60 * 60 * 24 * 30,
+        //         sameSite: 'none',
+        //         secure: true,
+        //         httpOnly: true
+        // }
         store: MongoStore.create({
                 mongoUrl: require('./secrets').mongo.connectionString,
-                dbName: 'QuantFreelance'
-        }),
-        secret: require('./secrets').session.secret,
-        name: 'quant.session',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-                maxAge: 1000 * 60 * 60 * 24 * 30,
-                sameSite: 'none',
-                secure: true,
-                httpOnly: true
-        }
+                dbName: 'QuantFreelance',
+                ttl: 14 * 24 * 60 * 60 // = 14 days. Default
+              })
 }));
 
 app.listen(3005, "localhost");
