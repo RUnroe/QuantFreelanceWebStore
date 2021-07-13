@@ -6,7 +6,7 @@ export default function HomePage() {
             identifier: "RUnroe",
             password: "1234aaAb"
         }
-        fetch("http://localhost:3005/api/auth", {
+        fetch("quant.ryanunroe.com/api/auth", {
             method: 'POST', 
             headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ export default function HomePage() {
     const updateUser = () => {
         const data = {first_name: firstName.current.value};
         console.log(data);
-        fetch("http://localhost:3005/api/user", {
+        fetch("quant.ryanunroe.com/api/user", {
             method: 'PUT', 
             headers: {
             'Content-Type': 'application/json'
