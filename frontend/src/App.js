@@ -50,6 +50,7 @@ function App() {
       <div className="secondary-nav section">
 
       </div>
+    </nav>
       {/*
         A <Switch> looks through all its children <Route>
         elements and renders the first one whose path
@@ -101,7 +102,6 @@ function App() {
           <OrdersPage />
         </Route>
       </Switch>
-    </nav>
   </Router>
   );
 }
