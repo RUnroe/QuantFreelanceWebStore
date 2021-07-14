@@ -8,6 +8,7 @@ export default function HomePage() {
         }
         fetch("/api/auth", {
             method: 'POST', 
+            credentials: 'include',
             headers: {
             'Content-Type': 'application/json'
             },
