@@ -35,7 +35,7 @@ import './App.css';
 //           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
 function App() {
   return (
-    <Router>
+    <StaticRouter>
     <nav>
       <div className="primary-nav section">
         <div>
@@ -104,7 +104,7 @@ function App() {
         </Route>
       </Switch>
     </div>
-  </Router>
+  </StaticRouter>
   );
 }
 

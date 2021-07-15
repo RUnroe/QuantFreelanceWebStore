@@ -8,7 +8,6 @@ export default function HomePage() {
         }
         fetch("/api/auth", {
             method: 'POST', 
-            credentials: 'include',
             headers: {
             'Content-Type': 'application/json'
             },
@@ -19,7 +18,8 @@ export default function HomePage() {
         const data = {first_name: firstName.current.value};
         console.log(data);
         fetch("/api/user", {
-            method: 'PUT', 
+            method: 'PUT',
+            credentials: 'include', 
             headers: {
             'Content-Type': 'application/json'
             },
