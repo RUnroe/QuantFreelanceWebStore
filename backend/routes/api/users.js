@@ -27,7 +27,7 @@ const authenticate = (req, res, next) => {
 				req.session.user_id = user_id;
 				console.log(req.session);
 				res.statusMessage = 'Authenticated';
-				res.status(204).end();
+				res.status(303).location("/store").end();
 				return;
 			}
 			res.sendStatus(401);

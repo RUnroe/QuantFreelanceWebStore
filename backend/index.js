@@ -23,10 +23,10 @@ app.use(bodyParser.json());
 //app.use(require('cookie-parser')(require('./secrets').session.secret));
 
 app.use(session({
-        store: MongoStore.create({
-                mongoUrl: require('./secrets').mongo.connectionString,
-                dbName: 'QuantFreelance'
-        }),
+        // store: MongoStore.create({
+        //         mongoUrl: require('./secrets').mongo.connectionString,
+        //         dbName: 'QuantFreelance'
+        // }),
         secret: require('./secrets').session.secret,
         resave: false,
         saveUninitialized: false,
