@@ -1,5 +1,5 @@
 const requireAuth = (redirect) => (req, res, next) => {
-	console.log("user_id", req);
+	console.log("user_id", req.session);
 	if (req.session.user_id) next();
 	else if (redirect) res.redirect(redirect);
 	else res.sendStatus(401);
