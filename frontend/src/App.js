@@ -1,5 +1,5 @@
 import {
-  BrowserRouter as Router,
+  StaticRouter,
   Switch,
   Route,
   Link
