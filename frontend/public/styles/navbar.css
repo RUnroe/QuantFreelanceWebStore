@@ -25,10 +25,9 @@ nav hr {
     box-sizing: border-box;
     text-decoration:none;
     color: var(--color-dark-1);
-    border-bottom: 2px solid var(--color-light-1);
 }
 .primary-nav .nav-item:hover {
-    border-bottom-color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
     color: var(--color-primary);
 }
 

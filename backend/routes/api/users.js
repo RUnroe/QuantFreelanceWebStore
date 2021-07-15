@@ -10,6 +10,7 @@ const createUser = (req, res) => {
 	dal.createUser(req.body)
 		.then(user_id => {
 			req.session.user_id = user_id.toString(); // log them in
+			console.log("session created");
 			//res.header('Location', '/api/auth');
 			res.status(201);
 			res.statusMessage = 'Created User';
@@ -25,7 +26,7 @@ const authenticate = (req, res, next) => {
 			console.log(user_id, 'logged in');
 			if (user_id) {
 				req.session.user_id = user_id;
-				console.log(req.session);
+				console.log("session created");
 				res.statusMessage = 'Authenticated';
 				res.status(303).location("/store").end();
 				return;

@@ -1,4 +1,6 @@
 import React, { createRef, useState } from "react";
+import {ImageInput} from "./../partials/form";
+
 export default function HomePage() {
     const firstName = createRef();
     const logIn = () => {
@@ -32,6 +34,7 @@ export default function HomePage() {
             <button onClick={logIn}>Log In</button>
             <input type="text" ref={firstName} placeholder="First Name" />
             <button onClick={updateUser}> Update User</button>
+            <ImageInput />
         </div>
     );
 

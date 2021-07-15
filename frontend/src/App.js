@@ -5,20 +5,20 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import HomePage from './HomePage';
-import LoginPage from './LoginPage';
-import SignupPage from './SignupPage';
-import SearchPage from './SearchPage';
-import CategoryPage from './CategoryPage';
-import ProductPage from './ProductPage';
-import ProductEditPage from './ProductEditPage';
-import PurchasePage from './PurchasePage';
-import AccountPage from './AccountPage';
-import AccountSettingsPage from './AccountSettingsPage';
-import PurchaseHistoryPage from './PurchaseHistoryPage';
-import SellHistoryPage from './SellHistoryPage';
-import InboxPage from './InboxPage';
-import OrdersPage from './OrdersPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import SearchPage from './pages/SearchPage';
+import CategoryPage from './pages/CategoryPage';
+import ProductPage from './pages/ProductPage';
+import ProductEditPage from './pages/ProductEditPage';
+import PurchasePage from './pages/PurchasePage';
+import AccountPage from './pages/AccountPage';
+import AccountSettingsPage from './pages/AccountSettingsPage';
+import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
+import SellHistoryPage from './pages/SellHistoryPage';
+import InboxPage from './pages/InboxPage';
+import OrdersPage from './pages/OrdersPage';
 
 
 import './App.css';
