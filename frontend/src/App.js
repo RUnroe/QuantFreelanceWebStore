@@ -1,5 +1,6 @@
 import {
   StaticRouter,
+  BrowserRouter,
   Switch,
   Route,
   Link
@@ -35,7 +36,7 @@ import './App.css';
 //           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
 function App() {
   return (
-    <StaticRouter>
+    <BrowserRouter>
     <nav>
       <div className="primary-nav section">
         <div>
@@ -63,10 +64,10 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <SignupPage />
         </Route>
-        <Route path="/login">
+        <Route exact path="/login">
           <LoginPage />
         </Route>
         <Route path="/store/search">
@@ -104,7 +105,7 @@ function App() {
         </Route>
       </Switch>
     </div>
-  </StaticRouter>
+  </BrowserRouter>
   );
 }
 
