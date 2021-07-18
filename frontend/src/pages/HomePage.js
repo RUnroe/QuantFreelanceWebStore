@@ -36,7 +36,8 @@ export default function HomePage() {
             <button onClick={logIn}>Log In</button>
             <input type="text" ref={firstName} placeholder="First Name" />
             <button onClick={updateUser}> Update User</button>
-                <SignupForm />
+            <SignupForm />
+            <img src="/api/icons/d6980014f41b1429abbe18d4fedc96c8" />
         </div>
     );
 
