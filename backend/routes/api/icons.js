@@ -3,6 +3,8 @@ let upload;
 const configure = (obj) => {
 	Object.assign(dal, obj.dal);
 	upload = obj['upload'];
+	routes.filter(route => route.id === 'Upload Here')
+		.forEach(route => route.handler.unshift(upload.single('icon')));
 };
 
 const { requireAuth, requireNotAuth, handle } = require('../util');
@@ -57,9 +59,10 @@ const getIcon = (req, res) => {
 
 const routes = [
 	{
+		id: 'Upload Here',
 		uri: '/api/icons',
 		methods: ['post'],
-		handler: [upload.single('icon'), createIcon]
+		handler: [ createIcon]
 	},
     {
 		uri: '/api/icon/:icon_id',
