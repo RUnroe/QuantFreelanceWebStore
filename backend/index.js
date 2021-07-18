@@ -3,7 +3,6 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
-const upload = require('multer')({ dest: __dirname + '/public/icons' });
 
 
 
@@ -44,7 +43,7 @@ const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
         if (component.configure) component.configure({
-                dal, upload
+                dal
         });
         routeManager.apply(app, component);
 });
