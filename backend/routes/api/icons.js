@@ -1,7 +1,8 @@
 const dal = {};
-const upload = require('multer')({ dest:'/public/icons' });
+let upload;
 const configure = (obj) => {
 	Object.assign(dal, obj.dal);
+	upload = obj['upload'];
 };
 
 const { requireAuth, requireNotAuth, handle } = require('../util');
