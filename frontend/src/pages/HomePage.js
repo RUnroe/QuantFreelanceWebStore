@@ -31,9 +31,11 @@ export default function HomePage() {
 
     const postIcon = event => {
         event.preventDefault();
+        const formData = new FormData();
+        formData.append('icon', document.getElementById("iconInput").files[0]);
         fetch('/api/icons', {
             method: 'POST',
-            body: new FormData()
+            body: formData
         }).then(response => response.json())
         .then(data => console.log(data));
     }
