@@ -3,6 +3,9 @@ const configure = (obj) => {
 	Object.assign(dal, obj.dal);
 
 };
+const upload = require('multer')({ dest: __dirname + '/public/icons' });
+routes.filter(route => route.id === 'Upload Here')
+		.forEach(route => route.handler.unshift(upload.single('icon')));
 
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
@@ -56,6 +59,7 @@ const getIcon = (req, res) => {
 
 const routes = [
 	{
+		id: 'Upload Here',
 		uri: '/api/icons',
 		methods: ['post'],
 		handler: createIcon

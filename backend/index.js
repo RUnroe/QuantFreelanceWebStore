@@ -3,7 +3,6 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
-const upload = require('multer')({ dest: __dirname + '/public/icons' });
 
 
 
@@ -11,8 +10,8 @@ const app = express();
 const dal = require('./db/dal');
 
 
-app.set("view engine", "pug");
-app.set("views", __dirname + "/views");
+// app.set("view engine", "pug");
+// app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname + "/public")));
 
 app.use(bodyParser.urlencoded({
