@@ -49,7 +49,7 @@ const getIcon = (req, res) => {
             if (!icon) {
                 res.sendStatus(404);
             }
-            else res.redirect(301, `https://quant.ryanunroe.com/api/${icon.url}`);
+            else res.redirect(301, `https://quant.ryanunroe.com/api${icon.url}`);
         })
         .catch(handle(req, res));
 }
