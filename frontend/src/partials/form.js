@@ -7,6 +7,7 @@ function SignupForm() {
     const postIcon = event => {
         event.preventDefault();
         const formData = new FormData();
+        console.log(image.current.files[0]);
         formData.append('icon', image.current.files[0]);
         fetch('/api/icons', {
             method: 'POST',
