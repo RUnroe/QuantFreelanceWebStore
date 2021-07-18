@@ -13,6 +13,7 @@ const dal = require('./db/dal');
 
 // app.set("view engine", "pug");
 // app.set("views", __dirname + "/views");
+app.set("trust proxy", 1);
 app.use(express.static(path.join(__dirname + "/public")));
 
 app.use(bodyParser.urlencoded({
