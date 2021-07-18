@@ -39,7 +39,7 @@ const createIcon = (req, res) => {
 
 
 const uploadImageFile = (file) => {
-	return '/icons/' + file.filename;
+	return '/api/icons/' + file.filename;
 };
 
 const getIcon = (req, res) => {
