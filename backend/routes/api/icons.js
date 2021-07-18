@@ -25,7 +25,7 @@ const createIcon = (req, res) => {
 		req.body.url = uploadImageFile(req.file);
 	}
 
-	db.createIcon(req.body.url)
+	dal.createIcon(req.body.url)
 		.then(icon => {
 			res.status(201)
 				.location(`api/icons/${icon.icon_id}`)
@@ -40,7 +40,7 @@ const uploadImageFile = (file) => {
 };
 
 const getIcon = (req, res) => {
-    db.getIcon(req.params.icon_id)
+    dal.getIcon(req.params.icon_id)
         .then(icon => {
             if (!icon) {
                 res.sendStatus(404);
