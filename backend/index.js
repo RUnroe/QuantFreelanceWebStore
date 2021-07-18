@@ -3,7 +3,7 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
-const upload = require('multer')({ dest: __dirname + '../icon/public' });
+const upload = require('multer')({ dest: __dirname + '../frontend/public/icons' });
 
 
 

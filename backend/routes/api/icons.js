@@ -39,7 +39,7 @@ const createIcon = (req, res) => {
 
 
 const uploadImageFile = (file) => {
-	return file.filename;
+	return '/icons/' + file.filename;
 };
 
 const getIcon = (req, res) => {
@@ -49,7 +49,7 @@ const getIcon = (req, res) => {
             if (!icon) {
                 res.sendStatus(404);
             }
-            else res.redirect(301, `https://icon.ryanunroe.com/${icon.url}`);
+            else res.redirect(301, icon.url);
         })
         .catch(handle(req, res));
 }
