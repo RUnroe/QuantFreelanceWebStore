@@ -1,5 +1,5 @@
 const dal = {};
-const upload = require('multer')({ dest: __dirname + '/public/icons' });
+const upload = require('multer')({ dest:'/public/icons' });
 const configure = (obj) => {
 	Object.assign(dal, obj.dal);
 };
