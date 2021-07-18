@@ -28,13 +28,25 @@ export default function HomePage() {
             body: JSON.stringify(data)
         }).then( response => console.log(response));
     }
+
+    const postIcon = event => {
+        event.preventDefault();
+        fetch('/api/icons', {
+            method: 'POST',
+            body: new FormData()
+        }).then(response => response.json())
+        .then(data => console.log(data));
+    }
     return(
         <div className="section">
             <h1>Home</h1>
             <button onClick={logIn}>Log In</button>
             <input type="text" ref={firstName} placeholder="First Name" />
             <button onClick={updateUser}> Update User</button>
-            <ImageInput />
+            <form id="form" method="POST" onSubmit={postIcon}>
+                <ImageInput />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 
