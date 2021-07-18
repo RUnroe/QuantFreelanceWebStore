@@ -260,6 +260,7 @@ const createIcon = async (url) => {
 
 const getIcon = async (icon_id) => {
 	return await dbclient.db('QuantFreelance').collection('Icon').findOne({icon_id}).then(result => {
+		console.log(result);
 		return result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});

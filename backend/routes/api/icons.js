@@ -43,6 +43,7 @@ const uploadImageFile = (file) => {
 };
 
 const getIcon = (req, res) => {
+	console.log(req.params);
     dal.getIcon(req.params.icon_id)
         .then(icon => {
             if (!icon) {
