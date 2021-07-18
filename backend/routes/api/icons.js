@@ -66,7 +66,7 @@ const routes = [
 		handler: [ createIcon]
 	},
     {
-		uri: '/api/icons/:icon_id',
+		uri: '/api/icon/:icon_id',
 		methods: ['get'],
 		handler: getIcon
 	}
