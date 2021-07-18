@@ -7,7 +7,7 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createIcon = (req, res) => {
-	console.log(req);
+	console.log(req.file, req.body);
 	const errors = [];
 
 	let hasImage = false; if (req.file)     hasImage = true;
