@@ -23,6 +23,7 @@ import InboxPage from './pages/InboxPage';
 import OrdersPage from './pages/OrdersPage';
 
 import './App.css';
+import { useEffect, useState } from "react";
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   console.log(Cookie.get());
@@ -43,6 +44,16 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
 //       each val in ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"]
 //           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
 function App() {
+  const [currAuthLevel, setCurrAuthLevel] = useState();
+  useEffect(() => {
+    const checkAuth = async () => {
+      fetch('/api/checkAuth', {credentials:include})
+      .then(response => response.json())
+      .then(data => setCurrAuthLevel(data.authLevel ? data.authLevel : ""));
+    }
+    checkAuth();
+  }, []);
+
   return (
     <BrowserRouter>
     <nav>
@@ -78,13 +89,13 @@ function App() {
           <CategoryPage />
         </Route>
         <Route exact path="/store/:product_id/edit">
-          <AuthenticatedRoute currAuthLevel="seller" component={<ProductEditPage />} reqAuthLevel="seller" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<ProductEditPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/store/:product_id">
           <ProductPage />
         </Route>
         <Route exact path="/purchase/:product_id">
-          <AuthenticatedRoute currAuthLevel="" component={<PurchasePage />} reqAuthLevel="buyer" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
           <AccountSettingsPage />

@@ -74,6 +74,10 @@ const removeUser = (req, res) => {
 	.catch(handle(req, res));
 }
 
+const checkSession = (req, res) => {
+	if(req.session) res.json({authLevel: req.session.is_seller ? "seller" : "buyer"});
+	else res.json({authLevel: ""});
+}
 
 const routes = [
 	{
@@ -106,6 +110,11 @@ const routes = [
 		uri: '/api/auth',
 		methods: ['delete'],
 		handler: [requireAuth(), endSession]
+	},
+	{
+		uri: '/api/chechAuth',
+		methods: ['get'],
+		handler: checkSession
 	},
 
 ];
