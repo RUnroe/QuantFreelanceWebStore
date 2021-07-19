@@ -6,7 +6,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Cookie from "js-cookie";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -26,8 +25,8 @@ import './App.css';
 import { useEffect, useState } from "react";
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
-  console.log(Cookie.get());
-  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) {console.log("Auth is good mate"); return component;}
+  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) return component;
+  else if (currAuthLevel == "buyer" && reqAuthLevel == "seller") return <Redirect to={{pathname: '/'}} />
   return <Redirect to={{pathname: '/login'}} />
 }
 
@@ -49,7 +48,7 @@ function App() {
     const checkAuth = async () => {
       fetch('/api/auth', {credentials:"include"})
       .then(response => response.json())
-      .then(data => {setCurrAuthLevel(data.authLevel); console.log(data, currAuthLevel)})
+      .then(data => setCurrAuthLevel(data.authLevel))
       .catch(error => setCurrAuthLevel(""));
     }
     checkAuth();
