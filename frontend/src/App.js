@@ -47,7 +47,7 @@ function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
   useEffect(() => {
     const checkAuth = async () => {
-      fetch('/api/checkauth', {credentials:"include"})
+      fetch('/api/checkauth', {method: 'POST', credentials:"include"})
       .then(response => response.json())
       .then(data => setCurrAuthLevel(data.authLevel ? data.authLevel : ""));
     }

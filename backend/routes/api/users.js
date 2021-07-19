@@ -114,7 +114,7 @@ const routes = [
 	},
 	{
 		uri: '/api/chechauth',
-		methods: ['get'],
+		methods: ['post'],
 		handler: checkSession
 	},
 
