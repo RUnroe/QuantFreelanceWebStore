@@ -113,8 +113,8 @@ const routes = [
 		handler: [requireAuth(), endSession]
 	},
 	{
-		uri: '/api/chechauth',
-		methods: ['post'],
+		uri: '/api/auth',
+		methods: ['get'],
 		handler: checkSession
 	},
 
