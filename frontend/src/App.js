@@ -49,12 +49,11 @@ function App() {
     const checkAuth = async () => {
       fetch('/api/auth', {credentials:"include"})
       .then(response => response.json())
-      .then(data => setCurrAuthLevel(data.authLevel ? data.authLevel : ""));
+      .then(data => {setCurrAuthLevel(data.authLevel ? data.authLevel : ""); console.log(currAuthLevel)});
     }
     checkAuth();
-    console.log(currAuthLevel);
   }, []);
-
+  if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
     <BrowserRouter>
     <nav>
