@@ -77,10 +77,10 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/signup">
-          <SignupPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage />} reqAuthLevel="" />
         </Route>
         <Route exact path="/login">
-          <LoginPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage />} reqAuthLevel="" />
         </Route>
         <Route exact path="/store/search">
           <SearchPage />
@@ -98,22 +98,22 @@ function App() {
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
-          <AccountSettingsPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/history/purchase">
-          <PurchaseHistoryPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchaseHistoryPage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/history/sell">
-          <SellHistoryPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SellHistoryPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/account/:username">
           <AccountPage />
         </Route>
         <Route exact path="/inbox">
-          <InboxPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<InboxPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/orders">
-          <OrdersPage />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<OrdersPage />} reqAuthLevel="buyer" />
         </Route>
         <Route path="/">
           <Redirect to={{pathname: '/'}} />
