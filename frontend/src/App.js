@@ -24,7 +24,7 @@ import OrdersPage from './pages/OrdersPage';
 import './App.css';
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
-  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) return component;
+  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) {console.log("Auth is good mate"); return component;}
   return <Redirect to={{pathname: '/login'}} />
 }
 
@@ -82,7 +82,7 @@ function App() {
           <ProductPage />
         </Route>
         <Route exact path="/purchase/:product_id">
-          <PurchasePage />
+          <AuthenticatedRoute currAuthLevel="" component={<PurchasePage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
           <AccountSettingsPage />
