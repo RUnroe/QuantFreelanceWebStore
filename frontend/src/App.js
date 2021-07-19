@@ -52,6 +52,7 @@ function App() {
       .then(data => setCurrAuthLevel(data.authLevel ? data.authLevel : ""));
     }
     checkAuth();
+    console.log(currAuthLevel);
   }, []);
 
   return (
