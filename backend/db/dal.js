@@ -66,7 +66,7 @@ const createUser = async (_user) => {
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
-			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(() => user_id);
+			return dbclient.db('QuantFreelance').collection('User').insertOne(record).then(() => ({user_id, is_seller: record.is_seller}));
 		})
 	);
 }
@@ -114,7 +114,7 @@ const authenticate = async ({identifier, password}) => {
 		.then(result => {
 			if (result)
 				return verify_hash(result.password, password).then(ok => {
-					if (ok) return result.user_id;
+					if (ok) return {user_id: result.user_id, is_seller: result.is_seller};
 					else return undefined;
 				});
 			else return undefined; 

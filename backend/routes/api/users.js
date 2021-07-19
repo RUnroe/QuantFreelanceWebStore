@@ -8,8 +8,9 @@ const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createUser = (req, res) => {
 	dal.createUser(req.body)
-		.then(user_id => {
+		.then(({user_id, is_seller}) => {
 			req.session.user_id = user_id.toString(); // log them in
+			req.session.is_seller = is_seller.toString(); // log them in
 			console.log("session created");
 			//res.header('Location', '/api/auth');
 			res.status(201);
@@ -22,10 +23,12 @@ const createUser = (req, res) => {
 // Authenticate the user by assigning them a session/cookie
 const authenticate = (req, res, next) => {
 	dal.authenticate({identifier: req.body.identifier, password: req.body.password})
-		.then(user_id => {
+		.then(({user_id, is_seller}) => {
 			console.log(user_id, 'logged in');
 			if (user_id) {
 				req.session.user_id = user_id;
+				req.session.is_seller = is_seller.toString(); // log them in
+
 				console.log("session created");
 				res.statusMessage = 'Authenticated';
 				res.status(303).location("/store").end();
