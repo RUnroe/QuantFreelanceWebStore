@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Cookie from "js-cookie";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -24,6 +25,7 @@ import OrdersPage from './pages/OrdersPage';
 import './App.css';
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
+  console.log(Cookie.get());
   if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) {console.log("Auth is good mate"); return component;}
   return <Redirect to={{pathname: '/login'}} />
 }
