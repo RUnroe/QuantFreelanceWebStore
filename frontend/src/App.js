@@ -21,8 +21,13 @@ import SellHistoryPage from './pages/SellHistoryPage';
 import InboxPage from './pages/InboxPage';
 import OrdersPage from './pages/OrdersPage';
 
-
 import './App.css';
+
+function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
+  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) return component;
+  return <Redirect to={{pathname: '/login'}} />
+}
+
 // nav
 //   div.primary-nav.section
 //       div
@@ -71,7 +76,7 @@ function App() {
           <CategoryPage />
         </Route>
         <Route exact path="/store/:product_id/edit">
-          <ProductEditPage />
+          <AuthenticatedRoute currAuthLevel="seller" component={<ProductEditPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/store/:product_id">
           <ProductPage />
