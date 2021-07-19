@@ -37,7 +37,7 @@ export default function HomePage() {
             <input type="text" ref={firstName} placeholder="First Name" />
             <button onClick={updateUser}> Update User</button>
             <SignupForm />
-            <img src="/api/icon/866441899454627840" />
+            <img src="/api/icon/866702471496601600" />
         </div>
     );
 

@@ -1,6 +1,7 @@
 import {
   StaticRouter,
   BrowserRouter,
+  Redirect,
   Switch,
   Route,
   Link
@@ -53,13 +54,6 @@ function App() {
       </div>
     </nav>
     <div id="main">
-      {/*
-        A <Switch> looks through all its children <Route>
-        elements and renders the first one whose path
-        matches the current URL. Use a <Switch> any time
-        you have multiple routes, but you want only one
-        of them to render at a time
-      */}
       <Switch>
         <Route exact path="/">
           <HomePage />
@@ -70,38 +64,41 @@ function App() {
         <Route exact path="/login">
           <LoginPage />
         </Route>
-        <Route path="/store/search">
+        <Route exact path="/store/search">
           <SearchPage />
         </Route>
-        <Route path="/store/category/:category_name">
+        <Route exact path="/store/category/:category_name">
           <CategoryPage />
         </Route>
-        <Route path="/store/:product_id/edit">
+        <Route exact path="/store/:product_id/edit">
           <ProductEditPage />
         </Route>
-        <Route path="/store/:product_id">
+        <Route exact path="/store/:product_id">
           <ProductPage />
         </Route>
-        <Route path="/purchase/:product_id">
+        <Route exact path="/purchase/:product_id">
           <PurchasePage />
         </Route>
-        <Route path="/account/settings">
+        <Route exact path="/account/settings">
           <AccountSettingsPage />
         </Route>
-        <Route path="/account/history/purchase">
+        <Route exact path="/account/history/purchase">
           <PurchaseHistoryPage />
         </Route>
-        <Route path="/account/history/sell">
+        <Route exact path="/account/history/sell">
           <SellHistoryPage />
         </Route>
-        <Route path="/account/:username">
+        <Route exact path="/account/:username">
           <AccountPage />
         </Route>
-        <Route path="/inbox">
+        <Route exact path="/inbox">
           <InboxPage />
         </Route>
-        <Route path="/orders">
+        <Route exact path="/orders">
           <OrdersPage />
+        </Route>
+        <Route path="/">
+          <Redirect to={{pathname: '/'}} />
         </Route>
       </Switch>
     </div>

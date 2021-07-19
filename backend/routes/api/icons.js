@@ -10,7 +10,6 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createIcon = (req, res) => {
-	console.log(req.file, req.body);
 	const errors = [];
 
 	let hasImage = false; if (req.file)     hasImage = true;
@@ -43,7 +42,6 @@ const uploadImageFile = (file) => {
 };
 
 const getIcon = (req, res) => {
-	console.log(req.params);
     dal.getIcon(req.params.icon_id)
         .then(icon => {
             if (!icon) {
