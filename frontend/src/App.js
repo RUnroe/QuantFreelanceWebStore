@@ -58,8 +58,8 @@ function App() {
       .catch(error => setCurrAuthLevel(""));
     }
     //Enable for dev purposes
-    setCurrAuthLevel("seller");
-    //checkAuth();
+    //setCurrAuthLevel("seller");
+    checkAuth();
   }, []);
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
