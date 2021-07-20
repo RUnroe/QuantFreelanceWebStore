@@ -21,6 +21,8 @@ import SellHistoryPage from './pages/SellHistoryPage';
 import InboxPage from './pages/InboxPage';
 import OrdersPage from './pages/OrdersPage';
 
+import NavigationMenu from "./partials/navbar";
+
 import './App.css';
 import { useEffect, useState } from "react";
 
@@ -44,33 +46,26 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
 //           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
 function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
+  const [currUser, setCurrUser] = useState({});
   useEffect(() => {
     const checkAuth = async () => {
       fetch('/api/auth', {credentials:"include"})
       .then(response => response.json())
-      .then(data => setCurrAuthLevel(data.authLevel))
+      .then(data => {
+        setCurrUser(data);
+        setCurrAuthLevel(data.authLevel);
+      })
       .catch(error => setCurrAuthLevel(""));
+      //setCurrAuthLevel("seller");
     }
     checkAuth();
   }, []);
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
     <BrowserRouter>
-    <nav>
-      <div className="primary-nav section">
-        <div>
-          <Link className="nav-logo" to="/"><img src="https://via.placeholder.com/135x45" alt="logo" /></Link>
-        </div>
-        <div>
-          <Link className="nav-item" to="/signup">Sign Up</Link>
-          <Link className="nav-item" to="/login">Log In</Link>
-        </div>
-      </div>
-      <hr />
-      <div className="secondary-nav section">
 
-      </div>
-    </nav>
+    <NavigationMenu currAuthLevel={currAuthLevel} username={currUser.username}/>
+    
     <div id="main">
       <Switch>
         <Route exact path="/">

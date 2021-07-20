@@ -76,9 +76,18 @@ const removeUser = (req, res) => {
 
 const checkSession = (req, res) => {
 	// console.log("check Auth:",req.session);
+	
 	if(req.session) {
 		const is_seller = req.session.is_seller === "true" ? "seller" : "buyer";
-		res.json({authLevel: is_seller});
+		// res.json({authLevel: is_seller});
+		dal.getUserById({user_id: req.session.user_id}).then( user => {
+			let retUser = Object.assign(user, {authLevel: is_seller});
+			delete retUser._id;
+			delete retUser.is_seller;
+
+			res.json(retUser);
+		})
+		.catch(handle(req, res));
 	}
 	else res.json({authLevel: ""});
 }
