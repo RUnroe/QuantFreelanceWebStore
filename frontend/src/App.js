@@ -27,9 +27,25 @@ import './App.css';
 import { useEffect, useState } from "react";
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
-  if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) return component;
-  else if (currAuthLevel == "buyer" && reqAuthLevel == "seller") return <Redirect to={{pathname: '/'}} />
-  return <Redirect to={{pathname: '/login'}} />
+  // if(reqAuthLevel == "noAuth" && (currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null)) return component;
+  // else if(currAuthLevel == "seller" || (currAuthLevel == "buyer" && reqAuthLevel == "buyer")) return component;
+  // else if (currAuthLevel == "buyer" && reqAuthLevel == "seller") return <Redirect to={{pathname: '/'}} />
+  // return <Redirect to={{pathname: '/login'}} />;
+
+  if(reqAuthLevel == "noAuth") {
+    if(currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null) return component;
+    return <Redirect to={{pathname: '/'}} />;
+  }
+  else if (reqAuthLevel == "buyer") {
+    if(currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null) return <Redirect to={{pathname: '/login'}} />;
+    return component;
+  }
+  else if(reqAuthLevel == "seller") {
+    if(currAuthLevel == "buyer") return <Redirect to={{pathname: '/'}} />;
+    if(currAuthLevel == "seller") return component;
+    return <Redirect to={{pathname: '/login'}} />;
+  }
+  return <Redirect to={{pathname: '/login'}} />;
 }
 
 // nav
@@ -73,10 +89,10 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/signup">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage />} reqAuthLevel="" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage />} reqAuthLevel="noAuth" />
         </Route>
         <Route exact path="/login">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage />} reqAuthLevel="" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage />} reqAuthLevel="noAuth" />
         </Route>
         <Route exact path="/store/search">
           <SearchPage />
