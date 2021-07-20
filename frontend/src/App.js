@@ -63,16 +63,17 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
 function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
   const [currUser, setCurrUser] = useState({});
+  const checkAuth = async () => {
+    fetch('/api/auth', {credentials:"include"})
+    .then(response => response.json())
+    .then(data => {
+      setCurrUser(data);
+      setCurrAuthLevel(data.authLevel);
+    })
+    .catch(error => setCurrAuthLevel(""));
+  }
   useEffect(() => {
-    const checkAuth = async () => {
-      fetch('/api/auth', {credentials:"include"})
-      .then(response => response.json())
-      .then(data => {
-        setCurrUser(data);
-        setCurrAuthLevel(data.authLevel);
-      })
-      .catch(error => setCurrAuthLevel(""));
-    }
+    
     //Enable for dev purposes
     //setCurrAuthLevel("seller");
     checkAuth();
@@ -89,10 +90,10 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/signup">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage />} reqAuthLevel="noAuth" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
         </Route>
         <Route exact path="/login">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage />} reqAuthLevel="noAuth" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
         </Route>
         <Route exact path="/store/search">
           <SearchPage />

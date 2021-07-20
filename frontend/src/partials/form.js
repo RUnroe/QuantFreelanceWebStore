@@ -29,7 +29,7 @@ function SignupForm() {
     );
 }
 
-function LogInForm() {
+function LogInForm({checkAuth}) {
     const [pageState, setPageState] = useState("");
     const identifier = createRef();
     const password = createRef();
@@ -48,7 +48,10 @@ function LogInForm() {
             body: JSON.stringify(postData)
         }).then( response => {
             console.log(response);
-            if(response.ok) setPageState("success");
+            if(response.ok)  {
+                checkAuth();
+                setPageState("success");
+            }
             else setPageState("error");
         });
     }
