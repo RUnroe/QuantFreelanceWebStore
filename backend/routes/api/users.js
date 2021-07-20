@@ -77,7 +77,7 @@ const removeUser = (req, res) => {
 const checkSession = (req, res) => {
 	// console.log("check Auth:",req.session);
 	
-	if(req.session) {
+	if(req.session && req.session.user_id) {
 		const is_seller = req.session.is_seller === "true" ? "seller" : "buyer";
 		// res.json({authLevel: is_seller});
 		dal.getUserById({user_id: req.session.user_id}).then( user => {
