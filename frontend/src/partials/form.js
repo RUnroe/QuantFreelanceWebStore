@@ -60,10 +60,10 @@ function LogInForm({checkAuth}) {
 
     }, [pageState]);
 
-    if(pageState == "success") {
+    if(pageState === "success") {
         return <Redirect to={{pathname: '/'}} />;
     }
-    else if(pageState == "error") {
+    else if(pageState === "error") {
         return (
         <form id="form" method="POST" onSubmit={postLogin}>
             <div className="form-block">

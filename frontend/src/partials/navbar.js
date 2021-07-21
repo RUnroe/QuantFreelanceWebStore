@@ -18,7 +18,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
     const logoutUser = () => {
 
     }
-    if(currAuthLevel == "seller") {
+    if(currAuthLevel === "seller") {
         return (
         <nav>
             <div className="primary-nav section">
@@ -52,7 +52,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
         </nav>
         );
     }
-    else if (currAuthLevel == "buyer") {
+    else if (currAuthLevel === "buyer") {
         return (
         <nav>
             <div className="primary-nav section">

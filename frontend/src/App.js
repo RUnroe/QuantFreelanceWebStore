@@ -1,10 +1,8 @@
 import {
-  StaticRouter,
   BrowserRouter,
   Redirect,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -34,17 +32,17 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   // else if (currAuthLevel == "buyer" && reqAuthLevel == "seller") return <Redirect to={{pathname: '/'}} />
   // return <Redirect to={{pathname: '/login'}} />;
 
-  if(reqAuthLevel == "noAuth") {
-    if(currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null) return component;
+  if(reqAuthLevel === "noAuth") {
+    if(currAuthLevel === "" || currAuthLevel === undefined || currAuthLevel === null) return component;
     return <Redirect to={{pathname: '/'}} />;
   }
-  else if (reqAuthLevel == "buyer") {
-    if(currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null) return <Redirect to={{pathname: '/login'}} />;
+  else if (reqAuthLevel === "buyer") {
+    if(currAuthLevel === "" || currAuthLevel === undefined || currAuthLevel === null) return <Redirect to={{pathname: '/login'}} />;
     return component;
   }
-  else if(reqAuthLevel == "seller") {
-    if(currAuthLevel == "buyer") return <Redirect to={{pathname: '/'}} />;
-    if(currAuthLevel == "seller") return component;
+  else if(reqAuthLevel === "seller") {
+    if(currAuthLevel === "buyer") return <Redirect to={{pathname: '/'}} />;
+    if(currAuthLevel === "seller") return component;
     return <Redirect to={{pathname: '/login'}} />;
   }
   return <Redirect to={{pathname: '/login'}} />;
@@ -54,7 +52,7 @@ function Footer() {
     <footer>
       <div className="section">
         <div> 
-            <img src="https://via.placeholder.com/135x45" alt="footer-image" />
+            <img src="https://via.placeholder.com/135x45" alt="footer logo" />
             <span>&copy;Quant Freelance</span>
         </div> 
         <span>ryanunroe@gmail.com</span>
