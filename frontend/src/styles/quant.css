@@ -100,11 +100,13 @@ h4 { font-size:1.2rem; }
     color: var(--color-dark-1);
     text-decoration: none;
     border-radius: 4px;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
     box-sizing: border-box;
     margin: 0.5rem 0;
     width:fit-content;
     display:block;
+    border:none;
+    font-size: 0.9rem;
 }
 .btn:hover {
     cursor:pointer;
@@ -118,6 +120,11 @@ h4 { font-size:1.2rem; }
 .btn.blue {
     color: var(--color-light-1);
     background-color:var(--color-primary);
+}
+.btn.blue-outline {
+    color: var(--color-light-1);
+    border:2px solid var(--color-primary);
+    background-color: transparent;
 }
 
 
@@ -133,6 +140,7 @@ h4 { font-size:1.2rem; }
     border: 2px solid var(--color-light-3);
     background-color: var(--color-light-3);
     color: var(--color-dark-1);
+    font-size: 0.9rem;
     box-sizing: border-box;
 }
 .input.search {
@@ -141,7 +149,30 @@ h4 { font-size:1.2rem; }
 .input:focus {
     border:2px solid var(--color-primary);
 }
+textarea.input {
+    resize: none;
+    height:6rem;
+}
+select.input {
+    color: var(--color-dark-1);
+}
+.input-block {
+    margin:0.6rem 0.5rem;
+}
+.input-block label{
+    margin-bottom:0.2rem;
+    display:block;
+}
 
+.combo-input {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.combo-input .input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 /*====================
         Image

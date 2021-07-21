@@ -55,39 +55,47 @@ export default function ProductEditPage() {
                 </div>
             </div>
             <div className="product-side edit container gradient">
-                <div className="input-block">
-                    <label>Cover Image</label>
-                    <div>
-                        <img src="https://via.placeholder.com/135x65" alt="cover-img" />
+                <div className="options">
+                    <div className="input-block">
+                        <label>Cover Image</label>
+                        <div class="cover-img-container">
+                            <img src="https://via.placeholder.com/135x65" alt="cover-img" />
+                        </div>
+                    </div>
+                    <div className="input-block">
+                        <label>Product Title</label>
+                        <input class="input" type="text" />
+                    </div>
+                    <div className="input-block">
+                        <label>Price</label>
+                        <div className="combo-input">
+                            <div class="unit-display">$</div>
+                            <input class="input" type="text" />
+                        </div>
+                    </div>
+                    <div className="input-block">
+                        <label>Category</label>
+                        <select class="input">
+                            <option value="DesignArt">Design &amp; Art</option>
+                            <option value="SalesMarketing">Sales &amp; Marketing</option>
+                            <option value="BusinessFinance">Business &amp; Finance</option>
+                            <option value="WritingTranslation">Writing &amp; Translation</option>
+                            <option value="VideoAnimation">Video &amp; Animation</option>
+                            <option value="AudioMusic">Audio &amp; Music</option>
+                            <option value="ProgrammingTech">Programming &amp; Tech</option>
+                            <option value="EngineeringArchitecture">Engineering &amp; Architecture</option>
+                            <option value="EducationTraining">Education &amp; Training</option>
+                        </select>
+                    </div>
+                    <div className="input-block">
+                        <label>Product Description</label>
+                        <textarea class="input" type="text" />
                     </div>
                 </div>
-                <div className="input-block">
-                    <label>Product Title</label>
-                    <input type="text" />
+                <div className="btn-group">
+                    <button className="btn blue-outline white-text">Cancel</button>
+                    <button className="btn blue">Save Changes</button>
                 </div>
-                <div className="input-block">
-                    <label>Price</label>
-                    <input type="text" />
-                </div>
-                <div className="input-block">
-                    <label>Category</label>
-                    <select>
-                        <option value="DesignArt">Design &amp; Art</option>
-                        <option value="SalesMarketing">Sales &amp; Marketing</option>
-                        <option value="BusinessFinance">Business &amp; Finance</option>
-                        <option value="WritingTranslation">Writing &amp; Translation</option>
-                        <option value="VideoAnimation">Video &amp; Animation</option>
-                        <option value="AudioMusic">Audio &amp; Music</option>
-                        <option value="ProgrammingTech">Programming &amp; Tech</option>
-                        <option value="EngineeringArchitecture">Engineering &amp; Architecture</option>
-                        <option value="EducationTraining">Education &amp; Training</option>
-                    </select>
-                </div>
-                <div className="input-block">
-                    <label>Product Description</label>
-                    <textarea type="text" />
-                </div>
-                
             </div>
         </div>
 
