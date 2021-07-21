@@ -98,7 +98,7 @@ nav hr {
     overflow-y: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 .secondary-nav::-webkit-scrollbar {
     display: none;

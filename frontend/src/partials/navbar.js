@@ -48,6 +48,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
             </div>
             <hr />
             <SecondaryNavigationMenu />
+            <hr />
         </nav>
         );
     }
@@ -79,6 +80,8 @@ export default function NavigationMenu({currAuthLevel, username}) {
             </div>
             <hr />
             <SecondaryNavigationMenu />
+            <hr />
+
         </nav>
         );
         
@@ -96,6 +99,8 @@ export default function NavigationMenu({currAuthLevel, username}) {
             </div>
             <hr />
             <SecondaryNavigationMenu />
+            <hr />
+
         </nav>
         );
 }
