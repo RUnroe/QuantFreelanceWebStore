@@ -49,7 +49,19 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   }
   return <Redirect to={{pathname: '/login'}} />;
 }
-
+function Footer() {
+  return (
+    <footer>
+      <div className="section">
+        <div> 
+            <img src="https://via.placeholder.com/135x45" alt="footer-image" />
+            <span>&copy;Quant Freelance</span>
+        </div> 
+        <span>ryanunroe@gmail.com</span>
+      </div>
+    </footer>
+  );
+}
 
 function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
@@ -124,6 +136,7 @@ function App() {
         </Route>
       </Switch>
     </div>
+    <Footer />
   </BrowserRouter>
   );
 }

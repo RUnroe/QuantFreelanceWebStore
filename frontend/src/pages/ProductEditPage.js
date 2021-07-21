@@ -1,4 +1,6 @@
 import React from "react";
+import "../styles/productPage.css";
+
 export default function ProductEditPage() {
     return(
         <div className="section">
