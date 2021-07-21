@@ -23,7 +23,9 @@ import OrdersPage from './pages/OrdersPage';
 
 import NavigationMenu from "./partials/navbar";
 
-import './App.css';
+import './styles/quant.css';
+import './styles/navbar.css';
+
 import { useEffect, useState } from "react";
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
