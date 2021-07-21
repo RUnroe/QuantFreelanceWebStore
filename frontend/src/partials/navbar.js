@@ -1,5 +1,19 @@
 import { Link } from "react-router-dom";
 
+function SecondaryNavigationMenu() {
+    const pages = ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"];
+    const jsxElements = [];
+
+    pages.forEach(value => {
+        jsxElements.push(<a href={`/store/category/${value.replace(" & ", "-").toLowerCase()}`} className="secondary-nav-item" key={value}>{value}</a>)
+    });
+    return (
+        <div className="secondary-nav section">
+            {jsxElements}
+        </div>
+    );
+}
+
 export default function NavigationMenu({currAuthLevel, username}) {
     const logoutUser = () => {
 
@@ -33,9 +47,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                 </div>
             </div>
             <hr />
-            <div className="secondary-nav section">
-
-            </div>
+            <SecondaryNavigationMenu />
         </nav>
         );
     }
@@ -52,9 +64,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                 </div>
             </div>
             <hr />
-            <div className="secondary-nav section">
-
-            </div>
+            <SecondaryNavigationMenu />
         </nav>
         );
         
@@ -71,9 +81,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                 </div>
             </div>
             <hr />
-            <div className="secondary-nav section">
-
-            </div>
+            <SecondaryNavigationMenu />
         </nav>
         );
 }

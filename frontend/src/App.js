@@ -48,18 +48,7 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   return <Redirect to={{pathname: '/login'}} />;
 }
 
-// nav
-//   div.primary-nav.section
-//       div
-//           a(href="/").nav-logo
-//               img(src="https://via.placeholder.com/135x45", alt="logo")
-//       div
-//           a(href="signup").nav-item Sign Up
-//           a(href="login").nav-item Log In
-//   hr
-//   div.secondary-nav.section
-//       each val in ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"]
-//           a(href=val.replace(" & ", "-").toLowerCase()).secondary-nav-item= val
+
 function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
   const [currUser, setCurrUser] = useState({});

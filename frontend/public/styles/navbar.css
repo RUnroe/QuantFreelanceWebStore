@@ -54,6 +54,7 @@ nav hr {
 .dropdown .dropdown-menu {
     display:none;
     position:absolute;
+    z-index: 10;
     top: 3.55rem;
     margin:0;
     padding:0;
@@ -93,10 +94,11 @@ nav hr {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     overflow-y: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    border-bottom: 1px solid #ccc;
 }
 .secondary-nav::-webkit-scrollbar {
     display: none;
