@@ -8,16 +8,22 @@ export default function ProductEditPage() {
             <div className="product-main container">
                 <h1>Sample Header</h1>
                 <p>Sample paragraph</p>
-                <div>
+                <div className="image">
                     <img src="https://via.placeholder.com/600x250" alt="sample" />
                 </div>
                 <hr />
                 <div className="spacer"></div>
                 <div className="faq-container">
-                    <div className="faq-module">
-                        <div className="faq-question">Sample Question</div>
-                        <div className="faq-answer">Sample Answer</div>
-                    </div>
+                    <label className="faq-module">
+                        <input type="checkbox"/>
+                        <div className="faq-question"><span>Sample Question</span><i class="fas fa-chevron-down"></i> </div>
+                        <div className="faq-answer"><span>Sample Answer</span></div>
+                    </label>
+                    <label className="faq-module">
+                        <input type="checkbox"/>
+                        <div className="faq-question"><span>Sample Question</span><i class="fas fa-chevron-down"></i> </div>
+                        <div className="faq-answer"><span>Sample Answer</span></div>
+                    </label>
                 </div>
                 <div className="split-section">
                     <div class="left-side">
