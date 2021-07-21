@@ -161,7 +161,7 @@ select.input {
 .input-block {
     margin:0.6rem 0.5rem;
 }
-.input-block label{
+.input-label{
     margin-bottom:0.2rem;
     display:block;
 }
@@ -182,9 +182,61 @@ select.input {
 .hidden {
     visibility: hidden;
 }
+
+.file-input {
+    display:inline-block;
+    margin:0.5rem;
+}
+.file-input > input {
+    display:none;
+}
 /*====================
         Image
 ======================*/
 img.round {
     border-radius: 100%;
+}
+
+/*====================
+      Image Modal
+======================*/
+
+#imageModal {
+    padding:0;
+}
+#imageModal > .modal-header {
+    padding: 1rem 1rem 0;
+}
+#imageModal .btn-group {
+    border-top: 1px solid #ccc;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+#imageModal .image-options {
+    padding: 0 1rem;
+    display:flex;
+}
+#imageModal .image-options  .image-option {
+    padding: 0.5rem 1rem;
+    cursor:pointer;
+}
+#imageModal .image-options input:checked + .image-option {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+#imageModal .image-options-container {
+    border-bottom: 1px solid #ccc;
+}
+.modal input[type="radio"], .modal input[type="checkbox"] {
+    display:none;
+}
+#image-upload-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#image-upload-container .form-block {
+    flex: 1;
 }

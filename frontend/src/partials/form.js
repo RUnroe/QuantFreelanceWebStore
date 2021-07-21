@@ -19,7 +19,7 @@ function ImageForm({labelName}) {
         <form id="form" method="POST" onSubmit={postIcon}>
             <div className="form-block">
                 <label className="input-label">{labelName}</label>
-                <label className="input-label file-input btn btn-blue"> Upload Image
+                <label className="input-label file-input btn blue"> Upload Image
                     <input id="imageInput" ref={image} type="file" name="newIcon" accept="image/png, image/jpeg, image/jpg, image/svg" />
                 </label>
                 <span id="imageErrorMsg" className="error-message hidden">Incorrect file type</span>
