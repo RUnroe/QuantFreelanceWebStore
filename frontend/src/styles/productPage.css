@@ -1,6 +1,6 @@
 .product-page {
     display:grid;
-    grid-template-columns: 1fr 35rem;
+    grid-template-columns: 3fr 2fr;
     height:100%;
 }
 .product-page > div {

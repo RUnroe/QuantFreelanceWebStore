@@ -41,18 +41,17 @@ function ImageSelectModal() {
                     </div>
                 </div>
                 <div className="image-container">
-                    <div className="image-upload-container">
+                    <div className="image-upload-container upload-container">
                         <div className="form-block">
-                            <label className="input-label">Image</label>
                             <label className="input-label file-input btn blue"> Upload Image
                                 <input id="imageInput"  onInput={e => setImage(e.target.files[0])} type="file" name="newIcon" accept="image/png, image/jpeg, image/jpg, image/svg" />
                             </label>
-                            <span>{image ? image.name : "" }</span>
+                            <p>{image ? image.name : "" }</p>
                             <span id="imageErrorMsg" className="error-message hidden">Incorrect file type</span>
                         </div>
                         {/* <button type="submit">Submit</button> */}
                     </div>
-                    <div className="image-select-container">
+                    <div className="image-select-container upload-container">
 
                     </div>
                 </div>
