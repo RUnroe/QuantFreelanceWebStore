@@ -22,7 +22,7 @@
 }
 
 
-.explore-section {
+.container.explore-section {
     padding-bottom: 3rem;
 }
 
@@ -63,7 +63,7 @@
     text-decoration: none;
     margin: 0.25rem 0;
 }
-.learn-section {
+.container.learn-section {
     padding-bottom: 4.5rem;
 }
 .info-container {
@@ -104,7 +104,7 @@
 .info-box > p {
     margin: 0.25rem 0;
 }
-.cta-section {
+.container.cta-section {
     padding-bottom: 2rem;
 }
 .cta-section > h1 {

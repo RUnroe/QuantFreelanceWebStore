@@ -60,7 +60,7 @@ footer > div.section {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
     
 }
 footer > .section > div {
@@ -122,11 +122,13 @@ h4 { font-size:1.2rem; }
     background-color:var(--color-primary);
 }
 .btn.blue-outline {
-    color: var(--color-light-1);
+    color: var(--color-primary);
     border:2px solid var(--color-primary);
     background-color: transparent;
 }
-
+.btn.blue-outline.text-white {
+    color: var(--color-light-1);
+}
 
 /*====================
         Input

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/productPage.css";
-
+import {ImageForm} from "../partials/form";
 export default function ProductEditPage() {
     return(
         <>
@@ -36,7 +36,7 @@ export default function ProductEditPage() {
 
 
 
-                <div className="modal">
+                <div className="modal" id="addElementModal">
                     <div className="modal-header">
                         <h2>Add an Element:</h2>
                         <button><i class="fas fa-times"></i></button>
@@ -70,7 +70,7 @@ export default function ProductEditPage() {
                         <label>Price</label>
                         <div className="combo-input">
                             <div class="unit-display">$</div>
-                            <input class="input" type="text" />
+                            <input class="input" type="number" />
                         </div>
                     </div>
                     <div className="input-block">
@@ -93,12 +93,38 @@ export default function ProductEditPage() {
                     </div>
                 </div>
                 <div className="btn-group">
-                    <button className="btn blue-outline white-text">Cancel</button>
+                    <button className="btn blue-outline text-white">Cancel</button>
                     <button className="btn blue">Save Changes</button>
                 </div>
             </div>
         </div>
 
+        <div className="modal visible" id="imageModal">
+            <div className="modal-header">
+                <h2>Select Image</h2>
+                <button><i class="fas fa-times"></i></button>
+            </div>
+            <div className="modal-body">
+                <div className="image-options-container">
+                    <div className="image-options">
+                        <label><input type="radio" name="image-option" checked/><div className="image-option">Upload Photo</div></label>
+                        <label><input type="radio" name="image-option" /><div className="image-option">Your Photos</div></label>
+                    </div>
+                </div>
+                <div className="image-container">
+                    <div class="image-upload-container">
+                        <ImageForm />
+                    </div>
+                    <div class="image-select-container">
+
+                    </div>
+                </div>
+                <div className="btn-group">
+                    <button className="btn blue-outline">Cancel</button>
+                    <button className="btn blue">Select</button>
+                </div>
+            </div>
+        </div>
     
         <div className="screen" id="modalScreen"></div>
         </>

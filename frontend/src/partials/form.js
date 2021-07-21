@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 
-function SignupForm() {
+function ImageForm() {
     const image = createRef();
 
     const postIcon = event => {
@@ -101,6 +101,6 @@ function LogInForm({checkAuth}) {
 
 
 export {
-    SignupForm,
+    ImageForm,
     LogInForm
 } 
