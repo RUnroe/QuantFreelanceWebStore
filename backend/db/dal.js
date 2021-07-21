@@ -255,7 +255,7 @@ const removeProduct = async (product_id) => {
 const createIcon = async (url) => {
 	if(isFieldEmpty(url)) throw [`Expected a url, but ${url} was supplied`];
 	const record = {icon_id: gen_id(), url};
-	return dbclient.db('QuantFreelance').collection('Icon').insertOne(record).then(() => url);
+	return dbclient.db('QuantFreelance').collection('Icon').insertOne(record).then(() => record);
 }
 
 const getIcon = async (icon_id) => {

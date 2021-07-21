@@ -48,6 +48,9 @@ body {
     background: linear-gradient(to bottom right, var(--color-dark-1), var(--color-dark-3));
 }
 
+/*====================
+        Footer
+======================*/
 footer {
     background-color: var(--color-light-2);
     color: var(--color-dark-2);
