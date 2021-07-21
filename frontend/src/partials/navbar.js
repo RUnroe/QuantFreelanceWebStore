@@ -27,7 +27,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                 </div>
                 <div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to="/orders">Orders <i class="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle"><Link to="/orders">Orders <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to="/orders">Orders</Link></li>
                             <li className="dropdown-item"><Link to="/inbox">Inbox</Link></li>
@@ -36,7 +36,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                         </ul>
                     </div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i class="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>
@@ -61,14 +61,14 @@ export default function NavigationMenu({currAuthLevel, username}) {
                 </div>
                 <div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to="/orders">Orders <i class="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle"><Link to="/orders">Orders <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to="/orders">Orders</Link></li>
                             <li className="dropdown-item"><Link to="/account/history/purchase">Purchase History</Link></li>
                         </ul>
                     </div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i class="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>

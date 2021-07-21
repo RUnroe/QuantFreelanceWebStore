@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 
-function ImageForm() {
+function ImageForm({labelName}) {
     const image = createRef();
 
     const postIcon = event => {
@@ -18,8 +18,8 @@ function ImageForm() {
     return (
         <form id="form" method="POST" onSubmit={postIcon}>
             <div className="form-block">
-                <label className="input-label">Icon</label>
-                <label className="input-label file-input btn"> Upload Image
+                <label className="input-label">{labelName}</label>
+                <label className="input-label file-input btn btn-blue"> Upload Image
                     <input id="imageInput" ref={image} type="file" name="newIcon" accept="image/png, image/jpeg, image/jpg, image/svg" />
                 </label>
                 <span id="imageErrorMsg" className="error-message hidden">Incorrect file type</span>

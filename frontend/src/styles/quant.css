@@ -175,7 +175,13 @@ select.input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-
+.error-message {
+    color: var(--color-danger);
+    font-size: 0.9rem;
+}
+.hidden {
+    visibility: hidden;
+}
 /*====================
         Image
 ======================*/

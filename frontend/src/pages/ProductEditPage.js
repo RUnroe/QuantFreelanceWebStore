@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/productPage.css";
-import {ImageForm} from "../partials/form";
+import {ImageSelectModal} from "../partials/image";
 export default function ProductEditPage() {
     return(
         <>
@@ -16,20 +16,20 @@ export default function ProductEditPage() {
                 <div className="faq-container">
                     <label className="faq-module">
                         <input type="checkbox"/>
-                        <div className="faq-question"><span>Sample Question</span><i class="fas fa-chevron-down"></i> </div>
+                        <div className="faq-question"><span>Sample Question</span><i className="fas fa-chevron-down"></i> </div>
                         <div className="faq-answer"><span>Sample Answer</span></div>
                     </label>
                     <label className="faq-module">
                         <input type="checkbox"/>
-                        <div className="faq-question"><span>Sample Question</span><i class="fas fa-chevron-down"></i> </div>
+                        <div className="faq-question"><span>Sample Question</span><i className="fas fa-chevron-down"></i> </div>
                         <div className="faq-answer"><span>Sample Answer</span></div>
                     </label>
                 </div>
                 <div className="split-section">
-                    <div class="left-side">
+                    <div className="left-side">
                         <p>Left text</p>
                     </div>
-                    <div class="right-side">
+                    <div className="right-side">
                         <p>Right text</p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ export default function ProductEditPage() {
                 <div className="modal" id="addElementModal">
                     <div className="modal-header">
                         <h2>Add an Element:</h2>
-                        <button><i class="fas fa-times"></i></button>
+                        <button><i className="fas fa-times"></i></button>
                     </div>
                     <div className="modal-body">
                         <div className="add-modal-list">
@@ -58,24 +58,24 @@ export default function ProductEditPage() {
                 <div className="options">
                     <div className="input-block">
                         <label>Cover Image</label>
-                        <div class="cover-img-container">
+                        <div className="cover-img-container">
                             <img src="https://via.placeholder.com/135x65" alt="cover-img" />
                         </div>
                     </div>
                     <div className="input-block">
                         <label>Product Title</label>
-                        <input class="input" type="text" />
+                        <input className="input" type="text" />
                     </div>
                     <div className="input-block">
                         <label>Price</label>
                         <div className="combo-input">
-                            <div class="unit-display">$</div>
-                            <input class="input" type="number" />
+                            <div className="unit-display">$</div>
+                            <input className="input" type="number" />
                         </div>
                     </div>
                     <div className="input-block">
                         <label>Category</label>
-                        <select class="input">
+                        <select className="input">
                             <option value="DesignArt">Design &amp; Art</option>
                             <option value="SalesMarketing">Sales &amp; Marketing</option>
                             <option value="BusinessFinance">Business &amp; Finance</option>
@@ -89,7 +89,7 @@ export default function ProductEditPage() {
                     </div>
                     <div className="input-block">
                         <label>Product Description</label>
-                        <textarea class="input" type="text" />
+                        <textarea className="input" type="text" />
                     </div>
                 </div>
                 <div className="btn-group">
@@ -99,34 +99,9 @@ export default function ProductEditPage() {
             </div>
         </div>
 
-        <div className="modal visible" id="imageModal">
-            <div className="modal-header">
-                <h2>Select Image</h2>
-                <button><i class="fas fa-times"></i></button>
-            </div>
-            <div className="modal-body">
-                <div className="image-options-container">
-                    <div className="image-options">
-                        <label><input type="radio" name="image-option" checked/><div className="image-option">Upload Photo</div></label>
-                        <label><input type="radio" name="image-option" /><div className="image-option">Your Photos</div></label>
-                    </div>
-                </div>
-                <div className="image-container">
-                    <div class="image-upload-container">
-                        <ImageForm />
-                    </div>
-                    <div class="image-select-container">
-
-                    </div>
-                </div>
-                <div className="btn-group">
-                    <button className="btn blue-outline">Cancel</button>
-                    <button className="btn blue">Select</button>
-                </div>
-            </div>
-        </div>
+        <ImageSelectModal />
     
-        <div className="screen" id="modalScreen"></div>
+        <div className="screen" id="addModalScreen"></div>
         </>
     );
 
