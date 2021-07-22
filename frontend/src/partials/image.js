@@ -2,12 +2,22 @@ import { createRef, useEffect, useState } from "react";
 
 function ImageSelectModal() {
     const [image, setImage] = useState();
+    const [selectedImageUrl, setSelectedImageUrl] = useState();
     const [modalState, setModalState] = useState("upload");
     const [userImages, setUserImages] = useState([]);
+    const [userImageJSX, setUserImageJSX] = useState([]);
+
     useEffect(() => {
         fetch("/api/icons/user").then(result => result.json()).then(data => {
             console.log(data);
             setUserImages(data);
+
+            const jsxElements = [];
+            userImages.forEach(value => {
+                jsxElements.push(<div><img src={value.url}/></div>)
+            });
+            setUserImageJSX(jsxElements);
+
         })
     }, []);
 
@@ -60,7 +70,7 @@ function ImageSelectModal() {
                         {/* <button type="submit">Submit</button> */}
                     </div>
                     <div className={`image-select-container upload-container ${modalState === "select" ? "" : "hidden"}`}>
-
+                        {userImageJSX}
                     </div>
                 </div>
                 <div className="btn-group">
