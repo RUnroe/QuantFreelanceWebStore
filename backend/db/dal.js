@@ -151,16 +151,12 @@ const createOrder = async (_order) => {
 }
 
 const getOrdersByCustomer = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').find({"buyer": user_id}).then(result => {
-		return result.toArray();
-	})
+	return await dbclient.db('QuantFreelance').collection('Order').find({"buyer": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding order by buyer id'];});
 }
 
 const getOrdersBySeller = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').find({"seller": user_id}).then(result => {
-		return result.toArray();
-	})
+	return await dbclient.db('QuantFreelance').collection('Order').find({"seller": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding order by seller id'];});
 }
 
@@ -211,17 +207,13 @@ const getProductById = async (product_id) => {
 }
 
 const getProductsBySeller = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Product').find({"seller": user_id}).then(result => {
-		return result.toArray();
-	})
+	return await dbclient.db('QuantFreelance').collection('Product').find({"seller": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by seller id'];});
 }
 
 const getProductsByCategory = async (category) => {
 	if(typeof category != "string") throw [`Expected a string for the category but ${category} was supplied`];
-	return await dbclient.db('QuantFreelance').collection('Product').find({category}).then(result => {
-		return result.toArray();
-	})
+	return await dbclient.db('QuantFreelance').collection('Product').find({category}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by category'];});
 }
 
