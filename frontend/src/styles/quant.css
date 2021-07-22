@@ -251,3 +251,12 @@ img.round {
     color: var(--color-dark-2);
     margin:0.5rem 0 0;
 }
+.image-select-option {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+}
+.image-select-option > img {
+    object-fit: cover;
+    object-position: center center;
+}
