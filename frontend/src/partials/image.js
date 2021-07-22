@@ -10,16 +10,17 @@ function ImageSelectModal() {
     const getUsersImages = async () => {
         fetch("/api/icons/user").then(result => result.json()).then(data => {
             console.log(data);
-            setUserImages(data).then(() => {
-                let jsxElements = [];
-                console.log(userImages);
-                userImages.forEach(value => {
-                    jsxElements.push(<div><img src={value.url}/></div>)
-                });
-                console.log(jsxElements);
-                setUserImageJSX(...jsxElements);
-                console.log(userImageJSX);
+            setUserImages(data);
+
+            let jsxElements = [];
+            console.log(userImages);
+            data.forEach(value => {
+                jsxElements.push(<div><img src={value.url}/></div>)
             });
+            console.log(jsxElements);
+            setUserImageJSX(...jsxElements);
+            console.log(userImageJSX);
+
         })
     }
 
