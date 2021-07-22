@@ -11,7 +11,7 @@ function ImageSelectModal() {
         return fetch("/api/icons/user").then(result => result.json()).then(data => {
             const images = data.map(item => item.url);
             console.log(images);
-            setUserImages(...images);
+            setUserImages(images);
             console.log(userImages);
             renderUserImagesJSX(images, -1);
             return images;
@@ -27,6 +27,7 @@ function ImageSelectModal() {
 
     useEffect(() => {
         getUsersImages();
+        console.log(userImages);
         //setUserImages(getUsersImages());
     }, []);
 
