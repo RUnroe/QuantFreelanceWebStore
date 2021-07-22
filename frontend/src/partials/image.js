@@ -9,6 +9,7 @@ function ImageSelectModal() {
 
     const getUsersImages = async () => {
         fetch("/api/icons/user").then(result => result.json()).then(data => {
+            console.log(data);
             setUserImages(data);
             renderUserImagesJSX(data, -1);
             
