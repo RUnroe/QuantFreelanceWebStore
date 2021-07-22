@@ -4,14 +4,15 @@ function ImageSelectModal() {
     const [image, setImage] = useState();
     const [selectedImageUrl, setSelectedImageUrl] = useState();
     const [modalState, setModalState] = useState("upload");
-    const [userImages, setUserImages] = useState([]);
+    const [userImages, setUserImages] = useState([]);/////////////////////////////
     const [userImageJSX, setUserImageJSX] = useState([]);
 
     const getUsersImages = async () => {
         return fetch("/api/icons/user").then(result => result.json()).then(data => {
             const images = data.map(item => item.url);
             console.log(images);
-            setUserImages(images);
+            setUserImages([...images]);
+            console.log(userImages);
             renderUserImagesJSX(images, -1);
             return images;
         });
@@ -53,7 +54,7 @@ function ImageSelectModal() {
             console.log(image.value);
         }
         else if (modalState === "select") {
-
+            console.log(selectedImageUrl);
         }
     }
     return (
