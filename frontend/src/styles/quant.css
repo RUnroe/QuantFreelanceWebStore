@@ -261,7 +261,8 @@ img.round {
     height:125px;
     overflow:hidden;
     margin:0.5rem;
-    border:2px solid transparent;
+    border:2px solid #ccc;
+    cursor:pointer;
 }
 .image-select-option.selected {
     border: 2px solid var(--color-primary);
