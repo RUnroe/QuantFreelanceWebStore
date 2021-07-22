@@ -26,8 +26,8 @@ const createIcon = (req, res) => {
 	if (hasImage) {
 		req.body.url = uploadImageFile(req.file);
 	}
-	const userId = (req.session && req.session.userId) ? req.session.user_id : null;
-	console.log(req.session, userId)
+	const userId = (req.session && req.session.user_id) ? req.session.user_id : null;
+	// console.log(req.session, userId)
 	dal.createIcon(req.body.url, userId)
 		.then(icon => {
 			res.status(201)
