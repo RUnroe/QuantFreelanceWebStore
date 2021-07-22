@@ -41,7 +41,7 @@ function ImageSelectModal() {
                     </div>
                 </div>
                 <div className="image-container">
-                    <div className="image-upload-container upload-container">
+                    <div className={`image-upload-container upload-container ${modalState === "upload" ? "" : "hidden"}`}>
                         <div className="form-block">
                             <label className="input-label file-input btn blue"> Upload Image
                                 <input id="imageInput"  onInput={e => setImage(e.target.files[0])} type="file" name="newIcon" accept="image/png, image/jpeg, image/jpg, image/svg" />
@@ -51,7 +51,7 @@ function ImageSelectModal() {
                         </div>
                         {/* <button type="submit">Submit</button> */}
                     </div>
-                    <div className="image-select-container upload-container">
+                    <div className={`image-select-container upload-container ${modalState === "select" ? "" : "hidden"}`}>
 
                     </div>
                 </div>

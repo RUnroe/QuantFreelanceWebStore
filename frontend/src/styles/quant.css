@@ -237,6 +237,9 @@ img.round {
     height:300px;
     overflow-x: hidden;
 }
+.upload-container.hidden {
+    display:none;
+}
 .image-upload-container {
     text-align: center;
     display:flex;

@@ -26,8 +26,8 @@ const createIcon = (req, res) => {
 	if (hasImage) {
 		req.body.url = uploadImageFile(req.file);
 	}
-
-	dal.createIcon(req.body.url)
+	const userId = (req.session && req.session.userId) ? req.session.user_id : null;
+	dal.createIcon(req.body.url, userId)
 		.then(icon => {
 			res.status(201)
 				.location(`api/icons/${icon.icon_id}`)
