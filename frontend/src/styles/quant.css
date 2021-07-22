@@ -251,12 +251,24 @@ img.round {
     color: var(--color-dark-2);
     margin:0.5rem 0 0;
 }
+.image-select-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .image-select-option {
-    width:100px;
-    height:100px;
+    width:125px;
+    height:125px;
     overflow:hidden;
+    margin:0.5rem;
+    border:2px solid transparent;
+}
+.image-select-option.selected {
+    border: 2px solid var(--color-primary);
 }
 .image-select-option > img {
+    width:100%;
+    height:100%;
     object-fit: cover;
     object-position: center center;
 }

@@ -10,13 +10,16 @@ function ImageSelectModal() {
     const getUsersImages = async () => {
         fetch("/api/icons/user").then(result => result.json()).then(data => {
             setUserImages(data);
-
-            let jsxElements = [];
-            data.forEach(value => {
-                jsxElements.push(<div class="image-select-option" onClick={() => selectImageOption(this, value.url)}><img src={value.url}/></div>)
-            });
-            setUserImageJSX(jsxElements);
+            renderUserImagesJSX(data, -1);
+            
         });
+    }
+    const renderUserImagesJSX = (data, selectedId) => {
+        let jsxElements = [];
+        data.forEach((value, index) => {
+            jsxElements.push(<div class={`image-select-option ${index == selectedId ? "selected" : ""}`} data-id={index} onClick={() => selectImageOption(index, value.url)}><img src={value.url}/></div>)
+        });
+        setUserImageJSX(jsxElements);
     }
 
     useEffect(() => {
@@ -36,8 +39,8 @@ function ImageSelectModal() {
         }).then(response => response.json())
         .then(data => console.log(data));
     }
-    const selectImageOption = (ref, url) => {
-        console.log(ref);
+    const selectImageOption = (dataId, url) => {
+        renderUserImagesJSX(dataId);
         setSelectedImageUrl(url);
     }
     const selectImage = () => {
