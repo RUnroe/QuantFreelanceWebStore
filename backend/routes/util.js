@@ -28,7 +28,7 @@ const handle = (req, res, code) => {
 			}
 		default:
 			return (errors) => {
-				if (process.env.NODE_ENV === 'debug') console.error(errors);
+				 console.error(errors);
 				res.status(code).json(errors);
 			}
 	}
