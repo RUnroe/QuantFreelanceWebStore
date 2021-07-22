@@ -8,12 +8,12 @@ function ImageSelectModal() {
     const [userImageJSX, setUserImageJSX] = useState([]);
 
     const getUsersImages = async () => {
-        fetch("/api/icons/user").then(result => result.json()).then(data => {
+        return fetch("/api/icons/user").then(result => result.json()).then(data => {
             const images = data.map(item => item.url);
             console.log(images);
-            setUserImages([...images]);
+            setUserImages(images);
             renderUserImagesJSX(images, -1);
-            
+            return images;
         });
     }
     const renderUserImagesJSX = (data, selectedId) => {
@@ -25,7 +25,7 @@ function ImageSelectModal() {
     }
 
     useEffect(() => {
-        getUsersImages();
+        setUserImages(getUsersImages());
     }, []);
 
 
