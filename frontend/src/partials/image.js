@@ -12,7 +12,8 @@ function ImageSelectModal() {
             console.log(data);
             setUserImages(data);
 
-            const jsxElements = [];
+            let jsxElements = [];
+            console.log(userImages);
             userImages.forEach(value => {
                 jsxElements.push(<div><img src={value.url}/></div>)
             });
