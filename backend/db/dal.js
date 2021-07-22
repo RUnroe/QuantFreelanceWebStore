@@ -268,6 +268,7 @@ const getIcon = async (icon_id) => {
 
 const getIconsByUser = async (user_id) => {
 	return await dbclient.db('QuantFreelance').collection('Icon').find({"owner": user_id}).then(result => {
+		console.log(result.toArray());
 		return result.toArray();
 	})
 	.catch(err => { throw ['An error occurred while finding icons by user id'];});
