@@ -18,7 +18,7 @@ function ImageSelectModal() {
                 jsxElements.push(<div><img src={value.url}/></div>)
             });
             console.log(jsxElements);
-            setUserImageJSX(...jsxElements);
+            setUserImageJSX(jsxElements);
             console.log(userImageJSX);
 
         })
