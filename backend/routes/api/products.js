@@ -23,14 +23,14 @@ const getProduct = (req, res) => {
 }
 
 const getProductsBySeller = (req, res) => {
-	dal.getProductsBySeller(req.session.user_id).then(result => {
+	dal.getProductsBySeller(req.params.seller_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
 }
 
 const getProductsByCategory = (req, res) => {
-	dal.getProductsByCategory(req.session.user_id).then(result => {
+	dal.getProductsByCategory(req.params.category).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));

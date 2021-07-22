@@ -266,6 +266,12 @@ const getIcon = async (icon_id) => {
 	.catch(err => { throw ['An error occurred while finding product by id'];});
 }
 
+const getIconsByUser = async (user_id) => {
+	return await dbclient.db('QuantFreelance').collection('Icon').find({"owner": user_id}).then(result => {
+		return result.toArray();
+	})
+	.catch(err => { throw ['An error occurred while finding icons by user id'];});
+}
 
 
 module.exports =  {
@@ -273,5 +279,5 @@ module.exports =  {
 	authenticate,
 	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
 	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct,
-	createIcon, getIcon
+	createIcon, getIcon, getIconsByUser
 };

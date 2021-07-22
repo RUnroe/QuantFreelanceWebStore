@@ -53,6 +53,15 @@ const getIcon = (req, res) => {
 }
 
 
+const getIconsByUser = (req, res) => {
+	if(!req.session || !req.session.user_id) res.json([]);
+	else {
+		dal.getProductsBySeller(req.session.user_id).then(result => {
+			res.json(result);
+		})
+		.catch(handle(req, res));
+	}
+}
 
 
 
@@ -67,6 +76,11 @@ const routes = [
 		uri: '/api/icon/:icon_id',
 		methods: ['get'],
 		handler: getIcon
+	},
+	{
+		uri: '/api/icons/user',
+		methods: ['get'],
+		handler: getIconsByUser
 	}
 ];
 
