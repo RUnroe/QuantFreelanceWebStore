@@ -4,7 +4,7 @@ function ImageSelectModal() {
     const [image, setImage] = useState();
     const [selectedImageUrl, setSelectedImageUrl] = useState();
     const [modalState, setModalState] = useState("upload");
-    const [userImages, setUserImages] = useState(["dsfds", "sdf"]);/////////////////////////////
+    const [userImages, setUserImages] = useState([]);/////////////////////////////
     const [userImageJSX, setUserImageJSX] = useState([]);
 
     const getUsersImages = async () => {
