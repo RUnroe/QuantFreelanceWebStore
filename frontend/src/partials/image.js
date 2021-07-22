@@ -9,16 +9,17 @@ function ImageSelectModal() {
 
     const getUsersImages = async () => {
         fetch("/api/icons/user").then(result => result.json()).then(data => {
-            console.log(data);
-            setUserImages(data);
-            renderUserImagesJSX(data, -1);
+            const images = data.map(item => item.url);
+            console.log(images);
+            setUserImages(images);
+            renderUserImagesJSX(images, -1);
             
         });
     }
     const renderUserImagesJSX = (data, selectedId) => {
         let jsxElements = [];
         data.forEach((value, index) => {
-            jsxElements.push(<div class={`image-select-option ${index == selectedId ? "selected" : ""}`} data-id={index} onClick={() => selectImageOption(index, value.url)}><img src={value.url}/></div>)
+            jsxElements.push(<div class={`image-select-option ${index == selectedId ? "selected" : ""}`} data-id={index} onClick={() => selectImageOption(index, value)}><img src={value}/></div>)
         });
         setUserImageJSX(jsxElements);
     }
