@@ -40,7 +40,7 @@ function ImageSelectModal() {
         .then(data => console.log(data));
     }
     const selectImageOption = (dataId, url) => {
-        renderUserImagesJSX(dataId);
+        renderUserImagesJSX(userImages, dataId);
         setSelectedImageUrl(url);
     }
     const selectImage = () => {
