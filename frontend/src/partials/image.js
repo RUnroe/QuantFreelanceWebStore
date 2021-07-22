@@ -30,7 +30,7 @@ function ImageSelectModal() {
     }, []);
 
     useEffect(() => {
-        renderUserImagesJSX(images, -1);
+        renderUserImagesJSX(userImages, -1);
     }, [userImages]);
 
 
