@@ -27,9 +27,9 @@ function ImageSelectModal() {
 
     useEffect(() => {
         getUsersImages();
-        console.log(userImages);
+        console.log("state user images:",userImages);
         //setUserImages(getUsersImages());
-    }, []);
+    }, [userImages]);
 
 
     const postIcon = () => {
