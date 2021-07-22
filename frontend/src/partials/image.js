@@ -25,7 +25,8 @@ function ImageSelectModal() {
     }
 
     useEffect(() => {
-        setUserImages(getUsersImages());
+        getUsersImages();
+        //setUserImages(getUsersImages());
     }, []);
 
 
