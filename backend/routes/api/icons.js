@@ -57,7 +57,7 @@ const getIcon = (req, res) => {
 const getIconsByUser = (req, res) => {
 	if(!req.session || !req.session.user_id) res.json([]);
 	else {
-		dal.getProductsBySeller(req.session.user_id).then(result => {
+		dal.getIconsByUser(req.session.user_id).then(result => {
 			res.json(result);
 		})
 		.catch(handle(req, res));
