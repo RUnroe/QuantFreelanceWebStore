@@ -3,6 +3,14 @@ import { createRef, useEffect, useState } from "react";
 function ImageSelectModal() {
     const [image, setImage] = useState();
     const [modalState, setModalState] = useState("upload");
+    const [userImages, setUserImages] = useState([]);
+    useEffect(() => {
+        fetch("/api/icons/user").then(result => result.json()).then(data => {
+            console.log(data);
+            setUserImages(data);
+        })
+    }, []);
+
 
     const postIcon = () => {
         //TODO: catch and display error
