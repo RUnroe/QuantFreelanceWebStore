@@ -164,7 +164,8 @@ const convertSplit = (object) => {
 
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
-    
+    const [addModalVisible, setAddModalVisible] = useState(false);
+
     const [productId, setProductId] = useState(""); 
     const [title, setTitle] = useState("");
     const [coverImg, setCoverImg] = useState("");
@@ -262,6 +263,10 @@ export default function ProductEditPage() {
     const selectImage = (setter) => {
         setImageSelectModalSetter(() => setter);
     }
+
+    const openAddElementModal = () => {
+        setAddModalVisible(true);
+    }
     return(
         <>
         <div className="product-page">
@@ -295,12 +300,17 @@ export default function ProductEditPage() {
                 </div>  */}
 
                 {pageStructureJSX}
+                
+                {/* Add NEW ELEMENT BUTTON */}
+                <div className="open-add-element-btn" onClick={openAddElementModal}>
+                    +
+                </div>
 
                 {/* ADD MODAL */}
-                <div className="modal" id="addElementModal">
+                <div className={`modal ${addModalVisible ? "visible" : ""}`} id="addElementModal">
                     <div className="modal-header">
                         <h2>Add an Element:</h2>
-                        <button><i className="fas fa-times"></i></button>
+                        <button onClick={() => setAddModalVisible(false)}><i className="fas fa-times"></i></button>
                     </div>
                     <div className="modal-body">
                         <div className="add-modal-list">
@@ -361,7 +371,7 @@ export default function ProductEditPage() {
         </div>
         <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
     
-        <div className="screen" id="addModalScreen"></div>
+        <div className={`screen ${addModalVisible ? "visible" : ""}`} id="addModalScreen" onClick={() => setAddModalVisible(false)}></div>
         </>
     );
 
