@@ -9,6 +9,35 @@ const genId = () => {
     });
 }
 
+
+const getJSXOfElement = (pageElement) => {
+    const tempJSX = [];
+    switch(pageElement.type) {
+        case "header": 
+            tempJSX.push(convertHeader(pageElement));
+        break;
+        case "paragraph": 
+            tempJSX.push(convertParagraph(pageElement));
+        break;
+        case "spacer": 
+            tempJSX.push(convertSpacer(pageElement));
+        break;
+        case "hr": 
+            tempJSX.push(convertHr(pageElement));
+        break;
+        case "image": 
+            tempJSX.push(convertImage(pageElement));
+        break;
+        case "faq": 
+            tempJSX.push(convertFAQ(pageElement));
+        break;
+        case "split": 
+            tempJSX.push(convertSplit(pageElement));
+        break;
+    }
+    return tempJSX;
+}
+
 const convertHeader = (headerObject) => {
     const props = headerObject.properties;
     const jsx = [];
@@ -58,6 +87,79 @@ const convertParagraph = (paragraphObject) => {
     return jsx;
 }
 
+const convertSpacer = (object) => {
+    const props = object.properties;
+    const jsx = [];
+    jsx.push(<div className={`spacer ${props.size}`}></div>);
+    return jsx;
+}
+
+const convertHr = (object) => {
+    const props = object.properties;
+    const jsx = [];
+    const style = {
+        backgroundColor: props.color,
+        width: props.width,
+        height: props.height
+    }
+    jsx.push(<hr style={style} />);
+    return jsx;
+}
+
+const convertImage = (object) => {
+    const props = object.properties;
+    const jsx = [];
+    const style = {
+        display: "block",
+        width: props.width,
+        height: props.height
+    }
+    if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
+    if(props.align === "center") style.marginRight = "auto";
+    jsx.push(<img style={style} src={props.src} />);
+    return jsx;
+}
+
+
+const convertFAQ = (object) => {
+    const props = object.properties;
+    const jsx = [];
+    const modulesJSX = [];
+    props.modules.forEach(module => {
+        modulesJSX.push(
+            <label className="faq-module">
+                <input type="checkbox"/>
+                <div className="faq-question"><span>{module.question}</span><i className="fas fa-chevron-down"></i> </div>
+                <div className="faq-answer"><span>{module.answer}</span></div>
+            </label>
+        );
+    });
+    jsx.push(
+        <div className="faq-container">
+          {modulesJSX}  
+        </div>
+    );
+
+    return jsx;
+}
+
+const convertSplit = (object) => {
+    const props = object.properties;
+    const jsx = [];
+    
+    jsx.push(
+        <div className="split-section">
+            <div className="left-side">
+                {getJSXOfElement(props.children[0])}
+            </div>
+            <div className="right-side">
+                {getJSXOfElement(props.children[1])}
+            </div>
+        </div> 
+    );
+
+    return jsx;
+}
 
 
 export default function ProductEditPage() {
@@ -139,11 +241,7 @@ export default function ProductEditPage() {
     const convertPageStructureToJSX = () => {
         const tempJSX = [];
         pageStructure.forEach(pageElement => {
-            switch(pageElement.type) {
-                case "header": 
-                    tempJSX.push(convertHeader(pageElement));
-                break;
-            }
+            tempJSX.push(getJSXOfElement(pageElement));
         });
         setPageStructureJSX(tempJSX);
     }
