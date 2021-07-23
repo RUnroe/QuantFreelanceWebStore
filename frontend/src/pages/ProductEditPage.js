@@ -20,7 +20,6 @@ const convertHeader = (headerObject) => {
 
     switch(headerObject.properties.headerType) {
         case "h1":
-            {{}}
             jsx.push(<h1 style={style}>{props.value}</h1>);
         break;
         case "h2":
