@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
-    const [coverImg, setCoverImg] = useState("https://via.placeholder.com/135x65");
-title
-"Logo Design"
-price
-20
-description
-"this is a description"
-category
-"Design & Art"
+
+    const [title, setTitle] = useState("");
+    const [coverImg, setCoverImg] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState(0);
+    const [category, setCategory] = useState("");
     const [pageStructure, setPageStructure] = useState([]);
+
     const [selectedElementId, setSelectedElementId] = useState();
 
+
+    //Temporary to display 
+    useEffect(() => {
+        setTitle("Logo Design");
+        setCoverImg("https://via.placeholder.com/135x65");
+        setDescription("this is a description");
+        setPrice("30.00");
+        setCategory("DesignArt");
+    }, []);
+
+    const savePage = () => {
+        console.log(title, coverImg, description, price, category, pageStructure);
+    }
 
     const selectImage = (setter) => {
         setImageSelectModalSetter(() => setter);
@@ -81,18 +92,18 @@ category
                     </div>
                     <div className="input-block">
                         <label>Product Title</label>
-                        <input className="input" type="text" />
+                        <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
                     </div>
                     <div className="input-block">
                         <label>Price</label>
                         <div className="combo-input">
                             <div className="unit-display">$</div>
-                            <input className="input" type="number" />
+                            <input className="input" type="number" value={price} onInput={event => setPrice(event.target.value)} />
                         </div>
                     </div>
                     <div className="input-block">
                         <label>Category</label>
-                        <select className="input">
+                        <select className="input" value={category} onInput={event => setCategory(event.target.value)}>
                             <option value="DesignArt">Design &amp; Art</option>
                             <option value="SalesMarketing">Sales &amp; Marketing</option>
                             <option value="BusinessFinance">Business &amp; Finance</option>
@@ -106,12 +117,12 @@ category
                     </div>
                     <div className="input-block">
                         <label>Product Description</label>
-                        <textarea className="input" type="text" />
+                        <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
                     </div>
                 </div>
                 <div className="btn-group">
                     <button className="btn blue-outline text-white">Cancel</button>
-                    <button className="btn blue">Save Changes</button>
+                    <button className="btn blue" onClick={savePage}>Save Changes</button>
                 </div>
             </div>
         </div>
