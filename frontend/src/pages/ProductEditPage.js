@@ -13,7 +13,8 @@ const convertHeader = (headerObject) => {
     const props = headerObject.properties;
     const jsx = [];
     const style = {
-        fontWeight: props.fontWeight
+        fontWeight: props.fontWeight,
+        textAlign: props.align
     }
     if(props.style === "italics") style.fontStyle = "italics";
     if(props.style === "underline") style.textDecoration = "underline";
@@ -41,6 +42,22 @@ const convertHeader = (headerObject) => {
     }
     return jsx;
 }
+
+const convertParagraph = (paragraphObject) => {
+    const props = paragraphObject.properties;
+    const jsx = [];
+    const style = {
+        fontWeight: props.fontWeight,
+        textAlign: props.align
+    }
+    if(props.style === "italics") style.fontStyle = "italics";
+    if(props.style === "underline") style.textDecoration = "underline";
+
+    jsx.push(<p style={style}>{props.value}</p>);
+
+    return jsx;
+}
+
 
 
 export default function ProductEditPage() {
@@ -74,6 +91,7 @@ export default function ProductEditPage() {
                 properties: {
                     value: "This is an example of a header",
                     fontWeight: 400,
+                    align: "left",
                     headerType: "h1",
                     style: "none" //(italics, underline, none)
                 }
