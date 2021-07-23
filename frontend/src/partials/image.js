@@ -1,16 +1,15 @@
 import { createRef, useEffect, useState } from "react";
 
-function ImageSelectModal() {
+function ImageSelectModal({setter, setSetter}) {
     const [image, setImage] = useState();
     const [selectedImageUrl, setSelectedImageUrl] = useState();
     const [modalState, setModalState] = useState("upload");
-    const [userImages, setUserImages] = useState([]);/////////////////////////////
+    const [userImages, setUserImages] = useState([]);
     const [userImageJSX, setUserImageJSX] = useState([]);
 
     const getUsersImages = async () => {
         return fetch("/api/icons/user").then(result => result.json()).then(data => {
             const images = data.map(item => item.url);
-            console.log(images);
             setUserImages(images);
             console.log(userImages);
             return images;
@@ -40,26 +39,31 @@ function ImageSelectModal() {
         // console.log(image.current.files[0]);
         console.log(image);
         formData.append('icon', image);
-        fetch('/api/icons', {
+        return fetch('/api/icons', {
             method: 'POST',
             body: formData
-        }).then(response => response.json())
-        .then(data => console.log(data));
+        }).then(response => response.json());
     }
     const selectImageOption = (dataId, url) => {
-        console.log(userImages);
         renderUserImagesJSX(userImages, dataId);
         setSelectedImageUrl(url);
     }
-    const selectImage = () => {
+    const selectImage = async() => {
         if(modalState === "upload"){
-            postIcon();
-            console.log(image.value);
+            postIcon().then(img => {
+                setSelectedImageUrl(img.url);
+                console.log(img.url);
+                setter(img.url);
+                setSetter(""); // clear the setter to hide the modal
+            });
         }
         else if (modalState === "select") {
-            console.log(selectedImageUrl);
+            setter(selectedImageUrl);
+            setSetter(""); // clear the setter to hide the modal
+
         }
     }
+    if(setter) {
     return (
         <>
         <div className="modal visible" id="imageModal">
@@ -95,9 +99,11 @@ function ImageSelectModal() {
                 </div>
             </div>
         </div>
-        <div className="screen" id="imageModalScreen"></div>
+        <div className="screen visible" id="imageModalScreen"></div>
         </>
     );
+    } 
+    return (<></>)
 }
 
 

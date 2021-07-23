@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 export default function ProductEditPage() {
+    const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
+    const [coverImg, setCoverImg] = useState("https://via.placeholder.com/135x65");
+    const [selectedElementId, setSelectedElementId] = useState();
+
+
+    const selectImage = (setter) => {
+        setImageSelectModalSetter(() => setter);
+    }
     return(
         <>
         <div className="product-page">
@@ -59,7 +67,7 @@ export default function ProductEditPage() {
                     <div className="input-block">
                         <label>Cover Image</label>
                         <div className="cover-img-container">
-                            <img src="https://via.placeholder.com/135x65" alt="cover-img" />
+                            <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} />
                         </div>
                     </div>
                     <div className="input-block">
@@ -98,8 +106,7 @@ export default function ProductEditPage() {
                 </div>
             </div>
         </div>
-
-        <ImageSelectModal />
+        <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
     
         <div className="screen" id="addModalScreen"></div>
         </>
@@ -116,6 +123,12 @@ export default function ProductEditPage() {
 
 
 //Load in current page
+    //fetch and get page json
+    //store in one state variable
+    //FUNCTION: loop over data and create jsx. Store in second state
+        //Need to create onClick/onInput events on every element
+        //Give each element an id in state. Give corresponding JSX element data-id
+
 //insert "add bar" btn under each element
 //Add delete btn to each element
 //Add event listener to each element to edit (turn text to input fields)
