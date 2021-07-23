@@ -161,6 +161,83 @@ const convertSplit = (object) => {
     return jsx;
 }
 
+const getConfigPanelInputs = (selectedElement) => {
+    const tempJSX = [];
+    switch(selectedElement.type) {
+        case "header": 
+            tempJSX.push(
+                <div className="input-block">
+                    <label htmlFor={`${selectedElement.id}headerType`}>Header Type</label>
+                    <select id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType}>
+                        <option value="h1">h1</option>
+                        <option value="h2">h2</option>
+                        <option value="h3">h3</option>
+                        <option value="h4">h4</option>
+                        <option value="h5">h5</option>
+                        <option value="h6">h6</option>
+                    </select>
+                </div>
+            );
+            tempJSX.push(
+                <div className="input-block">
+                    <label htmlFor={`${selectedElement.id}value`}>Text</label>
+                    <input type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
+                </div>
+            );
+            tempJSX.push(
+                <div className="input-block">
+                    <label htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
+                    <select id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
+                        <option value="200">Light</option>
+                        <option value="400">Regular</option>
+                        <option value="800">Bold</option>
+                    </select>
+                </div>
+            );
+            tempJSX.push(
+                <div className="input-block">
+                    <label htmlFor={`${selectedElement.id}style`}>Text Style</label>
+                    <select id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
+                        <option value="">None</option>
+                        <option value="italics">Italics</option>
+                        <option value="underline">Underline</option>
+                    </select>
+                </div>
+            );
+            tempJSX.push(
+                <div className="input-block">
+                    <label htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
+                    <select id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                        <option value="right">Right</option>
+                    </select>
+                </div>
+            );
+            
+        break;
+        case "paragraph": 
+            // tempJSX.push(convertParagraph(pageElement));
+        break;
+        case "spacer": 
+            // tempJSX.push(convertSpacer(pageElement));
+        break;
+        case "hr": 
+            // tempJSX.push(convertHr(pageElement));
+        break;
+        case "image": 
+            // tempJSX.push(convertImage(pageElement));
+        break;
+        case "faq": 
+            // tempJSX.push(convertFAQ(pageElement));
+        break;
+        case "split": 
+            // tempJSX.push(convertSplit(pageElement));
+        break;
+    }
+    return tempJSX;
+}
+
 
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
@@ -176,8 +253,8 @@ export default function ProductEditPage() {
 
     const [pageStructureJSX, setPageStructureJSX] = useState([]);
 
-    const [selectedElementId, setSelectedElementId] = useState();
-
+    const [selectedElement, setSelectedElement] = useState();
+    const [configPanelJSX, setConfigPanelJSX] = useState([]);
 
     //Temporary to display 
     useEffect(() => {
@@ -239,6 +316,24 @@ export default function ProductEditPage() {
         convertPageStructureToJSX();
     }, [pageStructure]);
 
+    //Update config panel with correct info when element is selected
+    useEffect(() => {
+        setupConfigPanel();
+    }, [selectedElement]);
+
+
+    const setupConfigPanel = () => {
+        const jsx = [];
+        const inputs = [];
+        jsx.push(<h2 className="config-panel-header">Edit {selectedElement.type}</h2>);
+
+        inputs = getConfigPanelInputs(selectedElement);
+        jsx.push(<div className="config-panel-input-section">{inputs}</div>);
+        
+        setConfigPanelJSX(jsx);
+    } 
+    
+    
     const convertPageStructureToJSX = () => {
         const tempJSX = [];
         pageStructure.forEach(pageElement => {
