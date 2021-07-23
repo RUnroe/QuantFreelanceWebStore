@@ -219,7 +219,7 @@ img.round {
     z-index: 30;
     width:90%;
     left:50%;
-    top:40%;
+    top:50%;
     transform:translate(-50%, -50%);
     max-width:750px;
     background-color: var(--color-light-1);

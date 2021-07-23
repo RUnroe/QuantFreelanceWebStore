@@ -63,13 +63,16 @@ function ImageSelectModal({setter, setSetter}) {
 
         }
     }
+    const closeModal = () => {
+        setSetter(""); // clear the setter to hide the modal
+    }
     if(setter) {
     return (
         <>
         <div className="modal visible" id="imageModal">
             <div className="modal-header">
                 <h2>Select Image</h2>
-                <button><i className="fas fa-times"></i></button>
+                <button onClick={closeModal}><i className="fas fa-times"></i></button>
             </div>
             <div className="modal-body">
                 <div className="image-options-container">
@@ -99,7 +102,7 @@ function ImageSelectModal({setter, setSetter}) {
                 </div>
             </div>
         </div>
-        <div className="screen visible" id="imageModalScreen"></div>
+        <div className="screen visible" id="imageModalScreen" onClick={closeModal}></div>
         </>
     );
     } 
