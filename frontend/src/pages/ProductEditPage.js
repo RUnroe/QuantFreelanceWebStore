@@ -4,6 +4,15 @@ import {ImageSelectModal} from "../partials/image";
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [coverImg, setCoverImg] = useState("https://via.placeholder.com/135x65");
+title
+"Logo Design"
+price
+20
+description
+"this is a description"
+category
+"Design & Art"
+    const [pageStructure, setPageStructure] = useState([]);
     const [selectedElementId, setSelectedElementId] = useState();
 
 

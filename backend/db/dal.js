@@ -189,6 +189,7 @@ const createProduct = async (user_id, _product) => {
 	]);
 	if(_product.price < 0) throw ['Price cannot be negative'];
 	if(typeof _product.description != "string")  _product.description = "";
+	if(typeof _product.coverImage != "string")  _product.coverImage = "";
 	if (errors.length) {
 		throw errors;
 	}
