@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 
@@ -267,6 +267,21 @@ export default function ProductEditPage() {
     const openAddElementModal = () => {
         setAddModalVisible(true);
     }
+
+    const createElement = (elementType) => {
+        //CREATE ELEMENT
+        //add to page structure
+        const newElement = {
+            type: elementType,
+            position: -1, //not sure how to do order yet lol
+            id: genId(),
+            properties: {}
+        }
+        setPageStructure((oldState) => [...oldState, newElement]);
+        convertPageStructureToJSX();
+        //close modal
+        setAddModalVisible(false);
+    }
     return(
         <>
         <div className="product-page">
@@ -314,13 +329,13 @@ export default function ProductEditPage() {
                     </div>
                     <div className="modal-body">
                         <div className="add-modal-list">
-                            <div className="add-element-btn">Header</div>
-                            <div className="add-element-btn">Paragraph</div>
-                            <div className="add-element-btn">Horizontal Rule</div>
-                            <div className="add-element-btn">Spacer</div>
-                            <div className="add-element-btn">Image</div>
-                            <div className="add-element-btn">FAQ</div>
-                            <div className="add-element-btn">Split Section</div>
+                            <div className="add-element-btn" onClick={() => createElement("header")}>Header</div>
+                            <div className="add-element-btn" onClick={() => createElement("paragraph")}>Paragraph</div>
+                            <div className="add-element-btn" onClick={() => createElement("hr")}>Horizontal Rule</div>
+                            <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
+                            <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
+                            <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
+                            <div className="add-element-btn" onClick={() => createElement("split")}>Split Section</div>
                         </div>
                     </div>
                 </div>
