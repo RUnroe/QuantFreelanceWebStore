@@ -38,7 +38,7 @@ const getProductsByCategory = (req, res) => {
 
 //Variable data pieces: title, price, description, category, cover_image, page_structure
 const updateProduct = (req, res) => {
-	dal.updateOrderStatus(req.body.product_id, req.session.user_id, req.body).then(() => {
+	dal.updateProduct(req.body.product_id, req.session.user_id, req.body).then(() => {
 		res.status(201);
 		res.statusMessage = 'Updated Product';
 		res.end();
