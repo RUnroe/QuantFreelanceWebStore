@@ -381,7 +381,7 @@ export default function ProductEditPage() {
             page_structure: pageStructure
 
         }
-        console.log(pageData);
+        console.log(data);
         //TODO: put the pageData to the updateProduct method
         
         fetch('/api/product', {
