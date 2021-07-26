@@ -379,7 +379,7 @@ export default function ProductEditPage() {
             description,
             price,
             category,
-            page_structure: pageStructure
+            page_structure: JSON.stringify(pageStructure)
 
         }
         console.log(data);
