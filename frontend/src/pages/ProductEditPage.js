@@ -238,7 +238,7 @@ const getConfigPanelInputs = (selectedElement) => {
     return tempJSX;
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [addModalVisible, setAddModalVisible] = useState(false);
@@ -318,14 +318,14 @@ export default function ProductEditPage() {
 
     //Update config panel with correct info when element is selected
     useEffect(() => {
-        setupConfigPanel();
+        if(selectedElement) setupConfigPanel();
     }, [selectedElement]);
 
 
     const setupConfigPanel = () => {
         const jsx = [];
         const inputs = [];
-        jsx.push(<h2 className="config-panel-header">Edit {selectedElement.type}</h2>);
+        jsx.push(<h2 className="config-panel-header">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
         jsx.push(<div className="config-panel-input-section">{inputs}</div>);
