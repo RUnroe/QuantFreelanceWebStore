@@ -10,7 +10,7 @@
 .product-main {
     position: relative;
 }
-.product-side.edit {
+.product-page.edit .product-side {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -18,7 +18,7 @@
 .product-side .options label {
     color: var(--color-light-1);
 }
-.product-side.edit .btn-group {
+.product-page.edit .product-side .btn-group {
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -47,10 +47,50 @@
 }
 
 /* ////////////////////////// */
+
+.product-page.edit .split-section .left-side:hover,
+.product-page.edit .split-section .right-side:hover,
+.product-page.edit .faq-container:hover,
+.product-page.edit .header:hover,
+.product-page.edit .paragraph:hover,
+.product-page.edit .spacer:hover,
+.product-page.edit .hr:hover,
+.product-page.edit .image:hover {
+    border: 2px solid var(--color-primary);
+    cursor:pointer;
+
+}
+.product-page.edit .split-section .left-side,
+.product-page.edit .split-section .right-side,
+.product-page.edit .faq-container,
+.product-page.edit .header,
+.product-page.edit .paragraph,
+.product-page.edit .spacer,
+.product-page.edit .hr,
+.product-page.edit .image {
+    border: 2px solid #ccc;
+
+}
+
+.product-page .split-section,
+.product-page .split-section .left-side,
+.product-page .split-section .right-side,
+.product-page .faq-container,
+.product-page .header,
+.product-page .paragraph,
+.product-page .spacer,
+.product-page .hr,
+.product-page .image {
+    box-sizing: border-box;
+
+}
+
 .product-main .split-section {
     display:grid;
     grid-template-columns: 1fr 1fr;
+    margin:0.3rem 0;
 }
+
 .product-main .split-section.split1 {
     grid-template-columns: 2fr 1fr;
 }
@@ -58,6 +98,12 @@
 .product-main .split-section.split3 {
     grid-template-columns: 1fr 2fr;
 }
+
+.product-main .split-section .left-side,
+.product-main .split-section .right-side {
+    padding: 0.5rem;
+}
+
 
 .product-main .faq-container {
     width:100%;
@@ -104,6 +150,16 @@
     max-height:10rem;
     padding:0.85rem;
 
+}
+
+.product-main .spacer.space1 {
+    height:20px;
+}
+.product-main .spacer.space2 {
+    height:35px;
+}
+.product-main .spacer.space3 {
+    height:45px;
 }
 /* ////////////////////////// */
 

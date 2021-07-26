@@ -50,22 +50,22 @@ const convertHeader = (headerObject) => {
 
     switch(headerObject.properties.headerType) {
         case "h1":
-            jsx.push(<h1 style={style}>{props.value}</h1>);
+            jsx.push(<h1 className="header" style={style}>{props.value}</h1>);
         break;
         case "h2":
-            jsx.push(<h2 style={style}>{props.value}</h2>);
+            jsx.push(<h2 className="header" style={style}>{props.value}</h2>);
         break;
         case "h3":
-            jsx.push(<h3 style={style}>{props.value}</h3>);
+            jsx.push(<h3 className="header" style={style}>{props.value}</h3>);
         break;
         case "h4":
-            jsx.push(<h4 style={style}>{props.value}</h4>);
+            jsx.push(<h4 className="header" style={style}>{props.value}</h4>);
         break;
         case "h5":
-            jsx.push(<h5 style={style}>{props.value}</h5>);
+            jsx.push(<h5 className="header" style={style}>{props.value}</h5>);
         break;
         case "h6":
-            jsx.push(<h6 style={style}>{props.value}</h6>);
+            jsx.push(<h6 className="header" style={style}>{props.value}</h6>);
         break;
 
     }
@@ -82,7 +82,7 @@ const convertParagraph = (paragraphObject) => {
     if(props.style === "italics") style.fontStyle = "italics";
     if(props.style === "underline") style.textDecoration = "underline";
 
-    jsx.push(<p style={style}>{props.value}</p>);
+    jsx.push(<p className="paragraph" style={style}>{props.value}</p>);
 
     return jsx;
 }
@@ -90,7 +90,7 @@ const convertParagraph = (paragraphObject) => {
 const convertSpacer = (object) => {
     const props = object.properties;
     const jsx = [];
-    jsx.push(<div className={`spacer ${props.size}`}></div>);
+    jsx.push(<div className={`spacer space${props.size}`}></div>);
     return jsx;
 }
 
@@ -102,7 +102,7 @@ const convertHr = (object) => {
         width: props.width,
         height: props.height
     }
-    jsx.push(<hr style={style} />);
+    jsx.push(<hr className="hr" style={style} />);
     return jsx;
 }
 
@@ -111,12 +111,12 @@ const convertImage = (object) => {
     const jsx = [];
     const style = {
         display: "block",
-        width: props.width,
-        height: props.height
+        width: props.width ?? "auto",
+        height: props.height ?? "auto"
     }
     if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
     if(props.align === "center") style.marginRight = "auto";
-    jsx.push(<img style={style} src={props.src} />);
+    jsx.push(<img className="image" style={style} src={props.src} />);
     return jsx;
 }
 
@@ -146,19 +146,47 @@ const convertFAQ = (object) => {
 const convertSplit = (object) => {
     const props = object.properties;
     const jsx = [];
-    
+    //TODO: Create add button for split section that does not have elements in it
     jsx.push(
-        <div className="split-section">
+        <div className={`split-section split${props.splitType}`}>
             <div className="left-side">
-                {getJSXOfElement(props.children[0])}
+                { (props.children && props.children.length > 0) ? getJSXOfElement(props.children[0]) : <div className="add"></div>}
             </div>
             <div className="right-side">
-                {getJSXOfElement(props.children[1])}
+            { (props.children && props.children.length > 1) ? getJSXOfElement(props.children[1]) : <div className="add"></div>}
             </div>
         </div> 
     );
 
     return jsx;
+}
+
+const getDefaultProperties = (elementType) => {
+    let props = {};
+    switch(elementType) {
+        case "header": 
+            props = {value: "New Header", fontWeight: 400, style: "none", align: "left", headerType: "h1"};
+        break;
+        case "paragraph": 
+            props = {value: "New paragraph", fontWeight: 400, style: "none", align: "left"};
+        break;
+        case "spacer": 
+            props = {size: 1};
+        break;
+        case "hr": 
+            props = {backgroundColor: "#403D52", height: "2px", width: "100%"};
+        break;
+        case "image": 
+            props = {src: "https://via.placeholder.com/320x180", align: "center"}; // give default image
+        break;
+        case "faq": 
+            props = {modules: [{question: "New Question?", answer: "The answer to the question"}]};
+        break;
+        case "split": 
+            props = {children: [], splitType: 2 }; // set split to half and half?
+        break;
+    }
+    return props;
 }
 
 const getConfigPanelInputs = (selectedElement) => {
@@ -370,7 +398,7 @@ export default function ProductEditPage() {
             type: elementType,
             position: -1, //not sure how to do order yet lol
             id: genId(),
-            properties: {}
+            properties: getDefaultProperties(elementType)
         }
         setPageStructure((oldState) => [...oldState, newElement]);
         convertPageStructureToJSX();
@@ -379,7 +407,7 @@ export default function ProductEditPage() {
     }
     return(
         <>
-        <div className="product-page">
+        <div className="product-page edit">
             <div className="product-main container">
                 {/* <h1>Sample Header</h1>
                 <p>Sample paragraph</p>
@@ -435,7 +463,7 @@ export default function ProductEditPage() {
                     </div>
                 </div>
             </div>
-            <div className="product-side edit container gradient">
+            <div className="product-side container gradient">
                 <div className="options">
                     <div className="input-block">
                         <label>Cover Image</label>
@@ -514,3 +542,5 @@ export default function ProductEditPage() {
 //Right panel
 //Import title, desc, cover img, price, category
 //Save changes and cancel btn
+
+
