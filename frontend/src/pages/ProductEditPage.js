@@ -372,6 +372,7 @@ export default function ProductEditPage() {
         setPageStructureJSX(tempJSX);
     }
     const savePage = () => {
+        console.log(price);
         const data = {
             product_id: productId,
             title,
