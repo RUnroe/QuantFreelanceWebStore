@@ -371,13 +371,15 @@ export default function ProductEditPage() {
         setPageStructureJSX(tempJSX);
     }
     const savePage = () => {
-        const pageData = {
+        const data = {
+            product_id: productId,
             title,
-            coverImage: coverImg,
+            icon_id: coverImg,
             description,
             price,
             category,
             page_structure: pageStructure
+
         }
         console.log(pageData);
         //TODO: put the pageData to the updateProduct method
@@ -388,7 +390,7 @@ export default function ProductEditPage() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(pageData)
+            body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(data => {

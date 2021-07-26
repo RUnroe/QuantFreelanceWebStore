@@ -16,7 +16,7 @@ const createProduct = (req, res) => {
 }
 
 const getProduct = (req, res) => {
-	dal.getProduct(req.session.user_id).then(result => {
+	dal.getProduct(req.params.product_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
@@ -38,7 +38,7 @@ const getProductsByCategory = (req, res) => {
 
 //Variable data pieces: title, price, description, category, cover_image, page_structure
 const updateProduct = (req, res) => {
-	dal.updateOrderStatus(req.params.product_id, req.session.user_id, req.body).then(() => {
+	dal.updateOrderStatus(req.body.product_id, req.session.user_id, req.body).then(() => {
 		res.status(201);
 		res.statusMessage = 'Updated Product';
 		res.end();
