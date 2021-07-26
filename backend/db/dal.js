@@ -223,14 +223,17 @@ const updateProduct = async (product_id, user_id, product) => {
 	getProductById(product_id).then(result => {
 		console.log(result, product);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
-		let newValues = { $set: {}};
+		let newValues = { $set: {
+			description: product.description,
+			page_structure: product.page_structure
+		}};
 		if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
 		if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
 		if(!isFieldEmpty(product.category)) newValues['$set'].category = product.category;
 		if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
 		return dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
-		.catch(err => { throw ['An error occurred while updating product'];});
-	}).catch(err => { throw ['An error occurred while updating product'];});
+		.catch(err => { console.log(err); throw ['An error occurred while updating product'];});
+	}).catch(err => { console.log(err); throw ['An error occurred while updating product'];});
 
 	
 
