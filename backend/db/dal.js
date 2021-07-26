@@ -102,7 +102,7 @@ const updateUser = async (user_id, user) => {
 }
 
 const removeUser = async (user_id) => {
-	console.log(user_id)
+	// console.log(user_id)
 	return await dbclient.db('QuantFreelance').collection('User').deleteOne({user_id})
 	.catch(err => { throw ['An error occurred while removing user'];});
 	
@@ -221,6 +221,7 @@ const getProductsByCategory = async (category) => {
 const updateProduct = async (product_id, user_id, product) => {
 	//check if current user owns product
 	getProductById(product_id).then(result => {
+		console.log(result, product);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {}};
 		if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
@@ -253,14 +254,14 @@ const createIcon = async (url, userId) => {
 
 const getIcon = async (icon_id) => {
 	return await dbclient.db('QuantFreelance').collection('Icon').findOne({icon_id}).then(result => {
-		console.log(result);
+		// console.log(result);
 		return result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
 }
 
 const getIconsByUser = async (user_id) => {
-	console.log(user_id);
+	// console.log(user_id);
 	return await dbclient.db('QuantFreelance').collection('Icon').find({"owner": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding icons by user id'];});
 }
