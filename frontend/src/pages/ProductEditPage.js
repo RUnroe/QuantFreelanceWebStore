@@ -393,8 +393,7 @@ export default function ProductEditPage() {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(response => {
           setStatusBar("Changes have been saved");
           setTimeout(() => setStatusBar(""), 2500);
 
