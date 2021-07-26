@@ -400,8 +400,9 @@ export default function ProductEditPage() {
 
         })
         .catch(error => {
-          setStatusBar("An error occured. Please refresh and try again");
-          setTimeout(() => setStatusBar(""), 2500);
+            console.log(error);
+            setStatusBar("An error occured. Please refresh and try again");
+            setTimeout(() => setStatusBar(""), 2500);
 
         });
     }
