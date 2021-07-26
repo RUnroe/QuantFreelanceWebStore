@@ -287,7 +287,7 @@ export default function ProductEditPage() {
 
     //Temporary to display 
     useEffect(() => {
-        setProductId(window.location.search.split("/store/")[1].split("/edit")[0]);
+        setProductId(((window.location.href).split("/store/")[1]).split("/edit")[0]);
         setTitle("Logo Design");
         setCoverImg("https://via.placeholder.com/135x65");
         setDescription("this is a description");
