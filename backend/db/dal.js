@@ -168,7 +168,7 @@ const updateOrderStatus = async (order_id, status) => {
 		return dbclient.db('QuantFreelance').collection('Order').updateOne({order_id}, newStatus)
 		.catch(err => { throw ['An error occurred while updating order status'];});
 	}
-	throw [`Expected 'pending', 'accepted', 'declined', or 'completed', but ${field.value} was supplied`];
+	throw [`Expected 'pending', 'accepted', 'declined', or 'completed', but ${status} was supplied`];
 }
 
 // ==============================
