@@ -58,7 +58,7 @@ const getIconsByUser = (req, res) => {
 	if(!req.session || !req.session.user_id) res.json([]);
 	else {
 		dal.getIconsByUser(req.session.user_id).then(result => {
-			console.log("result: ", result);
+			// console.log("result: ", result);
 			res.json(result);
 		})
 		.catch(handle(req, res));

@@ -230,7 +230,7 @@ const updateProduct = async (product_id, user_id, product) => {
 		if(product.icon_id) newValues['$set'].icon_id = product.icon_id;
 		return dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
 		.catch(err => { throw ['An error occurred while updating product'];});
-	});
+	}).catch(err => { throw ['An error occurred while updating product'];});
 
 	
 
