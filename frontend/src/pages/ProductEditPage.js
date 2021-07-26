@@ -270,6 +270,7 @@ const getConfigPanelInputs = (selectedElement) => {
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [addModalVisible, setAddModalVisible] = useState(false);
+    const [statusBar, setStatusBar] = useState("");
 
     const [productId, setProductId] = useState(""); 
     const [title, setTitle] = useState("");
@@ -379,8 +380,27 @@ export default function ProductEditPage() {
             page_structure: pageStructure
         }
         console.log(pageData);
-        //post the pageData to the updateProduct method
-        console.log(genId());
+        //TODO: put the pageData to the updateProduct method
+        
+        fetch('/api/product', {
+            method: "PUT",
+            credentials:"include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(pageData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          setStatusBar("Changes have been saved");
+          setTimeout(() => setStatusBar(""), 2500);
+
+        })
+        .catch(error => {
+          setStatusBar("An error occured. Please refresh and try again");
+          setTimeout(() => setStatusBar(""), 2500);
+
+        });
     }
 
     const selectImage = (setter) => {
@@ -407,6 +427,7 @@ export default function ProductEditPage() {
     }
     return(
         <>
+        <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
         <div className="product-page edit">
             <div className="product-main container">
                 {/* <h1>Sample Header</h1>
