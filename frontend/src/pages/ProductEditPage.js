@@ -515,47 +515,10 @@ export default function ProductEditPage() {
                 </div>
             </div>
             <div className="product-side container gradient">
-                <div className="options">
-                    <div className="input-block">
-                        <label>Cover Image</label>
-                        <div className="cover-img-container">
-                            <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} />
-                        </div>
-                    </div>
-                    <div className="input-block">
-                        <label>Product Title</label>
-                        <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
-                    </div>
-                    <div className="input-block">
-                        <label>Price</label>
-                        <div className="combo-input">
-                            <div className="unit-display">$</div>
-                            <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
-                        </div>
-                    </div>
-                    <div className="input-block">
-                        <label>Category</label>
-                        <select className="input" value={category} onInput={event => setCategory(event.target.value)}>
-                            <option value="DesignArt">Design &amp; Art</option>
-                            <option value="SalesMarketing">Sales &amp; Marketing</option>
-                            <option value="BusinessFinance">Business &amp; Finance</option>
-                            <option value="WritingTranslation">Writing &amp; Translation</option>
-                            <option value="VideoAnimation">Video &amp; Animation</option>
-                            <option value="AudioMusic">Audio &amp; Music</option>
-                            <option value="ProgrammingTech">Programming &amp; Tech</option>
-                            <option value="EngineeringArchitecture">Engineering &amp; Architecture</option>
-                            <option value="EducationTraining">Education &amp; Training</option>
-                        </select>
-                    </div>
-                    <div className="input-block">
-                        <label>Product Description</label>
-                        <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
-                    </div>
-                </div>
-                <div className="btn-group">
-                    <button className="btn blue-outline text-white">Cancel</button>
-                    <button className="btn blue" onClick={savePage}>Save Changes</button>
-                </div>
+                <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
+                    title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
+                    description={description} setDescription={setDescription} savePage={savePage}
+                />
             </div>
         </div>
         <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
@@ -570,7 +533,55 @@ export default function ProductEditPage() {
 
 
 
+function SideBar({configPanelJSX, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
 
+    if (configPanelJSX) return (<>{configPanelJSX}</>);
+    else return (
+        <>
+        <div className="options">
+            <div className="input-block">
+                <label>Cover Image</label>
+                <div className="cover-img-container">
+                    <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} />
+                </div>
+            </div>
+            <div className="input-block">
+                <label>Product Title</label>
+                <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
+            </div>
+            <div className="input-block">
+                <label>Price</label>
+                <div className="combo-input">
+                    <div className="unit-display">$</div>
+                    <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
+                </div>
+            </div>
+            <div className="input-block">
+                <label>Category</label>
+                <select className="input" value={category} onInput={event => setCategory(event.target.value)}>
+                    <option value="DesignArt">Design &amp; Art</option>
+                    <option value="SalesMarketing">Sales &amp; Marketing</option>
+                    <option value="BusinessFinance">Business &amp; Finance</option>
+                    <option value="WritingTranslation">Writing &amp; Translation</option>
+                    <option value="VideoAnimation">Video &amp; Animation</option>
+                    <option value="AudioMusic">Audio &amp; Music</option>
+                    <option value="ProgrammingTech">Programming &amp; Tech</option>
+                    <option value="EngineeringArchitecture">Engineering &amp; Architecture</option>
+                    <option value="EducationTraining">Education &amp; Training</option>
+                </select>
+            </div>
+            <div className="input-block">
+                <label>Product Description</label>
+                <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
+            </div>
+        </div>
+        <div className="btn-group">
+            <button className="btn blue-outline text-white">Cancel</button>
+            <button className="btn blue" onClick={savePage}>Save Changes</button>
+        </div>
+        </>
+    );
+};
 
 
 
