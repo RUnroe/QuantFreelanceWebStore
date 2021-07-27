@@ -408,7 +408,7 @@ export default function ProductEditPage() {
         pageStructure.forEach(element => {
             if(element.id == id) selected = element;
             else if(element.type === "split") {
-                element.children.forEach(child => {
+                element.properties.children.forEach(child => {
                     if(child.id == id) selected = element;
                 });
             }
