@@ -285,13 +285,18 @@ export default function ProductEditPage() {
     const [selectedElement, setSelectedElement] = useState();
     const [configPanelJSX, setConfigPanelJSX] = useState([]);
 
+    const [redirect, setRedirect] = useState(false);
+
     //get page data
     const getPageData = () => {
         const _productId =((window.location.href).split("/store/")[1]).split("/edit")[0]; 
         setProductId(_productId);
-        fetch(`/api/product/${_productId}`)
+        fetch(`/api/product/edit/${_productId}`, {
+            credentials:"include"
+        })
         .then(response => response.json())
         .then(data => {
+            if(!data) setRedirect(true);
             setTitle(data.title);
             setCoverImg(data.icon_id);
             setDescription(data.description);
@@ -448,6 +453,7 @@ export default function ProductEditPage() {
         //close modal
         setAddModalVisible(false);
     }
+    if (redirect) return <Redirect to={{pathname: '/'}} />;
     return(
         <>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>

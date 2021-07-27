@@ -78,7 +78,7 @@ const routes = [
 		handler: getProduct
 	},
 	{
-		uri: '/api/product/:product_id/edit',
+		uri: '/api/product/edit/:product_id',
 		methods: ['get'],
 		handler: [requireAuth(), getProductEdit]
 	},
