@@ -6,6 +6,7 @@ export default function LoginPage({checkAuth}) {
             <div className="section">
                 <h1>Log In</h1>
                 <LogInForm checkAuth={checkAuth} />
+                <a href="/signup">Don't have an account? Create one here</a>
             </div>
         </div>
     );

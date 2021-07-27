@@ -16,7 +16,7 @@ const createProduct = (req, res) => {
 }
 
 const getProduct = (req, res) => {
-	dal.getProduct(req.params.product_id).then(result => {
+	dal.getProductById(req.params.product_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
