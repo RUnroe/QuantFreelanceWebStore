@@ -4,7 +4,7 @@ import "../styles/index.css";
 
 
 function CtaButton({currAuthLevel, username}) {
-    console.log(currAuthLevel);
+    // console.log(currAuthLevel);
     if (currAuthLevel === "seller") return  (<a href={`/account/${username}`} className="btn blue center"> Sell a Service</a>);
     if(currAuthLevel === "buyer") return (<a href="/account/settings" className="btn blue center"> Become a Seller</a>);
 

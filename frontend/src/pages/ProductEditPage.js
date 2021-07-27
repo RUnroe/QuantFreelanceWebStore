@@ -504,7 +504,7 @@ export default function ProductEditPage() {
                         <label>Price</label>
                         <div className="combo-input">
                             <div className="unit-display">$</div>
-                            <input className="input" type="number" value={price} onInput={event => setPrice(event.target.value)} />
+                            <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
                         </div>
                     </div>
                     <div className="input-block">

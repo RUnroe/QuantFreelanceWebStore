@@ -222,6 +222,7 @@ const updateProduct = async (product_id, user_id, product) => {
 	//check if current user owns product
 	getProductById(product_id).then(result => {
 		console.log(result, product);
+		product.price = parseInt(product.price);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
 			description: product.description,
