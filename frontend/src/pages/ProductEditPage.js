@@ -20,6 +20,7 @@ export default function ProductEditPage() {
 
     const [pageStructureJSX, setPageStructureJSX] = useState([]);
 
+    const [selectedElementId, setSelectedElementId] = useState();
     const [selectedElement, setSelectedElement] = useState();
     const [configPanelJSX, setConfigPanelJSX] = useState([]);
 
@@ -75,22 +76,22 @@ export default function ProductEditPage() {
     
         switch(headerObject.properties.headerType) {
             case "h1":
-                jsx.push(<h1 className="header" style={style}>{props.value}</h1>);
+                jsx.push(<h1 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h1>);
             break;
             case "h2":
-                jsx.push(<h2 className="header" style={style}>{props.value}</h2>);
+                jsx.push(<h2 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h2>);
             break;
             case "h3":
-                jsx.push(<h3 className="header" style={style}>{props.value}</h3>);
+                jsx.push(<h3 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h3>);
             break;
             case "h4":
-                jsx.push(<h4 className="header" style={style}>{props.value}</h4>);
+                jsx.push(<h4 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h4>);
             break;
             case "h5":
-                jsx.push(<h5 className="header" style={style}>{props.value}</h5>);
+                jsx.push(<h5 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h5>);
             break;
             case "h6":
-                jsx.push(<h6 className="header" style={style}>{props.value}</h6>);
+                jsx.push(<h6 className="header" onClick={() => selectElement(headerObject.id)} style={style}>{props.value}</h6>);
             break;
     
         }
@@ -107,7 +108,7 @@ export default function ProductEditPage() {
         if(props.style === "italics") style.fontStyle = "italics";
         if(props.style === "underline") style.textDecoration = "underline";
     
-        jsx.push(<p className="paragraph" style={style}>{props.value}</p>);
+        jsx.push(<p className="paragraph" style={style} onClick={() => selectElement(paragraphObject.id)}>{props.value}</p>);
     
         return jsx;
     }
@@ -115,7 +116,7 @@ export default function ProductEditPage() {
     const convertSpacer = (object) => {
         const props = object.properties;
         const jsx = [];
-        jsx.push(<div className={`spacer space${props.size}`}></div>);
+        jsx.push(<div className={`spacer space${props.size}`} onClick={() => selectElement(object.id)}></div>);
         return jsx;
     }
     
@@ -127,7 +128,7 @@ export default function ProductEditPage() {
             width: props.width,
             height: props.height
         }
-        jsx.push(<hr className="hr" style={style} />);
+        jsx.push(<hr className="hr" style={style} onClick={() => selectElement(object.id)}/>);
         return jsx;
     }
     
@@ -141,7 +142,7 @@ export default function ProductEditPage() {
         }
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        jsx.push(<img className="image" style={style} src={props.src} />);
+        jsx.push(<img className="image" style={style} src={props.src} onClick={() => selectElement(object.id)} />);
         return jsx;
     }
     
@@ -160,7 +161,7 @@ export default function ProductEditPage() {
             );
         });
         jsx.push(
-            <div className="faq-container">
+            <div className="faq-container" onClick={() => selectElement(object.id)}>
               {modulesJSX}  
             </div>
         );
@@ -395,6 +396,24 @@ export default function ProductEditPage() {
     
     const selectElement = (id) => {
         console.log(id);
+        setSelectedElementId(id);
+        //TODO select element based on id
+        const element = findElementInPageStructure(id);
+        console.log(element);
+        setSelectedElement(element);
+    }
+
+    const findElementInPageStructure = id => {
+        const selected;
+        pageStructure.forEach(element => {
+            if(element.id == id) selected = element;
+            else if(element.type === "split") {
+                element.children.forEach(child => {
+                    if(child.id == id) selected = element;
+                });
+            }
+        });
+        return selected;
     }
     
     const convertPageStructureToJSX = () => {
