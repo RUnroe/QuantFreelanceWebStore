@@ -400,7 +400,7 @@ export default function ProductEditPage() {
         //TODO select element based on id
         const element = findElementInPageStructure(id);
         console.log(element);
-        //setSelectedElement(element);
+        setSelectedElement(Object.assign(element));
     }
 
     const findElementInPageStructure = id => {
