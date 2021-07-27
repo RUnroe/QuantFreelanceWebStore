@@ -25,7 +25,7 @@ const getProduct = (req, res) => {
 const getProductEdit = (req, res) => {
 	dal.getProductById(req.params.product_id).then(result => {
 		if(req.params.user_id == result.seller) res.json(result);
-		else throw ['The requested product page does not belong to this user'];
+		else res.json([]);
 	})
 	.catch(handle(req, res));
 }
