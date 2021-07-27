@@ -24,6 +24,7 @@ const getProduct = (req, res) => {
 
 const getProductEdit = (req, res) => {
 	dal.getProductById(req.params.product_id).then(result => {
+		console.log(req.params.user_id, result.seller);
 		if(req.params.user_id == result.seller) res.json(result);
 		else res.json([]);
 	})

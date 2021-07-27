@@ -454,39 +454,12 @@ export default function ProductEditPage() {
         //close modal
         setAddModalVisible(false);
     }
-    if (redirect) return <Redirect to={{pathname: '/'}} />;
+    if (redirect) return (<Redirect to={{pathname: '/'}} />);
     return(
         <>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
         <div className="product-page edit">
             <div className="product-main container">
-                {/* <h1>Sample Header</h1>
-                <p>Sample paragraph</p>
-                <div className="image">
-                    <img src="https://via.placeholder.com/600x250" alt="sample" />
-                </div>
-                <hr />
-                <div className="spacer"></div>
-                <div className="faq-container">
-                    <label className="faq-module">
-                        <input type="checkbox"/>
-                        <div className="faq-question"><span>Sample Question</span><i className="fas fa-chevron-down"></i> </div>
-                        <div className="faq-answer"><span>Sample Answer</span></div>
-                    </label>
-                    <label className="faq-module">
-                        <input type="checkbox"/>
-                        <div className="faq-question"><span>Sample Question</span><i className="fas fa-chevron-down"></i> </div>
-                        <div className="faq-answer"><span>Sample Answer</span></div>
-                    </label>
-                </div>
-                <div className="split-section">
-                    <div className="left-side">
-                        <p>Left text</p>
-                    </div>
-                    <div className="right-side">
-                        <p>Right text</p>
-                    </div>
-                </div>  */}
 
                 {pageStructureJSX}
                 
