@@ -521,7 +521,7 @@ export default function ProductEditPage() {
             <div className="product-side container gradient">
                 <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
                     title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
-                    description={description} setDescription={setDescription} savePage={savePage}
+                    description={description} setDescription={setDescription} savePage={savePage} selectedElementId={setSelectedElementId}
                 />
             </div>
         </div>
@@ -537,9 +537,8 @@ export default function ProductEditPage() {
 
 
 
-function SideBar({configPanelJSX, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
-    console.log(configPanelJSX);
-    if (configPanelJSX.length) return (<>{configPanelJSX}</>);
+function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
+    if (configPanelJSX.length && selectedElementId) return (<>{configPanelJSX}</>);
     else return (
         <>
         <div className="options">
