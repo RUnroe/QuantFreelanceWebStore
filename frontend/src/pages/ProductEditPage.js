@@ -214,9 +214,15 @@ export default function ProductEditPage() {
         }
         return props;
     }
-    
+    const clearSelection = () => {
+        setSelectedElementId("");
+        setSelectedElement({});
+    }
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
+        tempJSX.push(
+            <p className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i> Back</p>
+        )
         switch(selectedElement.type) {
             case "header": 
                 tempJSX.push(
