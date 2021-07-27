@@ -296,6 +296,7 @@ export default function ProductEditPage() {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if(!data) setRedirect(true);
             setTitle(data.title);
             setCoverImg(data.icon_id);
