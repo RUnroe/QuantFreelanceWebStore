@@ -225,8 +225,8 @@ export default function ProductEditPage() {
             case "header": 
                 tempJSX.push(
                     <div className="input-block">
-                        <label htmlFor={`${selectedElement.id}headerType`}>Header Type</label>
-                        <select id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}headerType`}>Header Type</label>
+                        <select className="input" id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType}>
                             <option value="h1">h1</option>
                             <option value="h2">h2</option>
                             <option value="h3">h3</option>
@@ -238,14 +238,14 @@ export default function ProductEditPage() {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label htmlFor={`${selectedElement.id}value`}>Text</label>
-                        <input type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
+                        <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
+                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
                     </div>
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
-                        <select id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
+                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
                             <option value="200">Light</option>
                             <option value="400">Regular</option>
                             <option value="800">Bold</option>
@@ -254,8 +254,8 @@ export default function ProductEditPage() {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label htmlFor={`${selectedElement.id}style`}>Text Style</label>
-                        <select id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
                             <option value="">None</option>
                             <option value="italics">Italics</option>
                             <option value="underline">Underline</option>
@@ -264,8 +264,8 @@ export default function ProductEditPage() {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
-                        <select id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
                             <option value="left">Left</option>
                             <option value="center">Center</option>
                             <option value="right">Right</option>
@@ -391,7 +391,7 @@ export default function ProductEditPage() {
         const jsx = [];
         let inputs;
         jsx.push(<p style={{cursor:"pointer"}} className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i> Back</p>);
-        jsx.push(<h2 className="config-panel-header">Edit {selectedElement ? selectedElement.type : ""}</h2>);
+        jsx.push(<h2 className="config-panel-header text-center">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
         jsx.push(<div className="config-panel-input-section">{inputs}</div>);
@@ -539,30 +539,30 @@ export default function ProductEditPage() {
 
 
 function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
-    console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
+    // console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
     if (configPanelJSX.length > 0 && selectedElementId != null) return (<div className="config-menu">{configPanelJSX}</div>);
     else return (
         <div className="product-details">
         <div className="options">
             <div className="input-block">
-                <label>Cover Image</label>
+                <label className="input-label">Cover Image</label>
                 <div className="cover-img-container">
                     <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} />
                 </div>
             </div>
             <div className="input-block">
-                <label>Product Title</label>
+                <label className="input-label">Product Title</label>
                 <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
             </div>
             <div className="input-block">
-                <label>Price</label>
+                <label className="input-label">Price</label>
                 <div className="combo-input">
                     <div className="unit-display">$</div>
                     <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
                 </div>
             </div>
             <div className="input-block">
-                <label>Category</label>
+                <label className="input-label">Category</label>
                 <select className="input" value={category} onInput={event => setCategory(event.target.value)}>
                     <option value="DesignArt">Design &amp; Art</option>
                     <option value="SalesMarketing">Sales &amp; Marketing</option>
@@ -576,7 +576,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
                 </select>
             </div>
             <div className="input-block">
-                <label>Product Description</label>
+                <label className="input-label">Product Description</label>
                 <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
             </div>
         </div>
