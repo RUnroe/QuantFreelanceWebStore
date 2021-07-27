@@ -2,7 +2,17 @@ import React, { createRef } from "react";
 //import {ImageInput, SignupForm} from "./../partials/form";
 import "../styles/index.css";
 
-export default function HomePage() {
+
+function CtaButton({currAuthLevel, username}) {
+    console.log(currAuthLevel);
+    if (currAuthLevel === "seller") return  (<a href={`/account/${username}`} className="btn blue center"> Sell a Service</a>);
+    if(currAuthLevel === "buyer") return (<a href="/account/settings" className="btn blue center"> Become a Seller</a>);
+
+    return (<a href="/signup" className="btn blue center"> Become a Seller</a>);
+}
+
+
+export default function HomePage({currAuthLevel, username}) {
     const firstName = createRef();
     const logIn = () => {
         const data = {
@@ -64,7 +74,8 @@ export default function HomePage() {
                     <div className="search-container">
                         <input type="text" placeholder="What service are you looking for?" className="input search" id="searchField" />
                         <p className="text-center text-white"> or</p>
-                        <a href="signup" className="btn blue center"> Become a Seller</a>
+                        {/* <a href="/signup" className="btn blue center"> Become a Seller</a> */}
+                        <CtaButton currAuthLevel={currAuthLevel} username={username} />
                     </div>
                 </div>
                 <div className="image-half">
@@ -102,3 +113,4 @@ export default function HomePage() {
     );
 
 }
+

@@ -77,6 +77,7 @@ function App() {
     
     //Enable for dev purposes
     //setCurrAuthLevel("seller");
+    //setCurrAuthLevel("buyer");
     checkAuth();
   }, []);
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
@@ -88,7 +89,7 @@ function App() {
     <div id="main">
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          <HomePage currAuthLevel={currAuthLevel} username={currUser.username}/>
         </Route>
         <Route exact path="/signup">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
