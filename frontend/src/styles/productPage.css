@@ -11,9 +11,7 @@
     position: relative;
 }
 .product-page.edit .product-side {
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: calc(100vh - 5.5rem);
 }
 .product-side .options label {
     color: var(--color-light-1);
@@ -23,6 +21,16 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+.product-side > .product-details {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-side > .config-menu {
+
+}
+
 
 .unit-display {
     background-color: #eee;

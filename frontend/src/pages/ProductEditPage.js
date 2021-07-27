@@ -540,9 +540,9 @@ export default function ProductEditPage() {
 
 function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
     console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
-    if (configPanelJSX.length > 0 && selectedElementId != null) return (<>{configPanelJSX}</>);
+    if (configPanelJSX.length > 0 && selectedElementId != null) return (<div className="config-menu">{configPanelJSX}</div>);
     else return (
-        <>
+        <div className="product-details">
         <div className="options">
             <div className="input-block">
                 <label>Cover Image</label>
@@ -584,7 +584,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
             <button className="btn blue-outline text-white">Cancel</button>
             <button className="btn blue" onClick={savePage}>Save Changes</button>
         </div>
-        </>
+        </div>
     );
 };
 
