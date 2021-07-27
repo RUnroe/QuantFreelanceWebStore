@@ -68,14 +68,14 @@ function LogInForm({checkAuth}) {
         <form id="form" method="POST" onSubmit={postLogin}>
             <div className="form-block">
                 <label htmlFor="identifierInput" className="input-label">Username or Email</label>
-                <input type="text" id="identifierInput" name="identifier" ref={identifier}/>
+                <input type="text" className="input" id="identifierInput" name="identifier" ref={identifier}/>
             </div>
             <div className="form-block">
                 <label htmlFor="passwordInput" className="input-label">Password</label>
-                <input type="password" id="passwordInput" name="password" ref={password}/>
+                <input type="password"className="input" id="passwordInput" name="password" ref={password}/>
             </div>
             <span id="loginErrorMsg" className="error-message">Username / email or password is wrong</span>
-            <button type="submit">Log In</button>
+            <button type="submit" class="btn blue">Log In</button>
         </form>
         );
     }
@@ -84,13 +84,13 @@ function LogInForm({checkAuth}) {
         <form id="form" method="POST" onSubmit={postLogin}>
             <div className="form-block">
                 <label htmlFor="identifierInput" className="input-label">Username or Email</label>
-                <input type="text" id="identifierInput" name="identifier" ref={identifier}/>
+                <input type="text" className="input" id="identifierInput" name="identifier" ref={identifier}/>
             </div>
             <div className="form-block">
                 <label htmlFor="passwordInput" className="input-label">Password</label>
-                <input type="password" id="passwordInput" name="password" ref={password}/>
+                <input type="password" className="input" id="passwordInput" name="password" ref={password}/>
             </div>
-            <button type="submit">Log In</button>
+            <button type="submit" class="btn blue">Log In</button>
         </form>
         );
     }
