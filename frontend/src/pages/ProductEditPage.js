@@ -215,14 +215,11 @@ export default function ProductEditPage() {
         return props;
     }
     const clearSelection = () => {
-        setSelectedElementId("");
-        setSelectedElement({});
+        setSelectedElementId(null);
+        setSelectedElement(null);
     }
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
-        tempJSX.push(
-            <p className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i> Back</p>
-        )
         switch(selectedElement.type) {
             case "header": 
                 tempJSX.push(
@@ -392,6 +389,7 @@ export default function ProductEditPage() {
     const setupConfigPanel = () => {
         const jsx = [];
         let inputs;
+        jsx.push(<p style={{cursor:"pointer"}} className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i> Back</p>);
         jsx.push(<h2 className="config-panel-header">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
