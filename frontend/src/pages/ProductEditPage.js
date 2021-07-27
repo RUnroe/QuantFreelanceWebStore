@@ -217,6 +217,7 @@ export default function ProductEditPage() {
     const clearSelection = () => {
         setSelectedElementId(null);
         setSelectedElement(null);
+        console.log("cleared values")
     }
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
