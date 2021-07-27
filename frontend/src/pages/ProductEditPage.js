@@ -285,61 +285,80 @@ export default function ProductEditPage() {
     const [selectedElement, setSelectedElement] = useState();
     const [configPanelJSX, setConfigPanelJSX] = useState([]);
 
-    //Temporary to display 
-    useEffect(() => {
-        setProductId(((window.location.href).split("/store/")[1]).split("/edit")[0]);
-        setTitle("Logo Design");
-        setCoverImg("https://via.placeholder.com/135x65");
-        setDescription("this is a description");
-        setPrice("30.00");
-        setCategory("ProgrammingTech");
-        setPageStructure([
-            {
-                type: "header",
-                id:"87c650d6-a60c-47c4-a7b8-f7537ba9d603",
-                position:1,
-                properties: {
-                    value: "This is an example of a header",
-                    fontWeight: 400,
-                    align: "left",
-                    headerType: "h1",
-                    style: "none" //(italics, underline, none)
-                }
-            },
-            {
-                type: "split",
-                id:"87c650d6-a60c-47c4-a7b8-f7537ba9d604",
-                position:2,
-                properties: {
-                    splitType: 1,
-                    children: [
-                        {
-                            type: "paragraph",
-                            id:"87c650d6-a60c-47c4-a7b8-f7537ba9d605",
-                            position:2,
-                            properties: {
-                                value: "This is an example of a nested paragrah",
-                                fontWeight: 400,
-                                style: "none", //(italics, underline, none)
-                                align: "center"
-                            }
-                        },
-                        {
-                            type: "image",
-                            id:"87c650d6-a60c-47c4-a7b8-f7537ba9d606",
-                            position:2,
-                            properties: {
-                                src: "https://via.placeholder.com/135x65",
-                                align: "right",
-                                width: "100%"
-                            }
-                        },
-                    ]
-                }
-            }
-
-        ]);
+    //get page data
+    const getPageData = () => {
+        const _productId =((window.location.href).split("/store/")[1]).split("/edit")[0]; 
+        setProductId(_productId);
+        fetch(`/api/product/${_productId}`)
+        .then(response => response.json())
+        .then(data => {
+            setTitle(data.title);
+            setCoverImg(data.icon_id);
+            setDescription(data.description);
+            setPrice(data.price);
+            setCategory(data.category);
+            setPageStructure(json.parse(data.page_structure));
+        })
+        .catch(err => console.log(err));
+    }
+    useEffect(()=> {
+        getPageData();
     }, []);
+    //Temporary to display 
+    // useEffect(() => {
+    //     setProductId(((window.location.href).split("/store/")[1]).split("/edit")[0]);
+    //     setTitle("Logo Design");
+    //     setCoverImg("https://via.placeholder.com/135x65");
+    //     setDescription("this is a description");
+    //     setPrice("30.00");
+    //     setCategory("ProgrammingTech");
+    //     setPageStructure([
+    //         {
+    //             type: "header",
+    //             id:"87c650d6-a60c-47c4-a7b8-f7537ba9d603",
+    //             position:1,
+    //             properties: {
+    //                 value: "This is an example of a header",
+    //                 fontWeight: 400,
+    //                 align: "left",
+    //                 headerType: "h1",
+    //                 style: "none" //(italics, underline, none)
+    //             }
+    //         },
+    //         {
+    //             type: "split",
+    //             id:"87c650d6-a60c-47c4-a7b8-f7537ba9d604",
+    //             position:2,
+    //             properties: {
+    //                 splitType: 1,
+    //                 children: [
+    //                     {
+    //                         type: "paragraph",
+    //                         id:"87c650d6-a60c-47c4-a7b8-f7537ba9d605",
+    //                         position:2,
+    //                         properties: {
+    //                             value: "This is an example of a nested paragrah",
+    //                             fontWeight: 400,
+    //                             style: "none", //(italics, underline, none)
+    //                             align: "center"
+    //                         }
+    //                     },
+    //                     {
+    //                         type: "image",
+    //                         id:"87c650d6-a60c-47c4-a7b8-f7537ba9d606",
+    //                         position:2,
+    //                         properties: {
+    //                             src: "https://via.placeholder.com/135x65",
+    //                             align: "right",
+    //                             width: "100%"
+    //                         }
+    //                     },
+    //                 ]
+    //             }
+    //         }
+
+    //     ]);
+    // }, []);
 
 
     useEffect(() => {

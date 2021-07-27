@@ -11,7 +11,6 @@ function ImageSelectModal({setter, setSetter}) {
         return fetch("/api/icons/user").then(result => result.json()).then(data => {
             const images = data.map(item => item.url);
             setUserImages(images);
-            console.log(userImages);
             return images;
         });
     }
@@ -22,10 +21,8 @@ function ImageSelectModal({setter, setSetter}) {
         });
         setUserImageJSX(jsxElements);
     }
-
     useEffect(() => {
         getUsersImages();
-        //setUserImages(getUsersImages());
     }, []);
 
     useEffect(() => {
