@@ -522,7 +522,7 @@ export default function ProductEditPage() {
             <div className="product-side container gradient">
                 <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
                     title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
-                    description={description} setDescription={setDescription} savePage={savePage} selectedElementId={setSelectedElementId}
+                    description={description} setDescription={setDescription} savePage={savePage} selectedElementId={selectedElementId}
                 />
             </div>
         </div>
