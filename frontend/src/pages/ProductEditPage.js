@@ -385,7 +385,7 @@ export default function ProductEditPage() {
 
     const setupConfigPanel = () => {
         const jsx = [];
-        const inputs = [];
+        let inputs;
         jsx.push(<h2 className="config-panel-header">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
