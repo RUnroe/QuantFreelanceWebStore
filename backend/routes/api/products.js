@@ -22,6 +22,14 @@ const getProduct = (req, res) => {
 	.catch(handle(req, res));
 }
 
+const getProductEdit = (req, res) => {
+	dal.getProductById(req.params.product_id).then(result => {
+		if(req.params.user_id == result.seller) res.json(result);
+		else throw ['The requested product page does not belong to this user'];
+	})
+	.catch(handle(req, res));
+}
+
 const getProductsBySeller = (req, res) => {
 	dal.getProductsBySeller(req.params.seller_id).then(result => {
 		res.json(result);
@@ -68,6 +76,11 @@ const routes = [
 		uri: '/api/product/:product_id',
 		methods: ['get'],
 		handler: getProduct
+	},
+	{
+		uri: '/api/product/:product_id/edit',
+		methods: ['get'],
+		handler: [requireAuth(), getProductEdit]
 	},
     {
 		uri: '/api/product/seller/:seller_id',
