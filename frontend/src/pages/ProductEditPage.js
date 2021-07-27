@@ -404,7 +404,7 @@ export default function ProductEditPage() {
     }
 
     const findElementInPageStructure = id => {
-        const selected;
+        let selected;
         pageStructure.forEach(element => {
             if(element.id == id) selected = element;
             else if(element.type === "split") {
