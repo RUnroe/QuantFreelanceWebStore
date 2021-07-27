@@ -547,7 +547,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
             <div className="input-block">
                 <label className="input-label">Cover Image</label>
                 <div className="cover-img-container">
-                    <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} />
+                    {coverImg ? <img src={coverImg} alt="cover-img" onClick={() => selectImage(setCoverImg)} /> : <h1 onClick={() => selectImage(setCoverImg)}>+</h1>}
                 </div>
             </div>
             <div className="input-block">
