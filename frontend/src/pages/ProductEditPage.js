@@ -297,7 +297,7 @@ export default function ProductEditPage() {
             setDescription(data.description);
             setPrice(data.price);
             setCategory(data.category);
-            setPageStructure(json.parse(data.page_structure));
+            setPageStructure(JSON.parse(data.page_structure));
         })
         .catch(err => console.log(err));
     }
