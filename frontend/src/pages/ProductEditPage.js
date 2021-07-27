@@ -539,7 +539,7 @@ export default function ProductEditPage() {
 
 
 function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
-    // console.log(configPanelJSX.length, selectedElementId, configPanelJSX.length && selectedElementId)
+    console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
     if (configPanelJSX.length > 0 && selectedElementId != null) return (<>{configPanelJSX}</>);
     else return (
         <>
