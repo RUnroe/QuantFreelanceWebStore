@@ -77,22 +77,22 @@ export default function ProductEditPage() {
     
         switch(headerObject.properties.headerType) {
             case "h1":
-                jsx.push(<h1 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h1>);
+                jsx.push(<h1 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h1>);
             break;
             case "h2":
-                jsx.push(<h2 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h2>);
+                jsx.push(<h2 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h2>);
             break;
             case "h3":
-                jsx.push(<h3 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h3>);
+                jsx.push(<h3 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h3>);
             break;
             case "h4":
-                jsx.push(<h4 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h4>);
+                jsx.push(<h4 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h4>);
             break;
             case "h5":
-                jsx.push(<h5 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h5>);
+                jsx.push(<h5 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h5>);
             break;
             case "h6":
-                jsx.push(<h6 className="header" onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h6>);
+                jsx.push(<h6 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h6>);
             break;
     
         }
@@ -109,7 +109,7 @@ export default function ProductEditPage() {
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
     
-        jsx.push(<p className="paragraph" style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
+        jsx.push(<p className={`paragraph ${paragraphObject.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
     
         return jsx;
     }
@@ -117,7 +117,7 @@ export default function ProductEditPage() {
     const convertSpacer = (object) => {
         const props = object.properties;
         const jsx = [];
-        jsx.push(<div className={`spacer space${props.size}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}></div>);
+        jsx.push(<div className={`spacer space${props.size} ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}></div>);
         return jsx;
     }
     
@@ -129,7 +129,7 @@ export default function ProductEditPage() {
             width: props.width,
             height: props.height
         }
-        jsx.push(<hr className="hr" style={style} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}/>);
+        jsx.push(<hr className={`hr ${object.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}/>);
         return jsx;
     }
     
@@ -143,7 +143,7 @@ export default function ProductEditPage() {
         }
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        jsx.push(<img className="image" style={style} src={props.src} onClick={(event) => {selectElement(object.id); event.stopPropagation();}} />);
+        jsx.push(<img className={`image ${object.id === selectedElementId ? "selected" : ""}`} style={style} src={props.src} onClick={(event) => {selectElement(object.id); event.stopPropagation();}} />);
         return jsx;
     }
     
@@ -162,7 +162,7 @@ export default function ProductEditPage() {
             );
         });
         jsx.push(
-            <div className="faq-container" onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+            <div className={`faq-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
               {modulesJSX}  
             </div>
         );
@@ -175,7 +175,7 @@ export default function ProductEditPage() {
         const jsx = [];
         //TODO: Create add button for split section that does not have elements in it
         jsx.push(
-            <div className={`split-section split${props.splitType}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+            <div className={`split-section split${props.splitType} ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
                 <div className="left-side">
                     { (props.children && props.children.length > 0) ? getJSXOfElement(props.children[0]) : <div className="add"></div>}
                 </div>
@@ -670,7 +670,7 @@ export default function ProductEditPage() {
             properties: getDefaultProperties(elementType)
         }
         setPageStructure((oldState) => [...oldState, newElement]);
-        convertPageStructureToJSX();
+        //convertPageStructureToJSX();
         //close modal
         setAddModalVisible(false);
         //select new element
