@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function ImageSelectModal({setter, setSetter}) {
     const [image, setImage] = useState();
@@ -17,7 +17,7 @@ function ImageSelectModal({setter, setSetter}) {
     const renderUserImagesJSX = (data, selectedId) => {
         let jsxElements = [];
         data.forEach((value, index) => {
-            jsxElements.push(<div class={`image-select-option ${index == selectedId ? "selected" : ""}`} data-id={index} onClick={() => selectImageOption(index, value)}><img src={value}/></div>)
+            jsxElements.push(<div class={`image-select-option ${index === selectedId ? "selected" : ""}`} data-id={index} onClick={() => selectImageOption(index, value)}><img alt={index} src={value}/></div>)
         });
         setUserImageJSX(jsxElements);
     }

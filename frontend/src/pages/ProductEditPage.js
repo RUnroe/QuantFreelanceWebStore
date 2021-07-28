@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 import {Redirect} from "react-router-dom";
@@ -31,7 +31,7 @@ export default function ProductEditPage() {
 
     const genId = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-            let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }
@@ -61,6 +61,7 @@ export default function ProductEditPage() {
             case "split": 
                 tempJSX.push(convertSplit(pageElement));
             break;
+            default: break;
         }
         return tempJSX;
     }
@@ -76,9 +77,6 @@ export default function ProductEditPage() {
         if(props.style === "underline") style.textDecoration = "underline";
     
         switch(headerObject.properties.headerType) {
-            case "h1":
-                jsx.push(<h1 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h1>);
-            break;
             case "h2":
                 jsx.push(<h2 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h2>);
             break;
@@ -93,6 +91,9 @@ export default function ProductEditPage() {
             break;
             case "h6":
                 jsx.push(<h6 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h6>);
+            break;
+            default:
+                jsx.push(<h1 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h1>);
             break;
     
         }
@@ -143,7 +144,7 @@ export default function ProductEditPage() {
         }
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        jsx.push(<img className={`image ${object.id === selectedElementId ? "selected" : ""}`} style={style} src={props.src} onClick={(event) => {selectElement(object.id); event.stopPropagation();}} />);
+        jsx.push(<img className={`image ${object.id === selectedElementId ? "selected" : ""}`} alt={object.id + "image"} style={style} src={props.src} onClick={(event) => {selectElement(object.id); event.stopPropagation();}} />);
         return jsx;
     }
     
@@ -212,6 +213,7 @@ export default function ProductEditPage() {
             case "split": 
                 props = {children: [], splitType: 2 }; // set split to half and half?
             break;
+            default: break;
         }
         return props;
     }
@@ -245,7 +247,7 @@ export default function ProductEditPage() {
         const newProps = Object.assign(selectedElement.properties);
         newProps["modules"] = newProps["modules"].filter(faqModule => {
             let keepItem = true;
-            if(faqModule.id == id) keepItem = false;
+            if(faqModule.id === id) keepItem = false;
             return keepItem;
         });
         setSelectedElement({...selectedElement, properties: newProps});
@@ -442,6 +444,7 @@ export default function ProductEditPage() {
                     </div>
                 );
             break;
+            default: break;
         }
         return tempJSX;
     }
@@ -557,10 +560,10 @@ export default function ProductEditPage() {
         let newPageStructure = Object.assign(pageStructure);
         newPageStructure = newPageStructure.filter((element) => {
             let keepItem = true;
-            if(element.id == selectedElementId) keepItem = false;
+            if(element.id === selectedElementId) keepItem = false;
             else if(element.type === "split") {
                 element.properties.children.forEach(child => {
-                    if(child.id == selectedElementId) keepItem = false;
+                    if(child.id === selectedElementId) keepItem = false;
                 });
             }
             return keepItem;
@@ -600,10 +603,10 @@ export default function ProductEditPage() {
     const findElementInPageStructure = id => {
         let selected;
         pageStructure.forEach(element => {
-            if(element.id == id) selected = element;
+            if(element.id === id) selected = element;
             else if(element.type === "split") {
                 element.properties.children.forEach(child => {
-                    if(child.id == id) selected = child;
+                    if(child.id === id) selected = child;
                 });
             }
         });
