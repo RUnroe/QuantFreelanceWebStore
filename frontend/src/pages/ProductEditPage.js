@@ -447,7 +447,7 @@ export default function ProductEditPage() {
     }
     const addToSelectedFAQModule = () => {
         const newProps = Object.assign(selectedElement.properties);
-        newProps["modules"].push({question: "New Question?", answer: "The answer to the question"});
+        newProps["modules"].push({id: genId(), question: "New Question?", answer: "The answer to the question"});
         setSelectedElement({...selectedElement, properties: newProps});
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
