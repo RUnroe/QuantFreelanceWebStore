@@ -75,6 +75,15 @@
 }
 .config-panel-header {
     margin:0.5rem 0;
+    text-transform: capitalize;
+}
+.config-panel-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.config-panel-body .btn.danger {
+    margin-top:2rem;
 }
 /* ////////////////////////// */
 

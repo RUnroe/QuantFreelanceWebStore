@@ -275,7 +275,42 @@ export default function ProductEditPage() {
                 
             break;
             case "paragraph": 
-                // tempJSX.push(convertParagraph(pageElement));
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
+                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
+                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
+                            <option value="200">Light</option>
+                            <option value="400">Regular</option>
+                            <option value="800">Bold</option>
+                        </select>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
+                            <option value="">None</option>
+                            <option value="italics">Italics</option>
+                            <option value="underline">Underline</option>
+                        </select>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                );
             break;
             case "spacer": 
                 // tempJSX.push(convertSpacer(pageElement));
@@ -386,15 +421,38 @@ export default function ProductEditPage() {
         if(selectedElement) setupConfigPanel();
     }, [selectedElement]);
 
-
+    const deleteElement = () => {
+        //Remove selected element from pageStructure
+        let newPageStructure = Object.assign(pageStructure);
+        newPageStructure = newPageStructure.filter((element) => {
+            let keepItem = true;
+            if(element.id == selectedElementId) keepItem = false;
+            else if(element.type === "split") {
+                element.properties.children.forEach(child => {
+                    if(child.id == selectedElementId) keepItem = false;
+                });
+            }
+            return keepItem;
+        });
+        setPageStructure(newPageStructure);
+        //unselect element
+        clearSelection();
+    }
     const setupConfigPanel = () => {
         const jsx = [];
         let inputs;
-        jsx.push(<p style={{cursor:"pointer"}} className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i> Back</p>);
+        jsx.push(<p style={{cursor:"pointer"}} className="text-white" onClick={clearSelection}><i class="fas fa-arrow-left"></i>&nbsp; Back</p>);
         jsx.push(<h2 className="config-panel-header text-center">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
-        jsx.push(<div className="config-panel-input-section">{inputs}</div>);
+        jsx.push(
+            <div className="config-panel-body"> 
+                <div className="config-panel-input-section">{inputs}</div>
+                <div className="btn-group">
+                    <button className="btn danger" onClick={deleteElement}>Delete</button>
+                </div>
+            </div>
+        );
         
         setConfigPanelJSX(jsx);
     } 
@@ -402,7 +460,7 @@ export default function ProductEditPage() {
     const selectElement = (id) => {
         console.log(id);
         setSelectedElementId(id);
-        //TODO select element based on id
+        //Select element based on id
         const element = findElementInPageStructure(id);
         console.log(element);
         setSelectedElement(Object.assign(element));
@@ -441,7 +499,6 @@ export default function ProductEditPage() {
 
         }
         console.log(data);
-        //TODO: put the pageData to the updateProduct method
         
         fetch('/api/product', {
             method: "PUT",
