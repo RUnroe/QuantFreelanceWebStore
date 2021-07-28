@@ -410,6 +410,7 @@ export default function ProductEditPage() {
                     </div>
                     );
                 });
+                tempJSX.push(<button className="btn blue center add" onClick={addToSelectedFAQModule}>+</button>);
 
             break;
             case "split": 
@@ -427,7 +428,11 @@ export default function ProductEditPage() {
         }
         return tempJSX;
     }
-
+    const addToSelectedFAQModule = () => {
+        const newProps = Object.assign(selectedElement.properties);
+        newProps["modules"].push({question: "New Question?", answer: "The answer to the question"});
+        setSelectedElement({...selectedElement, properties: newProps});
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     //get page data
