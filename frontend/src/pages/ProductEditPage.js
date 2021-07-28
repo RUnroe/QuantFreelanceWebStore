@@ -375,6 +375,18 @@ export default function ProductEditPage() {
                         </select>
                     </div>
                 );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}height`}>Height</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}height`} value={selectedElement.properties.height} onInput={event => updatePropInput("height", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}width`}>Width</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}width`} value={selectedElement.properties.width} onInput={event => updatePropInput("width", event.target.value)}/>
+                    </div>
+                );
             break;
             case "faq": 
             //TODO::::Add event listeners (on Clicks)

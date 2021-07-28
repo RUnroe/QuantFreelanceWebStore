@@ -94,7 +94,7 @@ function ImageSelectModal({setter, setSetter}) {
                     </div>
                 </div>
                 <div className="btn-group">
-                    <button className="btn blue-outline">Cancel</button>
+                    <button className="btn blue-outline" onClick={closeModal}>Cancel</button>
                     <button className="btn blue" onClick={selectImage}>Select</button>
                 </div>
             </div>

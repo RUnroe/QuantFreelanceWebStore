@@ -76,9 +76,9 @@ function App() {
   useEffect(() => {
     
     //Enable for dev purposes
-    //setCurrAuthLevel("seller");
+    setCurrAuthLevel("seller");
     //setCurrAuthLevel("buyer");
-    checkAuth();
+    //checkAuth();
   }, []);
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
