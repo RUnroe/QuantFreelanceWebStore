@@ -207,7 +207,7 @@ export default function ProductEditPage() {
                 props = {src: "https://via.placeholder.com/320x180", align: "center"}; // give default image
             break;
             case "faq": 
-                props = {modules: [{question: "New Question?", answer: "The answer to the question"}]};
+                props = {modules: [{id:genId(), question: "New Question?", answer: "The answer to the question"}]};
             break;
             case "split": 
                 props = {children: [], splitType: 2 }; // set split to half and half?
@@ -231,7 +231,16 @@ export default function ProductEditPage() {
         newProps["src"] = value;
         setSelectedElement({...selectedElement, properties: newProps});
     }
-
+    const updateFAQModuleText = (id, location, value) => {
+        const newProps = Object.assign(selectedElement.properties);
+        newProps["modules"] = newProps["modules"].map(faqModule => {
+            if(faqModule.id === id) {
+                faqModule[location] = value;
+            }
+            return faqModule;
+        });
+        setSelectedElement({...selectedElement, properties: newProps});
+    }
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
         switch(selectedElement.type) {
@@ -390,18 +399,17 @@ export default function ProductEditPage() {
             break;
             case "faq": 
             //TODO::::Add event listeners (on Clicks)
-                // {modules: [{question: "New Question?", answer: "The answer to the question"}]};
-                selectedElement.properties.modules.forEach(module => {
+                selectedElement.properties.modules.forEach(faqModule => {
                     tempJSX.push(
                     <div className="side-faq-module-container">
                         <div className="left-side">
                             <div className="input-block">
                                 <label>Q: &nbsp;</label>
-                                <input type="text" className="input" value={module.question} />
+                                <input type="text" className="input" value={faqModule.question} onInput={(event) => updateFAQModuleText(faqModule.id, "question", event.target.value)} />
                             </div>
                             <div className="input-block">
                                 <label>A: &nbsp;</label>
-                                <input type="text" className="input" value={module.answer} />
+                                <input type="text" className="input" value={faqModule.answer} onInput={(event) => updateFAQModuleText(faqModule.id, "answer", event.target.value)} />
                             </div>
                         </div>
                         <div className="right-side">
