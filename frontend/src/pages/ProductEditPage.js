@@ -241,6 +241,15 @@ export default function ProductEditPage() {
         });
         setSelectedElement({...selectedElement, properties: newProps});
     }
+    const removeFAQModule = (id) => {
+        const newProps = Object.assign(selectedElement.properties);
+        newProps["modules"] = newProps["modules"].filter(faqModule => {
+            let keepItem = true;
+            if(faqModule.id == id) keepItem = false;
+            return keepItem;
+        });
+        setSelectedElement({...selectedElement, properties: newProps});
+    }
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
         switch(selectedElement.type) {
@@ -413,7 +422,7 @@ export default function ProductEditPage() {
                             </div>
                         </div>
                         <div className="right-side">
-                            <button className="cancel-btn"><i className="fas fa-times"></i></button>
+                            <button className="cancel-btn" onClick={() => removeFAQModule(faqModule.id)}><i className="fas fa-times"></i></button>
                         </div>
                     </div>
                     );
