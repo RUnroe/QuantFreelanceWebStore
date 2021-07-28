@@ -138,6 +138,10 @@
     box-sizing: border-box;
 
 }
+.product-main hr.hr {
+    box-sizing: content-box;
+}
+
 
 .product-main .split-section {
     display:grid;

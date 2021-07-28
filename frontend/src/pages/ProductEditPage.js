@@ -72,7 +72,7 @@ export default function ProductEditPage() {
             fontWeight: props.fontWeight,
             textAlign: props.align
         }
-        if(props.style === "italics") style.fontStyle = "italics";
+        if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
     
         switch(headerObject.properties.headerType) {
@@ -106,7 +106,7 @@ export default function ProductEditPage() {
             fontWeight: props.fontWeight,
             textAlign: props.align
         }
-        if(props.style === "italics") style.fontStyle = "italics";
+        if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
     
         jsx.push(<p className="paragraph" style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
@@ -125,7 +125,7 @@ export default function ProductEditPage() {
         const props = object.properties;
         const jsx = [];
         const style = {
-            backgroundColor: props.color,
+            backgroundColor: props.backgroundColor,
             width: props.width,
             height: props.height
         }
@@ -226,6 +226,12 @@ export default function ProductEditPage() {
         setSelectedElement({...selectedElement, properties: newProps});
     }
 
+    const updatePropImage = (value) => {
+        const newProps = Object.assign(selectedElement.properties);
+        newProps["src"] = value;
+        setSelectedElement({...selectedElement, properties: newProps});
+    }
+
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
         switch(selectedElement.type) {
@@ -246,13 +252,13 @@ export default function ProductEditPage() {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
-                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
+                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}/>
                     </div>
                 );
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
-                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
+                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight} onInput={event => updatePropInput("fontWeight", event.target.value)}>
                             <option value="200">Light</option>
                             <option value="400">Regular</option>
                             <option value="800">Bold</option>
@@ -262,7 +268,7 @@ export default function ProductEditPage() {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
-                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style} onInput={event => updatePropInput("style", event.target.value)}>
                             <option value="">None</option>
                             <option value="italics">Italics</option>
                             <option value="underline">Underline</option>
@@ -271,8 +277,8 @@ export default function ProductEditPage() {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
-                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
                             <option value="left">Left</option>
                             <option value="center">Center</option>
                             <option value="right">Right</option>
@@ -285,13 +291,13 @@ export default function ProductEditPage() {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
-                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} />
+                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}/>
                     </div>
                 );
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}fontWeight`}>Font Weight</label>
-                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight}>
+                        <select className="input" id={`${selectedElement.id}fontWeight`} value={selectedElement.properties.fontWeight} onInput={event => updatePropInput("fontWeight", event.target.value)}>
                             <option value="200">Light</option>
                             <option value="400">Regular</option>
                             <option value="800">Bold</option>
@@ -301,7 +307,7 @@ export default function ProductEditPage() {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
-                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style}>
+                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style} onInput={event => updatePropInput("style", event.target.value)}>
                             <option value="">None</option>
                             <option value="italics">Italics</option>
                             <option value="underline">Underline</option>
@@ -310,8 +316,8 @@ export default function ProductEditPage() {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Alignment</label>
-                        <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.align}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
                             <option value="left">Left</option>
                             <option value="center">Center</option>
                             <option value="right">Right</option>
@@ -320,19 +326,71 @@ export default function ProductEditPage() {
                 );
             break;
             case "spacer": 
-                // tempJSX.push(convertSpacer(pageElement));
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}spacer`}>Space Size</label>
+                        <select className="input" id={`${selectedElement.id}spacer`} value={selectedElement.properties.size} onInput={event => updatePropInput("size", event.target.value)}>
+                            <option value="1">Small</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Large</option>
+                        </select>
+                    </div>
+                );
             break;
             case "hr": 
-                // tempJSX.push(convertHr(pageElement));
+            //TODO change input to color input
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}backgroundColor`}>Background Color</label>
+                        <input className="input" type="text" id={`${selectedElement.id}backgroundColor`} value={selectedElement.properties.backgroundColor} onInput={event => updatePropInput("backgroundColor", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}height`}>Height</label>
+                        <input className="input" type="text" id={`${selectedElement.id}height`} value={selectedElement.properties.height} onInput={event => updatePropInput("height", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}width`}>Width</label>
+                        <input className="input" type="text" id={`${selectedElement.id}width`} value={selectedElement.properties.width} onInput={event => updatePropInput("width", event.target.value)}/>
+                    </div>
+                );
             break;
             case "image": 
-                // tempJSX.push(convertImage(pageElement));
+                tempJSX.push(
+                    <div className="input-block">
+                        {/* <label className="input-label" htmlFor={`${selectedElement.id}image`}>Image</label> */}
+                        <button id={`${selectedElement.id}image`} className="btn blue center" onClick={() => selectImage(updatePropImage) }>Select Image</button>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                );
             break;
             case "faq": 
-                // tempJSX.push(convertFAQ(pageElement));
+                // {modules: [{question: "New Question?", answer: "The answer to the question"}]};
+
             break;
             case "split": 
-                // tempJSX.push(convertSplit(pageElement));
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}splitType`}>Split Type</label>
+                        <select className="input" id={`${selectedElement.id}splitType`} value={selectedElement.properties.splitType} onInput={event => updatePropInput("splitType", event.target.value)}>
+                            <option value="1">2:1</option>
+                            <option value="2">1:1</option>
+                            <option value="3">1:2</option>
+                        </select>
+                    </div>
+                );
             break;
         }
         return tempJSX;
@@ -438,7 +496,6 @@ export default function ProductEditPage() {
             return element;
         });
         setPageStructure(newStructure);
-        console.log(newStructure);
     }, [selectedElement]);
 
     const deleteElement = () => {
