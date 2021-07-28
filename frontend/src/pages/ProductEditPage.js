@@ -23,6 +23,7 @@ export default function ProductEditPage() {
     const [selectedElementId, setSelectedElementId] = useState();
     const [selectedElement, setSelectedElement] = useState();
     const [configPanelJSX, setConfigPanelJSX] = useState([]);
+    const [newCreatedElementId, setNewCreatedElementId] = useState();
 
     const [redirect, setRedirect] = useState(false);
 
@@ -414,6 +415,10 @@ export default function ProductEditPage() {
 
     useEffect(() => {
         convertPageStructureToJSX();
+        if(newCreatedElementId) {
+            selectElement(newCreatedElementId);
+            setNewCreatedElementId(null);
+        }
     }, [pageStructure]);
 
     //Update config panel with correct info when element is selected
@@ -542,6 +547,9 @@ export default function ProductEditPage() {
         convertPageStructureToJSX();
         //close modal
         setAddModalVisible(false);
+        //select new element
+        setNewCreatedElementId(newElement.id);
+        //selectElement(newElement.id);
     }
     if (redirect) return (<Redirect to={{pathname: '/'}} />);
     return(
