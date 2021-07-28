@@ -377,7 +377,27 @@ export default function ProductEditPage() {
                 );
             break;
             case "faq": 
+            //TODO::::Add event listeners (on Clicks)
                 // {modules: [{question: "New Question?", answer: "The answer to the question"}]};
+                selectedElement.properties.modules.forEach(module => {
+                    tempJSX.push(
+                    <div className="side-faq-module-container">
+                        <div className="left-side">
+                            <div className="input-block">
+                                <label>Q: &nbsp;</label>
+                                <input type="text" className="input" value={module.question} />
+                            </div>
+                            <div className="input-block">
+                                <label>A: &nbsp;</label>
+                                <input type="text" className="input" value={module.answer} />
+                            </div>
+                        </div>
+                        <div className="right-side">
+                            <button className="cancel-btn"><i className="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    );
+                });
 
             break;
             case "split": 

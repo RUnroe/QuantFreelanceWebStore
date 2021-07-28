@@ -141,7 +141,24 @@
 .product-main hr.hr {
     box-sizing: content-box;
 }
-
+.product-page .side-faq-module-container {
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    display:grid;
+    grid-template-columns: 1fr 2rem;
+}
+.product-page .side-faq-module-container .input {
+    display:inline-block;
+    width:90%;
+}
+button.cancel-btn {
+    color: var(--color-light-1);
+    display:block;
+    margin: 0.3rem auto;
+}
+.cancel-btn:hover {
+    color: var(--color-danger);
+}
 
 .product-main .split-section {
     display:grid;
