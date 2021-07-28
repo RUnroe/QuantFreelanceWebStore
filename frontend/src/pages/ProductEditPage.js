@@ -218,8 +218,14 @@ export default function ProductEditPage() {
     const clearSelection = () => {
         setSelectedElementId(null);
         setSelectedElement(null);
-        console.log("cleared values")
     }
+
+    const updatePropInput = (location, value) => {
+        const newProps = Object.assign(selectedElement.properties);
+        newProps[location] = value;
+        setSelectedElement({...selectedElement, properties: newProps});
+    }
+
     const getConfigPanelInputs = (selectedElement) => {
         const tempJSX = [];
         switch(selectedElement.type) {
@@ -227,7 +233,7 @@ export default function ProductEditPage() {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}headerType`}>Header Type</label>
-                        <select className="input" id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType}>
+                        <select className="input" id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType} onInput={event => updatePropInput("headerType", event.target.value)}>
                             <option value="h1">h1</option>
                             <option value="h2">h2</option>
                             <option value="h3">h3</option>
@@ -423,7 +429,16 @@ export default function ProductEditPage() {
 
     //Update config panel with correct info when element is selected
     useEffect(() => {
-        if(selectedElement) setupConfigPanel();
+        if(selectedElementId) setupConfigPanel();
+    }, [selectedElement]);
+
+    useEffect(() => {
+        let newStructure = pageStructure.map(element => {
+            if(element.id === selectedElementId) return selectedElement;
+            return element;
+        });
+        setPageStructure(newStructure);
+        console.log(newStructure);
     }, [selectedElement]);
 
     const deleteElement = () => {
