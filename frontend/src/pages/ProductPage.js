@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/productPage.css";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ export default function ProductPage() {
                 {pageStructureJSX}
             </div>
             <div className="product-side container gradient">
-                <SideBar title={title} price={price} category={category} description={description} user={user} setRedirect={setRedirect} />
+                <SideBar title={title} price={price} category={category} description={description} user={user}  />
             </div>
         </div>
     
@@ -253,7 +253,7 @@ const getCategoryTitle = (categorySelector) => {
 }
 
 
-function SideBar({title, price, category, description, user, setRedirect}) {
+function SideBar({title, price, category, description, user}) {
     return (
         <div className="product-details">
             <div className="top">
@@ -266,13 +266,15 @@ function SideBar({title, price, category, description, user, setRedirect}) {
             </div>
 
             <div className="bottom">
-                <div className="profile-display" onClick={() => setRedirect(`/account/${user.username}`)}>
-                    <div className="round-img-container"> {user ? <img src={user.icon_id} /> : <></>}</div>
-                    <div>
-                        <p className="profile-name">{user ? `${user.first_name} ${user.last_name}`: ""}</p>
-                        <p className="profile-username">{user ? `@${user.username}` : ""}</p>
+                <Link to={`/account/${user.username}`}>
+                    <div className="profile-display">
+                        <div className="round-img-container"> {user ? <img src={user.icon_id} /> : <></>}</div>
+                        <div>
+                            <p className="profile-name">{user ? `${user.first_name} ${user.last_name}`: ""}</p>
+                            <p className="profile-username">{user ? `@${user.username}` : ""}</p>
+                        </div>
                     </div>
-                </div>
+                </Link>
                 <button className="btn blue wide center">Purchase</button>
             </div>
         </div>
