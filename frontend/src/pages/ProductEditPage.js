@@ -8,6 +8,8 @@ import {Redirect} from "react-router-dom";
 export default function ProductEditPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [addModalVisible, setAddModalVisible] = useState(false);
+    const [addElementLocation, setAddElementLocation] = useState("");
+
     const [statusBar, setStatusBar] = useState("");
 
     const [productId, setProductId] = useState(""); 
@@ -178,15 +180,23 @@ export default function ProductEditPage() {
         jsx.push(
             <div className={`split-section split${props.splitType} ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
                 <div className="left-side">
-                    { (props.children && props.children.length > 0) ? getJSXOfElement(props.children[0]) : <div className="add"></div>}
+                    { (props.children && props.children.length > 0 && getChildById(props.children, 0)) ? getJSXOfElement(getChildById(props.children, 0)) : <div className="nested-add-element-btn" onClick={() => openAddElementModal(`L${object.id}`)}>+</div>}
                 </div>
                 <div className="right-side">
-                { (props.children && props.children.length > 1) ? getJSXOfElement(props.children[1]) : <div className="add"></div>}
+                    { (props.children && props.children.length > 0 && getChildById(props.children, 1)) ? getJSXOfElement(getChildById(props.children, 1)) : <div className="nested-add-element-btn" onClick={() => openAddElementModal(`R${object.id}`)} >+</div>}
                 </div>
             </div> 
         );
     
         return jsx;
+    }
+
+    const getChildById = (list, position) => {
+        let selected;
+        list.forEach(child => {
+            if(child.position == position) selected = child;
+        });
+        return selected;
     }
     
     const getDefaultProperties = (elementType) => {
@@ -659,7 +669,8 @@ export default function ProductEditPage() {
         setImageSelectModalSetter(() => setter);
     }
 
-    const openAddElementModal = () => {
+    const openAddElementModal = (addLocation) => {
+        setAddElementLocation(addLocation);
         setAddModalVisible(true);
     }
 
@@ -672,13 +683,34 @@ export default function ProductEditPage() {
             id: genId(),
             properties: getDefaultProperties(elementType)
         }
-        setPageStructure((oldState) => [...oldState, newElement]);
-        //convertPageStructureToJSX();
+
+        if(addElementLocation === "") setPageStructure((oldState) => [...oldState, newElement]);
+        else if (addElementLocation[0] === "L" || addElementLocation[0] === "R") {
+            //add element to properties.children of section
+
+            const splitSide = addElementLocation[0];
+            //Get Id by removing the split position indicator 
+            const id = addElementLocation.substring(1);
+            let newState = pageStructure.map(element => {
+                if(element.id === id && element.type === "split") {
+                    newElement.position = splitSide == "L" ? 0 : 1;
+                    element.properties.children.push(newElement);
+                }
+                return element;
+            });
+            console.log(newState);
+            setPageStructure(newState);
+        }
+        else {
+            //add element in array based on index
+        }
+        //renumber the positions
+
+
         //close modal
         setAddModalVisible(false);
         //select new element
         setNewCreatedElementId(newElement.id);
-        //selectElement(newElement.id);
     }
     if (redirect) return (<Redirect to={{pathname: '/'}} />);
     return(
@@ -690,7 +722,7 @@ export default function ProductEditPage() {
                 {pageStructureJSX}
                 
                 {/* Add NEW ELEMENT BUTTON */}
-                <div className="open-add-element-btn" onClick={openAddElementModal}>
+                <div className="open-add-element-btn" onClick={() => openAddElementModal("")}>
                     +
                 </div>
 
