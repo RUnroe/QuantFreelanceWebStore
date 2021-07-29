@@ -142,6 +142,7 @@
 .product-page .hr,
 .product-page .image {
     box-sizing: border-box;
+    margin:0.25rem 0;
 
 }
 .product-main hr.hr {
@@ -324,4 +325,32 @@ button.cancel-btn {
 }
 .nested-add-element-btn:hover, .open-add-element-btn:hover {
     background-color: #648DE522;
+}
+
+.inbetween-add-element-btn {
+    position: relative;
+    cursor: pointer;
+    opacity:0.2;
+    padding:0.5rem 0;
+    transition: opacity 0.1s ease;
+}
+.inbetween-add-element-btn:hover {
+    opacity:1;
+}
+
+.inbetween-add-element-btn > div {
+    position: absolute;
+    left:-10px;
+    top:50%;
+    transform: translateY(-50%);
+    color: var(--color-light-1);
+    font-size: 1.1rem;
+    background-color: var(--color-primary);
+    padding:1px 6px;
+    border-radius: 50px;
+}
+.inbetween-add-element-btn > hr {
+    border:none;
+    border-bottom: 2px dashed var(--color-primary);
+    box-sizing: border-box;
 }

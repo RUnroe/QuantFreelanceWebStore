@@ -545,6 +545,7 @@ export default function ProductEditPage() {
 
 
     useEffect(() => {
+        console.log("RERENDER")
         convertPageStructureToJSX();
         if(newCreatedElementId) {
             selectElement(newCreatedElementId);
@@ -602,11 +603,11 @@ export default function ProductEditPage() {
     } 
     
     const selectElement = (id) => {
-        console.log(id);
+        // console.log(id);
         setSelectedElementId(id);
         //Select element based on id
         const element = findElementInPageStructure(id);
-        console.log(element);
+        // console.log(element);
         setSelectedElement(Object.assign(element));
     }
 
@@ -623,9 +624,20 @@ export default function ProductEditPage() {
         return selected;
     }
     
+    const createAddBtn = (position) => {
+        return (
+        <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(position)}>
+            <div className="bobber">+</div>
+            <hr />
+        </div>
+        );
+    }
+
     const convertPageStructureToJSX = () => {
         const tempJSX = [];
-        pageStructure.forEach(pageElement => {
+        pageStructure.forEach((pageElement, index) => {
+            //add btn index index
+            tempJSX.push(createAddBtn(index));
             tempJSX.push(getJSXOfElement(pageElement));
         });
         setPageStructureJSX(tempJSX);
@@ -698,13 +710,20 @@ export default function ProductEditPage() {
                 }
                 return element;
             });
-            console.log(newState);
+            // console.log(newState);
             setPageStructure(newState);
         }
         else {
             //add element in array based on index
+            let newState = Object.assign(pageStructure);
+            newState.splice(parseInt(addElementLocation), 0, newElement);
+            console.log(newState);
+            setPageStructure(newState);
+            //shouldn't need to call this
+            convertPageStructureToJSX();
+
         }
-        //renumber the positions
+        //TODO renumber the positions
 
 
         //close modal
