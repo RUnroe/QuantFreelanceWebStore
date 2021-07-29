@@ -715,12 +715,11 @@ export default function ProductEditPage() {
         }
         else {
             //add element in array based on index
-            let newState = Object.assign(pageStructure);
+            let newState = [...pageStructure];
             newState.splice(parseInt(addElementLocation), 0, newElement);
             console.log(newState);
             setPageStructure(newState);
-            //shouldn't need to call this
-            convertPageStructureToJSX();
+
 
         }
         //TODO renumber the positions
