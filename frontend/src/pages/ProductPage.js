@@ -13,6 +13,7 @@ export default function ProductPage() {
     const [pageStructure, setPageStructure] = useState([]);
     const [pageStructureJSX, setPageStructureJSX] = useState([]);
     const [redirect, setRedirect] = useState("");
+    const [accountLink, setAccountLink] = useState("");
 
     const [user, setUser] = useState();
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -197,7 +198,10 @@ export default function ProductPage() {
 
             //get seller info
             fetch(`/api/user/${data.seller}`).then(result => result.json())
-            .then(data => setUser(data));
+            .then(data => {
+                setUser(data);
+                setAccountLink(`/account${data.username}`);
+            });
         })
         .catch(err => console.log(err));
     }
@@ -227,7 +231,7 @@ export default function ProductPage() {
                 {pageStructureJSX}
             </div>
             <div className="product-side container gradient">
-                <SideBar title={title} price={price} category={category} description={description} user={user}  />
+                <SideBar title={title} price={price} category={category} description={description} user={user} accountLink={accountLink} />
             </div>
         </div>
     
@@ -253,7 +257,7 @@ const getCategoryTitle = (categorySelector) => {
 }
 
 
-function SideBar({title, price, category, description, user}) {
+function SideBar({title, price, category, description, user, accountLink}) {
     return (
         <div className="product-details">
             <div className="top">
@@ -266,7 +270,7 @@ function SideBar({title, price, category, description, user}) {
             </div>
 
             <div className="bottom">
-                <Link to={`/account/${user.username}`}>
+                <Link to={accountLink}>
                     <div className="profile-display">
                         <div className="round-img-container"> {user ? <img src={user.icon_id} /> : <></>}</div>
                         <div>
