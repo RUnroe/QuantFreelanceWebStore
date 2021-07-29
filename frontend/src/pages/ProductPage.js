@@ -15,6 +15,8 @@ export default function ProductPage() {
     const [pageStructure, setPageStructure] = useState([]);
     const [pageStructureJSX, setPageStructureJSX] = useState([]);
     const [redirect, setRedirect] = useState("");
+
+    const [user, setUser] = useState();
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -176,35 +178,6 @@ export default function ProductPage() {
         });
         return selected;
     }
-    //??
-    // const getDefaultProperties = (elementType) => {
-    //     let props = {};
-    //     switch(elementType) {
-    //         case "header": 
-    //             props = {value: "New Header", fontWeight: 400, style: "none", align: "left", headerType: "h1"};
-    //         break;
-    //         case "paragraph": 
-    //             props = {value: "New paragraph", fontWeight: 400, style: "none", align: "left"};
-    //         break;
-    //         case "spacer": 
-    //             props = {size: 1};
-    //         break;
-    //         case "hr": 
-    //             props = {backgroundColor: "#403D52", height: "2px", width: "100%"};
-    //         break;
-    //         case "image": 
-    //             props = {src: "https://via.placeholder.com/320x180", align: "center"}; // give default image
-    //         break;
-    //         case "faq": 
-    //             props = {modules: [{id:genId(), question: "New Question?", answer: "The answer to the question"}]};
-    //         break;
-    //         case "split": 
-    //             props = {children: [], splitType: 2 }; // set split to half and half?
-    //         break;
-    //         default: break;
-    //     }
-    //     return props;
-    // }
 
 
     
@@ -224,6 +197,10 @@ export default function ProductPage() {
             setPrice(data.price);
             setCategory(data.category);
             setPageStructure(JSON.parse(data.page_structure));
+
+            //get seller info
+            fetch(`/api/user/${data.seller}`).then(result => result.json())
+            .then(data => setUser(data));
         })
         .catch(err => console.log(err));
     }
@@ -243,15 +220,15 @@ export default function ProductPage() {
     
 
 
-    if (redirect) return (<Redirect to={{pathname: '/'}} />);
+    if (redirect) return (<Redirect to={{pathname: redirect}} />);
     return(
         <>
-        <div className="product-page edit">
+        <div className="product-page display">
             <div className="product-main container">
                 {pageStructureJSX}
             </div>
             <div className="product-side container gradient">
-                <SideBar title={title} price={price} category={category} description={description} />
+                <SideBar title={title} price={price} category={category} description={description} user={user} setRedirect={setRedirect} />
             </div>
         </div>
     
@@ -264,46 +241,30 @@ export default function ProductPage() {
 
 
 
-function SideBar({title, price, category, description}) {
-    return <></>;
-    // return (
-    //     <div className="product-details">
-    //     <div className="options">
-    //         <div className="input-block">
-    //             <label className="input-label">Product Title</label>
-    //             <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
-    //         </div>
-    //         <div className="input-block">
-    //             <label className="input-label">Price</label>
-    //             <div className="combo-input">
-    //                 <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
-    //             </div>
-    //         </div>
-    //         <div className="input-block">
-    //             <label className="input-label">Category</label>
-    //             <select className="input" value={category} onInput={event => setCategory(event.target.value)}>
-    //                 <option value="DesignArt">Design &amp; Art</option>
-    //                 <option value="SalesMarketing">Sales &amp; Marketing</option>
-    //                 <option value="BusinessFinance">Business &amp; Finance</option>
-    //                 <option value="WritingTranslation">Writing &amp; Translation</option>
-    //                 <option value="VideoAnimation">Video &amp; Animation</option>
-    //                 <option value="AudioMusic">Audio &amp; Music</option>
-    //                 <option value="ProgrammingTech">Programming &amp; Tech</option>
-    //                 <option value="EngineeringArchitecture">Engineering &amp; Architecture</option>
-    //                 <option value="EducationTraining">Education &amp; Training</option>
-    //             </select>
-    //         </div>
-    //         <div className="input-block">
-    //             <label className="input-label">Product Description</label>
-    //             <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
-    //         </div>
-    //     </div>
-    //     <div className="btn-group">
-    //         <button className="btn blue-outline text-white">Cancel</button>
-    //         <button className="btn blue" onClick={savePage}>Save Changes</button>
-    //     </div>
-    //     </div>
-    // );
+function SideBar({title, price, category, description, user, setRedirect}) {
+    return (
+        <div className="product-details">
+            <div className="top">
+                <div className="product-details-header">
+                    <h2>{title}</h2>
+                    <div className="price-display">{`$${price}`}</div>
+                </div>
+                <p className="category">{category}</p>
+                <p className="description">{description}</p>
+            </div>
+
+            <div className="bottom">
+                <div className="profile-display" onClick={() => setRedirect(`/account/${user.username}`)}>
+                    <div className="round-img-container"> {user ? <img src={user.icon_id} /> : <></>}</div>
+                    <div>
+                        <p className="profile-name">{user ? `${user.first_name} ${user.last_name}`: ""}</p>
+                        <p className="profile-username">{user ? `@${user.username}` : ""}</p>
+                    </div>
+                </div>
+                <button className="btn blue wide center">Purchase</button>
+            </div>
+        </div>
+    );
 };
 
 

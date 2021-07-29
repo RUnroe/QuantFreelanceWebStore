@@ -106,7 +106,7 @@ h4 { font-size:1.2rem; }
     width:fit-content;
     display:block;
     border:none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition:background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .btn:hover {
@@ -116,6 +116,11 @@ h4 { font-size:1.2rem; }
     margin-left: auto;
     margin-right: auto;
 
+}
+.btn.wide {
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .btn.blue {
