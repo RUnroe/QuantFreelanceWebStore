@@ -241,6 +241,10 @@
     margin:0.25rem 0;
 
 }
+.product-page .split-section .left-side,
+.product-page .split-section .right-side {
+    margin:0;
+}
 .product-main hr.hr {
     box-sizing: content-box;
 }
@@ -345,7 +349,8 @@ button.cancel-btn {
 
 
 .status-bar {
-    position: absolute;
+    position: fixed;
+    z-index: 100;
     top:0;
     width:100%;
     background-color: var(--color-primary);
