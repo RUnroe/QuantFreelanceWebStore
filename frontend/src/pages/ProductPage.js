@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../styles/productPage.css";
-import {ImageSelectModal} from "../partials/image";
 import {Redirect} from "react-router-dom";
 
 
@@ -8,7 +7,6 @@ import {Redirect} from "react-router-dom";
 export default function ProductPage() {
     const [productId, setProductId] = useState();
     const [title, setTitle] = useState("");
-    const [coverImg, setCoverImg] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [category, setCategory] = useState("");
@@ -192,7 +190,6 @@ export default function ProductPage() {
         .then(data => {
             if(!data) setRedirect(true);
             setTitle(data.title);
-            setCoverImg(data.icon_id);
             setDescription(data.description);
             setPrice(data.price);
             setCategory(data.category);
@@ -207,7 +204,9 @@ export default function ProductPage() {
     useEffect(()=> {
         getPageData();
     }, []);
-    
+    useEffect(()=> {
+        convertPageStructureToJSX();
+    }, [pageStructure]);
 
     const convertPageStructureToJSX = () => {
         const tempJSX = [];
@@ -238,7 +237,20 @@ export default function ProductPage() {
 }
 
 
-
+const getCategoryTitle = (categorySelector) => {
+    switch(categorySelector) {
+        case "DesignArt": return "Design & Art";
+        case "SalesMarketing": return "Sales & Marketing";
+        case "BusinessFinance": return "Business & Finance";
+        case "WritingTranslation": return "Writing & Translation";
+        case "VideoAnimation": return "Video & Animation";
+        case "AudioMusic": return "Audio & Music";
+        case "ProgrammingTech": return "Programming & Tech";
+        case "EngineeringArchitecture": return "Engineering & Architecture";
+        case "EducationTraining": return "Education & Training";
+        default: return "";
+    }
+}
 
 
 function SideBar({title, price, category, description, user, setRedirect}) {
@@ -249,7 +261,7 @@ function SideBar({title, price, category, description, user, setRedirect}) {
                     <h2>{title}</h2>
                     <div className="price-display">{`$${price}`}</div>
                 </div>
-                <p className="category">{category}</p>
+                <p className="category">{getCategoryTitle(category)}</p>
                 <p className="description">{description}</p>
             </div>
 
