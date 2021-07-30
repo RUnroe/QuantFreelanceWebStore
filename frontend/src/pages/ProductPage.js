@@ -270,7 +270,7 @@ function SideBar({title, price, category, description, user, accountLink}) {
             </div>
 
             <div className="bottom">
-                <Link to={accountLink}>
+                <Link to={accountLink} style={{textDecoration: "none"}}>
                     <div className="profile-display">
                         <div className="round-img-container"> {user ? <img src={user.icon_id} /> : <></>}</div>
                         <div>
