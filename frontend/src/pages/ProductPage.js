@@ -200,7 +200,7 @@ export default function ProductPage() {
             fetch(`/api/user/${data.seller}`).then(result => result.json())
             .then(data => {
                 setUser(data);
-                setAccountLink(`/account${data.username}`);
+                setAccountLink(`/account/${data.username}`);
             });
         })
         .catch(err => console.log(err));
