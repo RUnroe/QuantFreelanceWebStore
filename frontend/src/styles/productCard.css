@@ -57,7 +57,7 @@
     
 }
 .product-card .description {
-    color: #82808c;
+    color: var(--color-dark-4);
 }
 
 .product-card .price {

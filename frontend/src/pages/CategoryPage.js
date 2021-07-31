@@ -42,7 +42,7 @@ export default function CategoryPage({ }) {
         </div>
         <div className="container">
             <div className="section list">
-                {resultListJSX}
+                {resultListJSX.length ? resultListJSX : <h2 className="no-results-header">No Results</h2>}
             </div>
         </div>
         </>
