@@ -10,8 +10,8 @@ export default function SearchPage() {
 
 
     useEffect(() => {
-        //fetch results by category name
-        fetch(`/api/product/category/${convertCategoryName(category_name)}`)
+        //fetch results by search term
+        fetch(`/api/product/search/${convertCategoryName(search_term)}`)
         .then(result => result.json())
         .then(data => (setResultList(data)))
         .catch(error => console.log(error));
