@@ -34,15 +34,17 @@
 .profile-section {
     display:flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .profile-section > div {
-    min-width: 50px;
-    max-width: 50px;
-    min-height: 50px;
-    max-height: 50px;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
     border-radius: 100px;
     overflow: hidden;
+    margin-right: 0.75rem;
 }
 
 .profile-section > div > img { 
@@ -50,7 +52,7 @@
     object-position: center;
     height: 100%;
     width: 100%;
-    margin-right: 0.75rem;
+    
 }
 
 .product-card .price {

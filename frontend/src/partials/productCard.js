@@ -18,7 +18,7 @@ export default function ProductCard({productData}) {
             <div className="bottom">
                 <h3 className="title">{productData.title}</h3>
                 <div class="profile-section">
-                    <div><img src={productData.user.icon_id} alt="user"/></div>
+                    <div><img src={productData.user.icon_id} /></div>
                     <p>{productData.user.username}</p>
                 </div>
                 <p>{productData.description}</p>
