@@ -30,7 +30,7 @@ export default function CategoryPage({ }) {
     const convertListToJSX = () => {
         const jsx = [];
         resultList.forEach(result => {
-            jsx.append(<ProductCard productData={result} />);
+            jsx.push(<ProductCard productData={result} />);
         });
         setResultListJSX(jsx);
     }
