@@ -224,7 +224,7 @@ const getProductsByCategory = async (category) => {
 const getProductsBySearchTerm = async (search_term) => {
 	if(isFieldEmpty(search_term)) throw [`Expected a string for the category but nothing was supplied`];
 	if(typeof search_term != "string") throw [`Expected a string for the category but ${search_term} was supplied`];
-	let productArray = await dbclient.db('QuantFreelance').collection('Product').find({$or:[{"title":{$regex : search_term}},{"category":{$regex : search_term}}]}).toArray()
+	let productArray = await dbclient.db('QuantFreelance').collection('Product').find({$or:[{"title":{'$regex' : search_term, '$options' : 'i'}},{"category":{'$regex' : search_term, '$options' : 'i'}}]}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by category'];});
 
 	return await Promise.all(productArray.map (product => getFullProductObj(product) ));
