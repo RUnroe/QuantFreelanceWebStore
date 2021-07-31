@@ -55,6 +55,10 @@ export default function NavigationMenu({currAuthLevel, username}) {
             if(response.status === 204) setRedirect(true);
         })
     }
+    useEffect(() => {
+        setTimeout(setRedirect(null), 20);
+    }, [redirect]);
+
     if(redirect) return (<Redirect to="/"/>);
     if(currAuthLevel === "seller") {
         return (
