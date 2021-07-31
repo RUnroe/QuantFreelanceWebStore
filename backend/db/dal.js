@@ -221,6 +221,15 @@ const getProductsByCategory = async (category) => {
 	return await Promise.all(productArray.map (product => getFullProductObj(product) ));
 }
 
+const getProductsBySearchTerm = async (search_term) => {
+	if(isFieldEmpty(search_term)) throw [`Expected a string for the category but nothing was supplied`];
+	if(typeof search_term != "string") throw [`Expected a string for the category but ${search_term} was supplied`];
+	let productArray = await dbclient.db('QuantFreelance').collection('Product').find({$or:[{"title":{$regex : search_term}},{"category":{$regex : search_term}}]}).toArray()
+	.catch(err => { throw ['An error occurred while finding product by category'];});
+
+	return await Promise.all(productArray.map (product => getFullProductObj(product) ));
+}
+
 const getFullProductObj = async (product) => {
 	return await getUserById({user_id: product.seller}).then(user => {
 		delete product.page_structure; 
@@ -287,6 +296,6 @@ module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
 	authenticate,
 	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
-	createProduct, getProductById, getProductsBySeller, getProductsByCategory, updateProduct, removeProduct,
+	createProduct, getProductById, getProductsBySeller, getProductsByCategory, getProductsBySearchTerm, updateProduct, removeProduct,
 	createIcon, getIcon, getIconsByUser
 };

@@ -45,6 +45,14 @@ const getProductsByCategory = (req, res) => {
 	.catch(handle(req, res));
 }
 
+const getProductsBySearchTerm = (req, res) => {
+	dal.getProductsBySearchTerm(req.params.search_term).then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
+}
+
+
 //Variable data pieces: title, price, description, category, cover_image, page_structure
 const updateProduct = (req, res) => {
 	dal.updateProduct(req.body.product_id, req.session.user_id, req.body).then(() => {
@@ -92,6 +100,11 @@ const routes = [
 		uri: '/api/product/category/:category',
 		methods: ['get'],
 		handler: getProductsByCategory
+	}, 
+	{
+		uri: '/api/product/search/:search_term',
+		methods: ['get'],
+		handler: getProductsBySearchTerm
 	}, 
     {
 		uri: '/api/product',
