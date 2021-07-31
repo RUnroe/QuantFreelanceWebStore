@@ -216,7 +216,7 @@ const getProductsByCategory = async (category) => {
 	if(typeof category != "string") throw [`Expected a string for the category but ${category} was supplied`];
 	const productArray = dbclient.db('QuantFreelance').collection('Product').find({category}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by category'];});
-	(await productArray).map(product => {
+	(await productArray).map(async (product) => {
 		product.user =  await getUserById(product.seller);
 		console.log(product);
 		return product; 
