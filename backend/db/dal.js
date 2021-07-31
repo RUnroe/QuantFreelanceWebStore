@@ -73,7 +73,6 @@ const createUser = async (_user) => {
 
 const getUserById = async ({user_id}) => {
 	return await dbclient.db('QuantFreelance').collection('User').findOne({"user_id": user_id}).then(result => {
-		console.log("USERRRRR", result);
 		if(!result) return null;
 		delete result.password; return result;
 	})
@@ -209,8 +208,9 @@ const getProductById = async (product_id) => {
 }
 
 const getProductsBySeller = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Product').find({"seller": user_id}).toArray()
+	let productArray = await dbclient.db('QuantFreelance').collection('Product').find({"seller": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by seller id'];});
+	return await Promise.all(productArray.map (product => getFullProductObj(product) ));
 }
 
 const getProductsByCategory = async (category) => {
@@ -219,11 +219,9 @@ const getProductsByCategory = async (category) => {
 	.catch(err => { throw ['An error occurred while finding product by category'];});
 
 	return await Promise.all(productArray.map (product => getFullProductObj(product) ));
-	// return result;
 }
 
 const getFullProductObj = async (product) => {
-	console.log("SELLER", product.seller);
 	return await getUserById({user_id: product.seller}).then(user => {
 		delete product.page_structure; 
 		product = Object.assign(product, {user: user});
