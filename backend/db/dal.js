@@ -218,7 +218,7 @@ const getProductsByCategory = async (category) => {
 	let productArray = dbclient.db('QuantFreelance').collection('Product').find({category}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by category'];});
 
-	return Promise.all(productArray.map( product => getFullProductObj(product) )).then(result => result);
+	return Promise.map(productArray, product => getFullProductObj(product) ).then(result => result);
 	// return result;
 }
 
