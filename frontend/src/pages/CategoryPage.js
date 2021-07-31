@@ -1,18 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from 'react-router-dom';
 import "../styles/category.css";
-export default function CategoryPage({ }) {
+import ProductCard from "../partials/productCard";
 
+export default function CategoryPage({ }) {
     const { category_name } = useParams();
+    const [resultList, setResultList] = useState();
+    const [resultListJSX, setResultListJSX] = useState(<></>);
+    
+
+    const convertCategoryName = (category) => {
+        const parts = category.split("-");
+        return `${parts[0][0].toUpperCase() + parts[0].substring(1)}${parts[1][0].toUpperCase() + parts[1].substring(1)}`;
+    }
+    useEffect(() => {
+        //fetch results by category name
+        fetch(`/api/product/category/${convertCategoryName(category_name)}`)
+        .then(result => result.json())
+        .then(data => (setResultList(data)))
+        .catch(error => console.log(error));
+    }, []);
+
+    //Convert list to jsx when data comes in and is stored
+    useEffect(() => {
+        if(resultList) convertListToJSX();
+    }, [resultList]);
+
+    const convertListToJSX = () => {
+        const jsx = [];
+        resultList.forEach(result => {
+            jsx.append(<ProductCard />);
+        })
+    }
+
     return(
         <>
         <div className="container gradient category-header">
             <CategoryHeader category={category_name}/>
         </div>
+        <div className="container">
+            <div className="section">
+                {resultListJSX}
+            </div>
+        </div>
         </>
     );
 
 }
+
+
+
 const validateCategory = (acceptedCategoryList, category) => {
     let valid = false;
     acceptedCategoryList.forEach(acceptedCategory => {
@@ -20,6 +57,8 @@ const validateCategory = (acceptedCategoryList, category) => {
     });
     return valid;
 }
+
+
 const getDescription = (category) => {
     switch(category) {
         case "design-art":
