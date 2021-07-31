@@ -41,8 +41,10 @@ export default function CategoryPage({ }) {
             <CategoryHeader category={category_name}/>
         </div>
         <div className="container">
-            <div className="section list">
-                {resultListJSX.length ? <><h2 className="results-header">Results ({resultListJSX.length})</h2>{resultListJSX}</> : <h2 className="no-results-header">No Results</h2>}
+            <div className="section result-area">
+                {resultListJSX.length ? 
+                <><h2 className="results-header">Results ({resultListJSX.length})</h2><div className="list">{resultListJSX}</div></> : 
+                <h2 className="no-results-header">No Results</h2>}
             </div>
         </div>
         </>

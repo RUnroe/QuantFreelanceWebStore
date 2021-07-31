@@ -22,12 +22,14 @@
     right:0;
     top:0;
 }
-.section.list {
+.result-area {
+    min-height: 45vh;
+}
+.list {
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    min-height: 45vh;
 }
 .results-header {
     color: var(--color-dark-4);
