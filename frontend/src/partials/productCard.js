@@ -1,9 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/productCard.css";
 
 
 export default function ProductCard({productData}) {
+    const formatPrice = (price) => {
+        let fprice = Math.floor(price * 100);
+        fprice = fprice.toString();
+        fprice.splice(fprice.length-2, 0, ".");
+        return fprice;
+    }
+
     return (
         <Link to={`/store/${productData.product_id}`} >
             <div className="product-card">
@@ -13,7 +19,9 @@ export default function ProductCard({productData}) {
                 <div className="bottom">
                     <h3 className="title">{productData.title}</h3>
                     <div class="profile-section">
-                        <div><img src={productData.user.icon_id}/></div>
+                        <div><img src={productData.user.icon_id} alt="user"/></div>
+                        <p>{productData.description}</p>
+                        <span className="price">{`$${formatPrice(productData.price)}`}</span>
                     </div>
                 </div>
             </div>

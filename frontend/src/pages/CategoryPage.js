@@ -31,7 +31,8 @@ export default function CategoryPage({ }) {
         const jsx = [];
         resultList.forEach(result => {
             jsx.append(<ProductCard productData={result} />);
-        })
+        });
+        setResultListJSX(jsx);
     }
 
     return(
