@@ -5,7 +5,7 @@ import "../styles/productCard.css";
 export default function ProductCard({productData}) {
     const formatPrice = (price) => {
         let fprice = Math.floor(price * 100);
-        fprice = fprice.toString();
+        fprice = fprice + "";
         fprice.splice(fprice.length-2, 0, ".");
         return fprice;
     }
