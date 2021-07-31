@@ -54,7 +54,7 @@ nav hr {
 .dropdown .dropdown-menu {
     display:none;
     position:absolute;
-    z-index: 10;
+    z-index: 30;
     top: 3.45rem;
     margin:0;
     padding:0;
@@ -75,7 +75,7 @@ nav hr {
     box-sizing: border-box;
     background-color: var(--color-light-1);
 }
-.dropdown-menu .dropdown-item:hover {
+.dropdown-menu .dropdown-item:hover, .logout-btn:hover {
     color: var(--color-light-1);
     background-color: var(--color-primary);
 
@@ -87,6 +87,17 @@ nav hr {
     padding:0.45rem 0.65rem;
     text-decoration:none;
     color: inherit;
+}
+
+.logout-btn {
+    width:100%;
+    border:none;
+    background-color: transparent;
+    font-size: 1rem;
+    padding:0.45rem 0.65rem;
+    text-align:left;
+    cursor:pointer;
+
 }
 /*///////////////////////////////////////////////////////*/
 .secondary-nav {

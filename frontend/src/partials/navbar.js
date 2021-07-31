@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function SecondaryNavigationMenu() {
     const pages = ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"];
@@ -42,9 +43,19 @@ function SecondaryNavigationMenu() {
 
 
 export default function NavigationMenu({currAuthLevel, username}) {
-    const logoutUser = () => {
+    const [redirect, setRedirect] = useState();
 
+    const logoutUser = () => {
+        //post to logout in backend
+        //on success, redirect user
+        fetch("/api/auth", {
+            method: "DELETE",
+            credentials:"include"
+        }).then(response => {
+            if(response.status === 204) setRedirect(true);
+        })
     }
+    if(redirect) return (<Redirect to="/"/>);
     if(currAuthLevel === "seller") {
         return (
         <nav>
@@ -67,7 +78,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>
-                            <li className="dropdown-item"><button onClick={logoutUser}>Log out</button></li>
+                            <li className="dropdown-item"><button className="logout-btn" onClick={logoutUser}>Log out</button></li>
                         </ul>
                     </div>
 
@@ -99,7 +110,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>
-                            <li className="dropdown-item"><button onClick={logoutUser}>Log out</button></li>
+                            <li className="dropdown-item"><button className="logout-btn" onClick={logoutUser}>Log out</button></li>
                         </ul>
                     </div>
 
