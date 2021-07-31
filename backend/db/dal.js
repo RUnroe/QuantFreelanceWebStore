@@ -218,6 +218,7 @@ const getProductsByCategory = async (category) => {
 	.catch(err => { throw ['An error occurred while finding product by category'];});
 	(await productArray).map(product => {
 		product.user = getUserById(product.id);
+		console.log(product);
 		return product; 
 	})
 	return productArray;
@@ -226,7 +227,7 @@ const getProductsByCategory = async (category) => {
 const updateProduct = async (product_id, user_id, product) => {
 	//check if current user owns product
 	getProductById(product_id).then(result => {
-		console.log(result, product);
+		// console.log(result, product);
 		product.price = parseInt(product.price);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
