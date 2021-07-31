@@ -68,21 +68,21 @@ const getDescription = (category) => {
         case "design-art":
             return "Art commissions, company logos, website wireframes and much more!";
         case "sales-marketing":
-            return "";
+            return "All of your 'smarketing' needs from advertisements to branding!";
         case "business-finance":
-            return "";
+            return "Your business is your passion. Outsource smaller tasks so you can focus on growth!";
         case "writing-translation":
-            return "";
+            return "Have your way with words. Get copy, translation & editorial work from freelancers!";
         case "video-animation":
-            return "";
+            return "Tell your story however you like with custom video & animation services!";
         case "audio-music":
-            return "";
+            return "Let the world hear your message through music, audio & voice services!";
         case "programming-tech":
-            return "";
+            return "Get all of your techical needs from website and app development to automation!";
         case "engineering-architecture":
-            return "";
+            return "Drafting, 3D models, floorplans, interior design, and much more!";
         case "education-training":
-            return "";
+            return "Want some help learning? Get training videos and one-on-one help for whatever you need!";
         default:
             return "You shouldn't be here";
     }
@@ -96,7 +96,7 @@ function CategoryHeader({category}) {
             <div className="split section">
                 <div className="left-side">
                     <h1 className="category-name">{category.replace("-", " & ")}</h1>
-                    <p className="text-white">{description}</p>
+                    <p className="text-white description">{description}</p>
                     <input type="text" placeholder="What service are you looking for?" className="input search" id="searchField" />
                 </div>
                 {/* <img src={`images/categoryHeader/${category}`} /> */}

@@ -1,7 +1,8 @@
 .category-name {
     text-transform: capitalize;
     color: var(--color-light-1);
-    display:inline-block
+    display:inline-block;
+    margin-bottom: 0.5rem;
 }
 .category-header.container.gradient {
     padding: 0;
@@ -13,6 +14,9 @@
 .category-header .left-side {
     max-width: 500px;
     height:250px;
+}
+.category-header .left-side .description {
+    color:var(--color-light-4);
 }
 .category-header img {
     max-width: 450px;
@@ -37,6 +41,10 @@
 .no-results-header {
     color: var(--color-dark-3);
     text-align: center;
+}
+
+#searchField {
+    margin-top:0.5rem;
 }
 
 @media all and (max-width: 1000px) {
