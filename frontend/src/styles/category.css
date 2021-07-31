@@ -20,7 +20,7 @@
     margin-left: auto;
     position:absolute;
     right:0;
-    top:0;
+    bottom:0;
 }
 .result-area {
     min-height: 45vh;
@@ -32,9 +32,23 @@
     justify-content: space-evenly;
 }
 .results-header {
-    color: var(--color-dark-4);
+    color: var(--color-dark-3);
 }
 .no-results-header {
-    color: var(--color-dark-4);
+    color: var(--color-dark-3);
     text-align: center;
+}
+
+@media all and (max-width: 1000px) {
+    .category-header img {
+        max-width: 350px;
+    }
+    .category-header .left-side {
+        max-width: 400px;
+    }
+}
+@media all and (max-width: 800px) {
+    .category-header img {
+        display:none;
+    }
 }
