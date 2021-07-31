@@ -16,7 +16,7 @@ export default function SearchPage() {
         .then(result => result.json())
         .then(data => (setResultList(data)))
         .catch(error => console.log(error));
-    }, []);
+    }, [search_term]);
 
     //Convert list to jsx when data comes in and is stored
     useEffect(() => {
