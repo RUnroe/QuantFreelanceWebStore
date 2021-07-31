@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from 'react-router-dom';
 import "../styles/search.css";
 import ProductCard from "../partials/productCard";
+import SearchBar from "../partials/searchBar";
 
 export default function SearchPage() {
     const { search_term } = useParams();
@@ -35,7 +36,7 @@ export default function SearchPage() {
     return(
         <>
         <div className="container gradient search-header">
-            <input type="text" placeholder="What service are you looking for?" className="input search center" id="searchField" />
+            <SearchBar classList={"center"} />
         </div>
         <div className="container">
             <div className="section result-area">

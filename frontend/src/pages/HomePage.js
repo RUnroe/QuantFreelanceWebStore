@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 //import {ImageInput, SignupForm} from "./../partials/form";
 import "../styles/index.css";
-
+import SearchBar from "../partials/searchBar";
 
 function CtaButton({currAuthLevel, username}) {
     // console.log(currAuthLevel);
@@ -72,7 +72,7 @@ export default function HomePage({currAuthLevel, username}) {
                 <div>
                     <h1 className="text-white">Find the freelance services that you need</h1>
                     <div className="search-container">
-                        <input type="text" placeholder="What service are you looking for?" className="input search" id="searchField" />
+                        <SearchBar classList={"center"} />
                         <p className="text-center text-white"> or</p>
                         {/* <a href="/signup" className="btn blue center"> Become a Seller</a> */}
                         <CtaButton currAuthLevel={currAuthLevel} username={username} />

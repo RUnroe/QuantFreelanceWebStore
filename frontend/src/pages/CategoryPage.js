@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from 'react-router-dom';
 import "../styles/category.css";
 import ProductCard from "../partials/productCard";
+import SearchBar from "../partials/searchBar";
 
 export default function CategoryPage({ }) {
     const { category_name } = useParams();
@@ -97,7 +98,7 @@ function CategoryHeader({category}) {
                 <div className="left-side">
                     <h1 className="category-name">{category.replace("-", " & ")}</h1>
                     <p className="text-white description">{description}</p>
-                    <input type="text" placeholder="What service are you looking for?" className="input search" id="searchField" />
+                    <SearchBar />
                 </div>
                 {/* <img src={`images/categoryHeader/${category}`} /> */}
                 <img src={`https://via.placeholder.com/450x250`} />

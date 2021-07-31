@@ -50,6 +50,8 @@ body {
     background: linear-gradient(to bottom right, var(--color-dark-1), var(--color-dark-3));
 }
 
+
+
 /*====================
         Footer
 ======================*/
@@ -207,6 +209,9 @@ h4 { font-size:1.2rem; }
 .input:focus {
     border:2px solid var(--color-primary);
 }
+.input.search:focus {
+    border:2px solid var(--color-light-1);
+}
 textarea.input {
     resize: none;
     height:6rem;
@@ -245,6 +250,33 @@ select.input {
 }
 .file-input > input {
     display:none;
+}
+
+.search-form {
+    display:flex;
+    flex-direction: row;
+    max-width:500px;
+    margin-top:0.5rem;
+}
+.search-form.center {
+    margin:1.5rem auto;
+}
+
+.search-form > button {
+    border:none;
+    border-left:1px solid var(--color-primary);
+    background-color: var(--color-light-1);
+    color: var(--color-primary);
+    border-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor:pointer;
+    padding:0 0.75rem;
+}
+
+#searchField {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 /*====================
         Image

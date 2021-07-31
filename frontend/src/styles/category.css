@@ -43,9 +43,7 @@
     text-align: center;
 }
 
-.input.search {
-    margin-top:0.5rem;
-}
+
 
 @media all and (max-width: 1000px) {
     .category-header img {
