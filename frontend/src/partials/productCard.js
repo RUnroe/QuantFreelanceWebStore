@@ -6,7 +6,7 @@ export default function ProductCard({productData}) {
     const formatPrice = (price) => {
         let fprice = Math.floor(price * 100);
         fprice = fprice + "";
-        fprice.splice(fprice.length-2, 0, ".");
+        fprice= fprice.slice(0, fprice.length-2) + "." + fprice.slice(fprice.length-2);
         return fprice;
     }
 
