@@ -42,7 +42,7 @@ function SecondaryNavigationMenu() {
 
 
 
-export default function NavigationMenu({currAuthLevel, username}) {
+export default function NavigationMenu({currAuthLevel,setCurrAuthLevel, username}) {
     const [redirect, setRedirect] = useState();
 
     const logoutUser = () => {
@@ -56,7 +56,7 @@ export default function NavigationMenu({currAuthLevel, username}) {
         })
     }
     useEffect(() => {
-        setTimeout(setRedirect(null), 50);
+        setTimeout(() => {setRedirect(null); setCurrAuthLevel("");}, 50);
     }, [redirect]);
 
     if(redirect) return (<Redirect to="/"/>);
