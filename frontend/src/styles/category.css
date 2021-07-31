@@ -29,6 +29,9 @@
     justify-content: space-evenly;
     min-height: 45vh;
 }
+.results-header {
+    color: var(--color-dark-4);
+}
 .no-results-header {
     color: var(--color-dark-4);
     text-align: center;
