@@ -97,7 +97,7 @@ function App() {
         <Route exact path="/login">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
         </Route>
-        <Route exact path="/store/search">
+        <Route exact path="/store/search/:search_term">
           <SearchPage />
         </Route>
         <Route exact path="/store/category/:category_name">

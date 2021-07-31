@@ -43,7 +43,7 @@
     text-align: center;
 }
 
-#searchField {
+.input.search {
     margin-top:0.5rem;
 }
 
