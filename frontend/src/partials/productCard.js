@@ -21,7 +21,7 @@ export default function ProductCard({productData}) {
                     <div><img src={productData.user.icon_id} /></div>
                     <p>{productData.user.username}</p>
                 </div>
-                <p>{productData.description}</p>
+                <p className="description">{productData.description}</p>
                 <p className="price">{`$${formatPrice(productData.price)}`}</p>
             </div>
         </Link>
