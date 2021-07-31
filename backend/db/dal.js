@@ -226,7 +226,7 @@ const getProductsByCategory = async (category) => {
 		})
 		
 	})
-	return productArray;
+	return await productArray;
 }
 
 const updateProduct = async (product_id, user_id, product) => {
