@@ -1,18 +1,45 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function SecondaryNavigationMenu() {
     const pages = ["Design & Art", "Sales & Marketing", "Business & Finance", "Writing & Translation", "Video & Animation", "Audio & Music", "Programming & Tech", "Engineering & Architecture", "Education & Training"];
     const jsxElements = [];
-
     pages.forEach(value => {
         jsxElements.push(<a href={`/store/category/${value.replace(" & ", "-").toLowerCase()}`} className="secondary-nav-item" key={value}>{value}</a>)
     });
+
+    const [scrollElement, setScrollElement] = useState();
+    const scrollSecondaryNav = direction => {
+        if(direction === "left") {
+            scrollElement.scrollLeft = 0;
+        }
+        else {
+            scrollElement.scrollLeft = 100000;
+        }
+    }
+    const listener = e => {
+        // if(scrollElement) console.log(scrollElement.scrollLeft);
+        setScrollElement(document.getElementById("secondaryNavList"));
+    };
+    useEffect(() => {
+        document.getElementById("secondaryNavList").addEventListener("scroll", listener);
+        listener();
+        return () => {
+            document.getElementById("secondaryNavList").removeEventListener("scroll", listener);
+        };
+      });
+
     return (
         <div className="secondary-nav section">
-            {jsxElements}
+            <div className="nav-scroll left" onClick={() => scrollSecondaryNav("left")}><i className="fas fa-angle-left"></i></div>
+            <div className="nav-item-list" id="secondaryNavList"> {jsxElements} </div>
+            <div className="nav-scroll right" onClick={() => scrollSecondaryNav("right")}><i className="fas fa-angle-right"></i></div>
         </div>
     );
 }
+
+
+
 
 export default function NavigationMenu({currAuthLevel, username}) {
     const logoutUser = () => {
