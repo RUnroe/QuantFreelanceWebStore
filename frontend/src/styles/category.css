@@ -22,3 +22,9 @@
     right:0;
     top:0;
 }
+.list {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

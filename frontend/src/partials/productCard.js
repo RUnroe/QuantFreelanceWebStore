@@ -19,9 +19,10 @@ export default function ProductCard({productData}) {
                 <h3 className="title">{productData.title}</h3>
                 <div class="profile-section">
                     <div><img src={productData.user.icon_id} alt="user"/></div>
-                    <p>{productData.description}</p>
+                    <p>{productData.user.username}</p>
                 </div>
-                <span className="price">{`$${formatPrice(productData.price)}`}</span>
+                <p>{productData.description}</p>
+                <p className="price">{`$${formatPrice(productData.price)}`}</p>
             </div>
         </Link>
     )

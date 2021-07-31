@@ -41,7 +41,7 @@ export default function CategoryPage({ }) {
             <CategoryHeader category={category_name}/>
         </div>
         <div className="container">
-            <div className="section">
+            <div className="section list">
                 {resultListJSX}
             </div>
         </div>
