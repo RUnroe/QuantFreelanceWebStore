@@ -215,18 +215,20 @@ const getProductsBySeller = async (user_id) => {
 
 const getProductsByCategory = async (category) => {
 	if(typeof category != "string") throw [`Expected a string for the category but ${category} was supplied`];
-	let productArray = dbclient.db('QuantFreelance').collection('Product').find({category}).toArray()
+	const productArray = dbclient.db('QuantFreelance').collection('Product').find({category}).toArray()
 	.catch(err => { throw ['An error occurred while finding product by category'];});
-	productArray = (await productArray).map(async (product) => {
-		return getUserById(product.seller).then(user => {
-			delete product.page_structure; 
-			product = Object.assign(product, {user: user});
-			console.log(user, product);
-			return product; 
-		})
-		
-	})
-	return await productArray;
+
+	const result = await Promise.all(productArray.map(product => getFullProductObj(product)));
+	return result;
+}
+
+const getFullProductObj = (product) => {
+	return getUserById(product.seller).then(user => {
+		delete product.page_structure; 
+		product = Object.assign(product, {user: user});
+		console.log(user, product);
+		return product; 
+	}) 
 }
 
 const updateProduct = async (product_id, user_id, product) => {
