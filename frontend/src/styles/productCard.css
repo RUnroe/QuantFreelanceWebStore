@@ -1,8 +1,8 @@
 .product-card {
     min-width: 280px;
     max-width: 280px;
-    min-height: 370px;
-    max-height: 370px;
+    /* min-height: 370px;
+    max-height: 370px; */
     text-decoration: none;
     color: var(--color-dark-1);
     display: flex;
@@ -12,11 +12,17 @@
 .product-card .top {
     max-height: 200px;
 }
+.product-card .bottom {
+    padding: 0.75rem;
+}
 .product-card .top img {
     object-fit: cover;
     object-position: center;
     height: 100%;
     width: 100%;
+}
+.product-card .title, .product-card .bottom p {
+    margin: 0.25rem 0;
 }
 
 .profile-section {
