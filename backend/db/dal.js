@@ -223,7 +223,7 @@ const getProductsByCategory = async (category) => {
 }
 
 const getFullProductObj = async (product) => {
-	return getUserById(product.seller).then(user => {
+	return await getUserById(product.seller).then(user => {
 		delete product.page_structure; 
 		product = Object.assign(product, {user: user});
 		console.log(user, product);
