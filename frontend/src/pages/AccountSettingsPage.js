@@ -20,7 +20,7 @@ export default function AccountSettingsPage({checkAuth, user}) {
             <div className="container right-side">
                 <div className="section">
                     <div className="form-container">
-                        <AccountSettingsForm checkAuth={checkAuth} icon_id={selectedIcon} user={user}/>
+                        <AccountSettingsForm checkAuth={checkAuth} icon_id={selectedIcon} userData={user}/>
                     </div>
                 </div>
             </div>
