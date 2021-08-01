@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AccountSettingsForm } from "../partials/form";
 import {ImageSelectModal} from "../partials/image";
 import '../styles/accountSettings.css';
@@ -10,6 +10,10 @@ export default function AccountSettingsPage({checkAuth, user}) {
     const selectImage = (setter) => {
         setImageSelectModalSetter(() => setter);
     }
+    useEffect(() => {
+        setSelectedIcon(user.icon_id);
+    }, []);
+
     return(
         <div className="account-form">
             <div className="container gradient left-side">
