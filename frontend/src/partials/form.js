@@ -105,7 +105,7 @@ function SignupForm({isSeller, icon_id}) {
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
 
-    const timer;
+    let timer;
 
     const [errors, setErrors] = useState({
         email: false,
