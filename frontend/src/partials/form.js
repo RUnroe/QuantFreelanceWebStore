@@ -192,7 +192,7 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
                 last_name,
                 password,
                 is_seller,
-                icon_id
+                icon_id: (icon_id ? icon_id : generateImage(first_name, last_name))
             }
             fetch("/api/user", {
                 method: "POST",
@@ -418,7 +418,11 @@ const confirmPasswords = (password, confirm) => {
     return password === confirm ? "": "Passwords do not match";
 }
 
-
+const generateImage = (first_name, last_name) => {
+    const colors = ["ffff7f", "7affc3", "60c1eb", "9372e8", "e35f94"];
+    let color = colors[Math.floor(Math.random() * colors.length)];
+    return `https://ui-avatars.com/api/?background=${color}&name=${first_name}+${last_name}`
+}
 
 
 
