@@ -3,7 +3,7 @@ import { AccountSettingsForm } from "../partials/form";
 import {ImageSelectModal} from "../partials/image";
 import '../styles/accountSettings.css';
 
-export default function AccountSettingsPage({checkAuth}) {
+export default function AccountSettingsPage({checkAuth, user}) {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [selectedIcon, setSelectedIcon] = useState(); //set up https://ui-avatars.com/api/?background=ffff7f&name=
     
@@ -20,7 +20,7 @@ export default function AccountSettingsPage({checkAuth}) {
             <div className="container right-side">
                 <div className="section">
                     <div className="form-container">
-                        <AccountSettingsForm checkAuth={checkAuth} icon_id={selectedIcon}/>
+                        <AccountSettingsForm checkAuth={checkAuth} icon_id={selectedIcon} user={user}/>
                     </div>
                 </div>
             </div>

@@ -113,7 +113,7 @@ function App() {
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage checkAuth={checkAuth} />} reqAuthLevel="buyer" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage user={currUser} checkAuth={checkAuth} />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/history/purchase">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchaseHistoryPage />} reqAuthLevel="buyer" />

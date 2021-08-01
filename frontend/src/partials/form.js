@@ -268,7 +268,6 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
 
     let timer;
     const [errors, setErrors] = useState({
-        email: "",
         username: "",
         first_name: "",
         last_name: ""
@@ -309,10 +308,15 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
         forceUpdate();
     }, [errors]);
 
+    useEffect(() => {
+        setEmail(userData.email);
+        setUsername(userData.username);
+        setFirstName(userData.first_name);
+        setLastName(userData.last_name);
+    }, []);
 
     const validateForm = () => {
         const newErrors = {
-            email: validate(email, "email"),
             username: validate(username, "username"),
             first_name: validate(first_name, "name"),
             last_name: validate(last_name, "name"),
@@ -333,7 +337,6 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
         if(!hasErrors()) {
             //If there are not any errors, post to backend
             const userData = {
-                email,
                 username,
                 first_name,
                 last_name,
@@ -363,7 +366,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
                 <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} disabled/>
-                <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()}&nbsp;</span>
+                <span className="error-message hidden">&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>

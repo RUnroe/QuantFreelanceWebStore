@@ -59,7 +59,12 @@
     margin:0 0 2rem 0;
 }
 
-
+.account-form .btn-group {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    
+}
 @media all and (max-width: 600px) {
     .account-form {
         display:block;
