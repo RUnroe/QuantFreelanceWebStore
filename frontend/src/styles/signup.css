@@ -55,6 +55,12 @@
     min-height: 90vh;
 }
 
+.form-container {
+    max-width: 500px;
+    margin:3rem;
+    display:block;
+    padding:0 1rem;
+}
 
 .form-section .left-side h1 {
     text-align: center;

@@ -239,6 +239,7 @@ select.input {
 .error-message {
     color: var(--color-danger);
     font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
 
 .hidden {

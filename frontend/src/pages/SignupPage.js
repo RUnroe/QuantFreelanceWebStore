@@ -47,8 +47,9 @@ export default function SignupPage() {
             </div>
             <div className="container right-side">
                 <div className="section">
-                    <SignupForm />
-                    
+                    <div className="form-container">
+                        <SignupForm />
+                    </div>
                 </div>
             </div>
         </div>
