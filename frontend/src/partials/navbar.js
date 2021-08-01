@@ -42,7 +42,7 @@ function SecondaryNavigationMenu() {
 
 
 
-export default function NavigationMenu({currAuthLevel,setCurrAuthLevel, username}) {
+export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, username}) {
     const [redirect, setRedirect] = useState();
 
     const logoutUser = () => {
