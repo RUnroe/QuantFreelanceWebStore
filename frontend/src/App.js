@@ -70,7 +70,6 @@ function App() {
     .then(data => {
       setCurrUser(data);
       setCurrAuthLevel(data.authLevel);
-      console.log(data.authLevel);
     })
     .catch(error => setCurrAuthLevel(""));
   }

@@ -22,7 +22,7 @@ export default function SignupPage({checkAuth}) {
     }
     const convertAccType = (accType) => {
         if(accType === "buyer") return "(Standard Account)";
-        else return "(Standard Account)";
+        else return "(Seller Account)";
     }
     return(
         <div className={`screen-section ${viewedPage}`}>
