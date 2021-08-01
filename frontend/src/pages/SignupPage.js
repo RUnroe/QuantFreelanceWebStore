@@ -40,7 +40,7 @@ export default function SignupPage() {
         </div>
         <div className="form-section">
             <div className="container gradient left-side">
-                <p style={{cursor:"pointer"}} className="text-white" onClick={backToAccTypeSelection}><i class="fas fa-arrow-left"></i>&nbsp; Back</p>
+                <p style={{cursor:"pointer"}} className="text-white" onClick={backToAccTypeSelection}><i className="fas fa-arrow-left"></i>&nbsp; Back</p>
                 <h1>Sign Up</h1>
                 <div className="round-img-container" onClick={() => selectImage(setSelectedIcon)}>{ selectedIcon ? <img src={selectedIcon} /> : <div className="image-picker-button">+</div>}</div>
                 <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />

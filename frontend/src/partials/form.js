@@ -96,21 +96,21 @@ function LogInForm({checkAuth}) {
     }
 }
 
-
+//React hates me so I have to use this force update hook to actually rerender on state change
 function useForceUpdate(){
     const [value, setValue] = useState(0); // integer state
     return () => setValue(value => value + 1); // update the state to force render
 }
 
-function SignupForm({isSeller, icon_id}) {
+function SignupForm({is_seller, icon_id}) {
     const forceUpdate = useForceUpdate();
 
-    const [email, setEmail] = useState();
-    const [username, setUsername] = useState();
-    const [first_name, setFirstName] = useState();
-    const [last_name, setLastName] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     let timer;
 
@@ -124,15 +124,16 @@ function SignupForm({isSeller, icon_id}) {
     });
     
     const checkCredentials = () => {
-        const credentials = {
-            email,
-            username
-        };
-        fetch("/api/user/check", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-                },
+        if(email.length || username.length) {
+            const credentials = {
+                email,
+                username
+            };
+            fetch("/api/user/check", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
                 body: JSON.stringify(credentials)
             })
             .then(response => response.json())
@@ -144,6 +145,7 @@ function SignupForm({isSeller, icon_id}) {
                 setErrors(tempErrors);
                 forceUpdate();
             });
+        }
     }
     useEffect(() => {
         clearTimeout(timer);
@@ -156,16 +158,45 @@ function SignupForm({isSeller, icon_id}) {
         forceUpdate();
     }, [errors]);
 
+
     const validateForm = () => {
 
     }
+
+    const hasErrors = () => {
+        let hasErrors = false;
+        Object.values(errors).forEach(errorMsg => {
+            if(errorMsg.length) hasErrors = true;
+        });
+        return hasErrors;
+    }
     const postToSignUp = (event) => {
         event.preventDefault();
-        const tempErrors = errors;
-        tempErrors.email = "Email is already in use. Please use another email.";
-        tempErrors.username = "Username is already in use. Please use another username.";
-        console.log(tempErrors);
-        setErrors(tempErrors);
+        validateForm();
+        if(!hasErrors()) {
+            //If there are not any errors, post to backend
+            const userData = {
+                email,
+                username,
+                first_name,
+                last_name,
+                password,
+                is_seller,
+                icon_id
+            }
+            fetch("/api/user", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+                console.log(response);
+            });
+
+
+        }
     }
 
     return (
@@ -173,12 +204,32 @@ function SignupForm({isSeller, icon_id}) {
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
                 <input type="text" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
-                <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()} </span>
+                <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>
                 <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={username} />
-                <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()} </span>
+                <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="firstNameInput" className="input-label">First Name</label>
+                <input type="text" className="input" id="firstNameInput" onInput={(event) => setFirstName(event.target.value)} value={first_name} />
+                <span className={`error-message ${errors.first_name.length ? "" : "hidden"}`}>{errors.first_name.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="lastNameInput" className="input-label">Last Name</label>
+                <input type="text" className="input" id="lastNameInput" onInput={(event) => setLastName(event.target.value)} value={last_name} />
+                <span className={`error-message ${errors.last_name.length ? "" : "hidden"}`}>{errors.last_name.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="passwordInput" className="input-label">Password</label>
+                <input type="password" className="input" id="passwordInput" onInput={(event) => setPassword(event.target.value)} value={password} />
+                <span className={`error-message ${errors.password.length ? "" : "hidden"}`}>{errors.password.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="confirmPasswordInput" className="input-label">Confirm Password</label>
+                <input type="password" className="input" id="confirmPasswordInput" onInput={(event) => setConfirmPassword(event.target.value)} value={confirmPassword} />
+                <span className={`error-message ${errors.confirmPassword.length ? "" : "hidden"}`}>{errors.confirmPassword.toString()}&nbsp;</span>
             </div>
             
             <button className="btn blue center" type="submit">Create Account</button>
