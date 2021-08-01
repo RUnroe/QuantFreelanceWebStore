@@ -352,8 +352,9 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             .then(response => {
                 if(response.ok) {
                     checkAuth();
+                    console.log(response, username);
                     setAccountPageUsername(username);
-                    setRedirect(true);
+                    //setRedirect(true);
                 }
             });
 
