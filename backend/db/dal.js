@@ -121,15 +121,15 @@ const authenticate = async ({identifier, password}) => {
 		});
 }
 
-const checkCredentials = async ({username, email}) => {
+const checkCredentials = async ({user_id, username, email}) => {
 	const errors = {username: false, email: false};
 	await dbclient.db('QuantFreelance').collection('User').findOne({"username": username})
 		.then(result => {
-			if(result) errors.username = true;
+			if(result && user_id != result.user_id) errors.username = true;
 		});
 	await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
 		.then(result => {
-			if(result) errors.email = true;
+			if(result && user_id != result.user_id) errors.email = true;
 		});
 	return errors;
 }
