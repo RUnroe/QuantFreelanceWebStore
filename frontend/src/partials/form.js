@@ -331,7 +331,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
         });
         return hasErrors;
     }
-    const postToSignUp = (event) => {
+    const postToUpdate = (event) => {
         event.preventDefault();
         validateForm();
         if(!hasErrors()) {
@@ -343,7 +343,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
                 icon_id
             }
             fetch("/api/user", {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                     },
@@ -362,7 +362,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     }
     if(redirect) return <Redirect to={{pathname: `/account/${accountPageUsername}`}}/>;
     return (
-        <form method="POST" onSubmit={event => postToSignUp(event)}>
+        <form method="POST" onSubmit={event => postToUpdate(event)}>
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
                 <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} disabled/>
