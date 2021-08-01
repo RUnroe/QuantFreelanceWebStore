@@ -123,12 +123,12 @@ const authenticate = async ({identifier, password}) => {
 
 const checkCredentials = async ({username, email}) => {
 	const errors = {username: false, email: false};
-	await dbclient.db('QuantFreelance').collection('User').findOne({username})
+	await dbclient.db('QuantFreelance').collection('User').findOne({"username": username})
 		.then(result => {
 			console.log(result);
 			if(result) errors.username = true;
 		});
-	await dbclient.db('QuantFreelance').collection('User').findOne({email})
+	await dbclient.db('QuantFreelance').collection('User').findOne({"email": username})
 		.then(result => {
 			if(result) errors.email = true;
 		});
