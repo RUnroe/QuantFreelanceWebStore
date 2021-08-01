@@ -327,14 +327,15 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     const hasErrors = () => {
         let hasErrors = false;
         Object.values(errors).forEach(errorMsg => {
-            console.log(errorMsg);
             if(errorMsg.length) hasErrors = true;
         });
         return hasErrors;
     }
     const postToUpdate = (event) => {
         event.preventDefault();
+        console.log(errors);
         validateForm();
+        console.log(errors);
         if(!hasErrors()) {
             //If there are not any errors, post to backend
             const userData = {
