@@ -56,7 +56,7 @@ export default function NavigationMenu({currAuthLevel,setCurrAuthLevel, username
         })
     }
     useEffect(() => {
-        setTimeout(() => {setRedirect(null); setCurrAuthLevel("");}, 50);
+        setTimeout(() => {setRedirect(null); /*setCurrAuthLevel("");*/}, 100);
     }, [redirect]);
 
     if(redirect) return (<Redirect to="/"/>);
