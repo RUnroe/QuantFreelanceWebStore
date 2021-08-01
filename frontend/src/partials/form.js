@@ -112,6 +112,8 @@ function SignupForm({is_seller, icon_id}) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [redirect, setRedirect] = useState(false);
+
     let timer;
 
     const [errors, setErrors] = useState({
@@ -138,7 +140,7 @@ function SignupForm({is_seller, icon_id}) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 const tempErrors = errors;
                 if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
                 if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
@@ -200,18 +202,18 @@ function SignupForm({is_seller, icon_id}) {
                 body: JSON.stringify(userData)
             })
             .then(response => {
-                console.log(response);
+                if(response.ok) setRedirect(true);
             });
 
 
         }
     }
-
+    if(redirect) return <Redirect to={{pathname: '/'}}/>;
     return (
         <form method="POST" onSubmit={event => postToSignUp(event)}>
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
-                <input type="text" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
+                <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
                 <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
