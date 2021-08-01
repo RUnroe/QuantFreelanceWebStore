@@ -1,8 +1,49 @@
 
 
+.account-type-section {
+    box-sizing: border-box;
+}
+.account-type-section .container {
+    height:100%;
+    box-sizing: border-box;
+    min-height: 90vh;
+}
 
 
+.account-type-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
+
+.account-selection {
+    width:100%;
+    max-width: 300px;
+    border-radius: 4px;
+    text-align: center;
+    border:2px solid var(--color-dark-2);
+    box-sizing: border-box;
+    cursor:pointer;
+    transition:border-color 0.15s ease;
+    margin:1rem 2rem;
+    padding:2rem 1rem;
+    color:var(--color-light-1);
+}
+
+.account-selection:hover {
+    border-color: var(--color-primary);
+}
+
+.account-selection h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin:0.75rem 0;
+}
+.account-selection p {
+    color: var(--color-light-4);
+}
 
 
 /* //////////////////////////////////////////// */
