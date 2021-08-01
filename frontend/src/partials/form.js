@@ -105,6 +105,8 @@ function SignupForm({isSeller, icon_id}) {
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
 
+    const timer;
+
     const [errors, setErrors] = useState({
         email: false,
         username: false,
@@ -113,6 +115,33 @@ function SignupForm({isSeller, icon_id}) {
         password: false,
         confirmPassword: false
     });
+    
+    const checkCredentials = () => {
+        const credentials = {
+            email,
+            username
+        };
+        fetch("/api/user/check", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(credentials)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const tempErrors = Object.assign(errors);
+                if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
+                if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
+                setErrors(tempErrors);
+            });
+    }
+    useEffect(() => {
+        if(timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+            checkCredentials();
+        }, 1000);
+    }, [username, email]);
 
     const validateForm = () => {
 
@@ -127,12 +156,12 @@ function SignupForm({isSeller, icon_id}) {
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
                 <input type="text" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
-                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>Not a valid email format</span>
+                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>{errors["email"].toString()}</span>
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>
-                <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={email} />
-                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>Not a valid email format</span>
+                <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={username} />
+                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>{errors["username"].toString()}</span>
             </div>
             
             <button className="btn blue center" type="submit">Create Account</button>

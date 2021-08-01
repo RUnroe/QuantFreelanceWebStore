@@ -122,14 +122,14 @@ const authenticate = async ({identifier, password}) => {
 }
 
 const checkCredentials = async ({username, email}) => {
-	const errors = [];
+	const errors = {username: false, email: false};
 	await dbclient.db('QuantFreelance').collection('User').findOne({username})
 		.then(result => {
-			if(result) errors.push("username");
+			if(result) errors.username = true;
 		});
 	await dbclient.db('QuantFreelance').collection('User').findOne({email})
 		.then(result => {
-			if(result) errors.push("email");
+			if(result) errors.email = true;
 		});
 	return errors;
 }
