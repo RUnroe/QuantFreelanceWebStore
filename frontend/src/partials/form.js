@@ -188,7 +188,7 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
     const checkError = (value, field, validationType) => {
         if(!validationType) validationType = field;
         const newErrors = Object.assign(errors);
-        newErrors[field] = validate(value, validationType),
+        newErrors[field] = validate(value, validationType);
         setErrors(newErrors);
     }
     const postToSignUp = (event) => {
