@@ -327,6 +327,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     const hasErrors = () => {
         let hasErrors = false;
         Object.values(errors).forEach(errorMsg => {
+            console.log(errorMsg);
             if(errorMsg.length) hasErrors = true;
         });
         return hasErrors;
