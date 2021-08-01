@@ -125,6 +125,7 @@ const checkCredentials = async ({user_id, username, email}) => {
 	const errors = {username: false, email: false};
 	await dbclient.db('QuantFreelance').collection('User').findOne({"username": username})
 		.then(result => {
+			console.log(user_id, result);
 			if(result && user_id != result.user_id) errors.username = true;
 		});
 	await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
