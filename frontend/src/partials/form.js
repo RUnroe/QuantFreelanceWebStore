@@ -97,7 +97,14 @@ function LogInForm({checkAuth}) {
 }
 
 
+function useForceUpdate(){
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
+
 function SignupForm({isSeller, icon_id}) {
+    const forceUpdate = useForceUpdate();
+
     const [email, setEmail] = useState();
     const [username, setUsername] = useState();
     const [first_name, setFirstName] = useState();
@@ -108,12 +115,12 @@ function SignupForm({isSeller, icon_id}) {
     let timer;
 
     const [errors, setErrors] = useState({
-        email: false,
-        username: false,
-        first_name: false,
-        last_name: false,
-        password: false,
-        confirmPassword: false
+        email: "",
+        username: "",
+        first_name: "",
+        last_name: "",
+        password: "",
+        confirmPassword: ""
     });
     
     const checkCredentials = () => {
@@ -131,10 +138,11 @@ function SignupForm({isSeller, icon_id}) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                const tempErrors = Object.assign(errors);
+                const tempErrors = errors;
                 if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
                 if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
                 setErrors(tempErrors);
+                forceUpdate();
             });
     }
     useEffect(() => {
@@ -144,12 +152,20 @@ function SignupForm({isSeller, icon_id}) {
         }, 1000);
     }, [username, email]);
 
+    useEffect(() => {
+        forceUpdate();
+    }, [errors]);
+
     const validateForm = () => {
 
     }
     const postToSignUp = (event) => {
         event.preventDefault();
-        console.log("post");
+        const tempErrors = errors;
+        tempErrors.email = "Email is already in use. Please use another email.";
+        tempErrors.username = "Username is already in use. Please use another username.";
+        console.log(tempErrors);
+        setErrors(tempErrors);
     }
 
     return (
@@ -157,12 +173,12 @@ function SignupForm({isSeller, icon_id}) {
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
                 <input type="text" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
-                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>{errors["email"].toString()}</span>
+                <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()} </span>
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>
                 <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={username} />
-                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>{errors["username"].toString()}</span>
+                <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()} </span>
             </div>
             
             <button className="btn blue center" type="submit">Create Account</button>
