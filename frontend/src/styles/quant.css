@@ -222,6 +222,9 @@ select.input {
 .input-block {
     margin:0.6rem 0.5rem;
 }
+.form-block {
+    margin:0.4rem 0;
+}
 .input-label{
     margin-bottom:0.3rem;
     display:block;

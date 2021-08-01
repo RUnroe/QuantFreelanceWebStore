@@ -57,7 +57,7 @@
 
 .form-container {
     max-width: 500px;
-    margin:3rem;
+    margin:3rem 0 0 3rem;
     display:block;
     padding:0 1rem;
 }
@@ -108,12 +108,23 @@
     text-align: center;
     margin:0 0 2rem 0;
 }
+
+
+@media all and (max-width: 600px) {
+    .form-section {
+        display:block;
+    }
+    .form-container {
+        margin:3rem auto;
+    }
+}
 /* //////////////////////////// */
 .screen-section {
     overflow-x: hidden;
     box-sizing: border-box;
     position: relative;
     min-height: 90vh;
+    height:fit-content;
     /* display:flex;
     flex-direction:row; */
 

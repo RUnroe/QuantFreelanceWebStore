@@ -160,7 +160,15 @@ function SignupForm({is_seller, icon_id}) {
 
 
     const validateForm = () => {
-
+        const newErrors = {
+            email: validate(email, "email"),
+            username: validate(username, "username"),
+            first_name: validate(first_name, "name"),
+            last_name: validate(last_name, "name"),
+            password: validate(password, "password"),
+            confirmPassword: confirmPasswords(password, confirmPassword)
+        }
+        setErrors(newErrors);
     }
 
     const hasErrors = () => {
@@ -236,6 +244,33 @@ function SignupForm({is_seller, icon_id}) {
         </form>
     );
 }
+
+
+
+const validate = (value, type) => {
+    let errorMessage = "";
+    switch(type) {
+        case "email":
+            errorMessage = (/\w+@\w+\.\w+/).test(value) ? "" : "Invalid email";
+        break;
+        case "username":
+            errorMessage = (/^[a-zA-Z0-9_ ]+$/).test(value) ? "" : "Invalid username";
+        break;
+        case "name":
+            errorMessage = (/^[a-zA-Z- ]+$/).test(value) ? "" : "Invalid name";
+        break;
+        case "password":
+            errorMessage = (/^(?=.*[A-Za-z])(?=.*\d).{8,}$/).test(value) ? "" : "Password must contain at least 8 characters, 1 letter, and 1 number";
+        break;
+        default: errorMessage = "";
+    }
+    return errorMessage;
+}
+const confirmPasswords = (password, confirm) => {
+    return password === confirm ? "": "Passwords do not match";
+}
+
+
 
 
 
