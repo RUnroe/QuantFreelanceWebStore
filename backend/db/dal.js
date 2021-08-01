@@ -125,12 +125,14 @@ const checkCredentials = async ({username, email}) => {
 	const errors = {username: false, email: false};
 	await dbclient.db('QuantFreelance').collection('User').findOne({username})
 		.then(result => {
+			console.log(result);
 			if(result) errors.username = true;
 		});
 	await dbclient.db('QuantFreelance').collection('User').findOne({email})
 		.then(result => {
 			if(result) errors.email = true;
 		});
+		console.log(errors);
 	return errors;
 }
 
