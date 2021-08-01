@@ -65,7 +65,7 @@
 .form-section .left-side h1 {
     text-align: center;
     color: var(--color-light-1);
-
+    margin-bottom: 1rem;
     font-weight: 600;
 } 
 
@@ -103,7 +103,11 @@
 
 }
 
-
+.account-type-text {
+    color:var(--color-light-4);
+    text-align: center;
+    margin:0 0 2rem 0;
+}
 /* //////////////////////////// */
 .screen-section {
     overflow-x: hidden;

@@ -20,6 +20,10 @@ export default function SignupPage() {
     const backToAccTypeSelection = () => {
         setViewedPage("account-type");
     }
+    const convertAccType = (accType) => {
+        if(accType === "buyer") return "(Standard Account)";
+        else return "(Standard Account)";
+    }
     return(
         <div className={`screen-section ${viewedPage}`}>
         <div className={`account-type-section`}>
@@ -28,7 +32,7 @@ export default function SignupPage() {
                 <div className="account-type-container">
                     <div className="buyer-account account-selection" onClick={() => toSignupForm("buyer")}>
                         <img className="round" src="https://via.placeholder.com/150" alt="account-icon"/>
-                        <h3>Basic Account</h3>
+                        <h3>Standard Account</h3>
                         <p>Perfect for browsing and purchasing services.</p>
                     </div>
                     <div className="seller-account account-selection" onClick={() => toSignupForm("seller")}>
@@ -43,6 +47,7 @@ export default function SignupPage() {
             <div className="container gradient left-side">
                 <p style={{cursor:"pointer"}} className="text-white" onClick={backToAccTypeSelection}><i className="fas fa-arrow-left"></i>&nbsp; Back</p>
                 <h1>Sign Up</h1>
+                <p className="account-type-text">{convertAccType(accType)}</p>
                 <div className="round-img-container" onClick={() => selectImage(setSelectedIcon)}>{ selectedIcon ? <img src={selectedIcon} /> : <div className="image-picker-button">+</div>}</div>
                 <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
             </div>
