@@ -121,6 +121,19 @@ const authenticate = async ({identifier, password}) => {
 		});
 }
 
+const checkCredentials = async ({username, email}) => {
+	const errors = [];
+	await dbclient.db('QuantFreelance').collection('User').findOne({username})
+		.then(result => {
+			if(result) errors.push("username");
+		});
+	await dbclient.db('QuantFreelance').collection('User').findOne({email})
+		.then(result => {
+			if(result) errors.push("email");
+		});
+	return errors;
+}
+
 // ==============================
 //            Orders
 // ==============================
@@ -294,7 +307,7 @@ const getIconsByUser = async (user_id) => {
 
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
-	authenticate,
+	authenticate, checkCredentials,
 	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
 	createProduct, getProductById, getProductsBySeller, getProductsByCategory, getProductsBySearchTerm, updateProduct, removeProduct,
 	createIcon, getIcon, getIconsByUser

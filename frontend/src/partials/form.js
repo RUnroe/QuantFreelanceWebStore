@@ -97,10 +97,54 @@ function LogInForm({checkAuth}) {
 }
 
 
+function SignupForm({isSeller, icon_id}) {
+    const [email, setEmail] = useState();
+    const [username, setUsername] = useState();
+    const [first_name, setFirstName] = useState();
+    const [last_name, setLastName] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+
+    const [errors, setErrors] = useState({
+        email: false,
+        username: false,
+        first_name: false,
+        last_name: false,
+        password: false,
+        confirmPassword: false
+    });
+
+    const validateForm = () => {
+
+    }
+    const postToSignUp = (event) => {
+        event.preventDefault();
+        console.log("post");
+    }
+
+    return (
+        <form method="POST" onSubmit={event => postToSignUp(event)}>
+            <div className="form-block">
+                <label htmlFor="emailInput" className="input-label">Email</label>
+                <input type="text" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
+                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>Not a valid email format</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="usernameInput" className="input-label">Username</label>
+                <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={email} />
+                <span className={`error-message ${errors["email"] ? "" : "hidden"}`}>Not a valid email format</span>
+            </div>
+            
+            <button className="btn blue center" type="submit">Create Account</button>
+        </form>
+    );
+}
+
 
 
 
 export {
     ImageForm,
-    LogInForm
+    LogInForm,
+    SignupForm
 } 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ImageForm } from "../partials/form";
+import { SignupForm } from "../partials/form";
 import {ImageSelectModal} from "../partials/image";
 import '../styles/signup.css';
 
@@ -47,7 +47,7 @@ export default function SignupPage() {
             </div>
             <div className="container right-side">
                 <div className="section">
-                    <ImageForm />
+                    <SignupForm />
                     
                 </div>
             </div>

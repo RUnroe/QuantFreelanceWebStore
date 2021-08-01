@@ -92,6 +92,14 @@ const checkSession = (req, res) => {
 	else res.json({authLevel: ""});
 }
 
+
+const checkCredentials = (req, res) => {
+	dal.checkCredentials(req.body.username, req.body.email).then(response => {
+		res.json(response);
+	})
+	.catch(handle(req, res));
+}
+
 const routes = [
 	{
 		uri: '/api/user',
@@ -112,6 +120,11 @@ const routes = [
 		uri: '/api/user',
 		methods: ['delete'],
 		handler: [requireAuth(), removeUser]
+	},
+	{
+		uri: '/api/user/check',
+		methods: ['post'],
+		handler: checkCredentials
 	},
 
 	{
