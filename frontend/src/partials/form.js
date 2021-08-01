@@ -130,6 +130,7 @@ function SignupForm({isSeller, icon_id}) {
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 const tempErrors = Object.assign(errors);
                 if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
                 if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
