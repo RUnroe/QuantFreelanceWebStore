@@ -74,7 +74,7 @@ function LogInForm({checkAuth}) {
                 <label htmlFor="passwordInput" className="input-label">Password</label>
                 <input type="password"className="input" id="passwordInput" name="password" ref={password}/>
             </div>
-            <span id="loginErrorMsg" className="error-message">Username / email or password is wrong</span>
+            <p id="loginErrorMsg" className="error-message text-center">Username / email or password is wrong</p>
             <button type="submit" className="btn blue center">Log In</button>
         </form>
         );
