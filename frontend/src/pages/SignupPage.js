@@ -7,6 +7,7 @@ export default function SignupPage() {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [selectedIcon, setSelectedIcon] = useState(); //set up https://ui-avatars.com/api/?background=ffff7f&name=
     const [accType, setAccType] = useState("buyer");
+    const [viewedPage, setViewedPage] = useState("account-type");
 
     const selectImage = (setter) => {
         setImageSelectModalSetter(() => setter);
@@ -14,14 +15,14 @@ export default function SignupPage() {
 
     const toSignupForm = (accType) => {
         setAccType(accType);
-
+        setViewedPage("form");
     }
     const backToAccTypeSelection = () => {
-
+        setViewedPage("account-type");
     }
     return(
-        <>
-        <div className="account-type-section">
+        <div className={`screen-section ${viewedPage}`}>
+        <div className={`account-type-section`}>
             <div className="container gradient">
                 <h1 className="text-center text-white">Choose Account Type</h1>
                 <div className="account-type-container">
@@ -38,7 +39,7 @@ export default function SignupPage() {
                 </div>
             </div>
         </div>
-        <div className="form-section">
+        <div className={`form-section`}>
             <div className="container gradient left-side">
                 <p style={{cursor:"pointer"}} className="text-white" onClick={backToAccTypeSelection}><i className="fas fa-arrow-left"></i>&nbsp; Back</p>
                 <h1>Sign Up</h1>
@@ -53,7 +54,7 @@ export default function SignupPage() {
                 </div>
             </div>
         </div>
-        </>
+        </div>
     );
 
 }
