@@ -159,7 +159,12 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
     useEffect(() => {
         forceUpdate();
     }, [errors]);
-
+    
+    useEffect(() => {
+        const newErrors = Object.assign(errors);
+        newErrors.confirmPassword = confirmPasswords(password, confirmPassword);
+        setErrors(newErrors);
+    }, [confirmPassword]);
 
     const validateForm = () => {
         const newErrors = {
@@ -179,6 +184,11 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
             if(errorMsg.length) hasErrors = true;
         });
         return hasErrors;
+    }
+    const clearError = (field) => {
+        const newErrors = Object.assign(errors);
+        newErrors[field] = "";
+        setErrors(newErrors);
     }
     const postToSignUp = (event) => {
         event.preventDefault();
@@ -216,27 +226,27 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
         <form method="POST" onSubmit={event => postToSignUp(event)}>
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
-                <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} />
+                <input type="email" className="input" id="emailInput" onInput={(event) => {setEmail(event.target.value); clearError("email")}} value={email} />
                 <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>
-                <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={username} />
+                <input type="text" className="input" id="usernameInput" onInput={(event) => {setUsername(event.target.value); clearError("username")}} value={username} />
                 <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="firstNameInput" className="input-label">First Name</label>
-                <input type="text" className="input" id="firstNameInput" onInput={(event) => setFirstName(event.target.value)} value={first_name} />
+                <input type="text" className="input" id="firstNameInput" onInput={(event) => {setFirstName(event.target.value); clearError("first_name")}} value={first_name} />
                 <span className={`error-message ${errors.first_name.length ? "" : "hidden"}`}>{errors.first_name.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="lastNameInput" className="input-label">Last Name</label>
-                <input type="text" className="input" id="lastNameInput" onInput={(event) => setLastName(event.target.value)} value={last_name} />
+                <input type="text" className="input" id="lastNameInput" onInput={(event) => {setLastName(event.target.value); clearError("last_name")}} value={last_name} />
                 <span className={`error-message ${errors.last_name.length ? "" : "hidden"}`}>{errors.last_name.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="passwordInput" className="input-label">Password</label>
-                <input type="password" className="input" id="passwordInput" onInput={(event) => setPassword(event.target.value)} value={password} />
+                <input type="password" className="input" id="passwordInput" onInput={(event) => {setPassword(event.target.value); clearError("password")}} value={password} />
                 <span className={`error-message ${errors.password.length ? "" : "hidden"}`}>{errors.password.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
