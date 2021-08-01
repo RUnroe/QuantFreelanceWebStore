@@ -355,7 +355,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
                     checkAuth();
                     console.log(response, username);
                     setAccountPageUsername(username);
-                    //setRedirect(true);
+                    setRedirect(true);
                 }
             });
 
