@@ -102,7 +102,7 @@ function useForceUpdate(){
     return () => setValue(value => value + 1); // update the state to force render
 }
 
-function SignupForm({is_seller, icon_id}) {
+function SignupForm({checkAuth, is_seller, icon_id}) {
     const forceUpdate = useForceUpdate();
 
     const [email, setEmail] = useState("");
@@ -202,7 +202,10 @@ function SignupForm({is_seller, icon_id}) {
                 body: JSON.stringify(userData)
             })
             .then(response => {
-                if(response.ok) setRedirect(true);
+                if(response.ok) {
+                    checkAuth();
+                    setRedirect(true);
+                }
             });
 
 

@@ -3,7 +3,7 @@ import { SignupForm } from "../partials/form";
 import {ImageSelectModal} from "../partials/image";
 import '../styles/signup.css';
 
-export default function SignupPage() {
+export default function SignupPage({checkAuth}) {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [selectedIcon, setSelectedIcon] = useState(); //set up https://ui-avatars.com/api/?background=ffff7f&name=
     const [accType, setAccType] = useState("buyer");
@@ -54,7 +54,7 @@ export default function SignupPage() {
             <div className="container right-side">
                 <div className="section">
                     <div className="form-container">
-                        <SignupForm />
+                        <SignupForm checkAuth={checkAuth} is_seller={(accType === "seller")} icon_id={selectedIcon}/>
                     </div>
                 </div>
             </div>
