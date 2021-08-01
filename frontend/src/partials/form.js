@@ -322,9 +322,10 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             last_name: validate(last_name, "name"),
         }
         setErrors(newErrors);
+        return newErrors;
     }
 
-    const hasErrors = () => {
+    const hasErrors = (errors) => {
         let hasErrors = false;
         Object.values(errors).forEach(errorMsg => {
             if(errorMsg.length) hasErrors = true;
@@ -333,10 +334,8 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     }
     const postToUpdate = (event) => {
         event.preventDefault();
-        console.log(errors);
-        validateForm();
-        console.log(errors);
-        if(!hasErrors()) {
+        const errors = validateForm();
+        if(!hasErrors(errors)) {
             //If there are not any errors, post to backend
             const userData = {
                 username,
