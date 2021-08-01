@@ -94,7 +94,7 @@ const checkSession = (req, res) => {
 
 
 const checkCredentials = (req, res) => {
-	dal.checkCredentials(req.body.username, req.body.email).then(response => {
+	dal.checkCredentials({username: req.body.username, email: req.body.email}).then(response => {
 		res.json(response);
 	})
 	.catch(handle(req, res));
