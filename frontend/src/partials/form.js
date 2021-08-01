@@ -365,7 +365,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
         <form method="POST" onSubmit={event => postToUpdate(event)}>
             <div className="form-block">
                 <label htmlFor="emailInput" className="input-label">Email</label>
-                <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} disabled/>
+                <input type="email" className="input disabled" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} disabled/>
                 <span className="error-message hidden">&nbsp;</span>
             </div>
             <div className="form-block">
