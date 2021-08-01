@@ -128,7 +128,7 @@ const checkCredentials = async ({username, email}) => {
 			console.log(result);
 			if(result) errors.username = true;
 		});
-	await dbclient.db('QuantFreelance').collection('User').findOne({"email": username})
+	await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
 		.then(result => {
 			if(result) errors.email = true;
 		});
