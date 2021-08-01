@@ -252,6 +252,144 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
 
 
 
+
+
+
+function AccountSettingsForm({checkAuth, icon_id, userData}) {
+    const forceUpdate = useForceUpdate();
+
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [redirect, setRedirect] = useState(false);
+
+    const [accountPageUsername, setAccountPageUsername] = useState();
+
+    let timer;
+    const [errors, setErrors] = useState({
+        email: "",
+        username: "",
+        first_name: "",
+        last_name: ""
+    });
+    
+    const checkCredentials = () => {
+        if(email.length || username.length) {
+            const credentials = {
+                email,
+                username
+            };
+            fetch("/api/user/check", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(credentials)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                const tempErrors = errors;
+                if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
+                if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
+                setErrors(tempErrors);
+                forceUpdate();
+            });
+        }
+    }
+    useEffect(() => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            checkCredentials();
+        }, 1000);
+    }, [username, email]);
+
+    useEffect(() => {
+        forceUpdate();
+    }, [errors]);
+
+
+    const validateForm = () => {
+        const newErrors = {
+            email: validate(email, "email"),
+            username: validate(username, "username"),
+            first_name: validate(first_name, "name"),
+            last_name: validate(last_name, "name"),
+        }
+        setErrors(newErrors);
+    }
+
+    const hasErrors = () => {
+        let hasErrors = false;
+        Object.values(errors).forEach(errorMsg => {
+            if(errorMsg.length) hasErrors = true;
+        });
+        return hasErrors;
+    }
+    const postToSignUp = (event) => {
+        event.preventDefault();
+        validateForm();
+        if(!hasErrors()) {
+            //If there are not any errors, post to backend
+            const userData = {
+                email,
+                username,
+                first_name,
+                last_name,
+                icon_id
+            }
+            fetch("/api/user", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+                if(response.ok) {
+                    checkAuth();
+                    setAccountPageUsername(username);
+                    setRedirect(true);
+                }
+            });
+
+
+        }
+    }
+    if(redirect) return <Redirect to={{pathname: `/account/${accountPageUsername}`}}/>;
+    return (
+        <form method="POST" onSubmit={event => postToSignUp(event)}>
+            <div className="form-block">
+                <label htmlFor="emailInput" className="input-label">Email</label>
+                <input type="email" className="input" id="emailInput" onInput={(event) => setEmail(event.target.value)} value={email} disabled/>
+                <span className={`error-message ${errors.email.length ? "" : "hidden"}`}>{errors.email.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="usernameInput" className="input-label">Username</label>
+                <input type="text" className="input" id="usernameInput" onInput={(event) => setUsername(event.target.value)} value={username} />
+                <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="firstNameInput" className="input-label">First Name</label>
+                <input type="text" className="input" id="firstNameInput" onInput={(event) => setFirstName(event.target.value)} value={first_name} />
+                <span className={`error-message ${errors.first_name.length ? "" : "hidden"}`}>{errors.first_name.toString()}&nbsp;</span>
+            </div>
+            <div className="form-block">
+                <label htmlFor="lastNameInput" className="input-label">Last Name</label>
+                <input type="text" className="input" id="lastNameInput" onInput={(event) => setLastName(event.target.value)} value={last_name} />
+                <span className={`error-message ${errors.last_name.length ? "" : "hidden"}`}>{errors.last_name.toString()}&nbsp;</span>
+            </div>
+            
+            <div class="btn-group">
+                <button className="btn blue-outline" type="button" onClick={() => {setAccountPageUsername(userData.username); setRedirect(true);}}>Cancel</button>
+                <button className="btn blue" type="submit">Save Changes</button>
+            </div>
+        </form>
+    );
+}
+
+
 const validate = (value, type) => {
     let errorMessage = "";
     switch(type) {
@@ -283,5 +421,6 @@ const confirmPasswords = (password, confirm) => {
 export {
     ImageForm,
     LogInForm,
-    SignupForm
+    SignupForm,
+    AccountSettingsForm
 } 
