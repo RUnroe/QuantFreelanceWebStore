@@ -137,7 +137,7 @@ function SignupForm({isSeller, icon_id}) {
             });
     }
     useEffect(() => {
-        if(timer) clearTimeout(timer);
+        clearTimeout(timer);
         timer = setTimeout(() => {
             checkCredentials();
         }, 1000);
