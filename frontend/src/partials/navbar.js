@@ -52,7 +52,10 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, usernam
             method: "DELETE",
             credentials:"include"
         }).then(response => {
-            if(response.status === 204) setRedirect(true);
+            if(response.status === 204) {
+                setRedirect(true);
+                setCurrAuthLevel(""); //remove auth level from front end at same time as backend
+            }
         })
     }
     useEffect(() => {
