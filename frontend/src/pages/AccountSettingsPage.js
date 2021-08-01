@@ -11,7 +11,7 @@ export default function AccountSettingsPage({checkAuth}) {
         setImageSelectModalSetter(() => setter);
     }
     return(
-        <div className="form-section">
+        <div className="account-form">
             <div className="container gradient left-side">
                 <h1>Account Settings</h1>
                 <div className="round-img-container" onClick={() => selectImage(setSelectedIcon)}>{ selectedIcon ? <img src={selectedIcon} /> : <div className="image-picker-button">+</div>}</div>
