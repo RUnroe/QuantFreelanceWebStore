@@ -71,6 +71,27 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
 
 
     }
+    const createProduct = () => {
+        const emptyProduct = {
+            price: 0,
+            title: "",
+            description: "",
+            category: "DesignArt",
+            page_structure: "[]",
+            icon_id: ""
+        }
+        fetch("/api/product", {
+            method: "POST",
+            credentials:"include",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(emptyProduct)
+        }).then(result => result.json())
+        .then(data => {
+            console.log(data);
+        })
+    }
 
 
     if(redirect) return < Redirect to={redirect}/>;
@@ -92,7 +113,7 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
                 <div className="service-side container">
                     <div className="title-bar">
                         <h1 className="title">{getTitle()}</h1>
-                        {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue">+</button>: <></> :<></>}
+                        {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue" onClick={createProduct}>+</button>: <></> :<></>}
                     </div>
                     <div className="service-list">
                         {productListJSX}
