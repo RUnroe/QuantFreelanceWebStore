@@ -36,7 +36,7 @@ export default function PurchasePage() {
     return(
         <div className="section purchase-page">
             <div className="container split">
-                <div>
+                <div className="left-side">
                     <h1>Purchase</h1>
                     <div className="column">
                         <div className="purchase-section">
