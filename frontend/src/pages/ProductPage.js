@@ -257,7 +257,7 @@ const getCategoryTitle = (categorySelector) => {
 }
 
 
-function SideBar({userId, title, price, category, description, user, accountLink, setRedirect}) {
+function SideBar({userId, title, price, category, description, user, accountLink, setRedirect, productId}) {
     return (
         <div className="product-details">
             <div className="top">
