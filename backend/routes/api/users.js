@@ -104,6 +104,13 @@ const checkCredentials = (req, res) => {
 	.catch(handle(req, res));
 }
 
+const getUserByUsername = (req, res) => {
+	dal.getUserByUsername({username: req.params.username}).then( user => {
+		res.json(user);
+	})
+	.catch(handle(req, res));
+}
+
 const routes = [
 	{
 		uri: '/api/user',
@@ -114,6 +121,11 @@ const routes = [
 		uri: '/api/user/:user_id',
 		methods: ['get'],
 		handler: getUser
+	},
+	{
+		uri: '/api/user/info/:username',
+		methods: ['get'],
+		handler: getUserByUsername
 	},
     {
 		uri: '/api/user',
