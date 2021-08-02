@@ -71,3 +71,9 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.service-side .title-bar button {
+    align-self: center;
+    font-size: 1.24rem;
+    padding: .4rem 0.8rem;
+}
