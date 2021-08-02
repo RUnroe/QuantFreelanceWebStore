@@ -78,7 +78,7 @@
 .info-box {
     text-align: center;
     max-width: 250px;
-    margin:0 0.5rem 0.5rem;
+    margin:0 0.5rem 2rem;
 }
 
 /* Test with real images */
@@ -114,6 +114,17 @@
     margin-top: 1.5rem;
 }
 
+@media all and (max-width:800px) {
+    .search-section > .section{
+        display:flex;
+    }
+    .image-half {
+        display:none;
+    }
+    .search-container {
+        width:100%;
+    }
+}
 @media all and (max-width:650px) {
     .category-box-container {
         grid-template-columns: repeat(2, 1fr);
@@ -123,5 +134,8 @@
 @media all and (max-width:450px) {
     .category-box-container {
         grid-template-columns: 1fr;
+    }
+    .search-section > .section {
+        padding: 3rem 0rem;
     }
 }

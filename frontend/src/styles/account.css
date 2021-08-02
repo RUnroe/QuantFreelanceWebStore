@@ -5,6 +5,7 @@
 }
 
 .account-container {
+    max-height: 80vh;
     border-radius: 6px;
     color: var(--color-light-1);
     text-align: center;
@@ -76,4 +77,11 @@
     align-self: center;
     font-size: 1.24rem;
     padding: .4rem 0.8rem;
+}
+
+
+@media all and (max-width: 850px) {
+    .account-page {
+        display: block;
+    }
 }
