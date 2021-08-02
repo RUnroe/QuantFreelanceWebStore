@@ -215,11 +215,10 @@ const createProduct = async (user_id, _product) => {
 	
 }
 const getProductById = async (product_id) => {
-	let product = await dbclient.db('QuantFreelance').collection('Product').findOne({product_id}).then(result => {
+	return await dbclient.db('QuantFreelance').collection('Product').findOne({product_id}).then(result => {
 		return result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
-	return await getFullProductObj(product);
 }
 
 const getProductsBySeller = async (user_id) => {
