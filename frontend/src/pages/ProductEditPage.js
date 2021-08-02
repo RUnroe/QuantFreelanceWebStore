@@ -673,7 +673,8 @@ export default function ProductEditPage({username}) {
         //select new element
         setNewCreatedElementId(newElement.id);
     }
-    if (redirect) return (<Redirect to={{pathname: redirect}} />);
+    if (redirect === "/") return (<Redirect to={{pathname: redirect}} />);
+    else if (redirect) return (<Redirect push to={{pathname: redirect}} />); // if user clicks cancel btn, route back to their account page and keep the browser history
     return(
         <>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
