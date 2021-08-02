@@ -164,6 +164,7 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
         const newErrors = Object.assign(errors);
         newErrors.confirmPassword = confirmPasswords(password, confirmPassword);
         setErrors(newErrors);
+        forceUpdate();
     }, [confirmPassword]);
 
     const validateForm = () => {
