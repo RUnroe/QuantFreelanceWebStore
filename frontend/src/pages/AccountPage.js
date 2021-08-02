@@ -43,11 +43,11 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
     }
 
     useEffect(() => {
-        if(products) convertListToJSX;
+        if(products) convertListToJSX();
     }, [products]);
 
     const getTitle = () => {
-        let name = `${user.first_name} ${user.last_name}'`;
+        let name = user ? `${user.first_name} ${user.last_name}'` : " ";
         if(name[name.length-1].toLowerCase() !== "s") name += "s";
         return `${name} Services`;
     }
@@ -72,23 +72,23 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
     }
 
 
-    if(redirect) return < Redirect to={redirect}/>;
+    //if(redirect) return < Redirect to={redirect}/>;
     return(
         <div className="container">
             <div className="section account-page">
-                <div className="account-container">
+                <div className="account-container container gradient">
                     <div className="top-section">
-                        <div className="round-img-container"><img src={selectedIcon} /></div>
+                        <div className="round-img-container"><img src={user ? user.icon_id : ""} /></div>
                         <h3 className="name">{user ? `${user.first_name} ${user.last_name}` : ""}</h3>
                         <h3 className="username">{user ? `@${user.username}` : ""}</h3>
                         <p className="email">{user ? user.email : ""}</p>
                     </div>
                     <div className="bottom-section">
-                        {user ? user.user_id === currUser.user_id && authLevel === "buyer" ? <p onClick={makeAccountSeller}>Become a seller</p> : "" : ""}
-                        {user ? user.user_id === currUser.user_id ? <Link to="/account/settings">Edit Account</Link> : "" : ""}
+                        {user ? user.user_id === currUser.user_id && authLevel === "buyer" ? <p className="seller-link" onClick={makeAccountSeller}>Become a seller</p> : "" : ""}
+                        {user ? user.user_id === currUser.user_id ? <Link to="/account/settings" className="btn blue center">Edit Account</Link> : "" : ""}
                     </div>
                 </div>
-                <div className="service-side">
+                <div className="service-side container">
                     <h1 className="title">{getTitle()}</h1>
                     <div className="service-list">
                         {productListJSX}
