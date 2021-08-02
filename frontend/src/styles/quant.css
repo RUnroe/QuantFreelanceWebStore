@@ -117,6 +117,13 @@ h4 { font-size:1.2rem; }
 .btn:hover {
     cursor:pointer;
 }
+
+.btn:disabled {
+    color: var(--color-light-4);
+    background-color: var(--color-dark-4);
+    cursor:default;
+}
+
 .btn.center {
     margin-left: auto;
     margin-right: auto;
