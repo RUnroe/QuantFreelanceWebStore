@@ -417,13 +417,13 @@ const validate = (value, type) => {
     let errorMessage = "";
     switch(type) {
         case "email":
-            errorMessage = value.length > 3 && (/\w+@\w+\.\w+/).test(value) ? "" : "Invalid email";
+            errorMessage = value.trim().length > 2 && (/\w+@\w+\.\w+/).test(value) ? "" : "Invalid email";
         break;
         case "username":
-            errorMessage = value.length > 3 && (/^[a-zA-Z0-9_ ]+$/).test(value) ? "" : "Invalid username";
+            errorMessage = value.trim().length > 0 && (/^[a-zA-Z0-9_ ]+$/).test(value) ? "" : "Invalid username";
         break;
         case "name":
-            errorMessage = value.length > 1 && (/^[a-zA-Z- ]+$/).test(value) ? "" : "Invalid name";
+            errorMessage = value.trim().length > 0 && (/^[a-zA-Z- ]+$/).test(value) ? "" : "Invalid name";
         break;
         case "password":
             errorMessage = (/^(?=.*[A-Za-z])(?=.*\d).{8,}$/).test(value) ? "" : "Password must contain at least 8 characters, 1 letter, and 1 number";
