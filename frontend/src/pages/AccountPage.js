@@ -37,7 +37,7 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
     const convertListToJSX = () => {
         const jsx = [];
         products.forEach(result => {
-            if(user && user.user_id === currUser.user_id) jsx.push(<ProductCard productData={result} mode={"edit"}/>);
+            if(user && user.user_id === currUser.user_id && authLevel === "seller") jsx.push(<ProductCard productData={result} mode={"edit"}/>);
             else jsx.push(<ProductCard productData={result} />);
         });
         setProductListJSX(jsx);
@@ -90,7 +90,10 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
                     </div>
                 </div>
                 <div className="service-side container">
-                    <h1 className="title">{getTitle()}</h1>
+                    <div className="title-bar">
+                        <h1 className="title">{getTitle()}</h1>
+                        {user ? user.user_id === currUser.user_id && authLevel === "buyer" ? <button title="Create new service" className="btn blue">+</button>: <></> :<></>}
+                    </div>
                     <div className="service-list">
                         {productListJSX}
                     </div>

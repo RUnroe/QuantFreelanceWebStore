@@ -65,3 +65,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+.service-side .title-bar {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
