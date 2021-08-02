@@ -1,6 +1,6 @@
 .account-page {
     display: grid !important;
-    grid-template-columns: 28rem 1fr;
+    grid-template-columns: 25rem 1fr;
     min-height: calc(100vh - 11.5rem);
 }
 
@@ -16,8 +16,8 @@
 }
 
 .account-container .round-img-container {
-    width:200px;
-    height: 200px;
+    width:180px;
+    height: 180px;
     border-radius: 200px;
     overflow:hidden;
     margin: 1rem auto;
@@ -51,6 +51,9 @@
     cursor:pointer;
 }
 
+.service-side {
+    margin-left:1rem;
+}
 .service-side .title {
     font-weight: 600;
 
