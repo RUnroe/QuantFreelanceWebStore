@@ -20,7 +20,15 @@ export default function PurchasePage() {
         //get product info
         fetch(`/api/product/${product_id}`)
         .then(response => response.json())
-        .then(data => setProductData(data))
+        .then(productData => {
+            fetch(`/api/user/${productData.seller}`)
+            .then(result => result.json())
+            .then(userData => {
+                const data = productData;
+                data.user = userData;
+                setProductData(data);
+            });
+        })
         .catch(err => setRedirect("/"));
     }, []);
 
