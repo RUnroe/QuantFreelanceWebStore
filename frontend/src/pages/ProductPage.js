@@ -4,7 +4,7 @@ import {Redirect, Link} from "react-router-dom";
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-export default function ProductPage() {
+export default function ProductPage({userId}) {
     const [productId, setProductId] = useState();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -231,7 +231,7 @@ export default function ProductPage() {
                 {pageStructureJSX}
             </div>
             <div className="product-side container gradient">
-                <SideBar title={title} price={price} category={category} description={description} user={user} accountLink={accountLink} />
+                <SideBar userId={userId} title={title} price={price} category={category} description={description} user={user} accountLink={accountLink} setRedirect={setRedirect} productId={productId} />
             </div>
         </div>
     
@@ -257,7 +257,7 @@ const getCategoryTitle = (categorySelector) => {
 }
 
 
-function SideBar({title, price, category, description, user, accountLink}) {
+function SideBar({userId, title, price, category, description, user, accountLink, setRedirect}) {
     return (
         <div className="product-details">
             <div className="top">
@@ -279,7 +279,7 @@ function SideBar({title, price, category, description, user, accountLink}) {
                         </div>
                     </div>
                 </Link>
-                <button className="btn blue wide center">Purchase</button>
+                <button className="btn blue wide center" disabled={userId === user.user_id} onClick={() => setRedirect(`/purchase/${productId}`)}>Purchase</button>
             </div>
         </div>
     );
