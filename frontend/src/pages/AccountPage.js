@@ -92,7 +92,7 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
                 <div className="service-side container">
                     <div className="title-bar">
                         <h1 className="title">{getTitle()}</h1>
-                        {user ? user.user_id === currUser.user_id && authLevel === "buyer" ? <button title="Create new service" className="btn blue">+</button>: <></> :<></>}
+                        {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue">+</button>: <></> :<></>}
                     </div>
                     <div className="service-list">
                         {productListJSX}
