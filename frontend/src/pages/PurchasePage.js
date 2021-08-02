@@ -34,29 +34,33 @@ export default function PurchasePage() {
 
     if(redirect) return < Redirect to={redirect}/>;
     return(
-        <div className="section">
-            <div className="container">
-                <h1>Purchase</h1>
-                <div className="column">
-                    <ProductCard productData={productData} />
-                    <div className="purchase-section">
-                        <h2>Billing Address</h2>
-                    </div>
-                    <div className="purchase-section">
-                        <h2>Card Information</h2>
-                    </div>
-                    <div className="purchase-section">
-                        <h2>Comments</h2>
-                        <textarea> </textarea>
-                    </div>
-                    <hr/>
-                    <div className="final-section">
-                        <h2>Purchase "{productData.title}" for ${productData.price}?</h2>
-                        <div className="btn-group">
-                            <button className="btn green-outline">Cancel</button>
-                            <button className="btn green">Purchase</button>
+        <div className="section purchase-page">
+            <div className="container split">
+                <div>
+                    <h1>Purchase</h1>
+                    <div className="column">
+                        <div className="purchase-section">
+                            <h2>Billing Address</h2>
+                        </div>
+                        <div className="purchase-section">
+                            <h2>Card Information</h2>
+                        </div>
+                        <div className="purchase-section">
+                            <h2>Comments</h2>
+                            <textarea> </textarea>
+                        </div>
+                        <hr/>
+                        <div className="final-section">
+                            <h2>Purchase "{productData.title}" for ${productData.price}?</h2>
+                            <div className="btn-group">
+                                <button className="btn green-outline">Cancel</button>
+                                <button className="btn green">Purchase</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <ProductCard productData={productData} />
                 </div>
             </div>
         </div>
