@@ -12,7 +12,7 @@ export default function ProductCard({productData, mode}) {
 
     return (
         <Link className="product-card" to={`/store/${productData.product_id}`} >
-            {mode === "edit" ? <Link className="edit-btn" to={`/store/${productData.product_id}/edit`}>
+            {mode === "edit" ? <Link className="edit-btn" to={`/store/${productData.product_id}/edit`} title="Edit service">
                 <i className="far fa-edit"></i>
             </Link>
             : <></>}

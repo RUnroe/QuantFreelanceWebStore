@@ -7,10 +7,8 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createProduct = (req, res) => {
-	dal.createProduct(req.session.user_id, req.body).then(() => {
-		res.status(201);
-		res.statusMessage = 'Created Product';
-		res.end();
+	dal.createProduct(req.session.user_id, req.body).then((result) => {
+		res.json(result);
 	})
 	.catch(handle(req, res));
 }

@@ -195,12 +195,12 @@ const createProduct = async (user_id, _product) => {
 	} catch (err) { throw ['An error occured while parsing price']};
 	_product.seller = user_id;
 
-	const errors = findErrors([
-		{name: "seller id", value: _product.seller},
-		{name: "price", value: _product.price, type:"number"},
-		{name: "title", value: _product.title}, 
-		{name: "category", value: _product.category}, 
-	]);
+	// const errors = findErrors([
+	// 	{name: "seller id", value: _product.seller},
+	// 	{name: "price", value: _product.price, type:"number"},
+	// 	{name: "title", value: _product.title}, 
+	// 	{name: "category", value: _product.category}, 
+	// ]);
 	if(_product.price < 0) throw ['Price cannot be negative'];
 	if(typeof _product.description != "string")  _product.description = "";
 	if(typeof _product.coverImage != "string")  _product.coverImage = "";
