@@ -770,7 +770,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
             </div>
         </div>
         <div className="btn-group">
-            <button className="btn blue-outline text-white" onClick={() => setRedirect(`/account/${username}`)}>Cancel</button>
+            <button className="btn blue-outline text-white" onClick={() => setRedirect(`/account/${username}`)}>Return</button>
             <button className="btn blue" onClick={savePage}>Save Changes</button>
         </div>
         </div>

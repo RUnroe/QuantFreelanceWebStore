@@ -4,6 +4,7 @@ import "../styles/productCard.css";
 
 export default function ProductCard({productData, mode}) {
     const formatPrice = (price) => {
+        if (price === 0) return "0.00";
         let fprice = Math.floor(price * 100);
         fprice = fprice + "";
         fprice= fprice.slice(0, fprice.length-2) + "." + fprice.slice(fprice.length-2);
