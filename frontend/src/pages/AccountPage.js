@@ -3,7 +3,7 @@ import { useParams, Redirect, Link } from 'react-router-dom';
 import "../styles/account.css";
 import ProductCard from "../partials/productCard";
 
-export default function AccountPage({currUser, authLevel}) {
+export default function AccountPage({currUser, authLevel, checkAuth}) {
     const { username } = useParams();
     const [user, setUser] = useState();
     const [products, setProducts] = useState();
@@ -55,6 +55,18 @@ export default function AccountPage({currUser, authLevel}) {
         const data = {
             is_seller: true
         }
+        fetch("/api/user", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if(response.ok) {
+                checkAuth();
+            }
+        });
 
 
     }

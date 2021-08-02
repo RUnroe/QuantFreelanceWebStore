@@ -122,7 +122,7 @@ function App() {
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SellHistoryPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/account/:username">
-          <AccountPage currUser={currUser} authLevel={currAuthLevel} />
+          <AccountPage currUser={currUser} authLevel={currAuthLevel} checkAuth={checkAuth} />
         </Route>
         <Route exact path="/inbox">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<InboxPage />} reqAuthLevel="seller" />
