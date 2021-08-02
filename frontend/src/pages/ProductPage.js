@@ -279,7 +279,7 @@ function SideBar({userId, title, price, category, description, user, accountLink
                         </div>
                     </div>
                 </Link>
-                <button className="btn blue wide center" disabled={userId === user.user_id} onClick={() => setRedirect(`/purchase/${productId}`)}>Purchase</button>
+                <button className="btn blue wide center" disabled={userId ? userId === user.user_id : false} onClick={() => setRedirect(`/purchase/${productId}`)}>Purchase</button>
             </div>
         </div>
     );
