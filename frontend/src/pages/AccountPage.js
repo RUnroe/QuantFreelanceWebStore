@@ -72,7 +72,7 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
     }
 
 
-    //if(redirect) return < Redirect to={redirect}/>;
+    if(redirect) return < Redirect to={redirect}/>;
     return(
         <div className="container">
             <div className="section account-page">

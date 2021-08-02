@@ -104,7 +104,7 @@ function App() {
           <CategoryPage />
         </Route>
         <Route exact path="/store/:product_id/edit">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<ProductEditPage />} reqAuthLevel="seller" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<ProductEditPage username={currUser.username}/>} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/store/:product_id">
           <ProductPage />

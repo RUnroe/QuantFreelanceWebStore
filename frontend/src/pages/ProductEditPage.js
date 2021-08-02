@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-export default function ProductEditPage() {
+export default function ProductEditPage({username}) {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [addElementLocation, setAddElementLocation] = useState("");
@@ -474,7 +474,7 @@ export default function ProductEditPage() {
         })
         .then(response => response.json())
         .then(data => {
-            if(!data) setRedirect(true);
+            if(!data) setRedirect("/");
             setTitle(data.title);
             setCoverImg(data.icon_id);
             setDescription(data.description);
@@ -489,7 +489,6 @@ export default function ProductEditPage() {
     }, []);
 
     useEffect(() => {
-        console.log("RERENDER")
         convertPageStructureToJSX();
         if(newCreatedElementId) {
             selectElement(newCreatedElementId);
@@ -674,7 +673,7 @@ export default function ProductEditPage() {
         //select new element
         setNewCreatedElementId(newElement.id);
     }
-    if (redirect) return (<Redirect to={{pathname: '/'}} />);
+    if (redirect) return (<Redirect to={{pathname: redirect}} />);
     return(
         <>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
@@ -711,6 +710,7 @@ export default function ProductEditPage() {
                 <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
                     title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
                     description={description} setDescription={setDescription} savePage={savePage} selectedElementId={selectedElementId}
+                    username={username} setRedirect={setRedirect}
                 />
             </div>
         </div>
@@ -726,7 +726,7 @@ export default function ProductEditPage() {
 
 
 
-function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage}) {
+function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage, username, setRedirect}) {
     // console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
     if (configPanelJSX.length > 0 && selectedElementId != null) return (<div className="config-menu">{configPanelJSX}</div>);
     else return (
@@ -769,7 +769,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
             </div>
         </div>
         <div className="btn-group">
-            <button className="btn blue-outline text-white">Cancel</button>
+            <button className="btn blue-outline text-white" onClick={() => setRedirect(`/account/${username}`)}>Cancel</button>
             <button className="btn blue" onClick={savePage}>Save Changes</button>
         </div>
         </div>
