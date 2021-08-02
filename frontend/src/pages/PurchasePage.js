@@ -24,8 +24,7 @@ export default function PurchasePage() {
             fetch(`/api/user/${productData.seller}`)
             .then(result => result.json())
             .then(userData => {
-                const data = productData;
-                data.user = userData;
+                const data = Object.assign(productData, {user: userData});
                 setProductData(data);
             });
         })
