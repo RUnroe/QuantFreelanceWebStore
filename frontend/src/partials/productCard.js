@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/productCard.css";
 
 
-export default function ProductCard({productData}) {
+export default function ProductCard({productData, mode}) {
     const formatPrice = (price) => {
         let fprice = Math.floor(price * 100);
         fprice = fprice + "";
@@ -12,6 +12,10 @@ export default function ProductCard({productData}) {
 
     return (
         <Link className="product-card" to={`/store/${productData.product_id}`} >
+            {mode === "edit" ? <Link className="edit-btn" to={`/store/${productData.product_id}/edit`}>
+                <i className="far fa-edit"></i>
+            </Link>
+            : <></>}
             <div className="top img-container">
                 <img src={productData.icon_id} alt="Product"/>
             </div>

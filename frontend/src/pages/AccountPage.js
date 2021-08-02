@@ -37,7 +37,8 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
     const convertListToJSX = () => {
         const jsx = [];
         products.forEach(result => {
-            jsx.push(<ProductCard productData={result} />);
+            if(user && user.user_id === currUser.user_id) jsx.push(<ProductCard productData={result} mode={"edit"}/>);
+            else jsx.push(<ProductCard productData={result} />);
         });
         setProductListJSX(jsx);
     }

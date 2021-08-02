@@ -44,6 +44,8 @@
     max-width: 40px;
     min-height: 40px;
     max-height: 40px;
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
     overflow: hidden;
     margin-right: 0.75rem;
@@ -65,4 +67,14 @@
     font-size: 1.1rem;
     text-align: right;
     color: var(--color-secondary);
+}
+
+
+.edit-btn {
+    position: absolute;
+    top:0;
+    right:0;
+    border:1px solid var(--color-light-3);
+    background-color: var(--color-primary);
+    color:var(--color-light-1);
 }
