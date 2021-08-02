@@ -114,7 +114,7 @@ h4 { font-size:1.2rem; }
     font-size: 0.95rem;
     transition:background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.btn:hover {
+.btn:hover:not(:disabled) {
     cursor:pointer;
 }
 
@@ -133,7 +133,7 @@ h4 { font-size:1.2rem; }
     color: var(--color-light-1);
     background-color:var(--color-primary);
 }
-.btn.blue:hover {
+.btn.blue:hover:not(:disabled) {
     background-color:#517EE1;
 }
 .btn.blue-outline {
@@ -141,7 +141,7 @@ h4 { font-size:1.2rem; }
     border:2px solid var(--color-primary);
     background-color: transparent;
 }
-.btn.blue-outline:hover {
+.btn.blue-outline:hover:not(:disabled) {
     background-color:var(--color-primary);
     color:var(--color-light-1);
 }
@@ -153,7 +153,7 @@ h4 { font-size:1.2rem; }
     color: var(--color-light-1);
     background-color:var(--color-secondary);
 }
-.btn.green:hover {
+.btn.green:hover:not(:disabled) {
     background-color:#3EA38B;
 }
 .btn.green-outline {
@@ -161,7 +161,7 @@ h4 { font-size:1.2rem; }
     border:2px solid var(--color-secondary);
     background-color: transparent;
 }
-.btn.green-outline:hover {
+.btn.green-outline:hover:not(:disabled) {
     background-color:var(--color-secondary);
     color:var(--color-light-1);
 }
@@ -173,7 +173,7 @@ h4 { font-size:1.2rem; }
     color: var(--color-light-1);
     background-color:var(--color-danger);
 }
-.btn.danger:hover {
+.btn.danger:hover:not(:disabled) {
     background-color:#EF4343;
 }
 .btn.danger-outline {
@@ -181,7 +181,7 @@ h4 { font-size:1.2rem; }
     border:2px solid var(--color-danger);
     background-color: transparent;
 }
-.btn.danger-outline:hover {
+.btn.danger-outline:hover:not(:disabled) {
     background-color:var(--color-danger);
     color:var(--color-light-1);
 }
