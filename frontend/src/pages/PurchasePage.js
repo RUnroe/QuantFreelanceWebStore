@@ -6,6 +6,9 @@ import ProductCard from "../partials/productCard";
 export default function PurchasePage() {
     const { product_id } = useParams();
     const [redirect, setRedirect] = useState(false);
+
+    const [comment, setComment] = useState("");
+
     const [productData, setProductData] = useState({
         title: "",
         price: 0,
@@ -31,6 +34,11 @@ export default function PurchasePage() {
         .catch(err => setRedirect("/"));
     }, []);
 
+    const purchaseProduct = () => {
+        //send request to record order
+        //on response, redirect
+    }
+
 
     if(redirect) return < Redirect to={redirect}/>;
     return(
@@ -41,20 +49,39 @@ export default function PurchasePage() {
                     <div className="column">
                         <div className="purchase-section">
                             <h2>Billing Address</h2>
+                            <div class="input-block">
+                                <input type="text" placeholder="Address 1" />
+                            </div>
+                            <div class="input-block">
+                                <input type="text" placeholder="Address 2" />
+                            </div>
+                            <div class="input-block flex">
+                                <input type="text" placeholder="City" />
+                                <input type="text" placeholder="State" />
+                                <input type="text" placeholder="Zip" />
+                            </div>
                         </div>
                         <div className="purchase-section">
                             <h2>Card Information</h2>
+                            <div class="input-block">
+                                <input type="text" placeholder="Card Number" />
+                            </div>
+                            <div class="input-block flex">
+                                <input type="text" placeholder="MM / YY" />
+                                <input type="text" placeholder="CVV" />
+                            </div>
+
                         </div>
                         <div className="purchase-section">
                             <h2>Comments</h2>
-                            <textarea> </textarea>
+                            <textarea value={comment} onInput={(event) => setComment(event.target.value)}> </textarea>
                         </div>
                         <hr/>
                         <div className="final-section">
                             <h2>Purchase "{productData.title}" for ${productData.price}?</h2>
                             <div className="btn-group">
-                                <button className="btn green-outline">Cancel</button>
-                                <button className="btn green">Purchase</button>
+                                <button className="btn green-outline" onClick={() => setRedirect(`/store/${product_id}`)}>Cancel</button>
+                                <button className="btn green" onClick={purchaseProduct}>Purchase</button>
                             </div>
                         </div>
                     </div>

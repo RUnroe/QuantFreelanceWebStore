@@ -1,3 +1,6 @@
+.purchase-page {
+    min-height: calc(100vh - 11.5rem);
+}
 .purchase-page .split {
     display:grid;
     grid-template-columns: 1fr 300px;
@@ -31,4 +34,14 @@
 
 .purchase-page .split .left-side {
     border-right: 1px solid var(--color-light-4);
+}
+
+.purchase-page .input-block.flex {
+    display:flex;
+    flex-direction: row;
+}
+
+.purchase-page .input-block.flex > input {
+    flex:1;
+    min-width:200px;
 }
