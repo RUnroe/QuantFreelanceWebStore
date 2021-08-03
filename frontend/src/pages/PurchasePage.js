@@ -3,7 +3,7 @@ import { useParams, Redirect } from 'react-router-dom';
 import "../styles/purchase.css";
 import ProductCard from "../partials/productCard";
 
-export default function PurchasePage() {
+export default function PurchasePage({userId}) {
     const { product_id } = useParams();
     const [redirect, setRedirect] = useState(false);
 
@@ -28,6 +28,7 @@ export default function PurchasePage() {
             .then(result => result.json())
             .then(userData => {
                 const data = Object.assign(productData, {user: userData});
+                if(userData.user_id === userId) setRedirect("/");
                 setProductData(data);
             });
         })
@@ -37,6 +38,22 @@ export default function PurchasePage() {
     const purchaseProduct = () => {
         //send request to record order
         //on response, redirect
+        const orderData = {
+            seller: productData.user.user_id,
+            message: comment
+        }
+        fetch("/api/order", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => {
+            if(response.ok) {
+                setRedirect("/purchased");
+            }
+        });
     }
 
 
@@ -74,7 +91,9 @@ export default function PurchasePage() {
                         </div>
                         <div className="purchase-section">
                             <h2>Comments</h2>
-                            <textarea className="input" value={comment} onInput={(event) => setComment(event.target.value)}> </textarea>
+                            <div className="input-block">
+                                <textarea className="input" value={comment} onInput={(event) => setComment(event.target.value)}> </textarea>
+                            </div>
                         </div>
                         <hr/>
                         <div className="final-section">

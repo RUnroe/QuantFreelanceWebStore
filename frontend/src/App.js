@@ -110,7 +110,7 @@ function App() {
           <ProductPage userId={currUser && currUser.user_id ? currUser.user_id : ""}/>
         </Route>
         <Route exact path="/purchase/:product_id">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage />} reqAuthLevel="buyer" />
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage userId={currUser.user_id}/>} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage user={currUser} checkAuth={checkAuth} />} reqAuthLevel="buyer" />

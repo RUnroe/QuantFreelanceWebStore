@@ -139,24 +139,24 @@ const checkCredentials = async ({user_id, username, email}) => {
 //            Orders
 // ==============================
 
-const createOrder = async (_order) => {
+const createOrder = async (user_id, _order) => {
 	const errors = findErrors([
-		{name: "buyer", value: _order.buyer}, 
+		{name: "buyer", value: user_id}, 
 		{name: "seller", value: _order.seller}, 
 	]);
 	if (errors.length) {
 		throw errors;
 	}
 	if(!_order.message) _order.message = "";
-	return getUserById({user_id: _order.buyer}).then(user => {
-		if(!user) throw [`No user exists with the id "${_order.buyer}" `];
+	return getUserById({user_id: user_id}).then(user => {
+		if(!user) throw [`No user exists with the id "${user_id}" `];
 	}).then(() => getUserById({user_id: _order.seller})).then(user => {
 		if(!user) throw [`No user exists with the id "${_order.seller}" `];
 	}).then(() => {
 		const order_id = gen_id();
-		const record = Object.assign({}, _order, {order_id});
-		if(_order.status != "pending" || _order.status != "accepted" ||
-		_order.status != "declined" || _order.status != "completed")
+		const record = Object.assign({}, _order, {order_id, buyer: user_id});
+		if(record.status != "pending" || record.status != "accepted" ||
+		record.status != "declined" || record.status != "completed")
 			record.status = "pending";
 
 		return dbclient.db('QuantFreelance').collection('Order').insertOne(record).then(() => order_id);
