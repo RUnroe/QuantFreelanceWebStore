@@ -9,8 +9,8 @@
 }
 .purchased-page p {
     text-align: center;
-    margin:1.5rem 0;
-    color: var(--color-dark-3);
+    margin:2.5rem 0;
+    color: var(--color-dark-4);
 }
 
 .purchased-page .check-container {
