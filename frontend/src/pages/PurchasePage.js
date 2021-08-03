@@ -52,7 +52,7 @@ export default function PurchasePage({userId}) {
         })
         .then(response => response.json())
         .then(data => {
-            if(data && data.order_id) setRedirect(`/purchased/${data.order_id}`);
+            if(data) setRedirect(`/purchased/${data}`);
             else setRedirect("/")
         });
     }

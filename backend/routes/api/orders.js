@@ -7,10 +7,8 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createOrder = (req, res) => {
-	dal.createOrder(req.session.user_id, req.body).then(() => {
-		res.status(201);
-		res.statusMessage = 'Created Order';
-		res.end();
+	dal.createOrder(req.session.user_id, req.body).then((order_id) => {
+		res.json(order_id);
 	})
 	.catch(handle(req, res));
 }
