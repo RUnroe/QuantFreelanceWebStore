@@ -44,4 +44,12 @@
 .purchase-page .input-block.flex > input {
     flex:1;
     min-width:200px;
+    margin-left:1rem;
+    margin-right: 1rem;
+}
+.purchase-page .input-block.flex > input:first-child {
+    margin-left:0;
+}
+.purchase-page .input-block.flex > input:last-child {
+    margin-right:0;
 }

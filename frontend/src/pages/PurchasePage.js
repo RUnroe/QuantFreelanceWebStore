@@ -49,26 +49,26 @@ export default function PurchasePage() {
                     <div className="column">
                         <div className="purchase-section">
                             <h2>Billing Address</h2>
-                            <div class="input-block">
-                                <input type="text" placeholder="Address 1" />
+                            <div className="input-block">
+                                <input className="input" type="text" placeholder="Address 1" />
                             </div>
-                            <div class="input-block">
-                                <input type="text" placeholder="Address 2" />
+                            <div className="input-block">
+                                <input className="input" type="text" placeholder="Address 2" />
                             </div>
-                            <div class="input-block flex">
-                                <input type="text" placeholder="City" />
-                                <input type="text" placeholder="State" />
-                                <input type="text" placeholder="Zip" />
+                            <div className="input-block flex">
+                                <input className="input" type="text" placeholder="City" />
+                                <input className="input" type="text" placeholder="State" />
+                                <input className="input" type="text" placeholder="Zip" />
                             </div>
                         </div>
                         <div className="purchase-section">
                             <h2>Card Information</h2>
-                            <div class="input-block">
-                                <input type="text" placeholder="Card Number" />
+                            <div className="input-block">
+                                <input className="input" type="text" placeholder="Card Number" />
                             </div>
-                            <div class="input-block flex">
-                                <input type="text" placeholder="MM / YY" />
-                                <input type="text" placeholder="CVV" />
+                            <div className="input-block flex">
+                                <input className="input" type="text" placeholder="MM / YY" />
+                                <input className="input" type="text" placeholder="CVV" />
                             </div>
 
                         </div>
