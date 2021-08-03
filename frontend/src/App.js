@@ -12,6 +12,7 @@ import CategoryPage from './pages/CategoryPage';
 import ProductPage from './pages/ProductPage';
 import ProductEditPage from './pages/ProductEditPage';
 import PurchasePage from './pages/PurchasePage';
+import PurchasedPage from './pages/PurchasedPage';
 import AccountPage from './pages/AccountPage';
 import AccountSettingsPage from './pages/AccountSettingsPage';
 import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
@@ -111,6 +112,9 @@ function App() {
         </Route>
         <Route exact path="/purchase/:product_id">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage userId={currUser.user_id}/>} reqAuthLevel="buyer" />
+        </Route>
+        <Route exact path="/purchased/:order_id">
+          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasedPage />} reqAuthLevel="buyer" />
         </Route>
         <Route exact path="/account/settings">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage user={currUser} checkAuth={checkAuth} />} reqAuthLevel="buyer" />

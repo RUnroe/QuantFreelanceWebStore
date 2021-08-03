@@ -53,3 +53,7 @@
 .purchase-page .input-block.flex > input:last-child {
     margin-right:0;
 }
+.purchase-page .product-card-container {
+    display: flex;
+    height: fit-content;
+}

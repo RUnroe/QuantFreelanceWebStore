@@ -189,7 +189,7 @@ export default function ProductPage({userId}) {
         fetch(`/api/product/${_productId}`)
         .then(response => response.json())
         .then(data => {
-            if(!data) setRedirect(true);
+            if(!data) setRedirect("/");
             setTitle(data.title);
             setDescription(data.description);
             setPrice(data.price);
@@ -223,7 +223,8 @@ export default function ProductPage({userId}) {
     
 
 
-    if (redirect) return (<Redirect to={{pathname: redirect}} />);
+    if (redirect && redirect == "/") return (<Redirect to={{pathname: redirect}} />);
+    else if (redirect) return (<Redirect push to={{pathname: redirect}} />);
     return(
         <>
         <div className="product-page display">

@@ -106,7 +106,7 @@ export default function PurchasePage({userId}) {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="product-card-container">
                     <ProductCard productData={productData} />
                 </div>
             </div>
