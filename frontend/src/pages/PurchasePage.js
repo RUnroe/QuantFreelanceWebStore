@@ -64,17 +64,17 @@ export default function PurchasePage() {
                         <div className="purchase-section">
                             <h2>Card Information</h2>
                             <div className="input-block">
-                                <input className="input" type="text" placeholder="Card Number" />
+                                <input className="input" type="text" placeholder="Card Number" autocomplete="off" />
                             </div>
                             <div className="input-block flex">
-                                <input className="input" type="text" placeholder="MM / YY" />
-                                <input className="input" type="text" placeholder="CVV" />
+                                <input className="input" type="text" placeholder="MM / YY" autocomplete="off" />
+                                <input className="input" type="text" placeholder="CVV" autocomplete="off" />
                             </div>
 
                         </div>
                         <div className="purchase-section">
                             <h2>Comments</h2>
-                            <textarea value={comment} onInput={(event) => setComment(event.target.value)}> </textarea>
+                            <textarea className="input" value={comment} onInput={(event) => setComment(event.target.value)}> </textarea>
                         </div>
                         <hr/>
                         <div className="final-section">
