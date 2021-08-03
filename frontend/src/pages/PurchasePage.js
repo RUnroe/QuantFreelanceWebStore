@@ -58,6 +58,7 @@ export default function PurchasePage({userId}) {
     }
 
 
+    if(redirect && redirect === "/purchased") return < Redirect push to={redirect}/>;
     if(redirect) return < Redirect to={redirect}/>;
     return(
         <div className="section purchase-page">
