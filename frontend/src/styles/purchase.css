@@ -21,6 +21,7 @@
     height:2px;
     background-color: var(--color-primary);
     color: var(--color-primary);
+    margin-top: 2rem;
 }
 .purchase-page .btn-group {
     display: flex;

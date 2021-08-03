@@ -50,16 +50,16 @@ export default function PurchasePage({userId}) {
                 },
             body: JSON.stringify(orderData)
         })
-        .then(response => {
-            if(response.ok) {
-                setRedirect("/purchased");
-            }
+        .then(response => response.json())
+        .then(data => {
+            if(data && data.order_id) setRedirect(`/purchased/${data.order_id}`);
+            else setRedirect("/")
         });
     }
 
 
-    if(redirect && redirect === "/purchased") return < Redirect push to={redirect}/>;
-    if(redirect) return < Redirect to={redirect}/>;
+    if(redirect && redirect === "/") return < Redirect to={redirect}/>;
+    else if(redirect) return < Redirect push to={redirect}/>;
     return(
         <div className="section purchase-page">
             <div className="container split">
