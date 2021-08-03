@@ -162,6 +162,10 @@ const createOrder = async (user_id, _order) => {
 
 }
 
+const getOrderById = async (order_id) => {
+	return await dbclient.db('QuantFreelance').collection('Order').findOne({"order_id": order_id})
+	.catch(err => { throw ['An error occurred while finding order by order id'];});
+}
 const getOrdersByCustomer = async (user_id) => {
 	return await dbclient.db('QuantFreelance').collection('Order').find({"buyer": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding order by buyer id'];});
@@ -303,7 +307,7 @@ const getIconsByUser = async (user_id) => {
 module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
 	authenticate, checkCredentials,
-	createOrder, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
+	createOrder, getOrderById, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
 	createProduct, getProductById, getProductsBySeller, getProductsByCategory, getProductsBySearchTerm, updateProduct, removeProduct,
 	createIcon, getIcon, getIconsByUser
 };

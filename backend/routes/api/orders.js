@@ -12,7 +12,13 @@ const createOrder = (req, res) => {
 	})
 	.catch(handle(req, res));
 }
-
+//get all order by order_id
+const getOrdersByCustomer = (req, res) => {
+	dal.getOrderById(req.params.order_id).then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
+}
 //get all orders (purchased) for user by user_id
 const getOrdersByCustomer = (req, res) => {
 	dal.getOrdersByCustomer(req.session.user_id).then(result => {
@@ -46,6 +52,11 @@ const routes = [
 		uri: '/api/order',
 		methods: ['post'],
 		handler: [requireAuth(), createOrder]
+	},
+	{
+		uri: '/api/order/:order_id',
+		methods: ['get'],
+		handler: getOrderById
 	},
     {
 		uri: '/api/order/customer',

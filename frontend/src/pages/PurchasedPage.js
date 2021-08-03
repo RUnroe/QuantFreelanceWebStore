@@ -20,13 +20,13 @@ export default function PurchasePage() {
         });
     }, []);
     return (
-        <div className="section purchased">
+        <div className="section purchased-page">
             <div className="container">
                 <h1>Order Confirmation</h1>
                 <p>You have sucessfully purchased { product  && product.title ? product.title : "the product"}! Please wait for the seller to accept your order.</p>
                 
 
-                <Link class="btn blue center" to="/">Continue Browsing</Link>
+                <Link class="btn blue-outline center" to="/">Continue Browsing</Link>
             </div>
         </div>
 
