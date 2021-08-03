@@ -43,7 +43,6 @@ const findErrors = fields => {
 // ==============================
 
 const createUser = async (_user) => {
-	// console.log("req.body", _user);
 	const errors = findErrors([
 		{name: "username", value: _user.username, regex: /^[a-zA-Z0-9_ ]+$/}, 
 		{name: "email", value: _user.email, regex: /\w+@\w+\.\w+/}, 
@@ -102,7 +101,6 @@ const updateUser = async (user_id, user) => {
 }
 
 const removeUser = async (user_id) => {
-	// console.log(user_id)
 	return await dbclient.db('QuantFreelance').collection('User').deleteOne({user_id})
 	.catch(err => { throw ['An error occurred while removing user'];});
 	
@@ -125,7 +123,6 @@ const checkCredentials = async ({user_id, username, email}) => {
 	const errors = {username: false, email: false};
 	await dbclient.db('QuantFreelance').collection('User').findOne({"username": username})
 		.then(result => {
-			console.log(user_id, result);
 			if(result && user_id != result.user_id) errors.username = true;
 		});
 	await dbclient.db('QuantFreelance').collection('User').findOne({"email": email})
@@ -143,6 +140,7 @@ const createOrder = async (user_id, _order) => {
 	const errors = findErrors([
 		{name: "buyer", value: user_id}, 
 		{name: "seller", value: _order.seller}, 
+		{name: "product_id", value: _order.product_id}, 
 	]);
 	if (errors.length) {
 		throw errors;
@@ -248,7 +246,6 @@ const getFullProductObj = async (product) => {
 	return await getUserById({user_id: product.seller}).then(user => {
 		delete product.page_structure; 
 		product = Object.assign(product, {user: user});
-		console.log(user, product);
 		return product; 
 	}) 
 }
@@ -256,7 +253,6 @@ const getFullProductObj = async (product) => {
 const updateProduct = async (product_id, user_id, product) => {
 	//check if current user owns product
 	getProductById(product_id).then(result => {
-		// console.log(result, product);
 		product.price = parseInt(product.price);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
@@ -293,14 +289,12 @@ const createIcon = async (url, userId) => {
 
 const getIcon = async (icon_id) => {
 	return await dbclient.db('QuantFreelance').collection('Icon').findOne({icon_id}).then(result => {
-		// console.log(result);
 		return result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
 }
 
 const getIconsByUser = async (user_id) => {
-	// console.log(user_id);
 	return await dbclient.db('QuantFreelance').collection('Icon').find({"owner": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding icons by user id'];});
 }

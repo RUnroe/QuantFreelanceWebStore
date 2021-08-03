@@ -40,7 +40,8 @@ export default function PurchasePage({userId}) {
         //on response, redirect
         const orderData = {
             seller: productData.user.user_id,
-            message: comment
+            message: comment,
+            product_id: productData.product_id
         }
         fetch("/api/order", {
             method: "POST",
