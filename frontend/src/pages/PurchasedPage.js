@@ -23,12 +23,12 @@ export default function PurchasePage() {
         <div className="section purchased-page">
             <div className="container">
                 <div class="top-section">
+                    <h2>You have sucessfully ordered "{ product  && product.title ? product.title : "???"}"!</h2>
                     <div className="check-container">
                         <hr />
                         <div className="check"><i className="fas fa-check"></i></div>
                     </div>
                     
-                    <p>You have sucessfully ordered "{ product  && product.title ? product.title : "???"}"!</p>
                     <p>Please wait for the seller to accept your order.</p>
                 </div>
 
