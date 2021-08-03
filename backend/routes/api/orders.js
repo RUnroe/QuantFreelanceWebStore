@@ -13,7 +13,7 @@ const createOrder = (req, res) => {
 	.catch(handle(req, res));
 }
 //get all order by order_id
-const getOrdersByCustomer = (req, res) => {
+const getOrderById = (req, res) => {
 	dal.getOrderById(req.params.order_id).then(result => {
 		res.json(result);
 	})
