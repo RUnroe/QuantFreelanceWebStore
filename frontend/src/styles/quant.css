@@ -300,7 +300,11 @@ select.input {
 img.round {
     border-radius: 100%;
 }
-
+.quant-logo {
+    height:45px;
+    box-sizing: border-box;
+    padding:0.25rem 0;
+}
 /*====================
         Modal
 ======================*/

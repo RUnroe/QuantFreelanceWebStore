@@ -53,7 +53,7 @@ function Footer() {
     <footer>
       <div className="section">
         <div> 
-            <img src="https://via.placeholder.com/135x45" alt="footer logo" />
+            <img src="/images/QuantLogo.svg" className="quant-logo" alt="footer logo" />
             <span>&copy;Quant Freelance</span>
         </div> 
         <span>ryanunroe@gmail.com</span>

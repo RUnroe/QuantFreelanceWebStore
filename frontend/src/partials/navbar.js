@@ -68,7 +68,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, usernam
         <nav>
             <div className="primary-nav section">
                 <div>
-                <Link className="nav-logo" to="/"><img src="https://via.placeholder.com/135x45" alt="logo" /></Link>
+                <Link className="nav-logo" to="/"><img src="/images/QuantLogo.svg" className="quant-logo" alt="logo" /></Link>
                 </div>
                 <div>
                     <div className="dropdown">
@@ -102,7 +102,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, usernam
         <nav>
             <div className="primary-nav section">
                 <div>
-                <Link className="nav-logo" to="/"><img src="https://via.placeholder.com/135x45" alt="logo" /></Link>
+                <Link className="nav-logo" to="/"><img src="/images/QuantLogo.svg" className="quant-logo" alt="logo" /></Link>
                 </div>
                 <div>
                     <div className="dropdown">
@@ -135,7 +135,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, usernam
         <nav>
             <div className="primary-nav section">
                 <div>
-                <Link className="nav-logo" to="/"><img src="https://via.placeholder.com/135x45" alt="logo" /></Link>
+                <Link className="nav-logo" to="/"><img src="/images/QuantLogo.svg" className="quant-logo" alt="logo" /></Link>
                 </div>
                 <div>
                 <Link className="nav-item" to="/signup">Sign Up</Link>
