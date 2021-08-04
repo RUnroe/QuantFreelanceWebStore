@@ -29,7 +29,10 @@ export default function PurchaseHistoryPage() {
                         <i className="fas fa-chevron-down"></i> 
                     </div>
                 </div>
-                <div className="message"><p>{element.message ? `\"${element.message}\"`: `\"\"`}</p></div>
+                <div className="message">
+                    <p className="seller-name">Seller: {element.sellerName ? element.sellerName: ""}</p>
+                    <p className="message-desc">{element.message ? `\"${element.message}\"`: `\"\"`}</p>
+                    </div>
             </label>
             );
         });

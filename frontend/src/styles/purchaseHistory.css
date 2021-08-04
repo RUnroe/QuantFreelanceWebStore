@@ -67,3 +67,11 @@
     padding:0.85rem;
 
 }
+
+.order-module .seller-name {
+    margin-top:0;
+    font-size: 0.95rem;
+}
+.order-module .message-desc {
+    color: var(--color-dark-4);
+}
