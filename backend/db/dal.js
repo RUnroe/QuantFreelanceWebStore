@@ -187,8 +187,8 @@ const getFullOrderObj = async (order, userType) => {
 		order = Object.assign(order, {user: {"name": `${user.first_name} ${user.last_name}`, "username": user.username}});
 		return order; 
 	})
-	await getProductById({product_id: order.product_id}).then(product => {
-		console.log(order, product);
+	await getProductById(order.product_id).then(product => {
+		console.log(product);
 		order = Object.assign(order, {title: product.title});
 		return order; 
 	});
