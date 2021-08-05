@@ -20,16 +20,30 @@ const getOrderById = (req, res) => {
 	.catch(handle(req, res));
 }
 //get all orders (purchased) for user by user_id
-const getOrdersByCustomer = (req, res) => {
-	dal.getOrdersByCustomer(req.session.user_id).then(result => {
+const getCurrentOrdersByCustomer = (req, res) => {
+	dal.getOrdersByCustomer(req.session.user_id, "").then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
+}
+
+const getPastOrdersByCustomer = (req, res) => {
+	dal.getOrdersByCustomer(req.session.user_id, "completed").then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
 }
 
 //get all orders (sold) for user by user_id
-const getOrdersBySeller = (req, res) => {
-	dal.getOrdersBySeller(req.session.user_id).then(result => {
+const getCurrentOrdersBySeller = (req, res) => {
+	dal.getOrdersBySeller(req.session.user_id, "").then(result => {
+		res.json(result);
+	})
+	.catch(handle(req, res));
+}
+
+const getPastOrdersBySeller = (req, res) => {
+	dal.getOrdersBySeller(req.session.user_id, "completed").then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
@@ -59,14 +73,24 @@ const routes = [
 		handler: getOrderById
 	},
     {
-		uri: '/api/order/customer',
+		uri: '/api/order/customer/current',
 		methods: ['get'],
-		handler: getOrdersByCustomer
+		handler: getCurrentOrdersByCustomer
+	},
+	{
+		uri: '/api/order/customer/past',
+		methods: ['get'],
+		handler: getPastOrdersByCustomer
 	},
     {
-		uri: '/api/order/seller',
+		uri: '/api/order/seller/current',
 		methods: ['get'],
-		handler: getOrdersBySeller
+		handler: getCurrentOrdersBySeller
+	}, 
+	{
+		uri: '/api/order/seller/past',
+		methods: ['get'],
+		handler: getPastOrdersBySeller
 	}, 
     {
 		uri: '/api/order/:order_id',

@@ -8,7 +8,7 @@ export default function PurchaseHistoryPage() {
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
-        fetch("/api/order/customer", {credentials: "include"})
+        fetch("/api/order/customer/past", {credentials: "include"})
         .then(response => response.json())
         .then(data => {
             setPurchaseHistory(data);

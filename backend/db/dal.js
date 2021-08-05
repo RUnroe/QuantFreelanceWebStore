@@ -166,14 +166,32 @@ const getOrderById = async (order_id) => {
 	return await dbclient.db('QuantFreelance').collection('Order').findOne({"order_id": order_id})
 	.catch(err => { throw ['An error occurred while finding order by order id'];});
 }
-const getOrdersByCustomer = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').find({"buyer": user_id}).toArray()
+const getOrdersByCustomer = async (user_id, status) => {
+	const find = status ? {$and:[{"buyer": user_id},{"status":status}]} : {"buyer": user_id};
+	let orderArray = await dbclient.db('QuantFreelance').collection('Order').find(find).toArray()
 	.catch(err => { throw ['An error occurred while finding order by buyer id'];});
+
+	return await Promise.all(orderArray.map (order => getFullOrderObj(order) ));
 }
 
-const getOrdersBySeller = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Order').find({"seller": user_id}).toArray()
+const getOrdersBySeller = async (user_id, status) => {
+	const find = status ? {$and:[{"seller": user_id},{"status":status}]} : {"seller": user_id};
+	let orderArray = await dbclient.db('QuantFreelance').collection('Order').find(find).toArray()
 	.catch(err => { throw ['An error occurred while finding order by seller id'];});
+
+	return await Promise.all(orderArray.map (order => getFullOrderObj(order) ));
+}
+
+const getFullOrderObj = (order) => {
+	return await getUserById({user_id: order.seller}).then(user => {
+		order = Object.assign(order, {sellerName: `${user.first_name} ${user.last_name}`, sellerUsername: user.username});
+		return order; 
+	}).then(order => {
+		return await getProductById({product_id: order.product_id}).then(product => {
+			order = Object.assign(order, {title: product.title});
+			return order; 
+		});
+	})
 }
 
 const updateOrderStatus = async (order_id, status) => {
