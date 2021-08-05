@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "../styles/purchaseHistory.css";
+import { Redirect } from 'react-router-dom';
 
 export default function PurchaseHistoryPage() {
     const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [purchaseHistoryJSX, setPurchaseHistoryJSX] = useState();
+    const [redirect, setRedirect] = useState();
 
     useEffect(() => {
-        setPurchaseHistory([1,1,1,1,1]);
+        fetch("/api/order/customer", {credentials: "include"})
+        .then(response => response.json())
+        .then(data => {
+            setPurchaseHistory(data);
+        })
+        .catch(err => setRedirect("/"))
     }, []);
 
     useEffect(() => {
@@ -21,11 +28,11 @@ export default function PurchaseHistoryPage() {
                 <input type="checkbox"/>
                 <div className="order">
                     <div className="left-side">
-                        <span className="title">Title</span>
+                        <span className="title">{element.title ? element.title: "Service Title"}</span>
                     </div>
                     <div className="right-side">
-                        <span className="date">06/26/2021</span>
-                        <span className="price negative">-$33</span>
+                        <span className="date">{element.date ? element.date: "mm/dd/yyyy"}</span>
+                        <span className="price negative">-${element.sellerName ? element.sellerName: "0"}</span>
                         <i className="fas fa-chevron-down"></i> 
                     </div>
                 </div>
@@ -38,7 +45,8 @@ export default function PurchaseHistoryPage() {
         });
         setPurchaseHistoryJSX(jsx);
     }
-    
+    if(redirect && redirect === "/") return < Redirect to={redirect}/>;
+    else if(redirect) return < Redirect push to={redirect}/>;
     return(
         <div className="section">
             <div className="container purchase-history-page">

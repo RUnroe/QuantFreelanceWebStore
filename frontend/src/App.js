@@ -72,14 +72,14 @@ function App() {
       setCurrUser(data);
       setCurrAuthLevel(data.authLevel);
     })
-    .catch(error => setCurrAuthLevel(""));
+    // .catch(error => setCurrAuthLevel(""));
   }
   useEffect(() => {
     
     //Enable for dev purposes
-    setCurrAuthLevel("seller");
+    //setCurrAuthLevel("seller");
     //setCurrAuthLevel("buyer");
-    //checkAuth();
+    checkAuth();
   }, []);
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (

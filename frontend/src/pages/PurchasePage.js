@@ -41,7 +41,8 @@ export default function PurchasePage({userId}) {
         const orderData = {
             seller: productData.user.user_id,
             message: comment,
-            product_id: productData.product_id
+            product_id: productData.product_id,
+            price: productData.price
         }
         fetch("/api/order", {
             method: "POST",
