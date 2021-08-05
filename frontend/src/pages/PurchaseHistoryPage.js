@@ -36,7 +36,7 @@ export default function PurchaseHistoryPage() {
                         <span className="title">{element.title ? element.title: "Service Title"}</span>
                     </div>
                     <div className="right-side">
-                        <span className="date">{element.timestamp ? format(element.timestamp): "mm/dd/yyyy"}</span>
+                        <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
                         <span className="price negative">-${element.price ? element.price: "0"}</span>
                         <i className="fas fa-chevron-down"></i> 
                     </div>
