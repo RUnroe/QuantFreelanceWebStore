@@ -182,7 +182,7 @@ const getOrdersBySeller = async (user_id, status) => {
 	return await Promise.all(orderArray.map (order => getFullOrderObj(order) ));
 }
 
-const getFullOrderObj = (order) => {
+const getFullOrderObj = async (order) => {
 	return await getUserById({user_id: order.seller}).then(user => {
 		order = Object.assign(order, {sellerName: `${user.first_name} ${user.last_name}`, sellerUsername: user.username});
 		return order; 
