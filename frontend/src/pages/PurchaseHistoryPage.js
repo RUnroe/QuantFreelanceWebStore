@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/purchaseHistory.css";
-import { Redirect } from 'react-router-dom';
-
+import { Link, Redirect } from 'react-router-dom';
 export default function PurchaseHistoryPage() {
     const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [purchaseHistoryJSX, setPurchaseHistoryJSX] = useState();
@@ -37,7 +36,7 @@ export default function PurchaseHistoryPage() {
                     </div>
                 </div>
                 <div className="message">
-                    <p className="seller-name">Seller: {element.user.name ? `${element.user.name} (@ ${element.user.username})`: ""}</p>
+                    <p className="seller-name">Seller:{element.user.name ?  <Link to={`/account/${user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
                     <p className="message-desc">{element.message ? `\"${element.message}\"`: `\"\"`}</p>
                     </div>
             </label>
