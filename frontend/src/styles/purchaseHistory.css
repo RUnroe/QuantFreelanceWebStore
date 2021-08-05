@@ -75,3 +75,8 @@
 .order-module .message-desc {
     color: var(--color-dark-4);
 }
+
+.seller-name a {
+    text-decoration: none;
+    color: var(--color-primary);
+}

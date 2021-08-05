@@ -18,7 +18,13 @@ export default function PurchaseHistoryPage() {
     useEffect(() => {
         renderPurchaseHistoryJSX();
     }, [purchaseHistory]);
-    
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
+    }
+
+
     const renderPurchaseHistoryJSX = () => {
         const jsx = [];
         purchaseHistory.forEach(element => {
@@ -30,14 +36,14 @@ export default function PurchaseHistoryPage() {
                         <span className="title">{element.title ? element.title: "Service Title"}</span>
                     </div>
                     <div className="right-side">
-                        <span className="date">{element.date ? element.date: "mm/dd/yyyy"}</span>
+                        <span className="date">{element.timestamp ? format(element.timestamp): "mm/dd/yyyy"}</span>
                         <span className="price negative">-${element.price ? element.price: "0"}</span>
                         <i className="fas fa-chevron-down"></i> 
                     </div>
                 </div>
                 <div className="message">
                     <p className="seller-name">Seller:{element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
-                    <p className="message-desc">{element.message ? `\"${element.message}\"`: `\"\"`}</p>
+                    <p className="message-desc">{element.message ? `\"${element.message}\"`: `\" \"`}</p>
                     </div>
             </label>
             );

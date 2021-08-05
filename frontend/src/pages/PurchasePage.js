@@ -42,7 +42,8 @@ export default function PurchasePage({userId}) {
             seller: productData.user.user_id,
             message: comment,
             product_id: productData.product_id,
-            price: productData.price
+            price: productData.price,
+            timestamp: + new Date()
         }
         fetch("/api/order", {
             method: "POST",
