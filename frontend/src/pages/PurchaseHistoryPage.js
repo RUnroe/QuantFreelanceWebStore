@@ -32,12 +32,12 @@ export default function PurchaseHistoryPage() {
                     </div>
                     <div className="right-side">
                         <span className="date">{element.date ? element.date: "mm/dd/yyyy"}</span>
-                        <span className="price negative">-${element.sellerName ? element.sellerName: "0"}</span>
+                        <span className="price negative">-${element.price ? element.price: "0"}</span>
                         <i className="fas fa-chevron-down"></i> 
                     </div>
                 </div>
                 <div className="message">
-                    <p className="seller-name">Seller: {element.sellerName ? element.sellerName: ""}</p>
+                    <p className="seller-name">Seller: {element.user.name ? `${element.user.name} (@ ${element.user.username})`: ""}</p>
                     <p className="message-desc">{element.message ? `\"${element.message}\"`: `\"\"`}</p>
                     </div>
             </label>
