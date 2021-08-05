@@ -186,8 +186,8 @@ const getFullOrderObj = (order) => {
 	return await getUserById({user_id: order.seller}).then(user => {
 		order = Object.assign(order, {sellerName: `${user.first_name} ${user.last_name}`, sellerUsername: user.username});
 		return order; 
-	}).then(order => {
-		return await getProductById({product_id: order.product_id}).then(product => {
+	}).then(  (order) => {
+		return  getProductById({product_id: order.product_id}).then(product => {
 			order = Object.assign(order, {title: product.title});
 			return order; 
 		});
