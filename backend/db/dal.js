@@ -188,11 +188,9 @@ const getFullOrderObj = async (order, userType) => {
 		return order; 
 	})
 	await getProductById(order.product_id).then(product => {
-		console.log(product);
 		order = Object.assign(order, {title: product.title});
 		return order; 
 	});
-	console.log(order);
 	return order;
 }
 
