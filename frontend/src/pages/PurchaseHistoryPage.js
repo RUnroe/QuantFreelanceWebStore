@@ -36,7 +36,7 @@ export default function PurchaseHistoryPage() {
                     </div>
                 </div>
                 <div className="message">
-                    <p className="seller-name">Seller:{element.user ? element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
+                    <p className="seller-name">Seller:{element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
                     <p className="message-desc">{element.message ? `\"${element.message}\"`: `\"\"`}</p>
                     </div>
             </label>
