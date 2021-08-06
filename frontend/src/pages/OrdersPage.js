@@ -29,31 +29,33 @@ export default function Orders() {
 
 
     const renderHistoryJSX = () => {
-        const jsx = {pending: [], inProgress: [], declined: []};
+        const jsx = {"pending": [], "inProgress": [], "declined": []};
         orders.forEach(element => {
             let orderType;
             if (element.status === "pending")  orderType = "pending";
             else if (element.status === "accepted")  orderType = "inProgress";
             else if (element.status === "declined")  orderType = "declined";
-            jsx[orderType].push(
-            <label className="order-module">
-                <input type="checkbox"/>
-                <div className="order">
-                    <div className="left-side">
-                        <span className="title">{element.title ? element.title: "Service Title"}</span>
+            if(orderType) {
+                jsx[orderType].push(
+                <label className="order-module">
+                    <input type="checkbox"/>
+                    <div className="order">
+                        <div className="left-side">
+                            <span className="title">{element.title ? element.title: "Service Title"}</span>
+                        </div>
+                        <div className="right-side">
+                            <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
+                            <span className="price negative">-${element.price ? element.price: "0"}</span>
+                            <i className="fas fa-chevron-down"></i> 
+                        </div>
                     </div>
-                    <div className="right-side">
-                        <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                        <span className="price negative">-${element.price ? element.price: "0"}</span>
-                        <i className="fas fa-chevron-down"></i> 
-                    </div>
-                </div>
-                <div className="message">
-                    <p className="seller-name">Seller:{element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
-                    <p className="message-desc">{element.message ? `\"${element.message}\"`: `\" \"`}</p>
-                    </div>
-            </label>
-            );
+                    <div className="message">
+                        <p className="seller-name">Seller:{element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
+                        <p className="message-desc">{element.message ? `\"${element.message}\"`: `\" \"`}</p>
+                        </div>
+                </label>
+                );
+            }
         });
         setPendingJSX(jsx.pending);
         setInProgressJSX(jsx.inProgress);
