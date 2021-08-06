@@ -13,3 +13,25 @@
     display: inline;
     padding: 0.4rem;
 }
+
+
+.status-bar {
+    position: fixed;
+    z-index: 100;
+    top:0;
+    width:100%;
+    background-color: var(--color-primary);
+    color: var(--color-light-1);
+    text-align: center;
+    max-height: 0px;
+    height: 100%;
+    transition: max-height 0.2s ease;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.status-bar.open {
+    max-height: 3rem;
+}
