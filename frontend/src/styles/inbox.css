@@ -36,3 +36,9 @@
 .status-bar.open {
     max-height: 3rem;
 }
+
+.empty-page-header {
+    font-weight: 300;
+    text-align: center;
+    
+}

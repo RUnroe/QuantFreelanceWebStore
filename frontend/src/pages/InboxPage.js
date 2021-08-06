@@ -155,19 +155,19 @@ export default function InboxPage() {
         <div className="section">
             <div className="container order-page">
                 <h1>Your Inbox </h1>
-                {pendingJSX === true ? <div className="order-page-section">
+                {pendingJSX.length ? <div className="order-page-section">
                     <h2>Pending</h2>
                     <div className="purchase-list">
                         {pendingJSX}
                     </div>
                 </div>: <></>}
-                {inProgressJSX === true ? <div className="order-page-section">
+                {inProgressJSX.length ? <div className="order-page-section">
                     <h2>In-Progress</h2>
                     <div className="purchase-list">
                         {inProgressJSX}
                     </div>
                 </div>: <></>}
-                {pendingJSX !== true && inProgressJSX !== true ? <h2 class="empty-page-header">Nothing in your inbox</h2> : <></>}
+                {!pendingJSX.length && !inProgressJSX.length ? <h2 class="empty-page-header">Nothing in your inbox</h2> : <></>}
             </div>
         </div>
         </>
