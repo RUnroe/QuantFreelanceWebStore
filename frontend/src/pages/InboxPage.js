@@ -8,6 +8,13 @@ export default function InboxPage() {
     const [pendingJSX, setPendingJSX] = useState();
     const [inProgressJSX, setInProgressJSX] = useState();
     const [redirect, setRedirect] = useState();
+    const [statusBar, setStatusBar] = useState();
+
+
+    useEffect(() => {
+        setTimeout(() => setStatusBar(""), 2500);
+    }, [statusBar]);
+
 
     useEffect(() => {
         fetch("/api/order/seller/current", {credentials: "include"})
@@ -38,8 +45,14 @@ export default function InboxPage() {
                 },
             body: JSON.stringify({"status": "accepted"})
         });
-        //delete order from pending list in ORDERS
+        setStatusBar("Accepted order");
+        //delete order from list in ORDERS
         //add order to in-progress
+        const newOrders = orders.map(order => {
+            if(order.order_id === order_id) order.status = "accepted";
+            return order;
+        });
+        setOrders(newOrders);
     }
 
     const declineOrder = (order_id) => {
@@ -53,7 +66,13 @@ export default function InboxPage() {
                 },
             body: JSON.stringify({"status": "declined"})
         });
-        //delete order from pending list in ORDERS
+        setStatusBar("Declined order");
+        //delete order from list in ORDERS
+        const newOrders = orders.filter(order => {
+            return order.order_id !== order_id;
+        });
+        setOrders(newOrders);
+
     }
 
     const markAsCompleted = (order_id) => {
@@ -67,7 +86,13 @@ export default function InboxPage() {
                 },
             body: JSON.stringify({"status": "completed"})
         });
-        //delete order from in-progress list in ORDERS  
+        setStatusBar("Order has been marked as complete");
+        //delete order from list in ORDERS 
+        const newOrders = orders.filter(order => {
+            return order.order_id !== order_id;
+        }); 
+        setOrders(newOrders);
+
     }
 
 
@@ -125,9 +150,11 @@ export default function InboxPage() {
     if(redirect && redirect === "/") return < Redirect to={redirect}/>;
     else if(redirect) return < Redirect push to={redirect}/>;
     return(
+        <>
+        <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
         <div className="section">
             <div className="container order-page">
-                <h1>Your Orders </h1>
+                <h1>Your Inbox </h1>
                 <div className="order-page-section">
                     <h2>Pending</h2>
                     <div className="purchase-list">
@@ -142,6 +169,7 @@ export default function InboxPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 
 }
