@@ -66,7 +66,7 @@ export default function Orders() {
     return(
         <div className="section">
             <div className="container order-page">
-                <h1>Your Purchase History</h1>
+                <h1>Your Orders </h1>
                 <div className="order-page-section">
                     <h2>Pending</h2>
                     <div className="purchase-list">

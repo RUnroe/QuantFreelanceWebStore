@@ -2,7 +2,12 @@
     min-height: calc(100vh - 11.5rem);
 }
 
-
+.order-page-section {
+    margin: 1rem 3rem;
+}
+.order-page-section h2 {
+    font-weight: 600;
+}
 
 .purchase-list, .sell-list {
     width:100%;
