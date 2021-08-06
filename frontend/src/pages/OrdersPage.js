@@ -13,14 +13,14 @@ export default function Orders() {
         fetch("/api/order/customer/current", {credentials: "include"})
         .then(response => response.json())
         .then(data => {
-            setPurchaseHistory(data);
+            setOrders(data);
         })
         .catch(err => setRedirect("/"))
     }, []);
 
     useEffect(() => {
-        renderPurchaseHistoryJSX();
-    }, [purchaseHistory]);
+        renderHistoryJSX();
+    }, [orders]);
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -28,7 +28,7 @@ export default function Orders() {
     }
 
 
-    const renderPurchaseHistoryJSX = () => {
+    const renderHistoryJSX = () => {
         const jsx = {pending: [], inProgress: [], declined: []};
         orders.forEach(element => {
             let orderType;
