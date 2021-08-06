@@ -1,4 +1,4 @@
-.purchase-list {
+.purchase-list, .sell-list {
     width:100%;
     margin: 0.5rem auto;
     display:block;
@@ -76,7 +76,7 @@
     color: var(--color-dark-4);
 }
 
-.seller-name a {
+.seller-name a, .buyer-name a {
     text-decoration: none;
     color: var(--color-primary);
 }
