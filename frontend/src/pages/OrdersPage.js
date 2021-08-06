@@ -67,24 +67,24 @@ export default function Orders() {
         <div className="section">
             <div className="container order-page">
                 <h1>Your Orders </h1>
-                <div className="order-page-section">
+                {pendingJSX ? <div className="order-page-section">
                     <h2>Pending</h2>
                     <div className="purchase-list">
                         {pendingJSX}
                     </div>
-                </div>
-                <div className="order-page-section">
+                </div>: <></>}
+                {inProgressJSX ? <div className="order-page-section">
                     <h2>In-Progress</h2>
                     <div className="purchase-list">
                         {inProgressJSX}
                     </div>
-                </div>
-                <div className="order-page-section">
+                </div>: <></>}
+                {declinedJSX ? <div className="order-page-section">
                     <h2>Declined</h2>
                     <div className="purchase-list">
                         {declinedJSX}
                     </div>
-                </div>
+                </div>: <></>}
             </div>
         </div>
     );
