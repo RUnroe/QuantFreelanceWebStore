@@ -4,9 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-    const [pendingJSX, setPendingJSX] = useState();
-    const [inProgressJSX, setInProgressJSX] = useState();
-    const [declinedJSX, setDeclinedJSX] = useState();
+    const [pendingJSX, setPendingJSX] = useState([]);
+    const [inProgressJSX, setInProgressJSX] = useState([]);
+    const [declinedJSX, setDeclinedJSX] = useState([]);
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {

@@ -5,8 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 export default function InboxPage() {
     const [orders, setOrders] = useState([]);
-    const [pendingJSX, setPendingJSX] = useState();
-    const [inProgressJSX, setInProgressJSX] = useState();
+    const [pendingJSX, setPendingJSX] = useState([]);
+    const [inProgressJSX, setInProgressJSX] = useState([]);
     const [redirect, setRedirect] = useState();
     const [statusBar, setStatusBar] = useState();
 
