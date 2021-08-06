@@ -31,6 +31,7 @@ export default function InboxPage() {
         //send fetch request
         fetch(`/api/order/${order_id}`,
         {
+            method: "PUT",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
@@ -45,6 +46,7 @@ export default function InboxPage() {
         //send fetch request
         fetch(`/api/order/${order_id}`,
         {
+            method: "PUT",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
@@ -58,6 +60,7 @@ export default function InboxPage() {
         //send fetch request
         fetch(`/api/order/${order_id}`,
         {
+            method: "PUT",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
