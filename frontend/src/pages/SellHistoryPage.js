@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 export default function SellHistoryPage() {
     const [sellHistory, setSellHistory] = useState([]);
-    const [sellHistoryJSX, setSellHistoryJSX] = useState();
+    const [sellHistoryJSX, setSellHistoryJSX] = useState([]);
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
@@ -61,6 +61,7 @@ export default function SellHistoryPage() {
                 <div className="sell-list">
                     {sellHistoryJSX}
                 </div>
+                {!sellHistoryJSX.length ? <h2 class="empty-page-header">You don't have any completed sales yet</h2> : <></>}
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ import "../styles/purchaseHistory.css";
 import { Link, Redirect } from 'react-router-dom';
 export default function PurchaseHistoryPage() {
     const [purchaseHistory, setPurchaseHistory] = useState([]);
-    const [purchaseHistoryJSX, setPurchaseHistoryJSX] = useState();
+    const [purchaseHistoryJSX, setPurchaseHistoryJSX] = useState([]);
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
@@ -60,6 +60,7 @@ export default function PurchaseHistoryPage() {
                 <div className="purchase-list">
                     {purchaseHistoryJSX}
                 </div>
+                {!purchaseHistoryJSX.length ? <h2 class="empty-page-header">You don't have any completed purchases yet</h2> : <></>}
             </div>
         </div>
     );
