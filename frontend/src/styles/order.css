@@ -1,3 +1,9 @@
+.order-page {
+    min-height: calc(100vh - 11.5rem);
+}
+
+
+
 .purchase-list, .sell-list {
     width:100%;
     margin: 0.5rem auto;
