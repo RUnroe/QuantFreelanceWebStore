@@ -66,7 +66,7 @@ display: flex;
     transition: transform 0.2s ease;
     transform-origin: center;
 }
-.order-module input:checked + .order i {
+.order-module input:checked + .order i.fa-chevron-down {
     transform:rotate(180deg);
 }
 .order-module .message {
