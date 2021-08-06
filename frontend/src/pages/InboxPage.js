@@ -42,8 +42,8 @@ export default function InboxPage() {
                         </div>
                         <div className="right-side">
                             <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                            <div className="btn green circle text-white"> <i className="fas fa-check"></i> </div>
-                            <div className="btn danger-outline circle"> <i className="fas fa-times"></i> </div>
+                            <div className="btn green circle text-white" title="Accept Order"> <i className="fas fa-check"></i> </div>
+                            <div className="btn danger-outline circle" title="Decline Order"> <i className="fas fa-times"></i> </div>
                             <i className="fas fa-chevron-down"></i> 
                         </div>
                     </div>
