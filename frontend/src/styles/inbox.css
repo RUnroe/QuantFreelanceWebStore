@@ -1,4 +1,4 @@
-.btn.circle {
+.order-module .right-side .btn.circle {
     border-radius: 100vh;
     text-align: center;
     display:inline-flex;
@@ -8,4 +8,8 @@
     height:2rem;
     margin:0 0.25rem;
     padding:0;
+}
+.order-module .right-side .btn.green-outline {
+    display: inline;
+    padding: 0.4rem;
 }

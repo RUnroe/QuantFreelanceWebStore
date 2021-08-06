@@ -85,8 +85,8 @@ export default function InboxPage() {
                         </div>
                         <div className="right-side">
                             <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                            <div className="btn green circle text-white" title="Accept Order" onClick={() => acceptOrder(element.order_id)}> <i className="fas fa-check"></i> </div>
-                            <div className="btn danger-outline circle" title="Decline Order" onClick={() => declineOrder(element.order_id)}> <i className="fas fa-times"></i> </div>
+                            <button className="btn green circle text-white" title="Accept Order" onClick={() => acceptOrder(element.order_id)}> <i className="fas fa-check"></i> </button>
+                            <button className="btn danger-outline circle" title="Decline Order" onClick={() => declineOrder(element.order_id)}> <i className="fas fa-times"></i> </button>
                             <i className="fas fa-chevron-down"></i> 
                         </div>
                     </div>
