@@ -72,7 +72,7 @@ function App() {
       setCurrUser(data);
       setCurrAuthLevel(data.authLevel);
     })
-    // .catch(error => setCurrAuthLevel(""));
+    .catch(error => setCurrAuthLevel(""));
   }
   useEffect(() => {
     
