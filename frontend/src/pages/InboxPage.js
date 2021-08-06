@@ -27,6 +27,46 @@ export default function InboxPage() {
         return (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
     }
 
+    const acceptOrder = (order_id) => {
+        //send fetch request
+        fetch(`/api/order/${order_id}`,
+        {
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({"status": "accepted"})
+        });
+        //delete order from pending list in ORDERS
+        //add order to in-progress
+    }
+
+    const declineOrder = (order_id) => {
+        //send fetch request
+        fetch(`/api/order/${order_id}`,
+        {
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({"status": "declined"})
+        });
+        //delete order from pending list in ORDERS
+    }
+
+    const markAsCompleted = (order_id) => {
+        //send fetch request
+        fetch(`/api/order/${order_id}`,
+        {
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({"status": "completed"})
+        });
+        //delete order from in-progress list in ORDERS  
+    }
+
 
     const renderHistoryJSX = () => {
         const jsx = {"pending": [], "inProgress": []};
@@ -42,8 +82,8 @@ export default function InboxPage() {
                         </div>
                         <div className="right-side">
                             <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                            <div className="btn green circle text-white" title="Accept Order"> <i className="fas fa-check"></i> </div>
-                            <div className="btn danger-outline circle" title="Decline Order"> <i className="fas fa-times"></i> </div>
+                            <div className="btn green circle text-white" title="Accept Order" onClick={() => acceptOrder(element.order_id)}> <i className="fas fa-check"></i> </div>
+                            <div className="btn danger-outline circle" title="Decline Order" onClick={() => declineOrder(element.order_id)}> <i className="fas fa-times"></i> </div>
                             <i className="fas fa-chevron-down"></i> 
                         </div>
                     </div>
@@ -64,7 +104,7 @@ export default function InboxPage() {
                         </div>
                         <div className="right-side">
                             <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                            <button className="btn green-outline">Mark as Complete</button>
+                            <button className="btn green-outline" onClick={() => markAsCompleted(element.order_id)}>Mark as Complete</button>
                             <i className="fas fa-chevron-down"></i> 
                         </div>
                     </div>
