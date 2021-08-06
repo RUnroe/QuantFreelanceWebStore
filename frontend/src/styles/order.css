@@ -21,6 +21,7 @@
 
 .order-module .title {
     font-weight: 600;
+    font-size: 1rem;
 }
 
 .order-module .right-side span, .order-module .right-side i {
@@ -50,10 +51,17 @@
     cursor:pointer;
     border-bottom: 1px solid #ccc;
 }
+
+.order-module .order .left-side {
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .order-module input {
     display:none;
 }
-.order-module .order i {
+.order-module .order i.fa-chevron-down {
     margin-right: 0.3rem;
     transition: transform 0.2s ease;
     transform-origin: center;
