@@ -10,7 +10,7 @@ export default function InboxPage() {
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
-        fetch("/api/order/customer/current", {credentials: "include"})
+        fetch("/api/order/seller/current", {credentials: "include"})
         .then(response => response.json())
         .then(data => {
             setOrders(data);
@@ -43,7 +43,7 @@ export default function InboxPage() {
                         <div className="right-side">
                             <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
                             <div className="btn green circle text-white"> <i className="fas fa-check"></i> </div>
-                            <div className="btn danger-outline circle text-white"> <i className="fas fa-times"></i> </div>
+                            <div className="btn danger-outline circle"> <i className="fas fa-times"></i> </div>
                             <i className="fas fa-chevron-down"></i> 
                         </div>
                     </div>
