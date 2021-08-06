@@ -67,24 +67,25 @@ export default function Orders() {
         <div className="section">
             <div className="container order-page">
                 <h1>Your Orders </h1>
-                {pendingJSX ? <div className="order-page-section">
+                {pendingJSX === true? <div className="order-page-section">
                     <h2>Pending</h2>
                     <div className="purchase-list">
                         {pendingJSX}
                     </div>
                 </div>: <></>}
-                {inProgressJSX ? <div className="order-page-section">
+                {inProgressJSX === true? <div className="order-page-section">
                     <h2>In-Progress</h2>
                     <div className="purchase-list">
                         {inProgressJSX}
                     </div>
                 </div>: <></>}
-                {declinedJSX ? <div className="order-page-section">
+                {declinedJSX === true? <div className="order-page-section">
                     <h2>Declined</h2>
                     <div className="purchase-list">
                         {declinedJSX}
                     </div>
                 </div>: <></>}
+                {pendingJSX !== true && inProgressJSX !== true && declinedJSX !== true ? <h2 class="empty-page-header">You don't have any current orders</h2> : <></>}
             </div>
         </div>
     );
