@@ -1,0 +1,82 @@
+.purchase-list {
+    width:100%;
+    margin: 0.5rem auto;
+    display:block;
+    max-width: 1000px;
+}
+.order-module {
+    width:100%;
+}
+
+.order-module .title {
+    font-weight: 600;
+}
+
+.order-module .right-side span, .order-module .right-side i {
+    margin:0 0.5rem;
+}
+
+.order-module .date {
+    color: var(--color-dark-4);
+}
+.order-module .price {
+    font-weight: 500;
+}
+.order-module .price.positive {
+    color: var(--color-secondary);
+}
+.order-module .price.negative {
+    color: var(--color-danger);
+}
+
+.order-module .order {
+    background-color: var(--color-light-1);
+    color:var(--color-dark-3);
+    padding:1.1rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor:pointer;
+    border-bottom: 1px solid #ccc;
+}
+.order-module input {
+    display:none;
+}
+.order-module .order i {
+    margin-right: 0.3rem;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+.order-module input:checked + .order i {
+    transform:rotate(180deg);
+}
+.order-module .message {
+    display: block;
+    background-color: var(--color-light-3);
+    max-height:0rem;
+    height:100%;
+    padding:0 0.85rem;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    overflow:hidden;
+    box-sizing: border-box;
+}
+
+
+.order-module input:checked + .order + .message {
+    max-height:10rem;
+    padding:0.85rem;
+
+}
+
+.order-module .seller-name {
+    margin-top:0;
+    font-size: 0.95rem;
+}
+.order-module .message-desc {
+    color: var(--color-dark-4);
+}
+
+.seller-name a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
