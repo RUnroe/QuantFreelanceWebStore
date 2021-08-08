@@ -2,6 +2,8 @@
 
 .account-type-section {
     box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
 }
 .account-type-section .container {
     height:100%;
@@ -139,6 +141,7 @@
 }
 .screen-section.account-type {
     transform:translateX(0);
+    overflow: hidden;
 }
 
 
