@@ -322,7 +322,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     }, [errors]);
 
     useEffect(() => {
-        console.log(userData);
+        // console.log(userData);
         setEmail(userData.email);
         setUsername(userData.username);
         setFirstName(userData.first_name);
@@ -392,17 +392,17 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             </div>
             <div className="form-block">
                 <label htmlFor="usernameInput" className="input-label">Username</label>
-                <input type="text" className="input" id="usernameInput" onInput={(event) => {setUsername(event.target.value); checkError(event.target.value, "username")}} />
+                <input type="text" className="input" id="usernameInput" value={username} onInput={(event) => {setUsername(event.target.value); checkError(event.target.value, "username")}} />
                 <span className={`error-message ${errors.username.length ? "" : "hidden"}`}>{errors.username.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="firstNameInput" className="input-label">First Name</label>
-                <input type="text" className="input" id="firstNameInput" onInput={(event) => {setFirstName(event.target.value); checkError(event.target.value, "first_name", "name")}} />
+                <input type="text" className="input" id="firstNameInput" value={first_name} onInput={(event) => {setFirstName(event.target.value); checkError(event.target.value, "first_name", "name")}} />
                 <span className={`error-message ${errors.first_name.length ? "" : "hidden"}`}>{errors.first_name.toString()}&nbsp;</span>
             </div>
             <div className="form-block">
                 <label htmlFor="lastNameInput" className="input-label">Last Name</label>
-                <input type="text" className="input" id="lastNameInput" onInput={(event) => {setLastName(event.target.value); checkError(event.target.value, "last_name", "name")}} />
+                <input type="text" className="input" id="lastNameInput" value={last_name} onInput={(event) => {setLastName(event.target.value); checkError(event.target.value, "last_name", "name")}} />
                 <span className={`error-message ${errors.last_name.length ? "" : "hidden"}`}>{errors.last_name.toString()}&nbsp;</span>
             </div>
             
