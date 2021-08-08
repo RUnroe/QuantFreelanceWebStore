@@ -102,13 +102,7 @@ export default function HomePage({currAuthLevel, username}) {
             </div>
         </div>
 
-        <div className="container dark cta-section">
-            <div className="section">
-                <h1 className="text-white">Want to join the fun?</h1>
-                <p className="text-white">Sign up now to purchase or sell services.</p>
-                <a href="signup" className="btn blue">Sign Up</a>
-            </div>
-        </div>
+        <CtaSection authLevel={currAuthLevel}/>
         </>
     );
 
