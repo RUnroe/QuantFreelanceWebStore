@@ -30,6 +30,7 @@ function ImageForm({labelName}) {
 }
 
 function LogInForm({checkAuth}) {
+    const forceUpdate = useForceUpdate();
     const [pageState, setPageState] = useState("");
     const identifier = createRef();
     const password = createRef();

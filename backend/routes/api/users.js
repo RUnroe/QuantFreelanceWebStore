@@ -31,10 +31,10 @@ const authenticate = (req, res, next) => {
 
 				console.log("session created");
 				res.statusMessage = 'Authenticated';
-				res.status(303).location("/store").end();
+				res.status(200).end();
 				return;
 			}
-			res.sendStatus(401);
+			res.status(401).end();
 			return;
 		})
 		.catch(err => {console.log(err); return handle(req, res);});
