@@ -48,7 +48,7 @@ function LogInForm({checkAuth}) {
             },
             body: JSON.stringify(postData)
         }).then( response => {
-            console.log(response);
+            // console.log(response);
             if(response.ok)  {
                 checkAuth();
                 setPageState("success");
@@ -322,6 +322,7 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     }, [errors]);
 
     useEffect(() => {
+        console.log(userData);
         setEmail(userData.email);
         setUsername(userData.username);
         setFirstName(userData.first_name);
