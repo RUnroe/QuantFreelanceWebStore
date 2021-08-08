@@ -24,11 +24,11 @@ const createUser = (req, res) => {
 const authenticate = (req, res, next) => {
 	dal.authenticate({identifier: req.body.identifier, password: req.body.password})
 		.then((value) => {
+			console.log(value);
 			if(value === undefined || value === null) {
 				res.status(401).end();
 				return;
 			}
-			console.log(value.user_id, 'logged in');
 			if (value.user_id) {
 				req.session.user_id = value.user_id;
 				req.session.is_seller = value.is_seller.toString(); // log them in
