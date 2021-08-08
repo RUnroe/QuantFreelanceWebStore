@@ -114,3 +114,30 @@ export default function HomePage({currAuthLevel, username}) {
 
 }
 
+function CtaSection({authLevel}) {
+    if(authLevel === "seller") {
+        return (
+            <></>
+        );
+    }
+    else if(authLevel === "buyer") {
+        return (
+            <div className="container dark cta-section">
+                <div className="section">
+                    <h1 className="text-white">Want to start selling?</h1>
+                    <p className="text-white">Upgrade your account to start selling services.</p>
+                    <a href="/account/settings" className="btn blue">Account Settings</a>
+                </div>
+            </div>
+        );
+    }
+    return (
+        <div className="container dark cta-section">
+            <div className="section">
+                <h1 className="text-white">Want to join the fun?</h1>
+                <p className="text-white">Sign up now to purchase or sell services.</p>
+                <a href="signup" className="btn blue">Sign Up</a>
+            </div>
+        </div>
+    );
+}
