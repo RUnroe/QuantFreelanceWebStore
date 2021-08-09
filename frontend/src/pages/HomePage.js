@@ -40,12 +40,12 @@ export default function HomePage({currAuthLevel, username}) {
         }).then( response => console.log(response));
     }
 
-    const categories = [{name:"Design & Art", src:"https://via.placeholder.com/100"}, {name:"Sales & Marketing", src:"https://via.placeholder.com/100"}, {name: "Business & Finance", src:"https://via.placeholder.com/100"}, {name: "Writing & Translation", src:"https://via.placeholder.com/100"}, {name: "Video & Animation", src:"https://via.placeholder.com/100"}, {name: "Audio & Music", src:"https://via.placeholder.com/100"}, {name: "Programming & Tech", src:"https://via.placeholder.com/100"}, {name: "Engineering & Architecture", src:"https://via.placeholder.com/100"}, {name: "Education & Training", src:"https://via.placeholder.com/100"}];
+    const categories = [{name:"Design & Art", src:"design-art"}, {name:"Sales & Marketing", src:"https://via.placeholder.com/100"}, {name: "Business & Finance", src:"https://via.placeholder.com/100"}, {name: "Writing & Translation", src:"https://via.placeholder.com/100"}, {name: "Video & Animation", src:"https://via.placeholder.com/100"}, {name: "Audio & Music", src:"https://via.placeholder.com/100"}, {name: "Programming & Tech", src:"https://via.placeholder.com/100"}, {name: "Engineering & Architecture", src:"https://via.placeholder.com/100"}, {name: "Education & Training", src:"https://via.placeholder.com/100"}];
     const marketplaceJsxElements = [];
     categories.forEach(value => {
         marketplaceJsxElements.push(
             <a href={`/store/category/${value.name.replace(" & ", "-").toLowerCase()}`} className="category-box" key={value.name}>
-                <img src={value.src} alt={value.name + " item"} />
+                <img src={`/images/categoryIcon/${value.name.toLowerCase().replace(" & ", "-")}.svg`} alt={value.name + " item"} />
                 <hr />
                 <p>{value.name}</p>
             </a>
