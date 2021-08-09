@@ -48,7 +48,16 @@
     color: var(--color-light-4);
 }
 
+.account-selection .img-container {
+    width:145px;
+    margin:0 auto 1rem;
+    display:block;
+}
 
+.account-selection .img-container img {
+    width:100%;
+    height:100%;
+}
 /* //////////////////////////////////////////// */
 
 .form-section {

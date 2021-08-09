@@ -31,12 +31,12 @@ export default function SignupPage({checkAuth}) {
                 <h1 className="text-center text-white">Choose Account Type</h1>
                 <div className="account-type-container">
                     <div className="buyer-account account-selection" onClick={() => toSignupForm("buyer")}>
-                        <img className="round" src="https://via.placeholder.com/150" alt="account-icon"/>
+                        <div class="img-container"><img src="/images/usage/freelancerIcon.svg" alt="account-icon"/></div>
                         <h3>Standard Account</h3>
                         <p>Perfect for browsing and purchasing services.</p>
                     </div>
                     <div className="seller-account account-selection" onClick={() => toSignupForm("seller")}>
-                        <img className="round" src="https://via.placeholder.com/150" alt="seller-icon"/>
+                        <div class="img-container"><img src="/images/usage/sellIcon.svg" alt="seller-icon"/></div>
                         <h3>Seller Account</h3>
                         <p>For freelancers to do what they do best and make money in the process.</p>
                     </div>
