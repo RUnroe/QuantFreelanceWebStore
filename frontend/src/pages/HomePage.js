@@ -52,12 +52,12 @@ export default function HomePage({currAuthLevel, username}) {
         );
     });
 
-    const usages = [{title: "Find what you need", src:"https://via.placeholder.com/100", desc: "Find services by searching or exploring the nine different categories."}, {title: "Hire freelancers", src:"https://via.placeholder.com/100", desc: "Once you have found a service, hire the freelancer and send them a custom message."}, {title: "Sell services", src:"https://via.placeholder.com/100", desc: "Become a seller by upgrading your account for free. Then start listing any services you wish to sell."}];
+    const usages = [{title: "Find what you need", src:"/images/usage/findIcon.svg", desc: "Find services by searching or exploring the nine different categories."}, {title: "Hire freelancers", src:"/images/usage/freelancerIcon.svg", desc: "Once you have found a service, hire the freelancer and send them a custom message."}, {title: "Sell services", src:"/images/usage/sellIcon.svg", desc: "Become a seller by upgrading your account for free. Then start listing any services you wish to sell."}];
     const usageJsxElements = [];
     usages.forEach(value => {
         usageJsxElements.push(
             <div className="info-box">
-                <img src={value.src} className="round" alt={value.title}/>
+                <div className="img-container"><img src={value.src} alt={value.title}/></div>
                 <h4>{value.title}</h4>
                 <hr />
                 <p>{value.desc}</p>
