@@ -100,8 +100,8 @@ function CategoryHeader({category}) {
                     <p className="text-white description">{description}</p>
                     <SearchBar />
                 </div>
-                {/* <img src={`images/categoryHeader/${category}`} /> */}
-                <img src={`https://via.placeholder.com/450x250`} />
+                <img src={`/images/categoryHeader/${category}.svg`} />
+                {/* <img src={`https://via.placeholder.com/450x250`} /> */}
                 
             </div>
         );
