@@ -79,7 +79,7 @@ export default function HomePage({currAuthLevel, username}) {
                     </div>
                 </div>
                 <div className="image-half">
-                    <img src="https://via.placeholder.com/275x275" alt="people" />
+                    <img src="/images/handshake.svg" alt="handshake" />
                 </div>
             </div>
         </div>
