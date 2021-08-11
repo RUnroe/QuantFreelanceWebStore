@@ -1,7 +1,9 @@
-import React, { createRef } from "react";
+import React, { useEffect, createRef } from "react";
 //import {ImageInput, SignupForm} from "./../partials/form";
 import "../styles/index.css";
 import SearchBar from "../partials/searchBar";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function CtaButton({currAuthLevel, username}) {
     // console.log(currAuthLevel);
@@ -14,37 +16,46 @@ function CtaButton({currAuthLevel, username}) {
 
 export default function HomePage({currAuthLevel, username}) {
     const firstName = createRef();
-    const logIn = () => {
-        const data = {
-            identifier: "RUnroe",
-            password: "1234aaAb"
-        }
-        fetch("/api/auth", {
-            method: 'POST', 
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then( response => console.log(response));
-    }
-    const updateUser = () => {
-        const data = {first_name: firstName.current.value};
-        console.log(data);
-        fetch("/api/user", {
-            method: 'PUT',
-            credentials: 'include', 
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then( response => console.log(response));
-    }
+    useEffect(() => {
+        AOS.init({
+            offset: 200,
+            duration: 400,
+            easing: 'ease-in-sine',
+          });
+        AOS.refresh();
+      }, []);
+
+    // const logIn = () => {
+    //     const data = {
+    //         identifier: "RUnroe",
+    //         password: "1234aaAb"
+    //     }
+    //     fetch("/api/auth", {
+    //         method: 'POST', 
+    //         headers: {
+    //         'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     }).then( response => console.log(response));
+    // }
+    // const updateUser = () => {
+    //     const data = {first_name: firstName.current.value};
+    //     console.log(data);
+    //     fetch("/api/user", {
+    //         method: 'PUT',
+    //         credentials: 'include', 
+    //         headers: {
+    //         'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     }).then( response => console.log(response));
+    // }
 
     const categories = [{name:"Design & Art", src:"design-art"}, {name:"Sales & Marketing", src:"https://via.placeholder.com/100"}, {name: "Business & Finance", src:"https://via.placeholder.com/100"}, {name: "Writing & Translation", src:"https://via.placeholder.com/100"}, {name: "Video & Animation", src:"https://via.placeholder.com/100"}, {name: "Audio & Music", src:"https://via.placeholder.com/100"}, {name: "Programming & Tech", src:"https://via.placeholder.com/100"}, {name: "Engineering & Architecture", src:"https://via.placeholder.com/100"}, {name: "Education & Training", src:"https://via.placeholder.com/100"}];
     const marketplaceJsxElements = [];
     categories.forEach(value => {
         marketplaceJsxElements.push(
-            <a href={`/store/category/${value.name.replace(" & ", "-").toLowerCase()}`} className="category-box" key={value.name}>
+            <a data-aos={"fade-up"} href={`/store/category/${value.name.replace(" & ", "-").toLowerCase()}`} className="category-box" key={value.name}>
                 <img src={`/images/categoryIcon/${value.name.toLowerCase().replace(" & ", "-")}.svg`} alt={value.name + " item"} />
                 <hr />
                 <p>{value.name}</p>
@@ -56,7 +67,7 @@ export default function HomePage({currAuthLevel, username}) {
     const usageJsxElements = [];
     usages.forEach(value => {
         usageJsxElements.push(
-            <div className="info-box">
+            <div data-aos={"fade-up"} className="info-box">
                 <div className="img-container"><img src={value.src} alt={value.title}/></div>
                 <h4>{value.title}</h4>
                 <hr />
@@ -95,7 +106,7 @@ export default function HomePage({currAuthLevel, username}) {
 
         <div className="container light-grey learn-section">
             <div className="section">
-                <h2>Using Quant is easy</h2>
+                <h2 data-aos={"fade-up"}>Using Quant is easy</h2>
                 <div className="info-container">
                     {usageJsxElements}
                 </div>
