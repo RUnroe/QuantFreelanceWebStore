@@ -110,6 +110,34 @@ nav hr {
     color: var(--color-dark-1);
 
 }
+
+
+.profile-section-nav {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+}
+.profile-section-nav > div {
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: .25rem;
+}
+.profile-section-nav > p {
+    margin:0;
+}
+.profile-section > div > img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+}
 /*///////////////////////////////////////////////////////*/
 .secondary-nav {
     position: relative;

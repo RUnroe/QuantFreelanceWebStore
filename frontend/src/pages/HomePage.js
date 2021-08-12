@@ -18,8 +18,8 @@ export default function HomePage({currAuthLevel, username}) {
     const firstName = createRef();
     useEffect(() => {
         AOS.init({
-            offset: 100,
-            duration: 300,
+            offset: 150,
+            duration: 350,
             easing: 'ease-in-sine',
           });
         AOS.refresh();
