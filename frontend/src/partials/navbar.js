@@ -117,7 +117,12 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_ic
                         </ul>
                     </div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i className="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle account"><Link to={`/account/${username}`}>
+                            <div class="profile-section-nav">
+                                <div><img src={user_icon.includes("/api/") ? user_icon : `/api/icon/${user_icon}`} /></div>
+                                <p>{username}</p>
+                            </div>
+                            <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>

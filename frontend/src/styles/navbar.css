@@ -111,7 +111,7 @@ nav hr {
 
 }
 
-.nav-item.account {
+.nav-item.account > a {
     display:flex;
     flex-direction: row;
     align-items: center;
