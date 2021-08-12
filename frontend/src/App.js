@@ -85,7 +85,7 @@ function App() {
   return (
     <BrowserRouter>
 
-    <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} username={currUser.username}/>
+    <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} user_icon={currUser.icon_id} username={currUser.username}/>
     
     <div id="main">
       <Switch>

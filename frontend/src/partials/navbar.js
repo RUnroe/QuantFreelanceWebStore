@@ -19,7 +19,6 @@ function SecondaryNavigationMenu() {
         }
     }
     const listener = e => {
-        // if(scrollElement) console.log(scrollElement.scrollLeft);
         setScrollElement(document.getElementById("secondaryNavList"));
     };
     useEffect(() => {
@@ -42,7 +41,7 @@ function SecondaryNavigationMenu() {
 
 
 
-export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, username}) {
+export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_icon, username}) {
     const [redirect, setRedirect] = useState();
 
     const logoutUser = () => {
@@ -81,7 +80,12 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, usernam
                         </ul>
                     </div>
                     <div className="dropdown">
-                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>Account <i className="fas fa-angle-down"></i></Link></div>
+                        <div className="nav-item dropdown-toggle"><Link to={`/account/${username}`}>
+                            <div class="profile-section">
+                                <div><img src={productData.user.icon_id.includes("/api/") ? productData.user.icon_id : `/api/icon/${productData.user.icon_id}`} /></div>
+                                <p>{productData.user.username}</p>
+                            </div>
+                            <i className="fas fa-angle-down"></i></Link></div>
                         <ul className="dropdown-menu">
                             <li className="dropdown-item"><Link to={`/account/${username}`}>Profile</Link></li>
                             <li className="dropdown-item"><Link to="/account/settings/">Settings</Link></li>

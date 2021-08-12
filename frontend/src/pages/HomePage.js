@@ -67,7 +67,7 @@ export default function HomePage({currAuthLevel, username}) {
     const usageJsxElements = [];
     usages.forEach(value => {
         usageJsxElements.push(
-            <div data-aos={"fade-up"} className="info-box">
+            <div data-aos={"zoom-in"} className="info-box">
                 <div className="img-container"><img src={value.src} alt={value.title}/></div>
                 <h4>{value.title}</h4>
                 <hr />
