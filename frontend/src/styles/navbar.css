@@ -111,11 +111,14 @@ nav hr {
 
 }
 
+.nav-item.account {
+    padding: 7px .75rem;
+}
+
 .nav-item.account > a {
     display:flex;
     flex-direction: row;
     align-items: center;
-    padding: 7px .75rem;
 }
 .profile-section-nav {
     display: contents;
