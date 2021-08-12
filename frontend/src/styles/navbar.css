@@ -111,11 +111,14 @@ nav hr {
 
 }
 
-
-.profile-section-nav {
-    display: inline-flex;
+.nav-item.account {
+    display:flex;
     flex-direction: row;
     align-items: center;
+    padding: 7px .75rem;
+}
+.profile-section-nav {
+    display: contents;
     margin: 0;
 }
 .profile-section-nav > div {
@@ -130,9 +133,9 @@ nav hr {
     margin-right: .25rem;
 }
 .profile-section-nav > p {
-    margin:0;
+    margin:0 4px 0 0;
 }
-.profile-section > div > img {
+.profile-section-nav > div > img {
     object-fit: cover;
     object-position: center;
     height: 100%;
