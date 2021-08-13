@@ -673,6 +673,16 @@ export default function ProductEditPage({username}) {
         //select new element
         setNewCreatedElementId(newElement.id);
     }
+
+    const createSplitSection = () => {
+        console.log(typeof(addElementLocation) === "string", !addElementLocation[0] === "L", !addElementLocation[0] === "R",
+        typeof(addElementLocation) === "string" && !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
+        if(typeof(addElementLocation) === "string" && !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
+            createElement("split") ;
+        } 
+        console.log(addElementLocation);
+    }
+
     if (redirect === "/") return (<Redirect to={{pathname: redirect}} />);
     else if (redirect) return (<Redirect push to={{pathname: redirect}} />); // if user clicks cancel btn, route back to their account page and keep the browser history
     return(
@@ -702,7 +712,7 @@ export default function ProductEditPage({username}) {
                             <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
                             <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
                             <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
-                            <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={() => {if(typeof(addElementLocation) === "string" && !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {createElement("split") } console.log(addElementLocation)}}>Split Section</div>
+                            <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={createSplitSection}>Split Section</div>
                         </div>
                     </div>
                 </div>
