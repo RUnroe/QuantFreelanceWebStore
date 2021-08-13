@@ -98,7 +98,13 @@
 }
 .product-page.edit .product-side {
     min-height: calc(100vh - 5.5rem);
+    position:relative;
 }
+.product-page.edit .product-side .product-details {
+    position: sticky;
+    top: 0;
+}  
+
 .product-page.display .product-side {
     margin:2rem;
     min-height: 40vh;
@@ -107,6 +113,8 @@
     height:35rem;
     width:23rem;
     border-radius: 6px;
+    position: sticky;
+    top: 20px;
 
 }
 
