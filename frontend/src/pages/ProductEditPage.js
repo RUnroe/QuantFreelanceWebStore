@@ -702,7 +702,7 @@ export default function ProductEditPage({username}) {
                             <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
                             <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
                             <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
-                            <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={() => {if(!addElementLocation[0] === "L" && !addElementLocation[0] === "R") {createElement("split") } console.log(addElementLocation)}}>Split Section</div>
+                            <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={() => {if(typeof(addElementLocation) === "string" && !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {createElement("split") } console.log(addElementLocation)}}>Split Section</div>
                         </div>
                     </div>
                 </div>
