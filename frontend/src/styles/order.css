@@ -106,3 +106,10 @@ display: flex;
     text-align: center;
     
 }
+
+
+@media all and (max-width:767px) {
+    .order-page-section {
+        margin: 0.5rem;
+    }
+}

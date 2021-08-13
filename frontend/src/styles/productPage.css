@@ -483,3 +483,11 @@ button.cancel-btn {
         max-width:25rem;
     }
 }
+
+
+@media all and (max-width:767px) {
+
+    .product-main .split-section {
+        display:block;
+    }
+}
