@@ -67,7 +67,7 @@
     margin:0.5rem;
 
 }
-@media all and (max-width: 600px) {
+@media all and (max-width: 767px) {
     .account-form {
         display:block;
     }

@@ -61,3 +61,18 @@
     top: 0;
 }
 
+@media all and (max-width:767px) {
+    .purchase-page .split {
+        display:flex;
+        flex-direction: column-reverse;
+    }
+    .purchase-page .product-card-container {
+        position: relative;
+    }
+    .purchase-page .input-block.flex {
+        flex-direction: column;
+    }
+    .purchase-page .input-block.flex > input {
+        margin:0.5rem 0;
+    }
+}
