@@ -68,11 +68,15 @@
     }
     .purchase-page .product-card-container {
         position: relative;
+        justify-content: center;
     }
     .purchase-page .input-block.flex {
         flex-direction: column;
     }
     .purchase-page .input-block.flex > input {
         margin:0.5rem 0;
+    }
+    .purchase-page .split .left-side {
+        border: none;
     }
 }
