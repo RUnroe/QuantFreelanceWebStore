@@ -37,7 +37,7 @@ export default function CategoryPage({ }) {
     }
 
     return(
-        <>
+        <div className="category-page">
         <div className="container gradient category-header">
             <CategoryHeader category={category_name}/>
         </div>
@@ -48,7 +48,7 @@ export default function CategoryPage({ }) {
                 <h2 className="no-results-header">No Results</h2>}
             </div>
         </div>
-        </>
+        </div>
     );
 
 }

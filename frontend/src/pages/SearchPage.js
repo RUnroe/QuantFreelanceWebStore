@@ -34,7 +34,7 @@ export default function SearchPage() {
 
     
     return(
-        <>
+        <div className="search-page">
         <div className="container gradient search-header">
             <SearchBar classList={"center"} />
         </div>
@@ -45,7 +45,7 @@ export default function SearchPage() {
                 <h2 className="no-results-header">No Results for "{search_term}"</h2>}
             </div>
         </div>
-        </>
+        </div>
     );
 
 }

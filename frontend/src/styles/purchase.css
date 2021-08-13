@@ -1,5 +1,5 @@
 .purchase-page {
-    min-height: calc(100vh - 11.5rem);
+    min-height: calc(100vh - 10rem);
 }
 .purchase-page .split {
     display:grid;

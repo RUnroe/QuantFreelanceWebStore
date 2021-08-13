@@ -1,4 +1,6 @@
-
+.search-page {
+    min-height: calc(100vh - 10rem);
+}
 
 .result-area {
     min-height: 45vh;
