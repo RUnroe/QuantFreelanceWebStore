@@ -294,8 +294,8 @@ button.cancel-btn {
     grid-template-columns: 1fr 2fr;
 }
 
-.product-main .split-section .left-side,
-.product-main .split-section .right-side {
+.product-page.edit .split-section .left-side,
+.product-page.edit .split-section .right-side {
     padding: 0.5rem;
 }
 
