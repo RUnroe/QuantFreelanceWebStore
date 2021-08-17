@@ -321,7 +321,7 @@ export default function ProductEditPage({username}) {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
-                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}/>
+                        <textarea className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}> </textarea>
                     </div>
                 );
                 tempJSX.push(
@@ -675,12 +675,12 @@ export default function ProductEditPage({username}) {
     }
 
     const createSplitSection = () => {
-        console.log(typeof(addElementLocation) !== "string", addElementLocation !== "", !addElementLocation[0] === "L", !addElementLocation[0] === "R",
-        typeof(addElementLocation) !== "string" || addElementLocation === "", !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
+        // console.log(typeof(addElementLocation) !== "string", addElementLocation !== "", !addElementLocation[0] === "L", !addElementLocation[0] === "R",
+        // typeof(addElementLocation) !== "string" || addElementLocation === "", !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
         if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
             createElement("split") ;
         } 
-        console.log(addElementLocation);
+        // console.log(addElementLocation);
     }
 
     if (redirect === "/") return (<Redirect to={{pathname: redirect}} />);
