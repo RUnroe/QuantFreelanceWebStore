@@ -6,6 +6,7 @@ function ImageSelectModal({setter, setSetter}) {
     const [modalState, setModalState] = useState("upload");
     const [userImages, setUserImages] = useState([]);
     const [userImageJSX, setUserImageJSX] = useState([]);
+    const [refresh, setRefresh] = useState(true);
 
     const getUsersImages = async () => {
         return fetch("/api/icons/user").then(result => result.json()).then(data => {
@@ -22,8 +23,12 @@ function ImageSelectModal({setter, setSetter}) {
         setUserImageJSX(jsxElements);
     }
     useEffect(() => {
-        getUsersImages();
-    }, []);
+        if(refresh) {
+            getUsersImages();
+            setRefresh(false);
+        }
+
+    }, [refresh]);
 
     useEffect(() => {
         renderUserImagesJSX(userImages, -1);
@@ -51,16 +56,19 @@ function ImageSelectModal({setter, setSetter}) {
                 setSelectedImageUrl(img.url);
                 console.log(img.url);
                 setter(img.url);
+                setRefresh(true);
                 setSetter(""); // clear the setter to hide the modal
             });
         }
         else if (modalState === "select") {
             setter(selectedImageUrl);
+            setRefresh(true);
             setSetter(""); // clear the setter to hide the modal
 
         }
     }
     const closeModal = () => {
+        setRefresh(true);
         setSetter(""); // clear the setter to hide the modal
     }
     if(setter) {
