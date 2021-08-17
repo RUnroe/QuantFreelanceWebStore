@@ -69,6 +69,7 @@ function App() {
     fetch('/api/auth', {credentials:"include"})
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       setCurrUser(data);
       setCurrAuthLevel(data.authLevel);
     })

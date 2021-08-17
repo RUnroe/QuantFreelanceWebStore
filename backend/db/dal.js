@@ -95,7 +95,6 @@ const updateUser = async (user_id, user) => {
 	if(!isFieldEmpty(user.last_name) && /^[a-zA-Z- ]+$/.test(user.last_name)) newValues['$set'].last_name = user.last_name;
 	if(user.icon_id) newValues['$set'].icon_id = user.icon_id;
 	if(user.is_seller) newValues['$set'].is_seller = (user.is_seller == true);
-	console.log(newValues);
 	return await dbclient.db('QuantFreelance').collection('User').updateOne({user_id}, newValues)
 	.catch(err => { throw ['An error occurred while updating user'];});
 

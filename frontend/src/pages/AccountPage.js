@@ -53,7 +53,6 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
         return `${name} Services`;
     }
     const makeAccountSeller = () => {
-        console.log("Pressed button");
         const data = {
             is_seller: true
         }
@@ -65,7 +64,6 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
             body: JSON.stringify(data)
         })
         .then(response => {
-            console.log(response);
             if(response.ok) {
                 checkAuth();
             }
