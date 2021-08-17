@@ -10,7 +10,7 @@ export default function ProductCard({productData, mode}) {
         fprice= fprice.slice(0, fprice.length-2) + "." + fprice.slice(fprice.length-2);
         return fprice;
     }
-
+    if(productData.title.trim() === "") return <></>;
     return (
         <Link className="product-card" to={`/store/${productData.product_id}`} >
             {mode === "edit" ? <Link className="edit-btn" to={`/store/${productData.product_id}/edit`} title="Edit service">
