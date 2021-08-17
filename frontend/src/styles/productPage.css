@@ -299,7 +299,12 @@ button.cancel-btn {
     padding: 0.5rem;
 }
 
-
+.product-page .split-section .left-side {
+    padding-right: 0.5rem;
+}
+.product-page .split-section .right-side {
+    padding-left: 0.5rem;
+}
 .product-main .faq-container {
     width:100%;
     margin: 0.5rem auto;
