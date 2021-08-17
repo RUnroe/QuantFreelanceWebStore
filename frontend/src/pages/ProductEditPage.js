@@ -215,7 +215,7 @@ export default function ProductEditPage({username}) {
                 props = {backgroundColor: "#403D52", height: "2px", width: "100%"};
             break;
             case "image": 
-                props = {src: "https://via.placeholder.com/320x180", align: "center"}; // give default image
+                props = {src: "https://via.placeholder.com/320x180", align: "center", width:"100%"}; // give default image
             break;
             case "faq": 
                 props = {modules: [{id:genId(), question: "New Question?", answer: "The answer to the question"}]};
@@ -474,6 +474,7 @@ export default function ProductEditPage({username}) {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if(!data) setRedirect("/");
             setTitle(data.title);
             setCoverImg(data.icon_id);

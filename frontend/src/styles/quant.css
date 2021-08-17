@@ -415,6 +415,9 @@ img.round {
     color: var(--color-dark-2);
     margin:0.5rem 0 0;
 }
+.image-upload-container .input-label.file-input.btn {
+    margin:0.25rem auto;
+}
 .image-select-container {
     display:flex;
     flex-direction: row;

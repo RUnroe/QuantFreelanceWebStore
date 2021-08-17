@@ -6,6 +6,10 @@
 }
 .product-page.display {
     grid-template-columns: 6fr 3fr;
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 .product-page.display .product-side {
     padding:1.5rem;
