@@ -3,7 +3,7 @@ import { useParams, Redirect, Link } from 'react-router-dom';
 import "../styles/account.css";
 import ProductCard from "../partials/productCard";
 
-export default function AccountPage({currUser, authLevel, checkAuth}) {
+export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuthLevel}) {
     const { username } = useParams();
     const [user, setUser] = useState();
     const [products, setProducts] = useState();
@@ -65,7 +65,7 @@ export default function AccountPage({currUser, authLevel, checkAuth}) {
         })
         .then(response => {
             if(response.ok) {
-                checkAuth();
+                setCurrAuthLevel("seller");
             }
         });
 

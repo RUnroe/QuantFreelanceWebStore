@@ -69,7 +69,6 @@ function App() {
     fetch('/api/auth', {credentials:"include"})
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       setCurrUser(data);
       setCurrAuthLevel(data.authLevel);
     })
@@ -127,7 +126,7 @@ function App() {
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SellHistoryPage />} reqAuthLevel="seller" />
         </Route>
         <Route exact path="/account/:username">
-          <AccountPage currUser={currUser} authLevel={currAuthLevel} checkAuth={checkAuth} />
+          <AccountPage currUser={currUser} authLevel={currAuthLevel} checkAuth={checkAuth} setCurrAuthLevel={setCurrAuthLevel} />
         </Route>
         <Route exact path="/inbox">
           <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<InboxPage />} reqAuthLevel="seller" />
