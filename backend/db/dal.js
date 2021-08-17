@@ -95,6 +95,7 @@ const updateUser = async (user_id, user) => {
 	if(!isFieldEmpty(user.last_name) && /^[a-zA-Z- ]+$/.test(user.last_name)) newValues['$set'].last_name = user.last_name;
 	if(user.icon_id) newValues['$set'].icon_id = user.icon_id;
 	if(user.is_seller) newValues['$set'].is_seller = (user.is_seller == true);
+	console.log(newValues);
 	return await dbclient.db('QuantFreelance').collection('User').updateOne({user_id}, newValues)
 	.catch(err => { throw ['An error occurred while updating user'];});
 
@@ -195,10 +196,10 @@ const getFullOrderObj = async (order, userType) => {
 }
 
 const updateOrderStatus = async (order_id, status) => {
-	console.log(order_id, status);
+	// console.log(order_id, status);
 	if(status == "pending" || status == "accepted" || status == "declined" || status == "completed") {
 		let newStatus = {$set: {status}};
-		console.log(newStatus);
+		// console.log(newStatus);
 		return dbclient.db('QuantFreelance').collection('Order').updateOne({order_id}, newStatus)
 		.catch(err => { throw ['An error occurred while updating order status'];});
 	}
