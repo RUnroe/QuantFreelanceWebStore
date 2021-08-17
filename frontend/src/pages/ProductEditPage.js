@@ -676,8 +676,8 @@ export default function ProductEditPage({username}) {
 
     const createSplitSection = () => {
         console.log(typeof(addElementLocation) !== "string", addElementLocation !== "", !addElementLocation[0] === "L", !addElementLocation[0] === "R",
-        typeof(addElementLocation) !== "string" || addElementLocation !== "", !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
-        if(typeof(addElementLocation) !== "string" || addElementLocation !== "" && !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
+        typeof(addElementLocation) !== "string" || addElementLocation === "", !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
+        if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
             createElement("split") ;
         } 
         console.log(addElementLocation);
