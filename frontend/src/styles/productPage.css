@@ -227,6 +227,9 @@
     cursor:pointer;
 
 }
+.product-page .hr {
+    border:none;
+}
 .product-page.edit .split-section,
 .product-page.edit .faq-container,
 .product-page.edit .header,
