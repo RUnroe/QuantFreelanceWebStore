@@ -7,7 +7,6 @@ function ImageForm({labelName}) {
     const postIcon = event => {
         event.preventDefault();
         const formData = new FormData();
-        console.log(image.current.files[0]);
         formData.append('icon', image.current.files[0]);
         fetch('/api/icons', {
             method: 'POST',
@@ -48,7 +47,6 @@ function LogInForm({checkAuth}) {
             },
             body: JSON.stringify(postData)
         }).then( response => {
-            // console.log(response);
             if(response.ok)  {
                 checkAuth();
                 setPageState("success");
@@ -141,7 +139,6 @@ function SignupForm({checkAuth, is_seller, icon_id}) {
             })
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
                 const tempErrors = errors;
                 if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
                 if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
@@ -301,7 +298,6 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             })
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
                 const tempErrors = errors;
                 if(data.email) tempErrors.email = "Email is already in use. Please use another email.";
                 if(data.username) tempErrors.username = "Username is already in use. Please use another username.";
@@ -322,7 +318,6 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
     }, [errors]);
 
     useEffect(() => {
-        // console.log(userData);
         setEmail(userData.email);
         setUsername(userData.username);
         setFirstName(userData.first_name);
@@ -373,7 +368,6 @@ function AccountSettingsForm({checkAuth, icon_id, userData}) {
             .then(response => {
                 if(response.ok) {
                     checkAuth();
-                    // console.log(response, username);
                     setAccountPageUsername(username);
                     setRedirect(true);
                 }

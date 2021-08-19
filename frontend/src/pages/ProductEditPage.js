@@ -474,7 +474,6 @@ export default function ProductEditPage({username}) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if(!data) setRedirect("/");
             setTitle(data.title);
             setCoverImg(data.icon_id);
@@ -547,11 +546,9 @@ export default function ProductEditPage({username}) {
     } 
     
     const selectElement = (id) => {
-        // console.log(id);
         setSelectedElementId(id);
         //Select element based on id
         const element = findElementInPageStructure(id);
-        // console.log(element);
         setSelectedElement(Object.assign(element));
     }
 
@@ -587,7 +584,6 @@ export default function ProductEditPage({username}) {
         setPageStructureJSX(tempJSX);
     }
     const savePage = () => {
-        console.log(price);
         const data = {
             product_id: productId,
             title,
@@ -598,7 +594,6 @@ export default function ProductEditPage({username}) {
             page_structure: JSON.stringify(pageStructure)
 
         }
-        console.log(data);
         
         fetch('/api/product', {
             method: "PUT",
@@ -614,7 +609,6 @@ export default function ProductEditPage({username}) {
 
         })
         .catch(error => {
-            console.log(error);
             setStatusBar("An error occured. Please refresh and try again");
             setTimeout(() => setStatusBar(""), 2500);
 
@@ -654,14 +648,12 @@ export default function ProductEditPage({username}) {
                 }
                 return element;
             });
-            // console.log(newState);
             setPageStructure(newState);
         }
         else {
             //add element in array based on index
             let newState = [...pageStructure];
             newState.splice(parseInt(addElementLocation), 0, newElement);
-            console.log(newState);
             setPageStructure(newState);
 
 
@@ -676,12 +668,9 @@ export default function ProductEditPage({username}) {
     }
 
     const createSplitSection = () => {
-        // console.log(typeof(addElementLocation) !== "string", addElementLocation !== "", !addElementLocation[0] === "L", !addElementLocation[0] === "R",
-        // typeof(addElementLocation) !== "string" || addElementLocation === "", !addElementLocation[0] === "L" && !addElementLocation[0] === "R");
         if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
             createElement("split") ;
         } 
-        // console.log(addElementLocation);
     }
 
     if (redirect === "/") return (<Redirect to={{pathname: redirect}} />);
@@ -739,7 +728,6 @@ export default function ProductEditPage({username}) {
 
 
 function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setCoverImg, title, setTitle, price, setPrice, category, setCategory, description, setDescription, savePage, username, setRedirect}) {
-    // console.log(selectedElementId, (configPanelJSX.length > 0 && selectedElementId != null));
     if (configPanelJSX.length > 0 && selectedElementId != null) return (<div className="config-menu">{configPanelJSX}</div>);
     else return (
         <div className="product-details">
@@ -758,7 +746,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
                 <label className="input-label">Price</label>
                 <div className="combo-input">
                     <div className="unit-display">$</div>
-                    <input className="input" type="number" value={price} onInput={event => {console.log(event.target.value); setPrice(event.target.value)}} />
+                    <input className="input" type="number" value={price} onInput={event => {setPrice(event.target.value)}} />
                 </div>
             </div>
             <div className="input-block">

@@ -6,7 +6,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 function CtaButton({currAuthLevel, username}) {
-    // console.log(currAuthLevel);
     if (currAuthLevel === "seller") return  (<a href={`/account/${username}`} className="btn blue center"> Sell a Service</a>);
     if(currAuthLevel === "buyer") return (<a href="/account/settings" className="btn blue center"> Become a Seller</a>);
 
@@ -25,31 +24,7 @@ export default function HomePage({currAuthLevel, username}) {
         AOS.refresh();
       }, []);
 
-    // const logIn = () => {
-    //     const data = {
-    //         identifier: "RUnroe",
-    //         password: "1234aaAb"
-    //     }
-    //     fetch("/api/auth", {
-    //         method: 'POST', 
-    //         headers: {
-    //         'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     }).then( response => console.log(response));
-    // }
-    // const updateUser = () => {
-    //     const data = {first_name: firstName.current.value};
-    //     console.log(data);
-    //     fetch("/api/user", {
-    //         method: 'PUT',
-    //         credentials: 'include', 
-    //         headers: {
-    //         'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     }).then( response => console.log(response));
-    // }
+
 
     const categories = [{name:"Design & Art", src:"design-art"}, {name:"Sales & Marketing", src:"https://via.placeholder.com/100"}, {name: "Business & Finance", src:"https://via.placeholder.com/100"}, {name: "Writing & Translation", src:"https://via.placeholder.com/100"}, {name: "Video & Animation", src:"https://via.placeholder.com/100"}, {name: "Audio & Music", src:"https://via.placeholder.com/100"}, {name: "Programming & Tech", src:"https://via.placeholder.com/100"}, {name: "Engineering & Architecture", src:"https://via.placeholder.com/100"}, {name: "Education & Training", src:"https://via.placeholder.com/100"}];
     const marketplaceJsxElements = [];

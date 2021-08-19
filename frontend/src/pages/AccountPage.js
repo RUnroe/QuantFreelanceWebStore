@@ -89,7 +89,6 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
             body: JSON.stringify(emptyProduct)
         }).then(result => result.json())
         .then(data => {
-            //console.log(data);
             setRedirect(`/store/${data}/edit`);
         })
     }

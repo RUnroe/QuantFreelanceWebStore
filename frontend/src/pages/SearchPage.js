@@ -20,7 +20,6 @@ export default function SearchPage() {
 
     //Convert list to jsx when data comes in and is stored
     useEffect(() => {
-        console.log(resultList);
         if(resultList) convertListToJSX();
     }, [resultList]);
 

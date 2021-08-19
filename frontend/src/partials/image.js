@@ -24,6 +24,7 @@ function ImageSelectModal({setter, setSetter}) {
     }
     useEffect(() => {
         if(refresh) {
+            setImage(null);
             getUsersImages();
             setRefresh(false);
         }
@@ -38,8 +39,6 @@ function ImageSelectModal({setter, setSetter}) {
     const postIcon = () => {
         //TODO: catch and display error
         const formData = new FormData();
-        // console.log(image.current.files[0]);
-        console.log(image);
         formData.append('icon', image);
         return fetch('/api/icons', {
             method: 'POST',
@@ -54,7 +53,6 @@ function ImageSelectModal({setter, setSetter}) {
         if(modalState === "upload"){
             postIcon().then(img => {
                 setSelectedImageUrl(img.url);
-                console.log(img.url);
                 setter(img.url);
                 setRefresh(true);
                 setSetter(""); // clear the setter to hide the modal
