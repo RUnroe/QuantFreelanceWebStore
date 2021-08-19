@@ -22,7 +22,7 @@ const getProduct = (req, res) => {
 
 const getProductEdit = (req, res) => {
 	dal.getProductById(req.params.product_id).then(result => {
-		console.log(req.session.user_id, result.seller);
+		// console.log(req.session.user_id, result.seller);
 		if(req.session.user_id == result.seller) res.json(result);
 		else handle(req, res);
 	})

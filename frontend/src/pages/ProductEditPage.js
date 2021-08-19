@@ -516,8 +516,8 @@ export default function ProductEditPage({username}) {
             let keepItem = true;
             if(element.id === selectedElementId) keepItem = false;
             else if(element.type === "split") {
-                element.properties.children.forEach(child => {
-                    if(child.id === selectedElementId) keepItem = false;
+                element.properties.children.filter(child => {
+                    return child.id !== selectedElementId;
                 });
             }
             return keepItem;
