@@ -520,7 +520,6 @@ export default function ProductEditPage({username}) {
                     return child.id !== selectedElementId;
                 });
             }
-            console.log(element, keepItem);
             return keepItem;
         });
         setPageStructure(newPageStructure);
