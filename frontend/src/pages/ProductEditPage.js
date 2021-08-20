@@ -430,7 +430,7 @@ export default function ProductEditPage({username}) {
                             </div>
                             <div className="input-block">
                                 <label>A: &nbsp;</label>
-                                <input type="text" className="input" value={faqModule.answer} onInput={(event) => updateFAQModuleText(faqModule.id, "answer", event.target.value)} />
+                                <textarea className="input" value={faqModule.answer} onInput={(event) => updateFAQModuleText(faqModule.id, "answer", event.target.value)}> </textarea>
                             </div>
                         </div>
                         <div className="right-side">
