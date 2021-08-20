@@ -62,6 +62,7 @@ const updateUser = (req, res) => {
 	dal.updateUser(req.session.user_id, req.body).then(() => {
 		res.status(204);
 		res.statusMessage = 'Updated User';
+		if(req.body.is_seller) req.session.is_seller = req.body.is_seller.toString();
 		res.end();
 	})
 	.catch(handle(req, res));
@@ -78,7 +79,7 @@ const removeUser = (req, res) => {
 }
 
 const checkSession = (req, res) => {
-	// console.log("check Auth:",req.session);
+	//console.log("check Auth:",req.session);
 	
 	if(req.session && req.session.user_id) {
 		const is_seller = req.session.is_seller === "true" ? "seller" : "buyer";
