@@ -99,7 +99,6 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
         setDeleteModal(false);
     }
     const deleteProduct = () => {
-        console.log("delete", deleteModal.id);
         fetch("/api/product", {
             method: "DELETE",
             credentials:"include",
@@ -109,8 +108,12 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
             body: JSON.stringify({"product_id": deleteModal.product_id})
         })
         .then(data => {
-            console.log(data);
-            if(data.status == "204") closeModal();
+            if(data.status == "204") {
+                //Delete local instance
+                const newProducts = products.filter(product => product.product_id !== data.product_id);
+                setProducts(newProducts);
+                closeModal();
+            }
         })
         
     }
