@@ -107,7 +107,7 @@
     min-height: calc(100vh - 5.5rem);
     position:relative;
 }
-.product-page.edit .product-side .product-details {
+.product-page.edit .product-side .product-details, .product-page.edit .product-side .config-menu {
     position: sticky;
     top: 0;
 }  
