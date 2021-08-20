@@ -34,7 +34,13 @@ export default function CategoryPage({ }) {
         });
         setResultListJSX(jsx);
     }
-
+    const getTrueLength = () => {
+        let count = 0;
+        resultList.forEach(result => {
+            if(result.title) count++;
+        });
+        return count;
+    }
     return(
         <div className="category-page">
         <div className="container gradient category-header">
@@ -43,7 +49,7 @@ export default function CategoryPage({ }) {
         <div className="container">
             <div className="section result-area">
                 {resultListJSX.length ? 
-                <><h2 className="results-header">Results ({resultListJSX.length})</h2><div className="list">{resultListJSX}</div></> : 
+                <><h2 className="results-header">Results ({getTrueLength()})</h2><div className="list">{resultListJSX}</div></> : 
                 <h2 className="no-results-header">No Results</h2>}
             </div>
         </div>
