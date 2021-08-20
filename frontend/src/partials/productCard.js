@@ -11,8 +11,10 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
         return fprice;
     }
 
-    const openDeleteModal = () => {
-        setDeleteModal(productData.product_id);
+    const openDeleteModal = (evt) => {
+        evt.preventDefault();
+        console.log("clicked");
+        setDeleteModal(productData);
     }
 
 
@@ -22,7 +24,7 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
             {mode === "edit" ? <><Link className="edit-btn" to={`/store/${productData.product_id}/edit`} title="Edit service">
                 <i className="far fa-edit"></i>
             </Link>
-            <button className="delete-btn" onClick={openDeleteModal}><i className="far fa-trash"></i></button>
+            <button className="delete-btn" onClick={evt => openDeleteModal(evt)}><i className="far fa-trash"></i></button>
             </>
             : <></>}
             <div className="top img-container">
