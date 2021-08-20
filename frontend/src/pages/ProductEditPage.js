@@ -739,7 +739,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
                 </div>
             </div>
             <div className="input-block">
-                <label className="input-label">Product Title</label>
+                <label className="input-label">Service Title</label>
                 <input className="input" type="text" value={title} onInput={event => setTitle(event.target.value)}/>
             </div>
             <div className="input-block">
@@ -764,7 +764,7 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
                 </select>
             </div>
             <div className="input-block">
-                <label className="input-label">Product Description</label>
+                <label className="input-label">Service Description</label>
                 <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
             </div>
         </div>
