@@ -261,8 +261,10 @@
     margin:0.1rem 0;
 
 }
-
-
+.product-page .header,
+.product-page .paragraph {
+    white-space: pre-line;
+}
 .product-page.display .faq-container,
 .product-page.display .split-section .left-side,
 .product-page.display .split-section .right-side {
