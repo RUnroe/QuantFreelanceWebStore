@@ -262,7 +262,8 @@
 
 }
 .product-page .header,
-.product-page .paragraph {
+.product-page .paragraph,
+.product-page .faq-answer {
     white-space: pre-line;
 }
 .product-page.display .faq-container,
