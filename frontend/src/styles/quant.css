@@ -440,3 +440,23 @@ img.round {
     object-fit: cover;
     object-position: center center;
 }
+
+
+
+
+/*====================
+  Delete Product Modal
+======================*/
+#deleteModal {
+    max-width: 650px;
+    transform: translate(-50%,0%);
+    top:3rem;
+    position: fixed;
+}
+
+#deleteModal .btn-group {
+    margin-top: 1rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

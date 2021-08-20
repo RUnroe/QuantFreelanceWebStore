@@ -13,7 +13,6 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
 
     const openDeleteModal = (evt) => {
         evt.preventDefault();
-        console.log("clicked");
         setDeleteModal(productData);
     }
 

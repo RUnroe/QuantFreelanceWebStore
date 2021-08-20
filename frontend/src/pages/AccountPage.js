@@ -106,7 +106,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
             headers: {
                 'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({"product_id": deleteModal.id})
+            body: JSON.stringify({"product_id": deleteModal.product_id})
         })
         .then(data => {
             console.log(data);
