@@ -104,6 +104,8 @@
     border-bottom-right-radius: 4px;
     transform: translateY(-100%);
     transition: transform 0.2s ease;
+    border:none;
+    font-size: 1rem;
 }
 
 .product-card:hover .edit-btn, .product-card:hover .delete-btn  {
