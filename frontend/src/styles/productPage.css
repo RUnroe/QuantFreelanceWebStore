@@ -270,12 +270,14 @@
 
 .product-page.display .image,
 .product-page.display .split-section,
-.product-page.display .hr,
+
 .product-page.display .header,
 .product-page.display .paragraph {
     margin:0.75rem 0;
 }
-
+.product-page.display .hr {
+    margin: 0.75rem auto;
+}
 
 .product-page .split-section .left-side,
 .product-page .split-section .right-side {
