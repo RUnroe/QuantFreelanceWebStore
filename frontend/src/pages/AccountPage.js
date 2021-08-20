@@ -46,7 +46,6 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     }
 
     useEffect(() => {
-        console.log(products);
         if(products) convertListToJSX();
     }, [products]);
 
@@ -111,7 +110,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
         .then(data => {
             if(data.status == "204") {
                 //Delete local instance
-                const newProducts = products.filter(product => product.product_id !== data.product_id);
+                const newProducts = products.filter(product => product.product_id !== deleteModal.product_id);
                 setProducts(newProducts);
                 closeModal();
             }
