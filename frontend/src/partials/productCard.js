@@ -22,7 +22,7 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
             {mode === "edit" ? <><Link className="edit-btn" to={`/store/${productData.product_id}/edit`} title="Edit service">
                 <i className="far fa-edit"></i>
             </Link>
-            <div className="delete-btn" onClick={openDeleteModal}><i className="far fa-trash"></i></div>
+            <button className="delete-btn" onClick={openDeleteModal}><i className="far fa-trash"></i></button>
             </>
             : <></>}
             <div className="top img-container">
