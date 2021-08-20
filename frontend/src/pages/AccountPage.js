@@ -46,6 +46,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     }
 
     useEffect(() => {
+        console.log(products);
         if(products) convertListToJSX();
     }, [products]);
 
