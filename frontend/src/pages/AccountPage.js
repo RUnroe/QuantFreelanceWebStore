@@ -158,7 +158,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                 </div>
             </div>
         </div>
-        <div className="screen visible" id="deleteModalScreen" onClick={closeModal}></div>
+        <div className={`screen ${ deleteModal ? "visible" : ""}`} id="deleteModalScreen" onClick={closeModal}></div>
         </>
     );
 
