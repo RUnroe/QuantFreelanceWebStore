@@ -91,7 +91,22 @@
     transition: transform 0.2s ease;
 }
 
-.product-card:hover .edit-btn {
+.delete-btn {
+    position: absolute;
+    top:0;
+    left:0;
+    /* border:1px solid var(--color-light-3); */
+    background-color: var(--color-danger);
+    color:var(--color-light-1);
+    padding:0.4rem;
+    box-sizing: border-box;
+    cursor:pointer;
+    border-bottom-left-radius: 4px;
+    transform: translateY(-100%);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover .edit-btn, .product-card:hover .delete-btn  {
     transform: translateY(0);
 }
 

@@ -10,6 +10,8 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     const [productListJSX, setProductListJSX] = useState();
     const [redirect, setRedirect] = useState(false);
 
+    const [deleteModal, setDeleteModal] = useState(false);
+
     const getUserData = async () => {
         fetch(`/api/user/info/${username}`)
         .then(response => response.json())
@@ -32,12 +34,12 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     }
     useEffect(() => {
         if(user) getUsersProducts();
-    }, [user])
+    }, [user]);
 
     const convertListToJSX = () => {
         const jsx = [];
         products.forEach(result => {
-            if(user && user.user_id === currUser.user_id && authLevel === "seller") jsx.push(<ProductCard productData={result} mode={"edit"}/>);
+            if(user && user.user_id === currUser.user_id && authLevel === "seller") jsx.push(<ProductCard productData={result} mode={"edit"} setDeleteModal={setDeleteModal}/>);
             else jsx.push(<ProductCard productData={result} />);
         });
         setProductListJSX(jsx);
@@ -93,9 +95,30 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
         })
     }
 
+    const closeModal = () => {
+        setDeleteModal(false);
+    }
+    const deleteProduct = () => {
+        console.log("delete", deleteModal.id);
+        fetch("/api/product", {
+            method: "DELETE",
+            credentials:"include",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({"product_id": deleteModal.id})
+        })
+        .then(data => {
+            console.log(data);
+            if(data.status == "204") closeModal();
+        })
+        
+    }
+
 
     if(redirect) return < Redirect to={redirect}/>;
     return(
+        <>
         <div className="container">
             <div className="section account-page">
                 <div className="account-container container gradient">
@@ -121,6 +144,22 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                 </div>
             </div>
         </div>
+
+
+        <div className={`modal ${ deleteModal ? "visible" : ""}`} id="deleteModal">
+            <div className="modal-header">
+                <h2>Delete '{deleteModal ? deleteModal.title : ""}'?</h2>
+                <button onClick={closeModal}><i className="fas fa-times"></i></button>
+            </div>
+            <div className="modal-body">
+                <div className="btn-group">
+                    <button className="btn danger-outline" onClick={closeModal}>Cancel</button>
+                    <button className="btn danger" onClick={deleteProduct}>Delete</button>
+                </div>
+            </div>
+        </div>
+        <div className="screen visible" id="deleteModalScreen" onClick={closeModal}></div>
+        </>
     );
 
 }
