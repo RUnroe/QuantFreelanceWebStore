@@ -922,6 +922,9 @@ export default function ProductEditPage({username}) {
         setAddModalVisible(false);
         //select new element
         setNewCreatedElementId(newElement.id);
+
+        //force page structure update
+        convertPageStructureToJSX();
     }
 
     const createElementInSection = (list, id, newElement) => {
