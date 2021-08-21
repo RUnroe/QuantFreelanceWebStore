@@ -245,7 +245,7 @@ export default function ProductEditPage({username}) {
         jsx.push(
             <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
                 {getAllChildrenElements(props.children)}
-                <div className="nested-add-element-btn" onClick={() => openAddElementModal(`${object.id}`)}>+</div>
+                <div className="nested-add-element-btn" onClick={() => openAddElementModal(`C${object.id}`)}>+</div>
             </div> 
         );
     
