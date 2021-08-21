@@ -928,6 +928,7 @@ export default function ProductEditPage({username}) {
     }
 
     const createElementInSection = (list, id, newElement) => {
+        console.log(list);
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) {
