@@ -718,11 +718,13 @@ export default function ProductEditPage({username}) {
         setSelectedElementId(id);
         //Select element based on id
         const element = findElementInPageStructure(id);
+        console.log(element);
         setSelectedElement(Object.assign(element));
     }
 
     //TODO: Make recursive
     const findElementInPageStructure = id => {
+        console.log(pageStructure);
         let selected = lookForElementInPageStructure(pageStructure, id);
         // pageStructure.forEach(element => {
         //     if(element.id === id) selected = element;
