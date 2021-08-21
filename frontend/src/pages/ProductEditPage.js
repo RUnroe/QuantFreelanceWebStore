@@ -738,13 +738,12 @@ export default function ProductEditPage({username}) {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) return list[i];
-                else if(element.type === "split" || element.type === "container") {
+                else if(list[i].type === "split" || list[i].type === "container") {
                     let found = lookForElementInPageStructure(list[i].children, id);
                     if(id) return found;
                 }
             }
         }
-        return selected;
     }
     const createAddBtn = (position) => {
         return (
