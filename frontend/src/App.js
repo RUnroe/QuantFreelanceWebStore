@@ -105,7 +105,6 @@ function RoutesModule({checkAuth, currUser, currAuthLevel, setCurrAuthLevel, set
   let location = useLocation();
   useEffect(() => {
       if(location && location.pathname) {
-        console.log(location.pathname.includes("/edit") === true);
         setInEditMode( location.pathname.includes("/edit") === true);
       }
     },

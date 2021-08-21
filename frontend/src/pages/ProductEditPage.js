@@ -492,6 +492,7 @@ export default function ProductEditPage({username}) {
         getPageData();
         //save page every 10 seconds
         setInterval(() => {
+            console.log(newChanges);
             if(newChanges) savePage();
         }, 10000);
     }, []);
