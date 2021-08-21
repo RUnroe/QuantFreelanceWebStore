@@ -109,7 +109,7 @@
 }
 .product-page.edit .product-side .product-details, .product-page.edit .product-side .config-menu {
     position: sticky;
-    top: 0;
+    top: 1rem;
 }  
 
 .product-page.display .product-side {

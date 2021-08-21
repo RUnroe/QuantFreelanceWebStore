@@ -62,6 +62,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_ic
     }, [redirect]);
 
     if(redirect) return (<Redirect to="/"/>);
+    
     if(currAuthLevel === "seller") {
         return (
         <nav>

@@ -3,6 +3,7 @@ import {
   Redirect,
   Switch,
   Route,
+  useLocation,
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -65,6 +66,15 @@ function Footer() {
 function App() {
   const [currAuthLevel, setCurrAuthLevel] = useState();
   const [currUser, setCurrUser] = useState({});
+
+  const [inEditMode, setInEditMode] = useState(false);
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+  
+  
   const checkAuth = async () => {
     fetch('/api/auth', {credentials:"include"})
     .then(response => response.json())
