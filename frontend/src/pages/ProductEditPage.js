@@ -243,7 +243,7 @@ export default function ProductEditPage({username}) {
         if(props.align === "center") style.marginRight = "auto";
 
         jsx.push(
-            <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+            <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
                 {getAllChildrenElements(props.children)}
                 <div className="nested-add-element-btn" onClick={() => openAddElementModal(`C${object.id}`)}>+</div>
             </div> 
@@ -702,7 +702,6 @@ export default function ProductEditPage({username}) {
         jsx.push(<h2 className="config-panel-header text-center">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
-        console.log(selectedElement);
         jsx.push(
             <div className="config-panel-body"> 
                 <div className="config-panel-input-section">{inputs}</div>
