@@ -704,6 +704,7 @@ export default function ProductEditPage({username}) {
             else if(element.type === "split" || element.type === "container") {
                 filterElementOut(element.properties.children);
             }
+            if(keepItem === false) console.log(selectedElementId);
             return keepItem;
         })
     }
