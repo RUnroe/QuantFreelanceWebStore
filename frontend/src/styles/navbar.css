@@ -200,3 +200,32 @@ nav hr {
     background: linear-gradient(to left, #fff, #fff, #fff, #fff0);
     padding-left:0.85rem;
 }
+
+
+
+
+
+
+
+
+.edit-nav {
+    height: 3.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+    background: var(--color-light-1);
+    box-shadow: 0px 4px 6px #65627624;
+}
+.edit-nav > div {
+    display:flex;
+}
+.edit-nav > div > button {
+    margin-right: 1rem;
+}
