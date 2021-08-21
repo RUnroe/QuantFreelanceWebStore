@@ -197,8 +197,8 @@ h4 { font-size:1.2rem; }
 }
 
 .btn.blue-outline:disabled {
-    background-color:var(--color-primary);
-    color:var(--color-light-1);
+    color: var(--color-primary);
+    background-color: transparent;
     opacity:0.5;
 }
 /*====================

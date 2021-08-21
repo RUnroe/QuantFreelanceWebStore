@@ -694,7 +694,7 @@ export default function ProductEditPage({username}) {
             </div>
         </nav>
         <div style={{paddingTop: "3.75rem"}}>
-            <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
+            <div className={statusBar ? "status-bar-product open" : "status-bar-product"}><p>{statusBar}</p></div>
             <div className="product-page edit">
                 <div className="product-main container">
 
