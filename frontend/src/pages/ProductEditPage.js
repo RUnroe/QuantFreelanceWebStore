@@ -490,6 +490,10 @@ export default function ProductEditPage({username}) {
     }
     useEffect(()=> {
         getPageData();
+        //save page every 10 seconds
+        setInterval(() => {
+            if(newChanges) savePage();
+        }, 10000);
     }, []);
 
     useEffect(() => {
