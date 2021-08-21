@@ -684,7 +684,7 @@ export default function ProductEditPage({username}) {
             </div>
             <button className="btn blue">Publish</button>
         </nav>
-        <div>
+        <div style={{paddingTop: "3.5rem"}}>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
         <div className="product-page edit">
             <div className="product-main container">
