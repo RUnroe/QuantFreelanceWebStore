@@ -894,6 +894,7 @@ export default function ProductEditPage({username}) {
             //     return element;
             // });
             let newState = createElementInSection([...pageStructure], id, newElement);
+            console.log(newState);
             setPageStructure(newState);
             //force page structure update
             convertPageStructureToJSX();
@@ -908,6 +909,7 @@ export default function ProductEditPage({username}) {
             //     return element;
             // });
             let newState = createElementInSection([...pageStructure], id, newElement);
+            console.log(newState);
             setPageStructure(newState);
             //force page structure update
             convertPageStructureToJSX();
