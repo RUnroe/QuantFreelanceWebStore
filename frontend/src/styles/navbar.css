@@ -222,7 +222,6 @@ nav hr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    max-width: 1350px;
     margin: 0 auto;
 }
 .edit-nav > div > div {
