@@ -246,7 +246,7 @@ const getProductById = async (product_id, type) => {
 			seller: result.seller,
 			product_id: result.product_id
 		}
-		if (type === "saved" && result.saved_page_structure) retObj.page_structure = result.saved_page_structure;
+		//if (type === "saved" && result.saved_page_structure) retObj.page_structure = result.saved_page_structure;
 		return type ? retObj : result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
