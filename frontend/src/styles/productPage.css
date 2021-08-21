@@ -215,6 +215,7 @@
 .product-page.edit .spacer:hover,
 .product-page.edit .hr:hover,
 .product-page.edit .image:hover,
+.product-page.edit .builder-container:hover,
 .product-page.edit .split-section.selected,
 .product-page.edit .split-section.selected .left-side,
 .product-page.edit .split-section.selected .right-side,
@@ -223,7 +224,9 @@
 .product-page.edit .paragraph.selected,
 .product-page.edit .spacer.selected,
 .product-page.edit .hr.selected,
+.product-page.edit .builder-container.selected,
 .product-page.edit .image.selected {
+
     border-color: var(--color-primary);
     cursor:pointer;
 
@@ -237,6 +240,7 @@
 .product-page.edit .paragraph,
 .product-page.edit .spacer,
 .product-page.edit .hr,
+.product-page.edit .builder-container,
 .product-page.edit .image {
     border: 2px solid #ccc;
 
@@ -256,6 +260,7 @@
 .product-page .paragraph,
 .product-page .spacer,
 .product-page .hr,
+.product-page .builder-container,
 .product-page .image {
     box-sizing: border-box;
     margin:0.1rem 0;
@@ -274,7 +279,7 @@
 
 .product-page.display .image,
 .product-page.display .split-section,
-
+.product-page.display .builder-container,
 .product-page.display .header,
 .product-page.display .paragraph {
     margin:0.75rem 0;
