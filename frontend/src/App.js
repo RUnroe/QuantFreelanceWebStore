@@ -104,7 +104,7 @@ function App() {
 function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
   let location = useLocation();
   useEffect(() => {
-      setInEditMode( location.pathname.includes("/edit"));
+      if(location && location.pathname) setInEditMode( location.pathname.includes("/edit") === true);
     },
     [location]
   )
