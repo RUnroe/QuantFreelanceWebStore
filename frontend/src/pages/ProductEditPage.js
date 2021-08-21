@@ -681,20 +681,34 @@ export default function ProductEditPage({username}) {
     const deleteElement = () => {
         //Remove selected element from pageStructure
         let newPageStructure = Object.assign(pageStructure);
-        newPageStructure = newPageStructure.filter((element) => {
-            let keepItem = true;
-            if(element.id === selectedElementId) keepItem = false;
-            else if(element.type === "split") {
-                element.properties.children = element.properties.children.filter(child => {
-                    return child.id !== selectedElementId;
-                });
-            }
-            return keepItem;
-        });
+        // newPageStructure = newPageStructure.filter((element) => {
+        //     let keepItem = true;
+        //     if(element.id === selectedElementId) keepItem = false;
+        //     else if(element.type === "split") {
+        //         element.properties.children = element.properties.children.filter(child => {
+        //             return child.id !== selectedElementId;
+        //         });
+        //     }
+        //     return keepItem;
+        // });
+        newPageStructure = filterElementOut(newPageStructure);
         setPageStructure(newPageStructure);
         //unselect element
         clearSelection();
     }
+
+    const filterElementOut = (list) => {
+        return list.filter(element => {
+            let keepItem = true;
+            if(element.id === selectedElementId) keepItem = false;
+            else if(element.type === "split" || element.type === "container") {
+                filterElementOut(element.properties.children);
+            }
+            return keepItem;
+        })
+    }
+
+
     const setupConfigPanel = () => {
         const jsx = [];
         let inputs;
