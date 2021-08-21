@@ -434,7 +434,7 @@ export default function ProductEditPage({username}) {
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}backgroundColor`}>Background Color</label>
-                        <input className="input" type="text" id={`${selectedElement.id}backgroundColor`} value={selectedElement.properties.backgroundColor} onInput={event => updatePropInput("backgroundColor", event.target.value)}/>
+                        <input className="input" type="color" id={`${selectedElement.id}backgroundColor`} value={selectedElement.properties.backgroundColor} onInput={event => updatePropInput("backgroundColor", event.target.value)}/>
                     </div>
                 );
                 tempJSX.push(
