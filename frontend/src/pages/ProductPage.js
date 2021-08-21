@@ -63,22 +63,22 @@ export default function ProductPage({userId}) {
     
         switch(headerObject.properties.headerType) {
             case "h2":
-                jsx.push(<h2 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h2>);
+                jsx.push(<h2 className={`header `} style={style}>{props.value}</h2>);
             break;
             case "h3":
-                jsx.push(<h3 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h3>);
+                jsx.push(<h3 className={`header `} style={style}>{props.value}</h3>);
             break;
             case "h4":
-                jsx.push(<h4 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h4>);
+                jsx.push(<h4 className={`header `} style={style}>{props.value}</h4>);
             break;
             case "h5":
-                jsx.push(<h5 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h5>);
+                jsx.push(<h5 className={`header `} style={style}>{props.value}</h5>);
             break;
             case "h6":
-                jsx.push(<h6 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h6>);
+                jsx.push(<h6 className={`header `} style={style}>{props.value}</h6>);
             break;
             default:
-                jsx.push(<h1 className={`header ${headerObject.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(headerObject.id); event.stopPropagation();}} style={style}>{props.value}</h1>);
+                jsx.push(<h1 className={`header `} style={style}>{props.value}</h1>);
             break;
     
         }
@@ -98,7 +98,7 @@ export default function ProductPage({userId}) {
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
     
-        jsx.push(<p className={`paragraph ${paragraphObject.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
+        jsx.push(<p className={`paragraph `} style={style} >{props.value}</p>);
     
         return jsx;
     }
@@ -106,7 +106,7 @@ export default function ProductPage({userId}) {
     const convertSpacer = (object) => {
         const props = object.properties;
         const jsx = [];
-        jsx.push(<div className={`spacer space${props.size} ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}></div>);
+        jsx.push(<div className={`spacer space${props.size} `} ></div>);
         return jsx;
     }
     
@@ -118,7 +118,7 @@ export default function ProductPage({userId}) {
             width: props.width,
             height: props.height
         }
-        jsx.push(<hr className={`hr ${object.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}/>);
+        jsx.push(<hr className={`hr `} style={style} />);
         return jsx;
     }
     
@@ -132,7 +132,7 @@ export default function ProductPage({userId}) {
         }
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        jsx.push(<img className={`image ${object.id === selectedElementId ? "selected" : ""}`} alt={object.id + "image"} style={style} src={props.src} onClick={(event) => {selectElement(object.id); event.stopPropagation();}} />);
+        jsx.push(<img className={`image `} alt={object.id + "image"} style={style} src={props.src}  />);
         return jsx;
     }
     
@@ -151,7 +151,7 @@ export default function ProductPage({userId}) {
             );
         });
         jsx.push(
-            <div className={`faq-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+            <div className={`faq-container `} >
               {modulesJSX}  
             </div>
         );
@@ -162,14 +162,13 @@ export default function ProductPage({userId}) {
     const convertSplit = (object) => {
         const props = object.properties;
         const jsx = [];
-        //TODO: Create add button for split section that does not have elements in it
         jsx.push(
-            <div className={`split-section split${props.splitType} ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+            <div className={`split-section split${props.splitType} `} >
                 <div className="left-side">
-                    { (props.children && props.children.length > 0 && getChildById(props.children, 0)) ? getJSXOfElement(getChildById(props.children, 0)) : <div className="nested-add-element-btn" onClick={() => openAddElementModal(`L${object.id}`)}>+</div>}
+                    { (props.children && props.children.length > 0 && getChildById(props.children, 0)) ? getJSXOfElement(getChildById(props.children, 0)) : <> </>}
                 </div>
                 <div className="right-side">
-                    { (props.children && props.children.length > 0 && getChildById(props.children, 1)) ? getJSXOfElement(getChildById(props.children, 1)) : <div className="nested-add-element-btn" onClick={() => openAddElementModal(`R${object.id}`)} >+</div>}
+                    { (props.children && props.children.length > 0 && getChildById(props.children, 1)) ? getJSXOfElement(getChildById(props.children, 1)) : <> </>}
                 </div>
             </div> 
         );
