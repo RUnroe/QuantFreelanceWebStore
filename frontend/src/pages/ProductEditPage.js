@@ -271,10 +271,10 @@ export default function ProductEditPage({username}) {
         let props = {};
         switch(elementType) {
             case "header": 
-                props = {value: "New Header", fontWeight: 400, style: "none", textAlign: "left", headerType: "h1", width: "100%", align: "left"};
+                props = {value: "New Header", fontWeight: 400, style: "none", textAlign: "left", headerType: "h1", width: "100%", align: "left", color: "#403d52"};
             break;
             case "paragraph": 
-                props = {value: "New paragraph", fontWeight: 400, style: "none", textAlign: "left", width: "100%", align: "left"};
+                props = {value: "New paragraph", fontWeight: 400, style: "none", textAlign: "left", width: "100%", align: "left", color: "#403d52"};
             break;
             case "spacer": 
                 props = {size: 1};
@@ -283,7 +283,7 @@ export default function ProductEditPage({username}) {
                 props = {backgroundColor: "#403D52", height: "2px", width: "100%"};
             break;
             case "image": 
-                props = {src: "https://via.placeholder.com/320x180", align: "center", width:"100%"}; // give default image
+                props = {src: "https://via.placeholder.com/320x180", align: "center", width:"100%", height:""}; // give default image
             break;
             case "faq": 
                 props = {modules: [{id:genId(), question: "New Question?", answer: "The answer to the question"}]};
@@ -292,7 +292,7 @@ export default function ProductEditPage({username}) {
                 props = {children: [], splitType: 2 }; // set split to half and half?
             break;
             case "container":
-                props= {children: [], padding:"1rem", align: "center"};
+                props= {children: [], padding:"1rem", width:"", height:"", backgroundColor:"", borderRadius: "0px", align: "center"};
             break;
             default: break;
         }

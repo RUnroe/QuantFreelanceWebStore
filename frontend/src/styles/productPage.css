@@ -331,6 +331,7 @@ button.cancel-btn {
     grid-template-columns: 1fr 2fr;
 }
 
+.product-page.edit .builder-container,
 .product-page.edit .split-section .left-side,
 .product-page.edit .split-section .right-side {
     padding: 0.5rem;
