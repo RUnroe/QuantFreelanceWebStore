@@ -773,14 +773,14 @@ export default function ProductEditPage({username}) {
 
     const convertPageStructureToJSX = () => {
         const tempJSX = [];
-        if(pageStructure) {
+        //if(pageStructure) {
             pageStructure.forEach((pageElement, index) => {
                 //add btn index index
                 tempJSX.push(createAddBtn(index));
                 tempJSX.push(getJSXOfElement(pageElement));
             });
             setPageStructureJSX(tempJSX);
-        }
+        //}
     }
     const savePage = () => {
         const data = {
