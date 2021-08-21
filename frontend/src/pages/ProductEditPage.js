@@ -741,7 +741,7 @@ export default function ProductEditPage({username}) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) return list[i];
                 if(list[i].type === "split" || list[i].type === "container") {
-                    let found = lookForElementInPageStructure(list[i].children, id);
+                    let found = lookForElementInPageStructure(list[i].properties.children, id);
                     if(found) return found;
                 }
             }
