@@ -60,6 +60,7 @@ export default function ProductPage({userId}) {
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
+        if(props.color) style.color = props.color;
     
         switch(headerObject.properties.headerType) {
             case "h2":
@@ -97,6 +98,7 @@ export default function ProductPage({userId}) {
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
+        if(props.color) style.color = props.color;
     
         jsx.push(<p className={`paragraph `} style={style} >{props.value}</p>);
     

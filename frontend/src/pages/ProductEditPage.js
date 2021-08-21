@@ -99,12 +99,13 @@ export default function ProductEditPage({username}) {
         const style = {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
-            textAlign: props.align
+            textAlign: props.align,
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
+        if(props.color) style.color = props.color;
     
         switch(headerObject.properties.headerType) {
             case "h2":
@@ -142,6 +143,7 @@ export default function ProductEditPage({username}) {
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
+        if(props.color) style.color = props.color;
     
         jsx.push(<p className={`paragraph ${paragraphObject.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
     
@@ -328,6 +330,12 @@ export default function ProductEditPage({username}) {
                 );
                 tempJSX.push(
                     <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}color`}>Text Color</label>
+                        <input className="input" type="color" id={`${selectedElement.id}color`} value={selectedElement.properties.color} onInput={event => updatePropInput("color", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
                         <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style} onInput={event => updatePropInput("style", event.target.value)}>
                             <option value="">None</option>
@@ -382,6 +390,12 @@ export default function ProductEditPage({username}) {
                 );
                 tempJSX.push(
                     <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}color`}>Text Color</label>
+                        <input className="input" type="color" id={`${selectedElement.id}color`} value={selectedElement.properties.color} onInput={event => updatePropInput("color", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}style`}>Text Style</label>
                         <select className="input" id={`${selectedElement.id}style`} value={selectedElement.properties.style} onInput={event => updatePropInput("style", event.target.value)}>
                             <option value="">None</option>
@@ -430,7 +444,6 @@ export default function ProductEditPage({username}) {
                 );
             break;
             case "hr": 
-            //TODO change input to color input
                 tempJSX.push(
                     <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}backgroundColor`}>Background Color</label>
