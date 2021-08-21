@@ -702,7 +702,7 @@ export default function ProductEditPage({username}) {
             let keepItem = true;
             if(element.id === selectedElementId) keepItem = false;
             else if(element.type === "split" || element.type === "container") {
-                filterElementOut(element.properties.children);
+                element.properties.children = filterElementOut(element.properties.children);
             }
             if(keepItem === false) console.log(selectedElementId);
             return keepItem;
@@ -737,9 +737,9 @@ export default function ProductEditPage({username}) {
         setSelectedElement(Object.assign(element));
     }
 
-    //TODO: Make recursive
+    // Make recursive
     const findElementInPageStructure = id => {
-        console.log(pageStructure, id);
+        // console.log(pageStructure, id);
         let selected = lookForElementInPageStructure(pageStructure, id);
         // pageStructure.forEach(element => {
         //     if(element.id === id) selected = element;
