@@ -847,8 +847,9 @@ export default function ProductEditPage({username}) {
             id: genId(),
             properties: getDefaultProperties(elementType)
         }
-
+        //add to end of list
         if(addElementLocation === "") setPageStructure((oldState) => [...oldState, newElement]);
+        //add to nested split section
         else if (addElementLocation[0] === "L" || addElementLocation[0] === "R") {
             //add element to properties.children of section
 
@@ -864,6 +865,18 @@ export default function ProductEditPage({username}) {
             });
             setPageStructure(newState);
         }
+        else if (addElementLocation[0] === "C") {
+            //Get Id by removing the split position indicator 
+            const id = addElementLocation.substring(1);
+            let newState = pageStructure.map(element => {
+                if(element.id === id && element.type === "container") {
+                    element.properties.children.push(newElement);
+                }
+                return element;
+            });
+            setPageStructure(newState);
+        }
+        //add before element
         else {
             //add element in array based on index
             let newState = [...pageStructure];
