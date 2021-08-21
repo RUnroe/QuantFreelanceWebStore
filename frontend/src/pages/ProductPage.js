@@ -43,6 +43,9 @@ export default function ProductPage({userId}) {
             case "split": 
                 tempJSX.push(convertSplit(pageElement));
             break;
+            case "container":
+                tempJSX.push(convertContainer(pageElement));
+                break;
             default: break;
         }
         return tempJSX;
