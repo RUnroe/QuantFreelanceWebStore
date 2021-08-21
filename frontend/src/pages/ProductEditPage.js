@@ -517,7 +517,7 @@ export default function ProductEditPage({username}) {
         if(newChanges) savePage();
     }, 10000);
 
-    
+
     useEffect(()=> {
         getPageData();
         
@@ -641,8 +641,8 @@ export default function ProductEditPage({username}) {
         })
         .then(response => {
           setNewChanges(false);
-          setStatusBar("Changes have been saved");
-          setTimeout(() => setStatusBar(""), 2500);
+        //   setStatusBar("Changes have been saved");
+        //   setTimeout(() => setStatusBar(""), 2500);
 
         })
         .catch(error => {
