@@ -241,7 +241,7 @@ const getProductById = async (product_id, type) => {
 			title: result.title,
 			description: result.description,
 			category: result.category,
-			page_structure: type === "saved" ? result.saved_page_structure : page_structure,
+			page_structure: (type === "saved" && result.saved_page_structure) ? result.saved_page_structure : page_structure,
 			icon_id: result.icon_id,
 			seller: result.seller,
 			product_id: result.product_id
