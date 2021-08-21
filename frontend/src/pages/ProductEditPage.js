@@ -930,7 +930,10 @@ export default function ProductEditPage({username}) {
     const createElementInSection = (list, id, newElement) => {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
-                if(list[i].id === id) list[i].properties.children.push(newElement);
+                if(list[i].id === id) {
+                    list[i].properties.children.push(newElement);
+                    return;
+                }
                 if(list[i].type === "split" || list[i].type === "container") {
                     lookForElementInPageStructure(list[i].properties.children, id);
                 }
