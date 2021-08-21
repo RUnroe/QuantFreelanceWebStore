@@ -493,12 +493,12 @@ export default function ProductEditPage({username}) {
 
     useEffect(() => {
         if(!isInitPageLoad) setNewChanges(true); 
-        setInitPageLoad(false);
         convertPageStructureToJSX();
         if(newCreatedElementId) {
             selectElement(newCreatedElementId);
             setNewCreatedElementId(null);
         }
+        if(pageStructure)setInitPageLoad(false);
     }, [pageStructure]);
 
     //Update config panel with correct info when element is selected

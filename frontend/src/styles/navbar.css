@@ -230,3 +230,9 @@ nav hr {
 .edit-nav > div > div > button {
     margin-right: 1rem;
 }
+
+.edit-nav span {
+    align-self: center;
+    color: var(--color-dark-4);
+    font-size: 0.9rem;
+}
