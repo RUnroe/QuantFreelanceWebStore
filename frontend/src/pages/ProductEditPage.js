@@ -735,13 +735,15 @@ export default function ProductEditPage({username}) {
         return selected;
     }
     const lookForElementInPageStructure = (list, id) => {
-        let selected;
-        list.forEach(element => {
-            if(element.id === id) selected = element;
-            else if(element.type === "split" || element.type === "container") {
-                lookForElementInPageStructure(element.children, id);
+        if(list && list.length > 0) {
+            for(let i = 0; i < list.length; i++) {
+                if(list[i].id === id) return list[i];
+                else if(element.type === "split" || element.type === "container") {
+                    let found = lookForElementInPageStructure(list[i].children, id);
+                    if(id) return found;
+                }
             }
-        });
+        }
         return selected;
     }
     const createAddBtn = (position) => {
