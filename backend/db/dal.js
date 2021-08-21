@@ -237,7 +237,10 @@ const createProduct = async (user_id, _product) => {
 const getProductById = async (product_id, type) => {
 	return await dbclient.db('QuantFreelance').collection('Product').findOne({product_id}).then(result => {
 		
-		//if (type === "saved" && result.saved_page_structure) retObj.page_structure = result.saved_page_structure;
+		if (type === "saved" && result.saved_page_structure) {
+			result.page_structure = result.saved_page_structure;
+			delete result.saved_page_structure;
+		}
 		return result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
