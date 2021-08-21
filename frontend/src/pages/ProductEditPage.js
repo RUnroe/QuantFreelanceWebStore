@@ -491,10 +491,11 @@ export default function ProductEditPage({username}) {
     useEffect(()=> {
         getPageData();
         //save page every 10 seconds
-        setInterval(() => {
+        const interval = setInterval(() => {
             console.log(newChanges);
             if(newChanges) savePage();
         }, 10000);
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
