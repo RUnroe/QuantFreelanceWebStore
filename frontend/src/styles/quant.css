@@ -301,6 +301,13 @@ select.input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+input.input[type="color"] {
+    width: 80px;
+    padding: 0;
+    height: 30px;
+    margin: 0.5rem 0;
+}
 /*====================
         Image
 ======================*/
