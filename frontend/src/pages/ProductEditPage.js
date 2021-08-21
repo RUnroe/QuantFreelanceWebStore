@@ -531,6 +531,10 @@ export default function ProductEditPage({username}) {
         }
     }, [pageStructure]);
 
+    useEffect(() => {
+        if(!isInitPageLoad) setNewChanges(true); 
+    }, [title, coverImg, description, price, category])
+
     //Update config panel with correct info when element is selected
     useEffect(() => {
         if(selectedElementId) setupConfigPanel();
