@@ -3,7 +3,7 @@ import {
   Redirect,
   Switch,
   Route,
-  useLocation,
+  useHistory,
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -62,21 +62,21 @@ function Footer() {
     </footer>
   );
 }
-function usePageViews() {
-  let location = useLocation();
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-}
 
 function App() {
-  usePageViews();
   const [currAuthLevel, setCurrAuthLevel] = useState();
   const [currUser, setCurrUser] = useState({});
 
   const [inEditMode, setInEditMode] = useState(false);
   
+  const history = useHistory() 
+
+  useEffect(() => {
+     return history.listen((location) => { 
+        console.log(`You changed the page to: ${location.pathname}`) 
+     }) 
+  },[history]) 
   
   
   const checkAuth = async () => {
