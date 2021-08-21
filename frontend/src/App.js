@@ -103,7 +103,7 @@ function App() {
 
 function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
   console.log(useLocation());
-  render (
+  return (
     <Switch>
     <Route exact path="/">
       <HomePage currAuthLevel={currAuthLevel} username={currUser.username}/>
