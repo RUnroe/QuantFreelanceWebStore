@@ -4,6 +4,28 @@ import {ImageSelectModal} from "../partials/image";
 import {Redirect} from "react-router-dom";
 
 
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+  
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 export default function ProductEditPage({username}) {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
@@ -488,14 +510,16 @@ export default function ProductEditPage({username}) {
         })
         .catch(err => console.log(err));
     }
+
+    
     useEffect(()=> {
         getPageData();
         //save page every 10 seconds
-        const interval = setInterval(() => {
+        useInterval(() => {
             console.log(newChanges);
             if(newChanges) savePage();
         }, 10000);
-        return () => clearInterval(interval);
+        
     }, []);
 
     useEffect(() => {
@@ -799,6 +823,8 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
         </div>
     );
 };
+
+
 
 
 
