@@ -234,9 +234,19 @@ const createProduct = async (user_id, _product) => {
 	return dbclient.db('QuantFreelance').collection('Product').insertOne(record).then(() => product_id);
 	
 }
-const getProductById = async (product_id) => {
+const getProductById = async (product_id, type) => {
 	return await dbclient.db('QuantFreelance').collection('Product').findOne({product_id}).then(result => {
-		return result;
+		const retObj = {
+			price: result.price,
+			title: result.title,
+			description: result.description,
+			category: result.category,
+			page_structure: type === "saved" ? result.saved_page_structure : page_structure,
+			icon_id: result.icon_id,
+			seller: result.seller,
+			product_id: result.product_id
+		}
+		return type ? retObj : result;
 	})
 	.catch(err => { throw ['An error occurred while finding product by id'];});
 }
@@ -267,6 +277,7 @@ const getProductsBySearchTerm = async (search_term) => {
 const getFullProductObj = async (product) => {
 	return await getUserById({user_id: product.seller}).then(user => {
 		delete product.page_structure; 
+		delete product.saved_page_structure; 
 		product = Object.assign(product, {user: user});
 		return product; 
 	}) 
@@ -279,7 +290,7 @@ const updateProduct = async (product_id, user_id, product) => {
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
 			description: product.description,
-			page_structure: product.page_structure
+			saved_page_structure: product.saved_page_structure
 		}};
 		if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
 		if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
@@ -289,7 +300,18 @@ const updateProduct = async (product_id, user_id, product) => {
 		.catch(err => { console.log(err); throw ['An error occurred while updating product'];});
 	}).catch(err => { console.log(err); throw ['An error occurred while updating product'];});
 
-	
+}
+
+const publishProduct = async (product_id, user_id) => {
+	//check if current user owns product
+	getProductById(product_id).then(result => {
+		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
+		let newValues = { $set: {
+			page_structure: result.saved_page_structure
+		}};
+		return dbclient.db('QuantFreelance').collection('Product').updateOne({product_id}, newValues)
+		.catch(err => { console.log(err); throw ['An error occurred while updating product'];});
+	}).catch(err => { console.log(err); throw ['An error occurred while updating product'];});
 
 }
 
@@ -326,6 +348,6 @@ module.exports =  {
 	createUser, getUserByEmail, getUserByUsername, getUserById, updateUser, removeUser,
 	authenticate, checkCredentials,
 	createOrder, getOrderById, getOrdersByCustomer, getOrdersBySeller, updateOrderStatus,
-	createProduct, getProductById, getProductsBySeller, getProductsByCategory, getProductsBySearchTerm, updateProduct, removeProduct,
+	createProduct, getProductById, getProductsBySeller, getProductsByCategory, getProductsBySearchTerm, updateProduct, removeProduct, publishProduct,
 	createIcon, getIcon, getIconsByUser
 };

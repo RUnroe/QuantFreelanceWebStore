@@ -513,7 +513,6 @@ export default function ProductEditPage({username}) {
 
     //save page every 10 seconds
     useInterval(() => {
-        console.log(newChanges);
         if(newChanges) savePage();
     }, 10000);
 
@@ -631,7 +630,7 @@ export default function ProductEditPage({username}) {
 
         }
         
-        fetch('/api/product', {
+        fetch('/api/product/save', {
             method: "PUT",
             credentials:"include",
             headers: {

@@ -14,20 +14,21 @@ const createProduct = (req, res) => {
 }
 
 const getProduct = (req, res) => {
-	dal.getProductById(req.params.product_id).then(result => {
+	dal.getProductById(req.params.product_id, "published").then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
 }
 
 const getProductEdit = (req, res) => {
-	dal.getProductById(req.params.product_id).then(result => {
-		// console.log(req.session.user_id, result.seller);
+	dal.getProductById(req.params.product_id, "saved").then(result => {
 		if(req.session.user_id == result.seller) res.json(result);
 		else handle(req, res);
 	})
 	.catch(handle(req, res));
 }
+
+
 
 const getProductsBySeller = (req, res) => {
 	dal.getProductsBySeller(req.params.seller_id).then(result => {
@@ -56,6 +57,15 @@ const updateProduct = (req, res) => {
 	dal.updateProduct(req.body.product_id, req.session.user_id, req.body).then(() => {
 		res.status(201);
 		res.statusMessage = 'Updated Product';
+		res.end();
+	})
+	.catch(handle(req, res));
+}
+
+const publishProduct = (req, res) => {
+	dal.publishProduct(req.body.product_id, req.session.user_id).then(() => {
+		res.status(201);
+		res.statusMessage = 'Published Product';
 		res.end();
 	})
 	.catch(handle(req, res));
@@ -105,9 +115,14 @@ const routes = [
 		handler: getProductsBySearchTerm
 	}, 
     {
-		uri: '/api/product',
+		uri: '/api/product/save',
 		methods: ['put'],
 		handler: [requireAuth(), updateProduct]
+	},
+	{
+		uri: '/api/product/publish',
+		methods: ['post'],
+		handler: [requireAuth(), publishProduct]
 	}, 
     {
 		uri: '/api/product',
