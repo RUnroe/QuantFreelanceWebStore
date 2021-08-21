@@ -285,7 +285,7 @@ const updateProduct = async (product_id, user_id, product) => {
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
 			description: product.description,
-			saved_page_structure: product.saved_page_structure
+			saved_page_structure: product.page_structure
 		}};
 		if(!isFieldEmpty(product.title)) newValues['$set'].title = product.title;
 		if(!isFieldEmpty(product.price) && typeof product.price == "number" && product.price >= 0) newValues['$set'].price = product.price;
