@@ -723,18 +723,27 @@ export default function ProductEditPage({username}) {
 
     //TODO: Make recursive
     const findElementInPageStructure = id => {
+        let selected = lookForElementInPageStructure(pageStructure);
+        // pageStructure.forEach(element => {
+        //     if(element.id === id) selected = element;
+        //     else if(element.type === "split") {
+        //         element.properties.children.forEach(child => {
+        //             if(child.id === id) selected = child;
+        //         });
+        //     }
+        // });
+        return selected;
+    }
+    const lookForElementInPageStructure = list => {
         let selected;
-        pageStructure.forEach(element => {
+        list.forEach(element => {
             if(element.id === id) selected = element;
-            else if(element.type === "split") {
-                element.properties.children.forEach(child => {
-                    if(child.id === id) selected = child;
-                });
+            else if(element.type === "split" || element.type === "container") {
+                lookForElementInPageStructure(element.children);
             }
         });
         return selected;
     }
-    
     const createAddBtn = (position) => {
         return (
         <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(position)}>
