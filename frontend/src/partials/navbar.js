@@ -41,7 +41,7 @@ function SecondaryNavigationMenu() {
 
 
 
-export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_icon, username}) {
+export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_icon, username, inEditMode}) {
     const [redirect, setRedirect] = useState();
 
     const logoutUser = () => {
@@ -62,7 +62,13 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_ic
     }, [redirect]);
 
     if(redirect) return (<Redirect to="/"/>);
-    
+    if(inEditMode) {
+        return (
+            <nav>
+                <button>Hi</button>
+            </nav>
+        )
+    }
     if(currAuthLevel === "seller") {
         return (
         <nav>

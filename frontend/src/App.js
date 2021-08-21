@@ -91,7 +91,7 @@ function App() {
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
     <BrowserRouter>
-    <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} user_icon={currUser.icon_id} username={currUser.username}/>
+    <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} user_icon={currUser.icon_id} username={currUser.username} inEditMode={inEditMode}/>
     
     <div id="main">
       <Routes checkAuth={checkAuth} currUser={currUser} currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} setInEditMode={setInEditMode} />
@@ -102,7 +102,7 @@ function App() {
 }
 
 function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
-  console.log(useLocation());
+  setInEditMode( useLocation().pathname.includes("/edit"));
   return (
     <Switch>
     <Route exact path="/">
