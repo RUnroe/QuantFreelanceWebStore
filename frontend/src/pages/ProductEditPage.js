@@ -88,6 +88,9 @@ export default function ProductEditPage({username}) {
             case "split": 
                 tempJSX.push(convertSplit(pageElement));
             break;
+            case "container": 
+                tempJSX.push(convertContainer(pageElement));
+            break;
             default: break;
         }
         return tempJSX;
@@ -100,7 +103,7 @@ export default function ProductEditPage({username}) {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
             color: props.color ?? "#403d52",
-            textAlign: props.align,
+            textAlign: props.textAlign ?? "left",
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
@@ -138,7 +141,7 @@ export default function ProductEditPage({username}) {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
             color: props.color ?? "#403d52",
-            textAlign: props.align
+            textAlign: props.textAlign ?? "left"
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
@@ -225,6 +228,38 @@ export default function ProductEditPage({username}) {
         return jsx;
     }
 
+    const convertContainer = (object) => {
+        const props = object.properties;
+        const jsx = [];
+
+        const style = {
+            padding: props.padding,
+            width: props.width ?? "auto",
+            height: props.height ?? "auto",
+            backgroundColor: props.backgroundColor ?? "transparent",
+            textAlign: props.align
+        }
+        if(props.style === "italics") style.fontStyle = "italic";
+        if(props.style === "underline") style.textDecoration = "underline";
+        if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
+        if(props.align === "center") style.marginRight = "auto";
+
+        jsx.push(
+            <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
+                {getAllChildrenElements(props.children)}
+            </div> 
+        );
+    
+        return jsx;
+    }
+
+    const getAllChildrenElements = (list) => {
+        const jsx = [];
+        list.forEach(element => {
+            jsx.push(getJSXOfElement(element));
+        });
+        return jsx;
+    }
     const getChildById = (list, position) => {
         let selected;
         list.forEach(child => {
@@ -237,10 +272,10 @@ export default function ProductEditPage({username}) {
         let props = {};
         switch(elementType) {
             case "header": 
-                props = {value: "New Header", fontWeight: 400, style: "none", align: "left", headerType: "h1", width: "100%", align: "left"};
+                props = {value: "New Header", fontWeight: 400, style: "none", textAlign: "left", headerType: "h1", width: "100%", align: "left"};
             break;
             case "paragraph": 
-                props = {value: "New paragraph", fontWeight: 400, style: "none", align: "left", width: "100%", align: "left"};
+                props = {value: "New paragraph", fontWeight: 400, style: "none", textAlign: "left", width: "100%", align: "left"};
             break;
             case "spacer": 
                 props = {size: 1};
@@ -347,8 +382,8 @@ export default function ProductEditPage({username}) {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Text Alignment</label>
-                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}textAlign`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}textAlign`} value={selectedElement.properties.textAlign} onInput={event => updatePropInput("textAlign", event.target.value)}>
                             <option value="left">Left</option>
                             <option value="center">Center</option>
                             <option value="right">Right</option>
@@ -407,8 +442,8 @@ export default function ProductEditPage({username}) {
                 );
                 tempJSX.push(
                     <div className="input-block">
-                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Text Alignment</label>
-                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                        <label className="input-label" htmlFor={`${selectedElement.id}textAlign`}>Text Alignment</label>
+                        <select className="input" id={`${selectedElement.id}textAlign`} value={selectedElement.properties.textAlign} onInput={event => updatePropInput("textAlign", event.target.value)}>
                             <option value="left">Left</option>
                             <option value="center">Center</option>
                             <option value="right">Right</option>
@@ -642,6 +677,7 @@ export default function ProductEditPage({username}) {
         setSelectedElement(Object.assign(element));
     }
 
+    //TODO: Make recursive
     const findElementInPageStructure = id => {
         let selected;
         pageStructure.forEach(element => {
