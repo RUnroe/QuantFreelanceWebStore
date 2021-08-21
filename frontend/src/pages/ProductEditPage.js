@@ -935,7 +935,7 @@ export default function ProductEditPage({username}) {
                     return;
                 }
                 if(list[i].type === "split" || list[i].type === "container") {
-                    createElementInSection(list[i].properties.children, id);
+                    createElementInSection(list[i].properties.children, id, newElement);
                 }
             }
         }
