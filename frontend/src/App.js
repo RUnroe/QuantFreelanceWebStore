@@ -102,7 +102,13 @@ function App() {
 }
 
 function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
-  setInEditMode( useLocation().pathname.includes("/edit"));
+  let location = useLocation();
+  useEffect(() => {
+      setInEditMode( location.pathname.includes("/edit"));
+    },
+    [location]
+  )
+  
   return (
     <Switch>
     <Route exact path="/">
