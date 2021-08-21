@@ -945,6 +945,7 @@ export default function ProductEditPage({username}) {
                 }
             }
         }
+        console.log("list", list);
         return list;
     }
 
