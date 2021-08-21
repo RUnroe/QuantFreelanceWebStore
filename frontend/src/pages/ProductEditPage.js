@@ -27,6 +27,9 @@ export default function ProductEditPage({username}) {
     const [configPanelJSX, setConfigPanelJSX] = useState([]);
     const [newCreatedElementId, setNewCreatedElementId] = useState();
 
+    const [newChanges, setNewChanges] = useState(false);
+    const [isInitPageLoad, setInitPageLoad] = useState(true);
+
     const [redirect, setRedirect] = useState(false);
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -489,6 +492,8 @@ export default function ProductEditPage({username}) {
     }, []);
 
     useEffect(() => {
+        if(!isInitPageLoad) setNewChanges(true); 
+        setInitPageLoad(false);
         convertPageStructureToJSX();
         if(newCreatedElementId) {
             selectElement(newCreatedElementId);
@@ -604,6 +609,7 @@ export default function ProductEditPage({username}) {
             body: JSON.stringify(data)
         })
         .then(response => {
+          setNewChanges(false);
           setStatusBar("Changes have been saved");
           setTimeout(() => setStatusBar(""), 2500);
 
@@ -680,8 +686,9 @@ export default function ProductEditPage({username}) {
         <nav className="edit-nav">
             <div>
                 <div>
-                    <button className="btn blue-outline">Return</button>
-                    <button className="btn blue-outline">Save</button>
+                    <button className="btn blue-outline" onClick={() => setRedirect(`/account/${username}`)}>Return</button>
+                    <button className="btn blue-outline" onClick={savePage} disabled={!newChanges}>Save</button>
+                    <span>{newChanges ? "Unsaved changes" : "Changes saved"}</span>
                 </div>
                 <button className="btn blue">Publish</button>
             </div>
@@ -779,10 +786,10 @@ function SideBar({configPanelJSX, selectedElementId, coverImg, selectImage, setC
                 <textarea className="input" type="text" value={description} onInput={event => setDescription(event.target.value)}/>
             </div>
         </div>
-        <div className="btn-group">
+        {/* <div className="btn-group">
             <button className="btn blue-outline text-white" onClick={() => setRedirect(`/account/${username}`)}>Return</button>
             <button className="btn blue" onClick={savePage}>Save Changes</button>
-        </div>
+        </div> */}
         </div>
     );
 };
