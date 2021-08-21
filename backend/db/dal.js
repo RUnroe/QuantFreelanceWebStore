@@ -300,6 +300,7 @@ const updateProduct = async (product_id, user_id, product) => {
 const publishProduct = async (product_id, user_id) => {
 	//check if current user owns product
 	getProductById(product_id).then(result => {
+		console.log(result);
 		if(result.seller != user_id) throw ['The user does not own the product they are attemting to update'];
 		let newValues = { $set: {
 			page_structure: result.saved_page_structure
