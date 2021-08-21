@@ -94,14 +94,14 @@ function App() {
     <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} user_icon={currUser.icon_id} username={currUser.username} inEditMode={inEditMode}/>
     
     <div id="main">
-      <Routes checkAuth={checkAuth} currUser={currUser} currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} setInEditMode={setInEditMode} />
+      <RoutesModule checkAuth={checkAuth} currUser={currUser} currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} setInEditMode={setInEditMode} />
     </div>
     <Footer />
   </BrowserRouter>
   );
 }
 
-function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
+function RoutesModule(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
   let location = useLocation();
   useEffect(() => {
       if(location && location.pathname) {
