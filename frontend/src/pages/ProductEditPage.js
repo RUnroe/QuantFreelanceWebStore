@@ -676,7 +676,8 @@ export default function ProductEditPage({username}) {
             credentials:"include",
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({product_id: productId})
         })
         .then(response => {
             if(response.ok) {
