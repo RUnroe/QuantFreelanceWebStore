@@ -62,17 +62,21 @@ function Footer() {
     </footer>
   );
 }
-
-function App() {
-  const [currAuthLevel, setCurrAuthLevel] = useState();
-  const [currUser, setCurrUser] = useState({});
-
-  const [inEditMode, setInEditMode] = useState(false);
+function usePageViews() {
   let location = useLocation();
 
   useEffect(() => {
     console.log(location);
   }, [location]);
+}
+
+function App() {
+  usePageViews();
+  const [currAuthLevel, setCurrAuthLevel] = useState();
+  const [currUser, setCurrUser] = useState({});
+
+  const [inEditMode, setInEditMode] = useState(false);
+  
   
   
   const checkAuth = async () => {
