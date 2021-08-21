@@ -939,9 +939,8 @@ export default function ProductEditPage({username}) {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) {
-                    console.log("added into new list");
                     list[i].properties.children.push(newElement);
-                    return;
+                    break;
                 }
                 if(list[i].type === "split" || list[i].type === "container") {
                     createElementInSection(list[i].properties.children, id, newElement);
