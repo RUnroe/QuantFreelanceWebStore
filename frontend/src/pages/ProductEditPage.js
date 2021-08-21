@@ -935,10 +935,12 @@ export default function ProductEditPage({username}) {
     }
 
     const createElementInSection = (list, id, newElement) => {
+        let list = [...list];
         console.log(list);
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) {
+                    console.log("added into new list");
                     list[i].properties.children.push(newElement);
                     return;
                 }
