@@ -922,9 +922,10 @@ export default function ProductEditPage({username}) {
     }
 
     const createSplitSection = () => {
-        if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
-            createElement("split") ;
-        } 
+        // if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
+        //     createElement("split") ;
+        // } 
+        createElement("split");
     }
 
     if (redirect === "/") return (<Redirect to={{pathname: redirect}} />);
