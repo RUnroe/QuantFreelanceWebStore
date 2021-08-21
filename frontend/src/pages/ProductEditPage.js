@@ -891,18 +891,19 @@ export default function ProductEditPage({username}) {
             //     }
             //     return element;
             // });
-            let newState = createElementInSplitSection(pageStructure, id, newElement);
+            let newState = createElementInSection(pageStructure, id, newElement);
             setPageStructure(newState);
         }
         else if (addElementLocation[0] === "C") {
             //Get Id by removing the split position indicator 
             const id = addElementLocation.substring(1);
-            let newState = pageStructure.map(element => {
-                if(element.id === id && element.type === "container") {
-                    element.properties.children.push(newElement);
-                }
-                return element;
-            });
+            // let newState = pageStructure.map(element => {
+            //     if(element.id === id && element.type === "container") {
+            //         element.properties.children.push(newElement);
+            //     }
+            //     return element;
+            // });
+            let newState = createElementInSection(pageStructure, id, newElement);
             setPageStructure(newState);
         }
         //add before element
@@ -923,7 +924,7 @@ export default function ProductEditPage({username}) {
         setNewCreatedElementId(newElement.id);
     }
 
-    const createElementInSplitSection = (list, id, newElement) => {
+    const createElementInSection = (list, id, newElement) => {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) list[i].properties.children.push(newElement);
