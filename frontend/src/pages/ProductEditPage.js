@@ -724,7 +724,7 @@ export default function ProductEditPage({username}) {
 
     //TODO: Make recursive
     const findElementInPageStructure = id => {
-        console.log(pageStructure);
+        console.log(pageStructure, id);
         let selected = lookForElementInPageStructure(pageStructure, id);
         // pageStructure.forEach(element => {
         //     if(element.id === id) selected = element;
