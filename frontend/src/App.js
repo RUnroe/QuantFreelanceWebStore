@@ -3,7 +3,7 @@ import {
   Redirect,
   Switch,
   Route,
-  useHistory,
+  useLocation,
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -69,16 +69,8 @@ function App() {
   const [currUser, setCurrUser] = useState({});
 
   const [inEditMode, setInEditMode] = useState(false);
-  
-  const history = useHistory() 
 
-  useEffect(() => {
-     return history.listen((location) => { 
-        console.log(`You changed the page to: ${location.pathname}`) 
-     }) 
-  },[history]) 
-  
-  
+  console.log(useLocation());
   const checkAuth = async () => {
     fetch('/api/auth', {credentials:"include"})
     .then(response => response.json())
