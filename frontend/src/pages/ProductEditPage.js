@@ -650,6 +650,48 @@ export default function ProductEditPage({username}) {
 
         });
     }
+    const publishPage = () => {
+        const data = {
+            product_id: productId,
+            title,
+            icon_id: coverImg,
+            description,
+            price,
+            category,
+            page_structure: JSON.stringify(pageStructure)
+
+        }
+        fetch('/api/product/save', {
+            method: "PUT",
+            credentials:"include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+          setNewChanges(false);
+          fetch('/api/product/publish', {
+            method: "POST",
+            credentials:"include",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if(response.ok) {
+                setStatusBar("Page has been published");
+                setTimeout(() => setStatusBar(""), 2500);
+            }
+        })
+
+        })
+        .catch(error => {
+            setStatusBar("An error occured. Please refresh and try again");
+            setTimeout(() => setStatusBar(""), 2500);
+
+        });
+    }
 
     const selectImage = (setter) => {
         setImageSelectModalSetter(() => setter);
