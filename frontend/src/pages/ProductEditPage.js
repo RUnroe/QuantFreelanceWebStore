@@ -723,7 +723,7 @@ export default function ProductEditPage({username}) {
 
     //TODO: Make recursive
     const findElementInPageStructure = id => {
-        let selected = lookForElementInPageStructure(pageStructure);
+        let selected = lookForElementInPageStructure(pageStructure, id);
         // pageStructure.forEach(element => {
         //     if(element.id === id) selected = element;
         //     else if(element.type === "split") {
@@ -734,12 +734,12 @@ export default function ProductEditPage({username}) {
         // });
         return selected;
     }
-    const lookForElementInPageStructure = list => {
+    const lookForElementInPageStructure = (list, id) => {
         let selected;
         list.forEach(element => {
             if(element.id === id) selected = element;
             else if(element.type === "split" || element.type === "container") {
-                lookForElementInPageStructure(element.children);
+                lookForElementInPageStructure(element.children, id);
             }
         });
         return selected;
