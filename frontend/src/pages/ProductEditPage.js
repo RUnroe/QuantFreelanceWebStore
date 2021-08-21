@@ -702,6 +702,7 @@ export default function ProductEditPage({username}) {
         jsx.push(<h2 className="config-panel-header text-center">Edit {selectedElement ? selectedElement.type : ""}</h2>);
 
         inputs = getConfigPanelInputs(selectedElement);
+        console.log(selectedElement);
         jsx.push(
             <div className="config-panel-body"> 
                 <div className="config-panel-input-section">{inputs}</div>
