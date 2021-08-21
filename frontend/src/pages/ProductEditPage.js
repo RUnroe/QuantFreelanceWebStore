@@ -895,6 +895,8 @@ export default function ProductEditPage({username}) {
             // });
             let newState = createElementInSection(pageStructure, id, newElement);
             setPageStructure(newState);
+            //force page structure update
+            convertPageStructureToJSX();
         }
         else if (addElementLocation[0] === "C") {
             //Get Id by removing the split position indicator 
@@ -907,6 +909,8 @@ export default function ProductEditPage({username}) {
             // });
             let newState = createElementInSection(pageStructure, id, newElement);
             setPageStructure(newState);
+            //force page structure update
+            convertPageStructureToJSX();
         }
         //add before element
         else {
@@ -925,8 +929,7 @@ export default function ProductEditPage({username}) {
         //select new element
         setNewCreatedElementId(newElement.id);
 
-        //force page structure update
-        convertPageStructureToJSX();
+        
     }
 
     const createElementInSection = (list, id, newElement) => {
