@@ -99,13 +99,13 @@ export default function ProductEditPage({username}) {
         const style = {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
+            color: props.color ?? "#403d52",
             textAlign: props.align,
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        if(props.color) style.color = props.color;
     
         switch(headerObject.properties.headerType) {
             case "h2":
@@ -137,13 +137,14 @@ export default function ProductEditPage({username}) {
         const style = {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
+            color: props.color ?? "#403d52",
             textAlign: props.align
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
-        if(props.color) style.color = props.color;
+        
     
         jsx.push(<p className={`paragraph ${paragraphObject.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
     
