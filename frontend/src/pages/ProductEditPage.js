@@ -679,53 +679,55 @@ export default function ProductEditPage({username}) {
         <>
         <nav className="edit-nav">
             <div>
-                <button className="btn blue-outline">Return</button>
-                <button className="btn blue-outline">Save</button>
-            </div>
-            <button className="btn blue">Publish</button>
-        </nav>
-        <div style={{paddingTop: "3.5rem"}}>
-        <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
-        <div className="product-page edit">
-            <div className="product-main container">
-
-                {pageStructureJSX}
-                
-                {/* Add NEW ELEMENT BUTTON */}
-                <div className="open-add-element-btn" onClick={() => openAddElementModal("")}>
-                    +
+                <div>
+                    <button className="btn blue-outline">Return</button>
+                    <button className="btn blue-outline">Save</button>
                 </div>
+                <button className="btn blue">Publish</button>
+            </div>
+        </nav>
+        <div style={{paddingTop: "3.75rem"}}>
+            <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
+            <div className="product-page edit">
+                <div className="product-main container">
 
-                {/* ADD MODAL */}
-                <div className={`modal ${addModalVisible ? "visible" : ""}`} id="addElementModal">
-                    <div className="modal-header">
-                        <h2>Add an Element:</h2>
-                        <button onClick={() => setAddModalVisible(false)}><i className="fas fa-times"></i></button>
+                    {pageStructureJSX}
+                    
+                    {/* Add NEW ELEMENT BUTTON */}
+                    <div className="open-add-element-btn" onClick={() => openAddElementModal("")}>
+                        +
                     </div>
-                    <div className="modal-body">
-                        <div className="add-modal-list">
-                            <div className="add-element-btn" onClick={() => createElement("header")}>Header</div>
-                            <div className="add-element-btn" onClick={() => createElement("paragraph")}>Paragraph</div>
-                            <div className="add-element-btn" onClick={() => createElement("hr")}>Horizontal Rule</div>
-                            <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
-                            <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
-                            <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
-                            <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={createSplitSection}>Split Section</div>
+
+                    {/* ADD MODAL */}
+                    <div className={`modal ${addModalVisible ? "visible" : ""}`} id="addElementModal">
+                        <div className="modal-header">
+                            <h2>Add an Element:</h2>
+                            <button onClick={() => setAddModalVisible(false)}><i className="fas fa-times"></i></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="add-modal-list">
+                                <div className="add-element-btn" onClick={() => createElement("header")}>Header</div>
+                                <div className="add-element-btn" onClick={() => createElement("paragraph")}>Paragraph</div>
+                                <div className="add-element-btn" onClick={() => createElement("hr")}>Horizontal Rule</div>
+                                <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
+                                <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
+                                <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
+                                <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={createSplitSection}>Split Section</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="product-side container gradient">
+                    <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
+                        title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
+                        description={description} setDescription={setDescription} savePage={savePage} selectedElementId={selectedElementId}
+                        username={username} setRedirect={setRedirect}
+                    />
+                </div>
             </div>
-            <div className="product-side container gradient">
-                <SideBar configPanelJSX={configPanelJSX} coverImg={coverImg} selectImage={selectImage} setCoverImg={setCoverImg}
-                    title={title} setTitle={setTitle} price={price} setPrice={setPrice} category={category} setCategory={setCategory}
-                    description={description} setDescription={setDescription} savePage={savePage} selectedElementId={selectedElementId}
-                    username={username} setRedirect={setRedirect}
-                />
-            </div>
-        </div>
-        <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
-    
-        <div className={`screen ${addModalVisible ? "visible" : ""}`} id="addModalScreen" onClick={() => setAddModalVisible(false)}></div>
+            <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
+        
+            <div className={`screen ${addModalVisible ? "visible" : ""}`} id="addModalScreen" onClick={() => setAddModalVisible(false)}></div>
         </div>
         </>
     );

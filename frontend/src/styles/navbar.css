@@ -210,11 +210,6 @@ nav hr {
 
 .edit-nav {
     height: 3.75rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1350px;
-    margin: 0 auto;
     padding: 0 2rem;
     position: fixed;
     width: 100%;
@@ -224,8 +219,15 @@ nav hr {
     box-shadow: 0px 4px 6px #65627624;
 }
 .edit-nav > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+.edit-nav > div > div {
     display:flex;
 }
-.edit-nav > div > button {
+.edit-nav > div > div > button {
     margin-right: 1rem;
 }
