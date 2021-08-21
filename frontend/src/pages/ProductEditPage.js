@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, createContext } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 import {Redirect} from "react-router-dom";
@@ -233,20 +233,19 @@ export default function ProductEditPage({username}) {
         const jsx = [];
 
         const style = {
-            padding: props.padding,
+            padding: props.padding ?? "0",
             width: props.width ?? "auto",
             height: props.height ?? "auto",
             backgroundColor: props.backgroundColor ?? "transparent",
-            textAlign: props.align
+            borderRadius: props.borderRadius ?? "0"
         }
-        if(props.style === "italics") style.fontStyle = "italic";
-        if(props.style === "underline") style.textDecoration = "underline";
         if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
         if(props.align === "center") style.marginRight = "auto";
 
         jsx.push(
             <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
                 {getAllChildrenElements(props.children)}
+                <div className="nested-add-element-btn" onClick={() => openAddElementModal(`${object.id}`)}>+</div>
             </div> 
         );
     
@@ -291,6 +290,9 @@ export default function ProductEditPage({username}) {
             break;
             case "split": 
                 props = {children: [], splitType: 2 }; // set split to half and half?
+            break;
+            case "container":
+                props= {children: [], padding:"1rem", align: "center"};
             break;
             default: break;
         }
@@ -561,6 +563,48 @@ export default function ProductEditPage({username}) {
                             <option value="1">2:1</option>
                             <option value="2">1:1</option>
                             <option value="3">1:2</option>
+                        </select>
+                    </div>
+                );
+            break;
+            case "container": 
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}padding`}>Padding</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}padding`} value={selectedElement.properties.padding} onInput={event => updatePropInput("padding", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}backgroundColor`}>Background Color</label>
+                        <input className="input" type="color" id={`${selectedElement.id}backgroundColor`} value={selectedElement.properties.backgroundColor} onInput={event => updatePropInput("backgroundColor", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}borderRadius`}>Border Radius</label>
+                        <input className="input" type="text" id={`${selectedElement.id}borderRadius`} value={selectedElement.properties.borderRadius} onInput={event => updatePropInput("borderRadius", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}height`}>Height</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}height`} value={selectedElement.properties.height} onInput={event => updatePropInput("height", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}width`}>Width</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}width`} value={selectedElement.properties.width} onInput={event => updatePropInput("width", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
                         </select>
                     </div>
                 );
@@ -884,6 +928,7 @@ export default function ProductEditPage({username}) {
                                 <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
                                 <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
                                 <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={createSplitSection}>Split Section</div>
+                                <div className={`add-element-btn`} onClick={() => createElement("container")}>Container</div>
                             </div>
                         </div>
                     </div>
