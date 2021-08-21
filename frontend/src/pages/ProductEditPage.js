@@ -762,7 +762,7 @@ export default function ProductEditPage({username}) {
                     <button className="btn blue-outline" onClick={savePage} disabled={!newChanges}>Save</button>
                     <span>{newChanges ? "Unsaved changes" : "Changes saved"}</span>
                 </div>
-                <button className="btn blue">Publish</button>
+                <button className="btn blue" onClick={publishPage}>Publish</button>
             </div>
         </nav>
         <div style={{paddingTop: "3.75rem"}}>
