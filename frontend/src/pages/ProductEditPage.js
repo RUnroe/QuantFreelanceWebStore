@@ -484,6 +484,7 @@ export default function ProductEditPage({username}) {
             setPrice(data.price);
             setCategory(data.category);
             setPageStructure(JSON.parse(data.page_structure));
+            setInitPageLoad(false);
         })
         .catch(err => console.log(err));
     }
@@ -498,7 +499,6 @@ export default function ProductEditPage({username}) {
             selectElement(newCreatedElementId);
             setNewCreatedElementId(null);
         }
-        if(pageStructure)setInitPageLoad(false);
     }, [pageStructure]);
 
     //Update config panel with correct info when element is selected
