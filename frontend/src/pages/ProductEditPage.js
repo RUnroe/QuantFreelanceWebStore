@@ -511,14 +511,15 @@ export default function ProductEditPage({username}) {
         .catch(err => console.log(err));
     }
 
+    //save page every 10 seconds
+    useInterval(() => {
+        console.log(newChanges);
+        if(newChanges) savePage();
+    }, 10000);
+
     
     useEffect(()=> {
         getPageData();
-        //save page every 10 seconds
-        useInterval(() => {
-            console.log(newChanges);
-            if(newChanges) savePage();
-        }, 10000);
         
     }, []);
 
