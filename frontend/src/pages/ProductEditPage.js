@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/productPage.css";
 import {ImageSelectModal} from "../partials/image";
 import {Redirect} from "react-router-dom";
