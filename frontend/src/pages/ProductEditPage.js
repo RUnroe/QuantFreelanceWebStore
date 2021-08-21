@@ -98,10 +98,13 @@ export default function ProductEditPage({username}) {
         const jsx = [];
         const style = {
             fontWeight: props.fontWeight,
+            width: props.width ?? "auto",
             textAlign: props.align
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
+        if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
+        if(props.align === "center") style.marginRight = "auto";
     
         switch(headerObject.properties.headerType) {
             case "h2":
@@ -132,10 +135,13 @@ export default function ProductEditPage({username}) {
         const jsx = [];
         const style = {
             fontWeight: props.fontWeight,
+            width: props.width ?? "auto",
             textAlign: props.align
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
+        if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
+        if(props.align === "center") style.marginRight = "auto";
     
         jsx.push(<p className={`paragraph ${paragraphObject.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(paragraphObject.id); event.stopPropagation();}}>{props.value}</p>);
     
@@ -228,10 +234,10 @@ export default function ProductEditPage({username}) {
         let props = {};
         switch(elementType) {
             case "header": 
-                props = {value: "New Header", fontWeight: 400, style: "none", align: "left", headerType: "h1"};
+                props = {value: "New Header", fontWeight: 400, style: "none", align: "left", headerType: "h1", width: "100%", align: "left"};
             break;
             case "paragraph": 
-                props = {value: "New paragraph", fontWeight: 400, style: "none", align: "left"};
+                props = {value: "New paragraph", fontWeight: 400, style: "none", align: "left", width: "100%", align: "left"};
             break;
             case "spacer": 
                 props = {size: 1};
@@ -293,6 +299,12 @@ export default function ProductEditPage({username}) {
             case "header": 
                 tempJSX.push(
                     <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
+                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}/>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
                         <label className="input-label" htmlFor={`${selectedElement.id}headerType`}>Header Type</label>
                         <select className="input" id={`${selectedElement.id}headerType`} value={selectedElement.properties.headerType} onInput={event => updatePropInput("headerType", event.target.value)}>
                             <option value="h1">h1</option>
@@ -302,12 +314,6 @@ export default function ProductEditPage({username}) {
                             <option value="h5">h5</option>
                             <option value="h6">h6</option>
                         </select>
-                    </div>
-                );
-                tempJSX.push(
-                    <div className="input-block">
-                        <label className="input-label" htmlFor={`${selectedElement.id}value`}>Text</label>
-                        <input className="input" type="text" id={`${selectedElement.id}value`} value={selectedElement.properties.value} onInput={event => updatePropInput("value", event.target.value)}/>
                     </div>
                 );
                 tempJSX.push(
@@ -340,7 +346,22 @@ export default function ProductEditPage({username}) {
                         </select>
                     </div>
                 );
-                
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}width`}>Width</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}width`} value={selectedElement.properties.width} onInput={event => updatePropInput("width", event.target.value)}/>
+                    </div>
+                );
             break;
             case "paragraph": 
                 tempJSX.push(
@@ -377,6 +398,22 @@ export default function ProductEditPage({username}) {
                             <option value="center">Center</option>
                             <option value="right">Right</option>
                         </select>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}align`}>Alignment</label>
+                        <select className="input" id={`${selectedElement.id}align`} value={selectedElement.properties.align} onInput={event => updatePropInput("align", event.target.value)}>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                );
+                tempJSX.push(
+                    <div className="input-block">
+                        <label className="input-label" htmlFor={`${selectedElement.id}width`}>Width</label>
+                        <input className="input" type="text" placeholder="auto" id={`${selectedElement.id}width`} value={selectedElement.properties.width} onInput={event => updatePropInput("width", event.target.value)}/>
                     </div>
                 );
             break;
