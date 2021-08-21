@@ -881,15 +881,17 @@ export default function ProductEditPage({username}) {
             //add element to properties.children of section
 
             const splitSide = addElementLocation[0];
+            newElement.position = splitSide == "L" ? 0 : 1;
             //Get Id by removing the split position indicator 
             const id = addElementLocation.substring(1);
-            let newState = pageStructure.map(element => {
-                if(element.id === id && element.type === "split") {
-                    newElement.position = splitSide == "L" ? 0 : 1;
-                    element.properties.children.push(newElement);
-                }
-                return element;
-            });
+            // let newState = pageStructure.map(element => {
+            //     if(element.id === id && element.type === "split") {
+            //         newElement.position = splitSide == "L" ? 0 : 1;
+            //         element.properties.children.push(newElement);
+            //     }
+            //     return element;
+            // });
+            let newState = createElementInSplitSection(pageStructure, id, newElement);
             setPageStructure(newState);
         }
         else if (addElementLocation[0] === "C") {
@@ -920,6 +922,20 @@ export default function ProductEditPage({username}) {
         //select new element
         setNewCreatedElementId(newElement.id);
     }
+
+    const createElementInSplitSection = (list, id, newElement) => {
+        if(list && list.length > 0) {
+            for(let i = 0; i < list.length; i++) {
+                if(list[i].id === id) list[i].properties.children.push(newElement);
+                if(list[i].type === "split" || list[i].type === "container") {
+                    lookForElementInPageStructure(list[i].properties.children, id);
+                }
+            }
+        }
+        return list;
+    }
+
+
 
     const createSplitSection = () => {
         // if(typeof(addElementLocation) !== "string" || addElementLocation === "" || !addElementLocation[0] === "L" && !addElementLocation[0] === "R") {
