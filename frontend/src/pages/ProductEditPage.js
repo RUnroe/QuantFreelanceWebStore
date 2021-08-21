@@ -677,6 +677,14 @@ export default function ProductEditPage({username}) {
     else if (redirect) return (<Redirect push to={{pathname: redirect}} />); // if user clicks cancel btn, route back to their account page and keep the browser history
     return(
         <>
+        <nav className="edit-nav">
+            <div>
+                <button className="btn blue-outline">Return</button>
+                <button className="btn blue-outline">Save</button>
+            </div>
+            <button className="btn blue">Publish</button>
+        </nav>
+        <div>
         <div className={statusBar ? "status-bar open" : "status-bar"}><p>{statusBar}</p></div>
         <div className="product-page edit">
             <div className="product-main container">
@@ -718,6 +726,7 @@ export default function ProductEditPage({username}) {
         <ImageSelectModal setter={imageSelectModalSetter} setSetter={setImageSelectModalSetter} />
     
         <div className={`screen ${addModalVisible ? "visible" : ""}`} id="addModalScreen" onClick={() => setAddModalVisible(false)}></div>
+        </div>
         </>
     );
 

@@ -63,11 +63,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_ic
 
     if(redirect) return (<Redirect to="/"/>);
     if(inEditMode) {
-        return (
-            <nav>
-                <button>Hi</button>
-            </nav>
-        )
+        return (<></>);
     }
     if(currAuthLevel === "seller") {
         return (
