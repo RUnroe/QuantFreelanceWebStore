@@ -178,6 +178,38 @@ export default function ProductPage({userId}) {
         return jsx;
     }
 
+
+    const convertContainer = (object) => {
+        const props = object.properties;
+        const jsx = [];
+
+        const style = {
+            padding: props.padding ?? "0",
+            width: props.width ?? "auto",
+            height: props.height ?? "auto",
+            backgroundColor: props.backgroundColor ?? "transparent",
+            borderRadius: props.borderRadius ?? "0"
+        }
+        if(props.align === "center" || props.align === "right") style.marginLeft = "auto";
+        if(props.align === "center") style.marginRight = "auto";
+
+        jsx.push(
+            <div className={`builder-container`} style={style}>
+                {getAllChildrenElements(props.children)}
+            </div> 
+        );
+    
+        return jsx;
+    }
+
+    const getAllChildrenElements = (list) => {
+        const jsx = [];
+        list.forEach(element => {
+            jsx.push(getJSXOfElement(element));
+        });
+        return jsx;
+    }
+
     const getChildById = (list, position) => {
         let selected;
         list.forEach(child => {
