@@ -70,7 +70,8 @@ function App() {
 
   const [inEditMode, setInEditMode] = useState(false);
 
-  console.log(useLocation());
+  
+
   const checkAuth = async () => {
     fetch('/api/auth', {credentials:"include"})
     .then(response => response.json())
@@ -90,64 +91,70 @@ function App() {
   if (currAuthLevel === undefined || currAuthLevel === null) return(<div></div>);
   return (
     <BrowserRouter>
-
     <NavigationMenu currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} user_icon={currUser.icon_id} username={currUser.username}/>
     
     <div id="main">
-      <Switch>
-        <Route exact path="/">
-          <HomePage currAuthLevel={currAuthLevel} username={currUser.username}/>
-        </Route>
-        <Route exact path="/signup">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
-        </Route>
-        <Route exact path="/login">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
-        </Route>
-        <Route exact path="/store/search/:search_term">
-          <SearchPage />
-        </Route>
-        <Route exact path="/store/category/:category_name">
-          <CategoryPage />
-        </Route>
-        <Route exact path="/store/:product_id/edit">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<ProductEditPage username={currUser.username}/>} reqAuthLevel="seller" />
-        </Route>
-        <Route exact path="/store/:product_id">
-          <ProductPage userId={currUser && currUser.user_id ? currUser.user_id : ""}/>
-        </Route>
-        <Route exact path="/purchase/:product_id">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage userId={currUser.user_id}/>} reqAuthLevel="buyer" />
-        </Route>
-        <Route exact path="/purchased/:order_id">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasedPage />} reqAuthLevel="buyer" />
-        </Route>
-        <Route exact path="/account/settings">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage user={currUser} checkAuth={checkAuth} />} reqAuthLevel="buyer" />
-        </Route>
-        <Route exact path="/account/history/purchase">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchaseHistoryPage />} reqAuthLevel="buyer" />
-        </Route>
-        <Route exact path="/account/history/sell">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SellHistoryPage />} reqAuthLevel="seller" />
-        </Route>
-        <Route exact path="/account/:username">
-          <AccountPage currUser={currUser} authLevel={currAuthLevel} checkAuth={checkAuth} setCurrAuthLevel={setCurrAuthLevel} />
-        </Route>
-        <Route exact path="/inbox">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<InboxPage />} reqAuthLevel="seller" />
-        </Route>
-        <Route exact path="/orders">
-          <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<OrdersPage />} reqAuthLevel="buyer" />
-        </Route>
-        <Route path="/">
-          <Redirect to={{pathname: '/'}} />
-        </Route>
-      </Switch>
+      <Routes checkAuth={checkAuth} currUser={currUser} currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} setInEditMode={setInEditMode} />
     </div>
     <Footer />
   </BrowserRouter>
   );
+}
+
+function Routes(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
+  console.log(useLocation());
+  render (
+    <Switch>
+    <Route exact path="/">
+      <HomePage currAuthLevel={currAuthLevel} username={currUser.username}/>
+    </Route>
+    <Route exact path="/signup">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SignupPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
+    </Route>
+    <Route exact path="/login">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<LoginPage checkAuth={checkAuth}/>} reqAuthLevel="noAuth" />
+    </Route>
+    <Route exact path="/store/search/:search_term">
+      <SearchPage />
+    </Route>
+    <Route exact path="/store/category/:category_name">
+      <CategoryPage />
+    </Route>
+    <Route exact path="/store/:product_id/edit">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<ProductEditPage username={currUser.username}/>} reqAuthLevel="seller" />
+    </Route>
+    <Route exact path="/store/:product_id">
+      <ProductPage userId={currUser && currUser.user_id ? currUser.user_id : ""}/>
+    </Route>
+    <Route exact path="/purchase/:product_id">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasePage userId={currUser.user_id}/>} reqAuthLevel="buyer" />
+    </Route>
+    <Route exact path="/purchased/:order_id">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchasedPage />} reqAuthLevel="buyer" />
+    </Route>
+    <Route exact path="/account/settings">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<AccountSettingsPage user={currUser} checkAuth={checkAuth} />} reqAuthLevel="buyer" />
+    </Route>
+    <Route exact path="/account/history/purchase">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<PurchaseHistoryPage />} reqAuthLevel="buyer" />
+    </Route>
+    <Route exact path="/account/history/sell">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<SellHistoryPage />} reqAuthLevel="seller" />
+    </Route>
+    <Route exact path="/account/:username">
+      <AccountPage currUser={currUser} authLevel={currAuthLevel} checkAuth={checkAuth} setCurrAuthLevel={setCurrAuthLevel} />
+    </Route>
+    <Route exact path="/inbox">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<InboxPage />} reqAuthLevel="seller" />
+    </Route>
+    <Route exact path="/orders">
+      <AuthenticatedRoute currAuthLevel={currAuthLevel} component={<OrdersPage />} reqAuthLevel="buyer" />
+    </Route>
+    <Route path="/">
+      <Redirect to={{pathname: '/'}} />
+    </Route>
+  </Switch>
+  )
 }
 
 export default App;
