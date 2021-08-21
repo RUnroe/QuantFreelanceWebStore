@@ -101,16 +101,16 @@ function App() {
   );
 }
 
-function RoutesModule(checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode) {
-  // let location = useLocation();
-  // useEffect(() => {
-  //     if(location && location.pathname) {
-  //       console.log(location.pathname.includes("/edit") === true);
-  //       //setInEditMode( location.pathname.includes("/edit") === true);
-  //     }
-  //   },
-  //   [location]
-  // )
+function RoutesModule({checkAuth, currUser, currAuthLevel, setCurrAuthLevel, setInEditMode}) {
+  let location = useLocation();
+  useEffect(() => {
+      if(location && location.pathname) {
+        console.log(location.pathname.includes("/edit") === true);
+        setInEditMode( location.pathname.includes("/edit") === true);
+      }
+    },
+    [location]
+  );
   
   return (
     <Switch>
