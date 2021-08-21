@@ -734,7 +734,7 @@ export default function ProductEditPage({username}) {
         //Select element based on id
         const element = findElementInPageStructure(id);
         console.log(element);
-        setSelectedElement(Object.assign(element));
+        if(element) setSelectedElement(Object.assign(element));
     }
 
     // Make recursive
