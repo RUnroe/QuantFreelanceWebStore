@@ -936,12 +936,12 @@ export default function ProductEditPage({username}) {
     const addElementBeforeElement = (list, newElement) => {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
-                if(list[i].id === id) {
+                if(list[i].id === addElementLocation) {
                     list.splice(parseInt(addElementLocation), 0, newElement);
                     break;
                 }
                 if(list[i].type === "split" || list[i].type === "container") {
-                    addElementBeforeElement(list[i].properties.children, id, newElement);
+                    addElementBeforeElement(list[i].properties.children, newElement);
                 }
             }
         }
