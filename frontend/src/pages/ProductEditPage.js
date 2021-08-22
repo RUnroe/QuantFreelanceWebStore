@@ -943,8 +943,8 @@ export default function ProductEditPage({username}) {
             else {
                 for(let i = 0; i < list.length; i++) {
                     if(list[i].id === location) {
-                        console.log("splice");
-                        list.splice(parseInt(position), 0, newElement);
+                        console.log("location", location);
+                        list.properties.children.splice(parseInt(position), 0, newElement);
                         break;
                     }
                     if(list[i].type === "split" || list[i].type === "container") {
