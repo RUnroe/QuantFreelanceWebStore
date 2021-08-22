@@ -763,7 +763,7 @@ export default function ProductEditPage({username}) {
     }
     const createAddBtn = (position, containerId) => {
         return (
-        <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(`${position}@${containerId}`)}>
+        <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(`${position}@${containerId}`)} title="Click to insert element here">
             <div className="bobber">+</div>
             <hr />
         </div>
@@ -1020,7 +1020,7 @@ export default function ProductEditPage({username}) {
                                 <div className="add-element-btn" onClick={() => createElement("spacer")}>Spacer</div>
                                 <div className="add-element-btn" onClick={() => createElement("image")}>Image</div>
                                 <div className="add-element-btn" onClick={() => createElement("faq")}>FAQ</div>
-                                <div className={`add-element-btn ${addElementLocation[0] === "L" || addElementLocation[0] === "R" ? "disabled": ""}`} onClick={createSplitSection}>Split Section</div>
+                                <div className={`add-element-btn`} onClick={createSplitSection}>Split Section</div>
                                 <div className={`add-element-btn`} onClick={() => createElement("container")}>Container</div>
                             </div>
                         </div>

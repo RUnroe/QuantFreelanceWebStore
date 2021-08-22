@@ -103,14 +103,23 @@
 .product-main {
     position: relative;
 }
-.product-page.edit .product-side {
-    min-height: calc(100vh - 5.5rem);
-    position:relative;
+
+.product-page.edit {
+    height: calc(100vh - 3.75rem);
 }
-.product-page.edit .product-side .product-details, .product-page.edit .product-side .config-menu {
+.product-page.edit .product-main {
+    overflow-x: hidden;
+}
+.product-page.edit .product-side {
+    /* min-height: calc(100vh - 5.5rem); */
+    position:relative;
+    overflow-x: hidden;
+
+}
+/* .product-page.edit .product-side .product-details, .product-page.edit .product-side .config-menu {
     position: sticky;
     top: 4.5rem;
-}  
+}   */
 
 .product-page.display .product-side {
     margin:2rem;
