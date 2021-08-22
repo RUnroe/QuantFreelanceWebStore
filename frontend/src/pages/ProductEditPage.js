@@ -916,6 +916,7 @@ export default function ProductEditPage({username}) {
         //add before element
         else {
             //add element in array based on index
+            console.log(addElementLocation);
             let newState = addElementBeforeElement([...pageStructure], newElement);
             //newState.splice(parseInt(addElementLocation), 0, newElement);
             setPageStructure(newState);
@@ -937,7 +938,7 @@ export default function ProductEditPage({username}) {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === addElementLocation) {
-                    console.log(addElementLocation);
+                    console.log("splice");
                     list.splice(parseInt(addElementLocation), 0, newElement);
                     break;
                 }
