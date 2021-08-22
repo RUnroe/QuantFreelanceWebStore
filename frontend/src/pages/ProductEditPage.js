@@ -255,6 +255,8 @@ export default function ProductEditPage({username}) {
     const getAllChildrenElements = (list) => {
         const jsx = [];
         list.forEach(element => {
+            //add btn index index
+            jsx.push(createAddBtn(`N${element.id}`));
             jsx.push(getJSXOfElement(element));
         });
         return jsx;
@@ -704,7 +706,6 @@ export default function ProductEditPage({username}) {
             else if(element.type === "split" || element.type === "container") {
                 element.properties.children = filterElementOut(element.properties.children);
             }
-            if(keepItem === false) console.log(selectedElementId);
             return keepItem;
         })
     }
@@ -733,13 +734,11 @@ export default function ProductEditPage({username}) {
         setSelectedElementId(id);
         //Select element based on id
         const element = findElementInPageStructure(id);
-        console.log(element);
         if(element) setSelectedElement(Object.assign(element));
     }
 
     // Make recursive
     const findElementInPageStructure = id => {
-        // console.log(pageStructure, id);
         let selected = lookForElementInPageStructure(pageStructure, id);
         // pageStructure.forEach(element => {
         //     if(element.id === id) selected = element;
@@ -894,11 +893,11 @@ export default function ProductEditPage({username}) {
             //     return element;
             // });
             let newState = createElementInSection([...pageStructure], id, newElement);
-            console.log(newState);
             setPageStructure(newState);
             //force page structure update
             convertPageStructureToJSX();
         }
+        //add to end of container
         else if (addElementLocation[0] === "C") {
             //Get Id by removing the split position indicator 
             const id = addElementLocation.substring(1);
@@ -909,16 +908,16 @@ export default function ProductEditPage({username}) {
             //     return element;
             // });
             let newState = createElementInSection([...pageStructure], id, newElement);
-            console.log(newState);
             setPageStructure(newState);
             //force page structure update
             convertPageStructureToJSX();
         }
+        
         //add before element
         else {
             //add element in array based on index
-            let newState = [...pageStructure];
-            newState.splice(parseInt(addElementLocation), 0, newElement);
+            let newState = addElementBeforeElement([...pageStructure], newElement);
+            //newState.splice(parseInt(addElementLocation), 0, newElement);
             setPageStructure(newState);
 
 
@@ -934,8 +933,22 @@ export default function ProductEditPage({username}) {
         
     }
 
+    const addElementBeforeElement = (list, newElement) => {
+        if(list && list.length > 0) {
+            for(let i = 0; i < list.length; i++) {
+                if(list[i].id === id) {
+                    list.splice(parseInt(addElementLocation), 0, newElement);
+                    break;
+                }
+                if(list[i].type === "split" || list[i].type === "container") {
+                    addElementBeforeElement(list[i].properties.children, id, newElement);
+                }
+            }
+        }
+        return list;
+    }
+
     const createElementInSection = (list, id, newElement) => {
-        console.log(list);
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === id) {
@@ -947,7 +960,6 @@ export default function ProductEditPage({username}) {
                 }
             }
         }
-        console.log("list", list);
         return list;
     }
 
