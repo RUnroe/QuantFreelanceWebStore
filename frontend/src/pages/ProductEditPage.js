@@ -256,7 +256,7 @@ export default function ProductEditPage({username}) {
         const jsx = [];
         list.forEach(element => {
             //add btn index index
-            jsx.push(createAddBtn(`N${element.id}`));
+            jsx.push(createAddBtn(`${element.id}`));
             jsx.push(getJSXOfElement(element));
         });
         return jsx;
@@ -937,6 +937,7 @@ export default function ProductEditPage({username}) {
         if(list && list.length > 0) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i].id === addElementLocation) {
+                    console.log(addElementLocation);
                     list.splice(parseInt(addElementLocation), 0, newElement);
                     break;
                 }
