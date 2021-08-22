@@ -254,9 +254,9 @@ export default function ProductEditPage({username}) {
 
     const getAllChildrenElements = (list) => {
         const jsx = [];
-        list.forEach(element => {
+        list.forEach((element, index) => {
             //add btn index index
-            jsx.push(createAddBtn(`${element.id}`));
+            jsx.push(createAddBtn(index, list.id));
             jsx.push(getJSXOfElement(element));
         });
         return jsx;
@@ -761,9 +761,9 @@ export default function ProductEditPage({username}) {
             }
         }
     }
-    const createAddBtn = (position) => {
+    const createAddBtn = (position, containerId) => {
         return (
-        <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(position)}>
+        <div className="inbetween-add-element-btn" onClick={() => openAddElementModal(`${position}@${containerId}`)}>
             <div className="bobber">+</div>
             <hr />
         </div>
@@ -775,7 +775,7 @@ export default function ProductEditPage({username}) {
         //if(pageStructure) {
             pageStructure.forEach((pageElement, index) => {
                 //add btn index index
-                tempJSX.push(createAddBtn(index));
+                tempJSX.push(createAddBtn(index, "top"));
                 tempJSX.push(getJSXOfElement(pageElement));
             });
             setPageStructureJSX(tempJSX);
@@ -917,7 +917,8 @@ export default function ProductEditPage({username}) {
         else {
             //add element in array based on index
             console.log(addElementLocation);
-            let newState = addElementBeforeElement([...pageStructure], newElement);
+            let location = addElementLocation.split("@");
+            let newState = addElementBeforeElement([...pageStructure], newElement, location[0], location[1]);
             //newState.splice(parseInt(addElementLocation), 0, newElement);
             setPageStructure(newState);
 
@@ -934,16 +935,21 @@ export default function ProductEditPage({username}) {
         
     }
 
-    const addElementBeforeElement = (list, newElement) => {
+    const addElementBeforeElement = (list, newElement, position, location) => {
         if(list && list.length > 0) {
-            for(let i = 0; i < list.length; i++) {
-                if(list[i].id === addElementLocation) {
-                    console.log("splice");
-                    list.splice(parseInt(addElementLocation), 0, newElement);
-                    break;
-                }
-                if(list[i].type === "split" || list[i].type === "container") {
-                    addElementBeforeElement(list[i].properties.children, newElement);
+            if(location === "top") {
+                list.splice(parseInt(position), 0, newElement);
+            }
+            else {
+                for(let i = 0; i < list.length; i++) {
+                    if(list[i].id === location) {
+                        console.log("splice");
+                        list.splice(parseInt(position), 0, newElement);
+                        break;
+                    }
+                    if(list[i].type === "split" || list[i].type === "container") {
+                        addElementBeforeElement(list[i].properties.children, newElement);
+                    }
                 }
             }
         }
