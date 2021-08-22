@@ -49,7 +49,8 @@ function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   }
   return <Redirect to={{pathname: '/login'}} />;
 }
-function Footer() {
+function Footer({inEditMode}) {
+  if(inEditMode) return <></>;
   return (
     <footer>
       <div className="section">
@@ -96,7 +97,7 @@ function App() {
     <div id="main">
       <RoutesModule checkAuth={checkAuth} currUser={currUser} currAuthLevel={currAuthLevel} setCurrAuthLevel={setCurrAuthLevel} setInEditMode={setInEditMode} />
     </div>
-    <Footer />
+    <Footer inEditMode={inEditMode}/>
   </BrowserRouter>
   );
 }
