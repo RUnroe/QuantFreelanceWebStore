@@ -244,7 +244,7 @@ export default function ProductEditPage({username}) {
 
         jsx.push(
             <div className={`builder-container ${object.id === selectedElementId ? "selected" : ""}`} style={style} onClick={(event) => {selectElement(object.id); event.stopPropagation();}}>
-                {getAllChildrenElements(props.children)}
+                {getAllChildrenElements(props.children, object.id)}
                 <div className="nested-add-element-btn" onClick={() => openAddElementModal(`C${object.id}`)}>+</div>
             </div> 
         );
@@ -252,11 +252,11 @@ export default function ProductEditPage({username}) {
         return jsx;
     }
 
-    const getAllChildrenElements = (list) => {
+    const getAllChildrenElements = (list, listId) => {
         const jsx = [];
         list.forEach((element, index) => {
             //add btn index index
-            jsx.push(createAddBtn(index, list.id));
+            jsx.push(createAddBtn(index, listId));
             jsx.push(getJSXOfElement(element));
         });
         return jsx;
