@@ -17,7 +17,7 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
     }
 
     if(productData.title.trim() === "") {
-        if(mode === edit) {
+        if(mode === "edit") {
             productData.title = "Untitled";
         }
         else return <></>;
