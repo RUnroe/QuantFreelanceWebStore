@@ -16,8 +16,12 @@ export default function ProductCard({productData, mode, setDeleteModal}) {
         setDeleteModal(productData);
     }
 
-
-    if(productData.title.trim() === "") return <></>;
+    if(productData.title.trim() === "") {
+        if(mode === edit) {
+            productData.title = "Untitled";
+        }
+        else return <></>;
+    }
     return (
         <Link className="product-card" to={`/store/${productData.product_id}`} >
             {mode === "edit" ? <><Link className="edit-btn" to={`/store/${productData.product_id}/edit`} title="Edit service">
