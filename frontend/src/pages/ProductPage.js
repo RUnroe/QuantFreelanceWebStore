@@ -58,7 +58,7 @@ export default function ProductPage({userId}) {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
             color: props.color ?? "#403d52",
-            textAlign: props.align
+            textAlign: props.textAlign
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
@@ -96,7 +96,7 @@ export default function ProductPage({userId}) {
             fontWeight: props.fontWeight,
             width: props.width ?? "auto",
             color: props.color ?? "#403d52",
-            textAlign: props.align
+            textAlign: props.textAlign
         }
         if(props.style === "italics") style.fontStyle = "italic";
         if(props.style === "underline") style.textDecoration = "underline";
