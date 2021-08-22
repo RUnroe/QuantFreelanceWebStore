@@ -1002,7 +1002,7 @@ export default function ProductEditPage({username}) {
                     {pageStructureJSX}
                     
                     {/* Add NEW ELEMENT BUTTON */}
-                    <div className="open-add-element-btn" onClick={() => openAddElementModal("")}>
+                    <div className="open-add-element-btn" title="Click to create an element" onClick={() => openAddElementModal("")}>
                         +
                     </div>
 
