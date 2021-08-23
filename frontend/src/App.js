@@ -108,9 +108,8 @@ function RoutesModule({checkAuth, currUser, currAuthLevel, setCurrAuthLevel, set
       if(location && location.pathname) {
         setInEditMode( location.pathname.includes("/edit") === true);
       }
-    },
-    [location]
-  );
+      window.scrollTo(0, 0);
+    }, [location]);
   
   return (
     <Switch>
