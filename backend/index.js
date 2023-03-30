@@ -3,6 +3,7 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
+const cors = require('cors')
 //const upload = require('multer')({ dest: require('./secrets').server.iconLocation });
 const upload = require('multer')({ dest: __dirname + '/public/api/icons' });
 
@@ -11,8 +12,7 @@ const app = express();
 const dal = require('./db/dal');
 
 
-// app.set("view engine", "pug");
-// app.set("views", __dirname + "/views");
+
 app.set("trust proxy", 1);
 app.use(express.static(path.join(__dirname + "/public")));
 
@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.use(cors());
 
 //app.use(require('cookie-parser')(require('./secrets').session.secret));
 

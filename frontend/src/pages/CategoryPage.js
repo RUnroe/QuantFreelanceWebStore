@@ -3,6 +3,7 @@ import { useParams, Redirect } from 'react-router-dom';
 import "../styles/category.css";
 import ProductCard from "../partials/productCard";
 import SearchBar from "../partials/searchBar";
+import { requestGet } from "../partials/requests";
 
 export default function CategoryPage({ }) {
     const { category_name } = useParams();
@@ -16,8 +17,9 @@ export default function CategoryPage({ }) {
     }
     useEffect(() => {
         //fetch results by category name
-        fetch(`/api/product/category/${convertCategoryName(category_name)}`)
-        .then(result => result.json())
+        // fetch(`/api/product/category/${convertCategoryName(category_name)}`)
+        // .then(result => result.json())
+        requestGet(`api/product/category/${convertCategoryName(category_name)}`)
         .then(data => (setResultList(data)))
         .catch(error => console.log(error));
     }, []);

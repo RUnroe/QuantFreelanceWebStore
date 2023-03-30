@@ -7,7 +7,6 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     const { username } = useParams();
     const [user, setUser] = useState();
     const [products, setProducts] = useState();
-    const [productListJSX, setProductListJSX] = useState();
     const [redirect, setRedirect] = useState(false);
 
     const [deleteModal, setDeleteModal] = useState(false);
@@ -36,18 +35,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
         if(user) getUsersProducts();
     }, [user]);
 
-    const convertListToJSX = () => {
-        const jsx = [];
-        products.forEach(result => {
-            if(user && user.user_id === currUser.user_id && authLevel === "seller") jsx.push(<ProductCard productData={result} mode={"edit"} setDeleteModal={setDeleteModal}/>);
-            else jsx.push(<ProductCard productData={result} />);
-        });
-        setProductListJSX(jsx);
-    }
 
-    useEffect(() => {
-        if(products) convertListToJSX();
-    }, [products]);
 
     const getTitle = () => {
         let name = user ? `${user.first_name} ${user.last_name}'` : " ";
@@ -120,7 +108,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
 
 
     if(redirect) return < Redirect to={redirect}/>;
-    return(
+    return (
         <>
         <div className="container">
             <div className="section account-page">
@@ -132,8 +120,8 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                         <p className="email">{user ? user.email : ""}</p>
                     </div>
                     <div className="bottom-section">
-                        {user ? user.user_id === currUser.user_id && authLevel === "buyer" ? <p className="seller-link" onClick={makeAccountSeller}>Become a seller</p> : "" : ""}
-                        {user ? user.user_id === currUser.user_id ? <Link to="/account/settings" className="btn blue center">Edit Account</Link> : "" : ""}
+                        {user && user.user_id === currUser.user_id && authLevel === "buyer" ? <p className="seller-link" onClick={makeAccountSeller}>Become a seller</p> : ""}
+                        {user && user.user_id === currUser.user_id ? <Link to="/account/settings" className="btn blue center">Edit Account</Link> : ""}
                     </div>
                 </div>
                 <div className="service-side container">
@@ -142,7 +130,13 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                         {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue" onClick={createProduct}>+</button>: <></> :<></>}
                     </div>
                     <div className="service-list">
-                        {productListJSX}
+                        {
+                            products?.map(product => {
+                                return (user && user.user_id === currUser.user_id && authLevel === "seller") ?
+                                <ProductCard productData={product} mode={"edit"} setDeleteModal={setDeleteModal}/> :
+                                <ProductCard productData={product} />;
+                            })
+                        }
                     </div>
                 </div>
             </div>
