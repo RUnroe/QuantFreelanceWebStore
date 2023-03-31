@@ -4,9 +4,10 @@ import "../styles/category.css";
 import ProductCard from "../partials/productCard";
 import SearchBar from "../partials/searchBar";
 import { requestGet } from "../partials/requests";
+import { getCategoryDescription, formatCategoryName, isCategoryValid } from "../shared";
 
 export default function CategoryPage({ }) {
-    const { category_name } = useParams();
+    const { category_name: currentCategoryName } = useParams();
     const [resultList, setResultList] = useState();
     const [resultListJSX, setResultListJSX] = useState(<></>);
     
@@ -19,7 +20,7 @@ export default function CategoryPage({ }) {
         //fetch results by category name
         // fetch(`/api/product/category/${convertCategoryName(category_name)}`)
         // .then(result => result.json())
-        requestGet(`api/product/category/${convertCategoryName(category_name)}`)
+        requestGet(`api/product/category/${convertCategoryName(currentCategoryName)}`)
         .then(data => (setResultList(data)))
         .catch(error => console.log(error));
     }, []);
@@ -46,7 +47,7 @@ export default function CategoryPage({ }) {
     return(
         <div className="category-page">
         <div className="container gradient category-header">
-            <CategoryHeader category={category_name}/>
+            <CategoryHeader categoryName={currentCategoryName}/>
         </div>
         <div className="container">
             <div className="section result-area">
@@ -62,52 +63,17 @@ export default function CategoryPage({ }) {
 
 
 
-const validateCategory = (acceptedCategoryList, category) => {
-    let valid = false;
-    acceptedCategoryList.forEach(acceptedCategory => {
-        if(acceptedCategory === category) valid = true;
-    });
-    return valid;
-}
-
-
-const getDescription = (category) => {
-    switch(category) {
-        case "design-art":
-            return "Art commissions, company logos, website wireframes and much more!";
-        case "sales-marketing":
-            return "All of your 'smarketing' needs from advertisements to branding!";
-        case "business-finance":
-            return "Your business is your passion. Outsource smaller tasks so you can focus on growth!";
-        case "writing-translation":
-            return "Have your way with words. Get copy, translation & editorial work from freelancers!";
-        case "video-animation":
-            return "Tell your story however you like with custom video & animation services!";
-        case "audio-music":
-            return "Let the world hear your message through music, audio & voice services!";
-        case "programming-tech":
-            return "Get all of your techical needs from website and app development to automation!";
-        case "engineering-architecture":
-            return "Drafting, 3D models, floorplans, interior design, and much more!";
-        case "education-training":
-            return "Want some help learning? Get training videos and one-on-one help for whatever you need!";
-        default:
-            return "You shouldn't be here";
-    }
-}
-
-function CategoryHeader({category}) {
-    if(validateCategory(["design-art", "sales-marketing", "business-finance", "writing-translation", "video-animation",
-        "audio-music", "programming-tech", "engineering-architecture", "education-training" ], category)) {
-        const description = getDescription(category);
+const CategoryHeader = ({categoryName}) => {
+    if(isCategoryValid(categoryName)) {
+        const description = getCategoryDescription(categoryName);
         return (
             <div className="split section">
                 <div className="left-side">
-                    <h1 className="category-name">{category.replace("-", " & ")}</h1>
+                    <h1 className="category-name">{formatCategoryName(categoryName)}</h1>
                     <p className="text-white description">{description}</p>
                     <SearchBar />
                 </div>
-                <img src={`/images/categoryHeader/${category}.svg`} />
+                <img src={`/images/categoryHeader/${categoryName}.svg`} />
                 {/* <img src={`https://via.placeholder.com/450x250`} /> */}
                 
             </div>
