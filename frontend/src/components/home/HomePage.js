@@ -1,7 +1,7 @@
 import React, { useEffect, createRef } from "react";
 //import {ImageInput, SignupForm} from "./../partials/form";
-import "../styles/index.css";
-import SearchBar from "../partials/searchBar";
+import "../../styles/index.css";
+import SearchBar from "../category/searchBar";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

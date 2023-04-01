@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect, Link } from 'react-router-dom';
-import "../styles/account.css";
-import ProductCard from "../partials/productCard";
-import { getUserByUsername, updateCurrentUser } from "../webservice/user";
-import { deleteProduct, getProductsByUser } from "../webservice/product";
+import "../../styles/account.css";
+import ProductCard from "../product/productCard";
+import { getUserByUsername, updateCurrentUser } from "../../webservice/user";
+import { createProduct, deleteProduct, getProductsByUser } from "../../webservice/product";
+import { DeleteModal } from "../modal/deleteModal";
 
 const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
     const { username } = useParams();
@@ -59,24 +60,24 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
 
 
     }
-    const createProduct = () => {
+    const handleCreateProduct = () => {
         createProduct()
         .then(newProductId => {
             setRedirect(`/store/${newProductId}/edit`);
         })
     }
 
-    const closeModal = () => {
+    const handleCloseModal = () => {
         setProductToDelete(false);
     }
-    const handleDelete = () => {
+    const handleDeleteProduct = () => {
         deleteProduct(productToDelete.product_id)
         .then(data => {
-            if(data.status == "204") {
+            if(String(data.status) === "204") {
                 //Delete local instance
                 const newProducts = products.filter(product => product.product_id !== productToDelete.product_id);
                 setProducts(newProducts);
-                closeModal();
+                handleCloseModal();
             }
         })
         
@@ -103,7 +104,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
                 <div className="service-side container">
                     <div className="title-bar">
                         <h1 className="title">{getTitle()}</h1>
-                        {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue" onClick={createProduct}>+</button>: <></> :<></>}
+                        {user ? user.user_id === currUser.user_id && authLevel === "seller" ? <button title="Create new service" className="btn blue" onClick={handleCreateProduct}>+</button>: <></> :<></>}
                     </div>
                     <div className="service-list">
                         {
@@ -118,20 +119,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
             </div>
         </div>
 
-
-        <div className={`modal ${ productToDelete ? "visible" : ""}`} id="deleteModal">
-            <div className="modal-header">
-                <h2>Delete '{productToDelete ? productToDelete.title : ""}'?</h2>
-                <button onClick={closeModal}><i className="fas fa-times"></i></button>
-            </div>
-            <div className="modal-body">
-                <div className="btn-group">
-                    <button className="btn danger-outline" onClick={closeModal}>Cancel</button>
-                    <button className="btn danger" onClick={handleDelete}>Delete</button>
-                </div>
-            </div>
-        </div>
-        <div className={`screen ${ productToDelete ? "visible" : ""}`} id="deleteModalScreen" onClick={closeModal}></div>
+        <DeleteModal itemToDelete={productToDelete} handleCloseModal={handleCloseModal} handleDelete={handleDeleteProduct} />
         </>
     );
 

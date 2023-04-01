@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect, Link } from 'react-router-dom';
-import "../styles/purchased.css";
+import "../../styles/purchased.css";
 
 export default function PurchasePage() {
     const {order_id} = useParams();

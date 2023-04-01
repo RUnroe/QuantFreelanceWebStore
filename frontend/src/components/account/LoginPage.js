@@ -1,6 +1,6 @@
 import React from "react";
-import { LogInForm } from "../partials/form";
-import '../styles/login.css';
+import { LogInForm } from "../form";
+import '../../styles/login.css';
 
 export default function LoginPage({checkAuth}) {
     return(

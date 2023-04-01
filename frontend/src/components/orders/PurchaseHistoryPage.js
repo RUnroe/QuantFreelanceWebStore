@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import "../styles/order.css";
-import "../styles/sellHistory.css";
+import "../../styles/order.css";
+import "../../styles/purchaseHistory.css";
 import { Link, Redirect } from 'react-router-dom';
-
-export default function SellHistoryPage() {
-    const [sellHistory, setSellHistory] = useState([]);
-    const [sellHistoryJSX, setSellHistoryJSX] = useState([]);
+export default function PurchaseHistoryPage() {
+    const [purchaseHistory, setPurchaseHistory] = useState([]);
+    const [purchaseHistoryJSX, setPurchaseHistoryJSX] = useState([]);
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
-        fetch("/api/order/seller/past", {credentials: "include"})
+        fetch("/api/order/customer/past", {credentials: "include"})
         .then(response => response.json())
         .then(data => {
-            setSellHistory(data);
+            setPurchaseHistory(data);
         })
         .catch(err => setRedirect("/"))
     }, []);
 
     useEffect(() => {
-        renderSellHistoryJSX();
-    }, [sellHistory]);
+        renderPurchaseHistoryJSX();
+    }, [purchaseHistory]);
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -27,9 +26,9 @@ export default function SellHistoryPage() {
     }
 
 
-    const renderSellHistoryJSX = () => {
+    const renderPurchaseHistoryJSX = () => {
         const jsx = [];
-        sellHistory.forEach(element => {
+        purchaseHistory.forEach(element => {
             jsx.push(
             <label className="order-module">
                 <input type="checkbox"/>
@@ -39,29 +38,29 @@ export default function SellHistoryPage() {
                     </div>
                     <div className="right-side">
                         <span className="date">{element.timestamp ? formatDate(element.timestamp): "mm/dd/yyyy"}</span>
-                        <span className="price positive">${element.price ? element.price: "0"}</span>
+                        <span className="price negative">-${element.price ? element.price: "0"}</span>
                         <i className="fas fa-chevron-down"></i> 
                     </div>
                 </div>
                 <div className="message">
-                    <p className="buyer-name">From {element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
+                    <p className="seller-name">Seller:{element.user && element.user.name ?  <Link to={`/account/${element.user.username}`}>{element.user.name} (@{element.user.username})</Link>: ""}</p>
                     <p className="message-desc">{element.message ? `\"${element.message}\"`: `\" \"`}</p>
                     </div>
             </label>
             );
         });
-        setSellHistoryJSX(jsx);
+        setPurchaseHistoryJSX(jsx);
     }
     if(redirect && redirect === "/") return < Redirect to={redirect}/>;
     else if(redirect) return < Redirect push to={redirect}/>;
     return(
         <div className="section">
-            <div className="container sell-history-page">
-                <h1>Your Sell History</h1>
-                <div className="sell-list">
-                    {sellHistoryJSX}
+            <div className="container purchase-history-page">
+                <h1>Your Purchase History</h1>
+                <div className="purchase-list">
+                    {purchaseHistoryJSX}
                 </div>
-                {!sellHistoryJSX.length ? <h2 class="empty-page-header">You don't have any completed sales yet</h2> : <></>}
+                {!purchaseHistoryJSX.length ? <h2 class="empty-page-header">You don't have any completed purchases yet</h2> : <></>}
             </div>
         </div>
     );

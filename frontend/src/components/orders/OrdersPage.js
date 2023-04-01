@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/order.css";
+import "../../styles/order.css";
 import { Link, Redirect } from 'react-router-dom';
 
 export default function Orders() {

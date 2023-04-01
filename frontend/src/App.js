@@ -5,28 +5,29 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import SearchPage from './pages/SearchPage';
-import CategoryPage from './pages/CategoryPage';
-import ProductPage from './pages/ProductPage';
-import ProductEditPage from './pages/ProductEditPage';
-import PurchasePage from './pages/PurchasePage';
-import PurchasedPage from './pages/PurchasedPage';
-import AccountPage from './pages/AccountPage';
-import AccountSettingsPage from './pages/AccountSettingsPage';
-import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
-import SellHistoryPage from './pages/SellHistoryPage';
-import InboxPage from './pages/InboxPage';
-import OrdersPage from './pages/OrdersPage';
 
-import NavigationMenu from "./partials/navbar";
+
+import NavigationMenu from "./components/navbar";
 
 import './styles/quant.css';
 import './styles/navbar.css';
 
 import { useEffect, useState } from "react";
+import HomePage from "./components/home/HomePage";
+import SignupPage from "./components/account/SignupPage";
+import CategoryPage from "./components/category/CategoryPage";
+import LoginPage from "./components/account/LoginPage";
+import SearchPage from "./components/category/SearchPage";
+import ProductEditPage from "./components/product/ProductEditPage";
+import ProductPage from "./components/product/ProductPage";
+import PurchasePage from "./components/product/PurchasePage";
+import PurchasedPage from "./components/orders/PurchasedPage";
+import AccountSettingsPage from "./components/account/AccountSettingsPage";
+import AccountPage from "./components/account/AccountPage";
+import PurchaseHistoryPage from "./components/orders/PurchaseHistoryPage";
+import SellHistoryPage from "./components/orders/SellHistoryPage";
+import InboxPage from "./components/orders/InboxPage";
+import OrdersPage from "./components/orders/OrdersPage";
 
 function AuthenticatedRoute({currAuthLevel, reqAuthLevel, component}) {
   // if(reqAuthLevel == "noAuth" && (currAuthLevel == "" || currAuthLevel == undefined || currAuthLevel == null)) return component;

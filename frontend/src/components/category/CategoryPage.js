@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
-import "../styles/category.css";
-import ProductCard from "../partials/productCard";
-import SearchBar from "../partials/searchBar";
+import "../../styles/category.css";
+import ProductCard from "../product/productCard";
+import SearchBar from "../category/searchBar";
+import { getProductsByCategory } from "../../webservice/product";
 import {
   getCategoryDescription,
   formatCategoryName,
   isCategoryValid,
-} from "../shared";
-import { getProductsByCategory } from "../webservice/product";
+} from "../../shared";
 
 export default function CategoryPage({}) {
   const { category_name: currentCategoryName } = useParams();

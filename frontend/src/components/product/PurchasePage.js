@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from 'react-router-dom';
-import "../styles/purchase.css";
-import ProductCard from "../partials/productCard";
+import "../../styles/purchase.css";
+import ProductCard from "./productCard";
 
 export default function PurchasePage({userId}) {
     const { product_id } = useParams();

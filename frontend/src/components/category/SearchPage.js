@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from 'react-router-dom';
-import "../styles/search.css";
-import ProductCard from "../partials/productCard";
-import SearchBar from "../partials/searchBar";
+import "../../styles/search.css";
+import ProductCard from "../product/productCard";
+import SearchBar from "./searchBar";
 
 export default function SearchPage() {
     const { search_term } = useParams();

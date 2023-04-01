@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { SignupForm } from "../partials/form";
-import {ImageSelectModal} from "../partials/image";
-import '../styles/signup.css';
+import { SignupForm } from "../form";
+import {ImageSelectModal} from "../modal/imageModal";
+import '../../styles/signup.css';
 
 export default function SignupPage({checkAuth}) {
     const [imageSelectModalSetter, setImageSelectModalSetter] = useState();
@@ -31,7 +31,7 @@ export default function SignupPage({checkAuth}) {
                 <h1 className="text-center text-white">Choose Account Type</h1>
                 <div className="account-type-container">
                     <div className="buyer-account account-selection" onClick={() => toSignupForm("buyer")}>
-                        <div class="img-container"><img src="/images/usage/freelancerIcon.svg" alt="account-icon"/></div>
+                        <div className="img-container"><img src="/images/usage/freelancerIcon.svg" alt="account-icon"/></div>
                         <h3>Standard Account</h3>
                         <p>Perfect for browsing and purchasing services.</p>
                     </div>

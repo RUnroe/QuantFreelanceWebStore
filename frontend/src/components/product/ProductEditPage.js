@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, createContext } from "react";
-import "../styles/productPage.css";
-import {ImageSelectModal} from "../partials/image";
+import "../../styles/productPage.css";
+import {ImageSelectModal} from "../modal/imageModal";
 import {Redirect} from "react-router-dom";
 
 
