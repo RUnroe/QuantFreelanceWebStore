@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useParams, Redirect, Link } from 'react-router-dom';
 import "../styles/account.css";
 import ProductCard from "../partials/productCard";
+import { getUserByUsername, updateCurrentUser } from "../webservice/user";
+import { deleteProduct, getProductsByUser } from "../webservice/product";
 
-export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuthLevel}) {
+const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
     const { username } = useParams();
     const [user, setUser] = useState();
     const [products, setProducts] = useState();
     const [redirect, setRedirect] = useState(false);
 
-    const [deleteModal, setDeleteModal] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(false);
 
-    const getUserData = async () => {
-        fetch(`/api/user/info/${username}`)
-        .then(response => response.json())
+    const getUserData = () => {
+        getUserByUsername(username)
         .then(data => {
             setUser(data);
-        }).catch(error => {
+        }).catch( () => {
             setRedirect("/");
         });
     }
@@ -25,8 +26,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
     }, []);
 
     const getUsersProducts = async () => {
-        fetch(`/api/product/seller/${user.user_id}`)
-        .then(response => response.json())
+        getProductsByUser(user.user_id)
         .then(data => {
             setProducts(data);
         });
@@ -38,21 +38,19 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
 
 
     const getTitle = () => {
-        let name = user ? `${user.first_name} ${user.last_name}'` : " ";
-        if(name[name.length-1].toLowerCase() !== "s") name += "s";
-        return `${name} Services`;
+        let title = "";
+        if(user) {
+            let name = `${user.first_name} ${user.last_name}'`;
+            if(name[name.length-1].toLowerCase() !== "s") name += "s";
+            title = `${name} Services`;
+        }
+        return title;
     }
-    const makeAccountSeller = () => {
-        const data = {
+    const convertToSellerAccount = () => {
+        const userData = {
             is_seller: true
         }
-        fetch("/api/user", {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(data)
-        })
+        updateCurrentUser(userData)
         .then(response => {
             if(response.ok) {
                 setCurrAuthLevel("seller");
@@ -62,43 +60,21 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
 
     }
     const createProduct = () => {
-        const emptyProduct = {
-            price: 0,
-            title: "",
-            description: "",
-            category: "DesignArt",
-            page_structure: "[]",
-            icon_id: ""
-        }
-        fetch("/api/product", {
-            method: "POST",
-            credentials:"include",
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(emptyProduct)
-        }).then(result => result.json())
-        .then(data => {
-            setRedirect(`/store/${data}/edit`);
+        createProduct()
+        .then(newProductId => {
+            setRedirect(`/store/${newProductId}/edit`);
         })
     }
 
     const closeModal = () => {
-        setDeleteModal(false);
+        setProductToDelete(false);
     }
-    const deleteProduct = () => {
-        fetch("/api/product", {
-            method: "DELETE",
-            credentials:"include",
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify({"product_id": deleteModal.product_id})
-        })
+    const handleDelete = () => {
+        deleteProduct(productToDelete.product_id)
         .then(data => {
             if(data.status == "204") {
                 //Delete local instance
-                const newProducts = products.filter(product => product.product_id !== deleteModal.product_id);
+                const newProducts = products.filter(product => product.product_id !== productToDelete.product_id);
                 setProducts(newProducts);
                 closeModal();
             }
@@ -120,7 +96,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                         <p className="email">{user ? user.email : ""}</p>
                     </div>
                     <div className="bottom-section">
-                        {user && user.user_id === currUser.user_id && authLevel === "buyer" ? <p className="seller-link" onClick={makeAccountSeller}>Become a seller</p> : ""}
+                        {user && user.user_id === currUser.user_id && authLevel === "buyer" ? <p className="seller-link" onClick={convertToSellerAccount}>Become a seller</p> : ""}
                         {user && user.user_id === currUser.user_id ? <Link to="/account/settings" className="btn blue center">Edit Account</Link> : ""}
                     </div>
                 </div>
@@ -133,7 +109,7 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
                         {
                             products?.map(product => {
                                 return (user && user.user_id === currUser.user_id && authLevel === "seller") ?
-                                <ProductCard productData={product} mode={"edit"} setDeleteModal={setDeleteModal}/> :
+                                <ProductCard productData={product} mode={"edit"} setDeleteModal={setProductToDelete}/> :
                                 <ProductCard productData={product} />;
                             })
                         }
@@ -143,20 +119,22 @@ export default function AccountPage({currUser, authLevel, checkAuth, setCurrAuth
         </div>
 
 
-        <div className={`modal ${ deleteModal ? "visible" : ""}`} id="deleteModal">
+        <div className={`modal ${ productToDelete ? "visible" : ""}`} id="deleteModal">
             <div className="modal-header">
-                <h2>Delete '{deleteModal ? deleteModal.title : ""}'?</h2>
+                <h2>Delete '{productToDelete ? productToDelete.title : ""}'?</h2>
                 <button onClick={closeModal}><i className="fas fa-times"></i></button>
             </div>
             <div className="modal-body">
                 <div className="btn-group">
                     <button className="btn danger-outline" onClick={closeModal}>Cancel</button>
-                    <button className="btn danger" onClick={deleteProduct}>Delete</button>
+                    <button className="btn danger" onClick={handleDelete}>Delete</button>
                 </div>
             </div>
         </div>
-        <div className={`screen ${ deleteModal ? "visible" : ""}`} id="deleteModalScreen" onClick={closeModal}></div>
+        <div className={`screen ${ productToDelete ? "visible" : ""}`} id="deleteModalScreen" onClick={closeModal}></div>
         </>
     );
 
 }
+
+export default AccountPage;

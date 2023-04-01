@@ -28,3 +28,10 @@ export const formatPrice = (price) => {
   return `$${formattedPrice}`;
 };
 
+// Format category name from design-art to DesignArt for backend
+export const convertCategoryName = (category) => {
+  const parts = category.split("-");
+  return `${parts[0][0].toUpperCase() + parts[0].substring(1)}${
+    parts[1][0].toUpperCase() + parts[1].substring(1)
+  }`;
+};

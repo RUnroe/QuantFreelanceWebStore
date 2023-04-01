@@ -55,3 +55,12 @@ const getCategoriesKeyValue = () => {
 }
 
 export const categoriesKeyValue = getCategoriesKeyValue();
+
+export const newDefaultProduct = {
+  price: 0,
+  title: "",
+  description: "",
+  category: "DesignArt",
+  page_structure: "[]",
+  icon_id: ""
+}

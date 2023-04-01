@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { formatPrice } from "../shared";
 import "../styles/productCard.css";
-import { getIconUrl } from "./requests";
+import { getIconUrl } from "../webservice/requests";
 
 export default function ProductCard({ productData, mode, setDeleteModal }) {
   
