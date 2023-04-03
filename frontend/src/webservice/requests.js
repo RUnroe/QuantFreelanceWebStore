@@ -23,14 +23,14 @@ export const requestUpdate = async (uri, body) => {
   return response;
 };
 
-export const requestCreate = async (uri, body, useCredentials) => {
+export const requestCreate = async (uri, body, useCredentials = true, formatJsonData = true) => {
   const response = await fetch(`${getApiUrl()}${uri}`, {
     method: "POST",
     ...(useCredentials && { credentials: "include" }),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body),
+    body: formatJsonData ? JSON.stringify(body) : body,
   });
   return response;
 };
