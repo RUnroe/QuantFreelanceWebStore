@@ -1,5 +1,5 @@
 const LOCAL_API_URL = "http://localhost:3005/api/";
-const PRODUCTION_API_URL = "https://quant.ryanunroe.com/";
+const PRODUCTION_API_URL = "https://quant.ryanunroe.com/api/";
 
 const IN_DEVELOPMENT_ENVIRONMENT = process.env.NODE_ENV === "development";
 
