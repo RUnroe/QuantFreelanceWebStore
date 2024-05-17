@@ -4,7 +4,7 @@ const PRODUCTION_API_URL = "https://quant.ryanunroe.com/api/";
 const IN_DEVELOPMENT_ENVIRONMENT = process.env.NODE_ENV === "development";
 
 const getApiUrl = () => {
-  return IN_DEVELOPMENT_ENVIRONMENT ? LOCAL_API_URL : "/";
+  return IN_DEVELOPMENT_ENVIRONMENT ? LOCAL_API_URL : PRODUCTION_API_URL;
 };
 
 export const requestGet = async (uri) => {
