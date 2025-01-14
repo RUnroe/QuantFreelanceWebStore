@@ -1,11 +1,12 @@
 const {MongoClient} = require('mongodb');
 const snowmachine = new (require('snowflake-generator'))(1420070400000);
 
-const dbclient = new MongoClient(require('../secrets.json').mongo.connectionString, {
+const dbclient = new MongoClient(process.env.MONGO_CONNECTION, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
 console.log("Attempting to connect to database");
+
 dbclient.connect().then(() => console.log("Connected")).catch(error => console.log("Could not connect", error));
 
 

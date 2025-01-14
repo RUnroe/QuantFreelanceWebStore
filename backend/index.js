@@ -3,8 +3,9 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
-const cors = require('cors')
-//const upload = require('multer')({ dest: require('./secrets').server.iconLocation });
+const cors = require('cors');
+require('dotenv').config();
+
 const upload = require('multer')({ dest: __dirname + '/public/api/icons' });
 
 
@@ -23,14 +24,13 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-//app.use(require('cookie-parser')(require('./secrets').session.secret));
 
 app.use(session({
         store: MongoStore.create({
-                mongoUrl: require('./secrets').mongo.connectionString,
+                mongoUrl: process.env.MONGO_CONNECTION,
                 dbName: 'QuantFreelance'
         }),
-        secret: require('./secrets').session.secret,
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {
