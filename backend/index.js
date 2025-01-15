@@ -54,4 +54,6 @@ routeFiles.forEach((file) => {
 
 
 
-app.listen(3005, "localhost");
+app.listen(process.env.PORT, () => {
+        console.log(`App running on port ${process.env.PORT}`)
+});
