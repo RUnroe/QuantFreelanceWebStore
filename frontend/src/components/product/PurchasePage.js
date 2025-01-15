@@ -30,7 +30,7 @@ export default function PurchasePage({userId}) {
                 const data = Object.assign(productData, {user: userData});
                 if(userData.user_id === userId) setRedirect("/");
                 setProductData(data);
-            });
+            }).catch(console.error);
         })
         .catch(err => setRedirect("/"));
     }, []);
@@ -56,7 +56,7 @@ export default function PurchasePage({userId}) {
         .then(data => {
             if(data) setRedirect(`/purchased/${data}`);
             else setRedirect("/")
-        });
+        }).catch(console.error);
     }
 
 

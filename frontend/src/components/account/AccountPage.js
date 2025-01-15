@@ -30,7 +30,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
         getProductsByUser(user.user_id)
         .then(data => {
             setProducts(data);
-        });
+        }).catch(console.error);
     }
     useEffect(() => {
         if(user) getUsersProducts();
@@ -56,7 +56,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
             if(response.ok) {
                 setCurrAuthLevel("seller");
             }
-        });
+        }).catch(console.error);
 
 
     }
@@ -64,7 +64,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
         createProduct()
         .then(newProductId => {
             setRedirect(`/store/${newProductId}/edit`);
-        })
+        }).catch(console.error);
     }
 
     const handleCloseModal = () => {
@@ -79,7 +79,7 @@ const AccountPage = ({currUser, authLevel, checkAuth, setCurrAuthLevel}) => {
                 setProducts(newProducts);
                 handleCloseModal();
             }
-        })
+        }).catch(console.error);
         
     }
 

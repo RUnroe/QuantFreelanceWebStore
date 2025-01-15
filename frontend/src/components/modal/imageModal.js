@@ -13,7 +13,7 @@ function ImageSelectModal({setter, setSetter}) {
             const images = data.map(item => item.url);
             setUserImages(images);
             return images;
-        });
+        }).catch(console.error);
     }
     const renderUserImagesJSX = (data, selectedId) => {
         let jsxElements = [];
@@ -43,7 +43,7 @@ function ImageSelectModal({setter, setSetter}) {
         return fetch('/api/icons', {
             method: 'POST',
             body: formData
-        }).then(response => response.json());
+        }).then(response => response.json()).catch(console.error);
     }
     const selectImageOption = (dataId, url) => {
         renderUserImagesJSX(userImages, dataId);
@@ -56,7 +56,7 @@ function ImageSelectModal({setter, setSetter}) {
                 setter(img.url);
                 setRefresh(true);
                 setSetter(""); // clear the setter to hide the modal
-            });
+            }).catch(console.error);
         }
         else if (modalState === "select") {
             setter(selectedImageUrl);

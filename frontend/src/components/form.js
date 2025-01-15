@@ -16,7 +16,8 @@ const ImageForm = ({ labelName }) => {
     // }).then(response => response.json())
     uploadIcon(formData)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch(console.error);
   };
   return (
     <form id="form" method="POST" onSubmit={postIcon}>
@@ -65,7 +66,7 @@ const LogInForm = ({ checkAuth }) => {
         checkAuth();
         setPageState("success");
       } else setPageState("error");
-    });
+    }).catch(console.error);
   };
 
   // useEffect(() => {
@@ -170,7 +171,8 @@ const SignupForm = ({ checkAuth, is_seller, icon_id }) => {
           }
           setErrors(tempErrors);
           forceUpdate();
-        });
+        })
+        .catch(console.error);
     }
   };
   
@@ -242,7 +244,7 @@ const SignupForm = ({ checkAuth, is_seller, icon_id }) => {
           checkAuth();
           setRedirect(true);
         }
-      });
+      }).catch(console.error);
     }
   };
   if (redirect) return <Redirect to={{ pathname: "/" }} />;
@@ -419,7 +421,7 @@ function AccountSettingsForm({ checkAuth, icon_id, userData }) {
               "Username is already in use. Please use another username.";
           setErrors(tempErrors);
           forceUpdate();
-        });
+        }).catch(console.error);
     }
   };
   useEffect(() => {
@@ -486,7 +488,7 @@ function AccountSettingsForm({ checkAuth, icon_id, userData }) {
           setAccountPageUsername(username);
           setRedirect(true);
         }
-      });
+      }).catch(console.error);
     }
   };
   if (redirect)

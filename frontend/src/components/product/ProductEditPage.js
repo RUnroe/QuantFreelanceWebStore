@@ -847,7 +847,7 @@ export default function ProductEditPage({username}) {
                 setStatusBar("Page has been published");
                 setTimeout(() => setStatusBar(""), 2500);
             }
-        })
+        }).catch(console.error)
 
         })
         .catch(error => {

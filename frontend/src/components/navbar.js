@@ -55,7 +55,7 @@ export default function NavigationMenu({currAuthLevel, setCurrAuthLevel, user_ic
                 setRedirect(true);
                 setCurrAuthLevel(""); //remove auth level from front end at same time as backend
             }
-        })
+        }).catch(console.error);
     }
     useEffect(() => {
         setTimeout(() => {setRedirect(null); /*setCurrAuthLevel("");*/}, 100);

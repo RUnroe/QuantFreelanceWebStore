@@ -16,8 +16,8 @@ export default function PurchasePage() {
             .then(response => response.json())
             .then(productData => {
                 setProduct(productData);
-            });
-        });
+            }).catch(console.error);
+        }).catch(console.error);
     }, []);
     return (
         <div className="section purchased-page">

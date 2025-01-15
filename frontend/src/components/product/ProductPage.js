@@ -244,7 +244,7 @@ export default function ProductPage({userId}) {
             .then(data => {
                 setUser(data);
                 setAccountLink(`/account/${data.username}`);
-            });
+            }).catch(console.error);
         })
         .catch(err => console.log(err));
     }
