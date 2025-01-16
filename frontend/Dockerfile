@@ -1,12 +1,13 @@
 FROM node:18-alpine AS build
-WORKDIR /app
+WORKDIR /project
 COPY . .
 RUN npm i
 RUN npm run build
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
-RUN rm index.html
-COPY --from=build /app/build/. .
+FROM steebchen/nginx-spa:stable
+WORKDIR /app
+COPY --from=build /project/build/. .
 
 EXPOSE 80
+
+CMD ["nginx"]
